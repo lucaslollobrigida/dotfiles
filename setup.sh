@@ -1,13 +1,13 @@
 #!/bin/sh
 
-function init() {
+init() {
   sudo apt-get update
   sudo apt-get upgrade
   sudo git config --global user.email "lucaslollobrigida@gmail.com"
   sudo git config --global user.name "Lucas Lollobrigida"
 }
 
-function essentials() {
+essentials() {
   sudo apt-get install curl -y
   sudo apt-get install apt-transport-https -y
   sudo apt-get install ca-certificates -y
@@ -15,16 +15,16 @@ function essentials() {
   sudo apt-get install tree -y
 }
 
-function nvmSetup() {
+nvmSetup() {
   curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
   nvm install --lts
 }
 
-function pipSetup() {
+pipSetup() {
   sudo apt-get install python-dev python-pip python3-dev python3-pip -y
 }
 
-function vimSetup() {
+vimSetup() {
   sudo add-apt-repository ppa:neovim-ppa/stable
   sudo apt-get update
   sudo apt-get install neovim -y
@@ -36,9 +36,11 @@ function vimSetup() {
 
   mkdir ~/.config
   git clone https://github.com/lucaslollobrigida/nvim.git ~/.config/
+
+  sudo git config --global core.editor "nvim"
 }
 
-function dockerSetup() {
+dockerSetup() {
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   sudo apt-key fingerprint 0EBFCD88
   sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
@@ -52,12 +54,12 @@ function dockerSetup() {
   sudo systemctl start docker
 }
 
-function dockerComposeSetup() {
+dockerComposeSetup() {
   sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   sudo chmod +x /usr/local/bin/docker-compose
 }
 
-function terminalSetup() {
+terminalSetup() {
   sudo apt-get install zsh -y
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   mv .zshrc ~/
