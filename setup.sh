@@ -29,8 +29,8 @@ function vimSetup() {
   sudo apt-get update
   sudo apt-get install neovim -y
 
-  pip2 install --upgrade pynvim
-  pip3 install --upgrade pynvim
+  sudo pip2 install --upgrade pynvim
+  sudo pip3 install --upgrade pynvim
 
   sudo npm install -g neovim
 
@@ -64,4 +64,4 @@ function terminalSetup() {
   chsh -s /bin/zsh user
 }
 
-init && essentials && nvmSetup pipSetup && vimSetup && dockerSetup && dockerComposeSetup && terminalSetup
+init && essentials && terminalSetup && nvmSetup && pipSetup && vimSetup && dockerSetup && dockerComposeSetup 
