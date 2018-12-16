@@ -1,7 +1,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/lucaslollobrigida/.oh-my-zsh"
+export ZSH=$HOME/.oh-my-zsh
 
 CASE_SENSITIVE="true"
 
