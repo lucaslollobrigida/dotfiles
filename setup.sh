@@ -73,4 +73,11 @@ terminalSetup() {
   chsh -s /bin/zsh user
 }
 
-init && essentials && terminalSetup && nvmSetup && pipSetup && vimSetup && dockerSetup && dockerComposeSetup && pgSetup
+goSetup() {
+  sudo apt install golang
+  echo 'export GOPATH=$HOME/go' >> ~/.zshrc 
+  echo 'export PATH=${PATH}:${GOPATH}/bin' >> ~/.zshrc 
+  source ~/.zshrc 
+  curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+}
+init && essentials && terminalSetup && nvmSetup && pipSetup && vimSetup && dockerSetup && dockerComposeSetup && pgSetup && goSetup
