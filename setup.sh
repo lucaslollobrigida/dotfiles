@@ -13,6 +13,7 @@ essentials() {
   sudo apt-get install ca-certificates -y
   sudo apt-get install software-properties-common -y
   sudo apt-get install tree -y
+  sudo apt-get install silversearcher-ag -y 
 }
 
 nvmSetup() {
