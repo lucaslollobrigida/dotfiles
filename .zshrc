@@ -44,8 +44,8 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR=nvim
 
-export GOPATH=/home/lucas/go
-export PATH=$PATH:/home/lucas/go/bin
+export GOPATH=${HOME}/go
+export PATH=$PATH:${HOME}/go/bin
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
