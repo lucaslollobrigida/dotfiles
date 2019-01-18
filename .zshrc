@@ -1,7 +1,13 @@
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/home/lucas/go/bin:$PATH
 
-# Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
+export EDITOR=nvim
+export GOPATH=/home/lucas/go
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 CASE_SENSITIVE="true"
 
@@ -33,6 +39,7 @@ alias zshrc='vim ~/.zshrc'
 alias python='python3'
 alias pip='pip3'
 
+alias cgo="cd $GOPATH"
 alias cjs='cd ~/dev/js'
 alias cpy='cd ~/dev/py'
 alias cc='cd ~/dev/c-lang'
@@ -41,13 +48,3 @@ alias cph='cd ~/dev/php'
 alias cvm='cd ~/.config/nvim'
 
 source $ZSH/oh-my-zsh.sh
-
-export EDITOR=nvim
-
-export GOPATH=${HOME}/go
-export PATH=$PATH:${HOME}/go/bin
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
