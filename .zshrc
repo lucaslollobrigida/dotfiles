@@ -1,8 +1,8 @@
-export PATH=$HOME/bin:/usr/local/bin:/home/lucas/go/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$HOME/go/bin:$PATH
 
 export ZSH=$HOME/.oh-my-zsh
 export EDITOR=nvim
-export GOPATH=/home/lucas/go
+export GOPATH=$HOME/go
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
