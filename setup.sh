@@ -13,7 +13,7 @@ init() {
 }
 
 utility() {
-  echo "Installing essential utility"
+  printf "${GREEN}" "Installing utility packages"
   sudo apt-get install curl -y
   sudo apt-get install apt-transport-https -y
   sudo apt-get install ca-certificates -y
@@ -29,7 +29,7 @@ nvmSetup() {
 }
 
 pythonSetup() {
-  printf "${RED}" "Installing pip"
+  printf "${RED}" "Installing python"
   sudo apt-get install python-dev python-pip python3-dev python3-pip -y
 }
 
@@ -84,6 +84,7 @@ terminalSetup() {
   sudo apt-get install zsh -y
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   cp .zshrc ~/
+  cp .fzf.zsh ~/
   chsh -s $(which zsh)
 }
 
