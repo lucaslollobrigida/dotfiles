@@ -94,6 +94,7 @@ goSetup() {
   echo 'export GOPATH=$HOME/go' >> ~/.zshrc 
   echo 'export PATH=${PATH}:${GOPATH}/bin' >> ~/.zshrc 
   source ~/.zshrc 
+  mkdir -p $HOME/go/bin
   curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 }
 
@@ -105,7 +106,7 @@ init \
   vimSetup \
   dockerSetup \ 
   dockerComposeSetup \
-  pgSetup \
   goSetup \
+  pgSetup \
   printf "${GREEN}" "Some changes require logout to take place"
 
