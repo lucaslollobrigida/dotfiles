@@ -21,6 +21,7 @@ plugins=(
   npm
   ssh-agent
   sudo
+  zsh-autosuggestions
 )
 
 # Aliases
