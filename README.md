@@ -7,5 +7,5 @@ Work in progres, still not fully tested
 ```terminal
 $ chmod 777 setup.sh
 
-$ ./setup.sh "your git name" "youremail@email.com"
+$ ./setup.sh "your git name" "youremail@email.com" [ --zsh || --bash ]
 ```
