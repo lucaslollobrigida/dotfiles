@@ -6,9 +6,9 @@ if [ $# -lt 2 ]; then
 fi
 
 if [ -z "$3" ] || [ "$3" = "--bash" ]; then
-  PATH_RC="~/.bashrc"
+  PATH_RC=~/.bashrc
 elif [ "$3" = "--zsh" ]; then
-  PATH_RC="~/.zshrc"
+  PATH_RC=~/.zshrc
 else
   printf "${RED}" "Invalid shell..."
   exit 1
@@ -33,7 +33,6 @@ utility() {
     apt-transport-https \
     build-essential \
     ca-certificates \
-    git-core \
     libxml2-dev \
     libxslt1-dev \
     libcurl4-openssl-dev \
@@ -44,9 +43,7 @@ utility() {
     libsqlite3-dev \
     sqlite3 \
     software-properties-common \
-    silversearcher-ag \ 
-    tree \
-    zlib1g-dev
+    silversearcher-ag -y
 }
 
 nvmSetup() {
@@ -84,9 +81,10 @@ vimSetup() {
 pgSetup() {
   printf "${GREEN}" "Installing postgres"
   curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-  sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/.s.list.d/pgdg.list'
-  sudo apt-get update -y
-  sudo apt-get install postgresql-11 -y
+  echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | tee /etc/apt/source.list.d/pgdg.list
+  wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+  sudo apt-get update
+  sudo apt-get install postgresql-11
 }
 
 dockerSetup() {
@@ -106,7 +104,8 @@ dockerSetup() {
 
 dockerComposeSetup() {
   printf "${GREEN}" "Installing docker-compose"
-  sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" \
+    -o /usr/local/bin/docker-compose
   sudo chmod +x /usr/local/bin/docker-compose
 }
 
@@ -114,7 +113,7 @@ zshSetup() {
   if [ $PATH_RC = "~/.zshrc" ]; then
     printf "${GREEN}" "Installing zsh"
     sudo apt-get install zsh -y
-    sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     cp .zshrc ~/
     cp .fzf.zsh ~/
     chsh -s $(which zsh)
@@ -123,34 +122,14 @@ zshSetup() {
 
 goSetup() {
   printf "${GREEN}" "Installing golang"
-  sudo apt install golang -y
-  echo 'export GOPATH=$HOME/go' >> $PATH_RC 
-  echo 'export PATH=${PATH}:${GOPATH}/bin' >> $PATH_RC 
+  curl https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz --output go1.11.5.linux-amd64.tar.gz
+  sudo tar -C /usr/local -xzf go1.11.5.linux-amd64.tar.gz
+  rm -f go1.11.5.linux-amd64.tar.gz
+  echo "export PATH=$PATH:/usr/local/go/bin" | tee $PATH_RC
+  echo "export GOPATH=$HOME/go" | tee $PATH_RC
+  # dep
   mkdir -p $HOME/go/bin
   curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-}
-
-rubySetup() {
-  # printf "${GREEN}" "Installing ruby"
-  # PATH_RBENV=~/.rbenv
-  # if [ ! -d "$PATH_RBENV" ]; then
-  #   git clone https://github.com/rbenv/rbenv.git $PATH_RBENV
-  # fi
-  # echo 'export PATH=${PATH}:${HOME}/.rbenv/bin' >> $PATH_RC
-  # echo 'eval "$(rbenv init -)"' >> "${PATH_RC}"
-  # exec $SHELL
-  #
-  # git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-  # echo 'export PATH=${PATH}:${HOME}/.rbenv/plugins/ruby-build/bin' >> $PATH_RC
-  # exec $SHELL
-  # gem install bundler
-  # rbenv rehash
-}
-
-railsSetup() {
-  # printf "${GREEN}" "Installing rails"
-  # gem install rails -v 5.2.1
-  # rbenv rehash
 }
 
 init "$1" "$2"
@@ -159,11 +138,8 @@ zshSetup
 nvmSetup
 pythonSetup
 goSetup
-rubySetup
-railsSetup
 vimSetup
 dockerSetup 
 dockerComposeSetup
 pgSetup
 printf "${YELLOW}" "Some changes require logout to take place"
-
