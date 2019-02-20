@@ -49,7 +49,8 @@ utility() {
     libsqlite3-dev \
     sqlite3 \
     software-properties-common \
-    silversearcher-ag -y
+    silversearcher-ag \
+    unzip -y
 }
 
 nvmSetup() {
@@ -141,10 +142,11 @@ goSetup() {
 
 fontSetup() {
   FONT_PATH=~/.local/share/fonts 
-  mkdir -p "$FONT_PATH"
+  mkdir -p $FONT_PATH
   wget \
-    -p "$FONT_PATH" \
-    https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/3270/Semi-Narrow/complete/3270%20Semi-Narrow%20Nerd%20Font%20Complete.otf 
+    -P $FONT_PATH \
+    https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/3270.zip 
+  unzip $FONT_PATH/3270.zip -d $FONT_PATH
 }
 
 init "$1" "$2"
