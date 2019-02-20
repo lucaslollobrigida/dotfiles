@@ -9,7 +9,7 @@ In case of a zsh usage(**Optional**)
 ```terminal
 $ wget http://raw.github.com/lucaslollobrigida/dotfiles/master/.zshrc
 
-$ wget http://raw.github.com/lucaslollobrigida/dotfiles/master/.fzf
+$ wget http://raw.github.com/lucaslollobrigida/dotfiles/master/.fzf.zsh
 ```
 Proceeds to install:
 
