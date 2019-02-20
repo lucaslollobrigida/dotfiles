@@ -25,6 +25,12 @@ init() {
   sudo apt install git -y
   sudo git config --global user.email "$2"
   sudo git config --global user.name "$1"
+
+  # workplace folders
+  mkdir -p $HOME/dev/node
+  mkdir -p $HOME/dev/py
+  mkdir -p $HOME/dev/rb
+  mkdir -p $HOME/dev/cpp
 }
 
 utility() {
@@ -50,10 +56,9 @@ nvmSetup() {
   printf "${GREEN}" "Installing nvm"
   mkdir "$HOME/.nvm"
   curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | sh
-  nvm install --lts
-  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - -y
-  echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-  sudo apt-get install yarn -y
+  nvm install 10
+  nvm use 10
+  npm i -g typescript neovim nodemon tern
 }
 
 pythonSetup() {
@@ -110,7 +115,7 @@ dockerComposeSetup() {
 }
 
 zshSetup() {
-  if [ $PATH_RC = "~/.zshrc" ]; then
+if [ "$PATH_RC" = "~/.zshrc" ]; then
     printf "${GREEN}" "Installing zsh"
     sudo apt-get install zsh -y
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -127,9 +132,19 @@ goSetup() {
   rm -f go1.11.5.linux-amd64.tar.gz
   echo "export PATH=$PATH:/usr/local/go/bin" | tee $PATH_RC
   echo "export GOPATH=$HOME/go" | tee $PATH_RC
-  # dep
   mkdir -p $HOME/go/bin
+  mkdir -p $HOME/go/src/github.com
+
+  # dep
   curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+}
+
+fontSetup() {
+  FONT_PATH=~/.local/share/fonts 
+  mkdir -p "$FONT_PATH"
+  wget \
+    -p "$FONT_PATH" \
+    https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/3270/Semi-Narrow/complete/3270%20Semi-Narrow%20Nerd%20Font%20Complete.otf 
 }
 
 init "$1" "$2"
@@ -142,4 +157,5 @@ vimSetup
 dockerSetup 
 dockerComposeSetup
 pgSetup
+fontSetup
 printf "${YELLOW}" "Some changes require logout to take place"

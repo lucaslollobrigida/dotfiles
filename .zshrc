@@ -1,4 +1,4 @@
-export PATH=$HOME/bin:/usr/local/bin:$HOME/go/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/go/bin:$PATH
 
 export ZSH=$HOME/.oh-my-zsh
 export EDITOR=nvim
@@ -31,21 +31,18 @@ new() {
   git init
 }
 
-alias home='cd ~'
-alias root='cd /'
 alias load='source ~/.zshrc'
 alias vim='nvim'
-alias vimrc='vim ~/.config/nvim/init.vim'
-alias zshrc='vim ~/.zshrc'
 alias python='python3'
 alias pip='pip3'
+alias vimrc='vim ~/.config/nvim/init.vim'
+alias zshrc='vim ~/.zshrc'
 
 alias cgo="cd $GOPATH"
-alias cjs='cd ~/dev/js'
+alias cjs='cd ~/dev/node'
 alias cpy='cd ~/dev/py'
-alias cc='cd ~/dev/c-lang'
-alias ccp='cd ~/dev/c++'
-alias cph='cd ~/dev/php'
+alias crb='cd ~/dev/rb'
+alias ccp='cd ~/dev/cpp'
 alias cvm='cd ~/.config/nvim'
 
 source $ZSH/oh-my-zsh.sh
