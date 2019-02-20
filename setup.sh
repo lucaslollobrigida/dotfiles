@@ -143,8 +143,8 @@ goSetup() {
 fontSetup() {
   FONT_PATH=~/.local/share/fonts 
   mkdir -p $FONT_PATH
-  wget \
-    -P $FONT_PATH \
+  curl \
+    -Lo $FONT_PATH/3270.zip \
     https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/3270.zip 
   unzip $FONT_PATH/3270.zip -d $FONT_PATH
 }
