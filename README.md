@@ -16,7 +16,7 @@ Proceeds to install:
 ```terminal
 $ wget http://raw.github.com/lucaslollobrigida/dotfiles/master/setup.sh
 
-$ chmod 777 setup.sh
+$ chmod +x setup.sh
 
 $ ./setup.sh "your git name" "youremail@email.com" [ --zsh || --bash ]
 ```
