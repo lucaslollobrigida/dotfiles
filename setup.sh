@@ -35,7 +35,8 @@ init() {
 
 utility() {
   printf "${GREEN}" "Installing utility packages"
-  sudo apt-get install curl \
+  sudo apt-get install \
+    curl \
     apt-transport-https \
     build-essential \
     ca-certificates \
@@ -51,12 +52,21 @@ utility() {
     software-properties-common \
     silversearcher-ag \
     unzip -y
+
+  sudo apt install \
+    zlib1g-dev \
+    autoconf \
+    bison \
+    libncurses5-dev \
+    libffi-dev \
+    libgdbm-dev -y
 }
 
 nvmSetup() {
   printf "${GREEN}" "Installing nvm"
   mkdir "$HOME/.nvm"
   curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | sh
+  source $PATH_RC
   nvm install 10
   nvm use 10
   npm i -g typescript neovim nodemon tern
@@ -133,11 +143,28 @@ goSetup() {
   rm -f go1.11.5.linux-amd64.tar.gz
   echo "export PATH=$PATH:/usr/local/go/bin" | tee $PATH_RC
   echo "export GOPATH=$HOME/go" | tee $PATH_RC
+  source $PATH_RC
   mkdir -p $HOME/go/bin
   mkdir -p $HOME/go/src/github.com
 
   # dep
   curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+}
+
+rubySetup() {
+  curl -sL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash -
+  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' | tee $PATH_RC
+  echo 'eval "$(rbenv init -)"' | tee $PATH_RC
+  source $PATH_RC
+  rbenv install 2.6.1
+  rbenv global 2.6.1
+  echo "gem: --no-document" | tee ~/.gemrc
+  gem install bundler
+}
+
+rails() {
+  gem install rails
+  rbenv rehash
 }
 
 fontSetup() {
@@ -158,6 +185,7 @@ goSetup
 vimSetup
 dockerSetup 
 dockerComposeSetup
+rubySetup
 pgSetup
 fontSetup
 printf "${YELLOW}" "Some changes require logout to take place"
