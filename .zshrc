@@ -1,4 +1,4 @@
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/go/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/go/bin:$HOME/go/bin:$PATH
 
 export ZSH=$HOME/.oh-my-zsh
 export EDITOR=nvim
