@@ -46,3 +46,4 @@ alias ccp='cd ~/dev/cpp'
 alias cvm='cd ~/.config/nvim'
 
 source $ZSH/oh-my-zsh.sh
+export GO111MODULE=on

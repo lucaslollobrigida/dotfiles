@@ -141,25 +141,26 @@ goSetup() {
   curl https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz --output go1.11.5.linux-amd64.tar.gz
   sudo tar -C /usr/local -xzf go1.11.5.linux-amd64.tar.gz
   rm -f go1.11.5.linux-amd64.tar.gz
-  echo "export PATH=$PATH:/usr/local/go/bin" | tee $PATH_RC
-  echo "export GOPATH=$HOME/go" | tee $PATH_RC
+  echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" | tee -a $PATH_RC
+  echo "export GOPATH=$HOME/go" | tee -a $PATH_RC
+  echo "export GO111MODULE=on" | tee -a $PATH_RC
   source $PATH_RC
   mkdir -p $HOME/go/bin
   mkdir -p $HOME/go/src/github.com
-
-  # dep
-  curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 }
 
 rubySetup() {
   curl -sL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash -
-  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' | tee $PATH_RC
-  echo 'eval "$(rbenv init -)"' | tee $PATH_RC
+  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' | tee -a $PATH_RC
+  echo 'eval "$(rbenv init -)"' | tee -a $PATH_RC
   source $PATH_RC
   rbenv install 2.6.1
   rbenv global 2.6.1
   echo "gem: --no-document" | tee ~/.gemrc
   gem install bundler
+  rbenv rehash
+  gem install neovim
+  rbenv rehash
 }
 
 rails() {
