@@ -97,10 +97,10 @@ vimSetup() {
 pgSetup() {
   printf "${GREEN}" "Installing postgres"
   curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-  echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | tee /etc/apt/source.list.d/pgdg.list
+  echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
   wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
   sudo apt-get update
-  sudo apt-get install postgresql-11
+  sudo apt-get install postgresql-11 pgadmin4
 }
 
 dockerSetup() {
@@ -150,9 +150,10 @@ goSetup() {
 }
 
 rubySetup() {
-  curl -sL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash -
+  printf "${GREEN}" "Installing ruby"
   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' | tee -a $PATH_RC
   echo 'eval "$(rbenv init -)"' | tee -a $PATH_RC
+  curl -sL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash -
   source $PATH_RC
   rbenv install 2.6.1
   rbenv global 2.6.1
@@ -164,17 +165,38 @@ rubySetup() {
 }
 
 rails() {
+  printf "${GREEN}" "Installing rails"
   gem install rails
   rbenv rehash
 }
 
+erlangSetup() {
+  printf "${GREEN}" "Installing erlang"
+  wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && sudo dpkg -i erlang-solutions_1.0_all.deb
+  rm -f sudo erlang-solutions_1.0_all.deb
+  sudo apt-get update -y
+  sudo apt-get install esl-erlang -y
+}
+
+elixirSetup() {
+  printf "${GREEN}" "Installing elixir"
+  sudo apt-get install elixir -y
+}
+
 fontSetup() {
+  printf "${GREEN}" "Installing font"
   FONT_PATH=~/.local/share/fonts 
   mkdir -p $FONT_PATH
   curl \
-    -Lo $FONT_PATH/3270.zip \
-    https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/3270.zip 
-  unzip $FONT_PATH/3270.zip -d $FONT_PATH
+    -Lo $FONT_PATH/Space\ Mono\ Nerd\ Font\ Complete\ Mono.ttf \
+    https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SpaceMono/Regular/complete/Space%20Mono%20Nerd%20Font%20Complete%20Mono.ttf?raw=true 
+}
+
+ngrokSetup() {
+  printf "${GREEN}" "Installing ngrok"
+  curl https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip --output ngrok-stable-linux-amd64.zip
+  sudo unzip ngrok-stable-linux-amd64.zip -d /usr/local
+  rm -f ngrok-stable-linux-amd64.zip
 }
 
 init "$1" "$2"
@@ -187,6 +209,10 @@ vimSetup
 dockerSetup 
 dockerComposeSetup
 rubySetup
+erlangSetup
+elixirSetup
 pgSetup
+ngrokSetup
 fontSetup
+
 printf "${YELLOW}" "Some changes require logout to take place"
