@@ -31,6 +31,10 @@ new() {
   git init
 }
 
+abnt() {
+  setxkbmap -model abnt2 -layout br -variant abnt2
+}
+
 alias load='source ~/.zshrc'
 alias vim='nvim'
 alias python='python3'
