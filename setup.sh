@@ -195,7 +195,7 @@ fontSetup() {
 ngrokSetup() {
   printf "${GREEN}" "Installing ngrok"
   curl https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip --output ngrok-stable-linux-amd64.zip
-  sudo unzip ngrok-stable-linux-amd64.zip -d /usr/local
+  sudo unzip ngrok-stable-linux-amd64.zip -d /usr/local/bin
   rm -f ngrok-stable-linux-amd64.zip
 }
 

@@ -31,6 +31,18 @@ new() {
   git init
 }
 
+mongo_run() {
+  docker run --rm -d --hostname mongodb -p 27017:27017 mongo:latest
+}
+
+redis_run() {
+  docker run --rm -d --hostname redis -p 6379:6379 redis:latest
+}
+
+rabbit_run() {
+  docker run --rm -d --hostname rabbitmq -p 5672:5672 rabbitmq:latest
+}
+
 abnt() {
   setxkbmap -model abnt2 -layout br -variant abnt2
 }
