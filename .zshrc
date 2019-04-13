@@ -43,6 +43,10 @@ rabbit_run() {
   docker run --rm -d --hostname rabbitmq -p 5672:5672 rabbitmq:latest
 }
 
+pg_run() {
+  docker run --rm -d --hostname pg -p 5432:5432 postgres:latest
+}
+
 abnt() {
   setxkbmap -model abnt2 -layout br -variant abnt2
 }
