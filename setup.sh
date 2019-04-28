@@ -94,15 +94,6 @@ vimSetup() {
   sudo git config --global core.editor "nvim"
 }
 
-pgSetup() {
-  printf "${GREEN}" "Installing postgres"
-  curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-  echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
-  wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-  sudo apt-get update
-  sudo apt-get install postgresql-11 pgadmin4
-}
-
 dockerSetup() {
   printf "${GREEN}" "Installing docker"
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -184,6 +175,12 @@ elixirSetup() {
   sudo apt-get install elixir -y
 }
 
+javaSetup() {
+  sudo add-apt-repository ppa:openjdk-r/ppa -y
+  sudo apt-get update
+  sudo apt-get install openjdk-8-jdk -y
+}
+
 fontSetup() {
   printf "${GREEN}" "Installing font"
   FONT_PATH=~/.local/share/fonts 
@@ -212,7 +209,7 @@ dockerComposeSetup
 rubySetup
 erlangSetup
 elixirSetup
-pgSetup
+javaSetup
 ngrokSetup
 fontSetup
 
