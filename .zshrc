@@ -25,9 +25,9 @@ plugins=(
 )
 
 # Aliases
-new() { 
-  mkdir -p $1 
-  cd $1 
+new() {
+  mkdir -p $1
+  cd $1
   git init
 }
 
@@ -58,12 +58,15 @@ alias pip='pip3'
 alias vimrc='vim ~/.config/nvim/init.vim'
 alias zshrc='vim ~/.zshrc'
 
-alias cgo="cd $GOPATH"
-alias cjs='cd ~/dev/node'
-alias cpy='cd ~/dev/py'
-alias crb='cd ~/dev/rb'
-alias ccp='cd ~/dev/cpp'
-alias cvm='cd ~/.config/nvim'
+WRKDIR="$HOME/dev"
+
+alias work="cd $WRKDIR"
+alias cgo="cd $WRKDIR/go"
+alias cjs="cd $WRKDIR/node"
+alias cpy="cd $WRKDIR/py"
+alias crb="cd $WRKDIR/rb"
+alias ccl="cd $WRKDIR/c-lang"
+alias ccp="cd $WRKDIR/cpp"
+alias cvm="cd ~/.config/nvim"
 
 source $ZSH/oh-my-zsh.sh
-export GO111MODULE=on
