@@ -10,7 +10,14 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
+
+PATH="$HOME/go/bin:$PATH"
 export PATH
+
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export XDG_CACHE_HOME="$HOME/.cache"
+export GPG_TTY=$(tty)
 
 # History Configuration
 shopt -s histappend
@@ -35,11 +42,17 @@ alias bc='vim -u NONE $HOME/.bashrc'
 alias vc='vim -u NONE $HOME/.config/nvim/init.vim'
 alias load='source $HOME/.bashrc'
 
+alias la='ls -lA'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
 alias gps='git push'
 alias gpl='git pull'
+alias gr='git remote'
 alias gra='git remote add'
 alias gl='git log'
 alias gd='git diff'
@@ -66,7 +79,10 @@ redis_run() {
     fi
 }
 
+[ -f ~/.bash_prompt ] && source ~/.bash_prompt
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 [ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
 [ -f ~/.asdf/completions/asdf.bash ] && source ~/.asdf/completions/asdf.bash
+[ -f ~/.asdf/plugins/java/set-java-home.sh ] && source ~/.asdf/plugins/java/set-java-home.sh

@@ -1,22 +1,35 @@
 # dotfiles
 
-Work in progres, still not fully tested
+My configuraration files for:
+
++ Bash
++ Vim(neovim)
++ Tmux
++ Fonts
++ Git
++ Ctags
++ GNU GPG
+
+## Dependencies
+
+[GNU Stow](https://www.gnu.org/software/stow/)
 
 ## Usage
 
-In case of a zsh usage(**Optional**)
+```sh
+git clone gitthub.com:lucaslollobrigida/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+git submodule update --recursive --remote
 
-```terminal
-$ wget http://raw.github.com/lucaslollobrigida/dotfiles/master/.zshrc
+# Backup your files, if needed
 
-$ wget http://raw.github.com/lucaslollobrigida/dotfiles/master/.fzf.zsh
+stow
 ```
-Proceeds to install:
 
-```terminal
-$ wget http://raw.github.com/lucaslollobrigida/dotfiles/master/setup.sh
+## Updating
 
-$ chmod +x setup.sh
-
-$ ./setup.sh "your git name" "youremail@email.com" [ --zsh || --bash ]
+```sh
+cd ~/.dotfiles
+git pull --recurse-submodules
+stow -R
 ```
