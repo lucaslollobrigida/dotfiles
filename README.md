@@ -17,9 +17,8 @@ My configuraration files for:
 ## Usage
 
 ```sh
-git clone gitthub.com:lucaslollobrigida/dotfiles.git ~/.dotfiles
+git clone gitthub.com:lucaslollobrigida/dotfiles.git --recursive ~/.dotfiles
 cd ~/.dotfiles
-git submodule update --recursive --remote
 
 # Backup your files, if needed
 
@@ -31,5 +30,5 @@ stow
 ```sh
 cd ~/.dotfiles
 git pull --recurse-submodules
-stow -R
+git submodule update --init --recursive --remote
 ```
