@@ -1,17 +1,18 @@
 # .bashrc
 
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
-
 # User specific environment
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
-then
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 
-PATH="$HOME/go/bin:$PATH"
+if ! [[ "$PATH" =~ "$HOME/Library/Python/3.7/bin:$PATH" ]]; then
+    PATH="/Users/lucaslollobrigida/Library/Python/3.7/bin:$PATH"
+fi
+
+if ! [[ "$PATH" =~ "$HOME/go/bin:$PATH" ]]; then
+    PATH="$HOME/go/bin:$PATH"
+fi
+
 export PATH
 
 export LANG=en_US.UTF-8
@@ -38,8 +39,8 @@ bind '"\e[D": backward-char'
 
 # Aliases
 alias vim='nvim'
-alias bc='vim -u NONE $HOME/.bashrc'
-alias vc='vim -u NONE $HOME/.config/nvim/init.vim'
+alias bc='vim $HOME/.dotfiles/bash/.bashrc'
+alias vc='vim $HOME/.dotfiles/vim/.config/nvim/init.vim'
 alias load='source $HOME/.bashrc'
 
 alias la='ls -lA'
@@ -49,7 +50,7 @@ alias ....='cd ../../..'
 
 alias gs='git status'
 alias ga='git add'
-alias gc='git commit'
+alias gc='git commit -sS'
 alias gps='git push'
 alias gpl='git pull'
 alias gr='git remote'
@@ -76,6 +77,14 @@ redis_run() {
 	docker run --name redis-container -d redis
     else
 	echo 'Docker is not installed or missing from PATH.'
+    fi
+}
+
+vim_update() {
+    if [ -f ~/.config/nvim/sync.sh ]; then
+	. ~/.config/nvim/sync.sh
+    else
+	echo "Update script not found."
     fi
 }
 
