@@ -22,7 +22,8 @@ cd ~/.dotfiles
 
 # Backup your files, if needed
 
-stow
+# packages: vim|bash|git|tmux|ctags|fonts|gpg
+stow package_name
 ```
 
 ## Updating

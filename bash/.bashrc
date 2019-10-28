@@ -2,96 +2,57 @@
 
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+    PATH+="$HOME/.local/bin:$HOME/bin"
 fi
 
 if ! [[ "$PATH" =~ "$HOME/Library/Python/3.7/bin:$PATH" ]]; then
-    PATH="/Users/lucaslollobrigida/Library/Python/3.7/bin:$PATH"
+    PATH+="$HOME/Library/Python/3.7/bin"
 fi
 
 if ! [[ "$PATH" =~ "$HOME/go/bin:$PATH" ]]; then
-    PATH="$HOME/go/bin:$PATH"
+    PATH+="$HOME/go/bin"
 fi
 
 export PATH
 
-export LANG=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
-export XDG_CACHE_HOME="$HOME/.cache"
+# export EDITOR="nvim -U NONE"
+export TERM=xterm-color
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+export CLICOLOR=YES
 export GPG_TTY=$(tty)
 
+export XDG_CACHE_HOME="$HOME/.cache"
+
 # History Configuration
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
+
 shopt -s histappend
 shopt -s cmdhist
+
 PROMPT_COMMAND='history -a'
 HISTSIZE=500000
 HISTFILESIZE=100000
 HISTCONTROL="erasedups:ignoreboth"
 HISTTIMEFORMAT='%F %T '
-export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
-
-# Enable incremental history search with up/down arrows (also Readline goodness)
-# Learn more about this here: http://codeinthehole.com/writing/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-bind '"\e[C": forward-char'
-bind '"\e[D": backward-char'
-
-# Aliases
-alias vim='nvim'
-alias bc='vim $HOME/.dotfiles/bash/.bashrc'
-alias vc='vim $HOME/.dotfiles/vim/.config/nvim/init.vim'
-alias load='source $HOME/.bashrc'
-
-alias la='ls -lA'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-
-alias gs='git status'
-alias ga='git add'
-alias gc='git commit -sS'
-alias gps='git push'
-alias gpl='git pull'
-alias gr='git remote'
-alias gra='git remote add'
-alias gl='git log'
-alias gd='git diff'
-alias gck='git checkout'
-
-# Functions
-new() {
-    mkdir $1; cd $1; git init
-}
-
-pg_run() {
-    if hash docker 2>/dev/null; then
-	docker run --name pg-container -e POSTGRES_PASSWORD=root -d postgres
-    else
-	echo 'Docker is not installed or missing from PATH.'
-    fi
-}
-
-redis_run() {
-    if hash docker 2>/dev/null; then
-	docker run --name redis-container -d redis
-    else
-	echo 'Docker is not installed or missing from PATH.'
-    fi
-}
-
-vim_update() {
-    if [ -f ~/.config/nvim/sync.sh ]; then
-	. ~/.config/nvim/sync.sh
-    else
-	echo "Update script not found."
-    fi
-}
 
 [ -f ~/.bash_prompt ] && source ~/.bash_prompt
+[ -f ~/.bash_aliases ] && source ~/.bash_aliases
+[ -f ~/.bash_functions ] && source ~/.bash_functions
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
+[ -f /usr/local/etc/profile.d/bash_completion.sh ] && source /usr/local/etc/profile.d/bash_completion.sh
 [ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
 [ -f ~/.asdf/completions/asdf.bash ] && source ~/.asdf/completions/asdf.bash
 [ -f ~/.asdf/plugins/java/set-java-home.sh ] && source ~/.asdf/plugins/java/set-java-home.sh
+
+if type brew &>/dev/null; then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  else
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+      [[ -r "$COMPLETION" ]] && source "$COMPLETION"
+    done
+  fi
+fi

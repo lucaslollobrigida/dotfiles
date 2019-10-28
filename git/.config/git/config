@@ -1,0 +1,60 @@
+[user]
+    name = Lucas Lollobrigida
+    email = lucaslollobrigida@gmail.com
+    signingkey = BC40E27120AFB948
+
+[github]
+    user = lucaslollobrigida
+
+[alias]
+    s = status -s
+    c = clone --recursive
+    last = log -1 HEAD
+    utg = reset HEAD --
+    aliases = config --get-regexp alias
+
+[pull]
+    rebase  = yes
+    octopus = octopus
+
+[push]
+    default = matching
+
+[color]
+    ui = true
+[core]
+    pager = less -r
+    filemode     = false
+    excludesfile = ~/.config/git/ignore
+
+[diff]
+    renames = copies
+    algorithm = patience
+
+[merge]
+    tool = vimdiff
+
+[mergetool]
+    keepBackup = false
+
+[format]
+    pretty = oneline
+
+[color]
+    ui = true
+
+[color "branch"]
+    current = green
+    local   = blue
+    remote  = yellow
+
+[color "status"]
+    added     = green
+    changed   = blue
+    untracked = red
+
+[log]
+    abbrevcommit = true
+
+[commit]
+    gpgsign = true
