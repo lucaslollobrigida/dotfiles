@@ -40,3 +40,7 @@ function vim_update() {
     fi
 }
 
+function repl() {
+    local port="$(grep :api ~/.config/conjure/.conjure.edn | awk '{print substr($3, 1, length($3)-1)}')"
+    clojure -J-Dclojure.server.jvm="{:port ${port} :accept clojure.core.server/io-prepl}"
+}

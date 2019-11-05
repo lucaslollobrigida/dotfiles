@@ -1,0 +1,4 @@
+{:conns
+ {:api {:port 5885}
+  :frontend {:port 5556
+             :lang :cljs}}}

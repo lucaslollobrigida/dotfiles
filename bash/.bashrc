@@ -2,15 +2,19 @@
 
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
-    PATH+="$HOME/.local/bin:$HOME/bin"
+    PATH+=":$HOME/.local/bin:$HOME/bin"
 fi
 
 if ! [[ "$PATH" =~ "$HOME/Library/Python/3.7/bin:$PATH" ]]; then
-    PATH+="$HOME/Library/Python/3.7/bin"
+    PATH+=":$HOME/Library/Python/3.7/bin"
 fi
 
 if ! [[ "$PATH" =~ "$HOME/go/bin:$PATH" ]]; then
-    PATH+="$HOME/go/bin"
+    PATH+=":$HOME/go/bin"
+fi
+
+if ! [[ "$PATH" =~ "$HOME/.asdf/installs/clojure/1.10.1/bin/:$PATH" ]]; then
+    PATH+=":$HOME/.asdf/installs/clojure/1.10.1/bin/"
 fi
 
 export PATH
