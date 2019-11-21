@@ -10,7 +10,7 @@ function hs() {
 
 function pg_run() {
     if hash docker 2>/dev/null; then
-        docker run --name pg-container -e POSTGRES_PASSWORD=root -d postgres
+        docker run --name pg-container -e POSTGRES_PASSWORD=root -p 5432:5432 -d postgres
     else
         echo 'Docker is not installed or missing from PATH.'
     fi
@@ -18,7 +18,7 @@ function pg_run() {
 
 function redis_run() {
     if hash docker 2>/dev/null; then
-        docker run --name redis-container -d redis
+        docker run --name redis-container -p 6379:6379 -d redis
     else
         echo 'Docker is not installed or missing from PATH.'
     fi

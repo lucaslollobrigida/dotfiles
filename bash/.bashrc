@@ -1,20 +1,28 @@
 # .bashrc
 
 # User specific environment
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+if ! [[ "$PATH" =~ ":$HOME/.local/bin:$HOME/bin" ]]; then
     PATH+=":$HOME/.local/bin:$HOME/bin"
 fi
 
-if ! [[ "$PATH" =~ "$HOME/Library/Python/3.7/bin:$PATH" ]]; then
+if ! [[ "$PATH" =~ ":$HOME/Library/Python/3.7/bin" ]]; then
     PATH+=":$HOME/Library/Python/3.7/bin"
 fi
 
-if ! [[ "$PATH" =~ "$HOME/go/bin:$PATH" ]]; then
+if ! [[ "$PATH" =~ ":$HOME/go/bin" ]]; then
     PATH+=":$HOME/go/bin"
 fi
 
-if ! [[ "$PATH" =~ "$HOME/.asdf/installs/clojure/1.10.1/bin/:$PATH" ]]; then
-    PATH+=":$HOME/.asdf/installs/clojure/1.10.1/bin/"
+if ! [[ "$PATH" =~ ":$HOME/.asdf/installs/clojure/1.10.1/bin" ]]; then
+    PATH+=":$HOME/.asdf/installs/clojure/1.10.1/bin"
+fi
+
+if ! [[ "$PATH" =~ ":$HOME/.asdf/installs/yarn/1.19.0/bin" ]]; then
+    PATH+=":$HOME/.asdf/installs/yarn/1.19.0/bin"
+fi
+
+if ! [[ "$PATH" =~ ":$HOME/.asdf/installs/nodejs/12.11.1/bin" ]]; then
+    PATH+=":$HOME/.asdf/installs/nodejs/12.11.1/bin"
 fi
 
 export PATH
@@ -39,6 +47,8 @@ HISTSIZE=500000
 HISTFILESIZE=100000
 HISTCONTROL="erasedups:ignoreboth"
 HISTTIMEFORMAT='%F %T '
+
+. $(brew --prefix asdf)/asdf.sh
 
 [ -f ~/.bash_prompt ] && source ~/.bash_prompt
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
