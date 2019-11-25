@@ -27,8 +27,9 @@ fi
 
 export PATH
 
+set -o vi
 # export EDITOR="nvim -U NONE"
-export TERM=xterm-color
+export TERM=screen-256color
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 export CLICOLOR=YES

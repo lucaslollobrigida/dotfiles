@@ -8,6 +8,10 @@ function hs() {
     history | grep $1
 }
 
+function load() {
+    source ~/.bashrc
+}
+
 function pg_run() {
     if hash docker 2>/dev/null; then
         docker run --name pg-container -e POSTGRES_PASSWORD=root -p 5432:5432 -d postgres
