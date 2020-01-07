@@ -36,6 +36,30 @@ function rabbit_run() {
     fi
 }
 
+function mongo_run() {
+    if hash docker 2>/dev/null; then
+	docker run --name some-mongo -d -p 27017:27017 mongo
+    else
+        echo 'Docker is not installed or missing from PATH.'
+    fi
+}
+
+function cassandra_daemon() {
+    if hash docker 2>/dev/null; then
+	docker run --name some-cassandra --network cdb -d cassandra
+    else
+        echo 'Docker is not installed or missing from PATH.'
+    fi
+}
+
+function cassandra_run() {
+    if hash docker 2>/dev/null; then
+	docker run -it --network cdb --rm cassandra cqlsh some-cassandra
+    else
+        echo 'Docker is not installed or missing from PATH.'
+    fi
+}
+
 function vim_update() {
     if [ -f ~/.config/nvim/sync.sh ]; then
         . ~/.config/nvim/sync.sh
