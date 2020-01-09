@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -110,6 +110,6 @@ export ARCHFLAGS="-arch x86_64"
 alias load="source ~/.zshrc"
 alias vim="nvim"
 
-. /usr/local/opt/asdf/asdf.sh
-
-. /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
+[ -f ~/.nurc ] && source ~/.nurc
+[ -f /usr/local/opt/asdf/asdf.sh ] && source /usr/local/opt/asdf/asdf.sh
+[ -f /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash ] && source /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
