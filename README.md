@@ -2,13 +2,14 @@
 
 My configuraration files for:
 
-+ Bash
++ Zsh
 + Vim(neovim)
 + Tmux
 + Fonts
 + Git
 + Ctags
 + GNU GPG
++ Bash
 
 ## Dependencies
 
@@ -22,14 +23,12 @@ cd ~/.dotfiles
 
 # Backup your files, if needed
 
-# packages: vim|bash|git|tmux|ctags|fonts|gpg
-stow package_name
+# packages: vim|bash|git|tmux|ctags|fonts|gpg|zsh
+stow <package_name>
 ```
 
 ## Updating
 
 ```sh
-cd ~/.dotfiles
-git pull --recurse-submodules
-git submodule update --init --recursive --remote
+~/.dotfiles/update.sh
 ```
