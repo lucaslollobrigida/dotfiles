@@ -110,6 +110,9 @@ export ARCHFLAGS="-arch x86_64"
 alias load="source ~/.zshrc"
 alias vim="nvim"
 
+export GPG_TTY=$(tty)
+export PINENTRY_USER_DATA="USE_CURSES=1"
+
 [ -f ~/.nurc ] && source ~/.nurc
 [ -f /usr/local/opt/asdf/asdf.sh ] && source /usr/local/opt/asdf/asdf.sh
 [ -f /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash ] && source /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash

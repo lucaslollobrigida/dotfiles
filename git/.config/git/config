@@ -1,7 +1,8 @@
 [user]
     name = Lucas Lollobrigida
-    email = lucaslollobrigida@gmail.com
-    signingkey = BC40E27120AFB948
+    # email = lucaslollobrigida@gmail.com
+    email = lucas.lollobrigida@nubank.com.br
+    signingkey = 056F9B8CBB81C691D5915FB9286880A835E4C06B
 
 [github]
     user = lucaslollobrigida
@@ -57,4 +58,4 @@
     abbrevcommit = true
 
 [commit]
-    gpgsign = true
+	gpgsign = true
