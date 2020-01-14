@@ -1,8 +1,9 @@
 [user]
     name = Lucas Lollobrigida
-    # email = lucaslollobrigida@gmail.com
-    email = lucas.lollobrigida@nubank.com.br
-    signingkey = 056F9B8CBB81C691D5915FB9286880A835E4C06B
+    email = lucaslollobrigida@gmail.com
+    signingkey = 7370366172F100970D9ABA68BBA6F99379ACADA9
+    # email = lucas.lollobrigida@nubank.com.br
+    # signingkey = 056F9B8CBB81C691D5915FB9286880A835E4C06B
 
 [github]
     user = lucaslollobrigida
