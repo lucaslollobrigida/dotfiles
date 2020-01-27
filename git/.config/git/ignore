@@ -30,5 +30,8 @@ log/
 *.tar
 *.zip
 
+# IntelliJ
+.idea/
+
 # LSP protocol
 .lsp
