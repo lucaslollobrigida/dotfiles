@@ -1,36 +1,25 @@
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; refresh' after modifying this file!
-
-
+;; Place your private configuration here
+;;
 ;; These are used for a number of things, particularly for GPG configuration,
 ;; some email clients, file templates and snippets.
 (setq user-full-name "Lucas Lollobrigida"
       user-mail-address "lucas.lollobrigida@nubank.com.br")
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
-;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'
-;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-; (setq doom-font (font-spec :family "monospace" :size 14))
+;;; GENERAL
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. These are the defaults.
-(setq doom-theme 'doom-one)
-
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;;
 ;; If you intend to use org, it is recommended you change this!
 (setq org-directory "~/org/")
 
 ;; If you want to change the style of line numbers, change this to `relative' or
 ;; `nil' to disable it:
 (setq display-line-numbers-type 'relative)
+
+;; theme
+(load-theme 'doom-vibrant t)
 
 ;; disable confirmation message on exit
 (setq confirm-kill-emacs nil)
@@ -43,23 +32,10 @@
                (format "[%s] " (projectile-project-name)))
               "%b")))
 
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-;; set localleader the same as Spacemacs
-(setq doom-localleader-key ",")
-
-;; enable minibuffer to work correctly in evil mode
-(setq evil-collection-setup-minibuffer t)
-
-;;; GENERAL
-
-;; theme
-(load-theme 'doom-vibrant t)
-
 ;; font
-; (setq doom-font (font-spec :family "Hack" :size 18)
-;       doom-big-font-increment 4
-;       doom-unicode-font (font-spec :family "DejaVu Sans"))
+(setq doom-font (font-spec :family "monospace" :size 18)
+      doom-big-font-increment 4
+      doom-unicode-font (font-spec :family "DejaVu Sans"))
 
 (add-hook! 'after-make-frame-functions
   (set-fontset-font t 'unicode
@@ -69,9 +45,32 @@
                     (font-spec :family "Font Awesome 5 Brands")
                     nil 'append))
 
+;; set localleader the same as Spacemacs
+(setq doom-localleader-key ",")
+
+;; enable minibuffer to work correctly in evil mode
+(setq evil-collection-setup-minibuffer t)
+
+;; general mappings
 (map!
- :m "C-w v" (lambda () (interactive)(split-window-horizontally) (other-window 1))
- :m "C-w s" (lambda () (interactive)(split-window-vertically) (other-window 1))
+ (:prefix ("C-w")
+   :n "s" (lambda () (interactive) (evil-window-split) (evil-window-down 1))
+   :n "v" (lambda () (interactive) (evil-window-vsplit) (evil-window-right 1)))
+ ; move betweeen windows faster in normal mode
+ :m "C-h" #'evil-window-left
+ :m "C-j" #'evil-window-down
+ :m "C-k" #'evil-window-up
+ :m "C-l" #'evil-window-right
+ ; move windows faster in normal mode
+ :m "C-S-h" #'+evil/window-move-left
+ :m "C-S-j" #'+evil/window-move-down
+ :m "C-S-k" #'+evil/window-move-up
+ :m "C-S-l" #'+evil/window-move-right
+ ; misc
+ :n "-" #'dired-jump
+ :nv "C-a" #'evil-numbers/inc-at-pt
+ :nv "C-S-a" #'evil-numbers/dec-at-pt
+ :nv "C-SPC" #'+fold/toggle
  ; workspaces
  (:prefix ("`" . "workspace")
    :n "n" #'+workspace/new
@@ -81,7 +80,11 @@
    :n "x" #'+workspace/delete
    :n "s" #'+workspace/save
    :n "l" #'+workspace/load
-   :n "r" #'+workspace/rename))
+   :n "r" #'+workspace/rename)
+ (:leader
+   (:prefix "o"
+     :desc "Visualize Undo Tree"
+     "u" #'undo-tree-visualize)))
 
 ;; ivy
 (after! ivy
@@ -283,4 +286,3 @@
 
 ;; load local configuration file if exists
 (load! "local.el" "~/.doom.d" t)
-
