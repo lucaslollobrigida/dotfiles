@@ -29,3 +29,6 @@ log/
 *.rar
 *.tar
 *.zip
+
+# LSP protocol
+.lsp

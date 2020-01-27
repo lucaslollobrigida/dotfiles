@@ -69,5 +69,3 @@ done
 
 [ -f /usr/local/opt/asdf/asdf.sh ] && source /usr/local/opt/asdf/asdf.sh
 [ -f /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash ] && source /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
