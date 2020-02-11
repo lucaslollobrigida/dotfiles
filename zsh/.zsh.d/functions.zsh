@@ -39,9 +39,9 @@ hs() {
     fi
 }
 
-# load() {
-#     source ~/.zshrc
-# }
+load() {
+    source ~/.zshrc
+}
 
 pg_run() {
     has_docker && \
@@ -84,4 +84,10 @@ vim_update() {
 repl() {
     local port="$(grep :api ~/.config/conjure/.conjure.edn | awk '{print substr($3, 1, length($3)-1)}')"
     clojure -J-Dclojure.server.jvm="{:port ${port} :accept clojure.core.server/io-prepl}"
+}
+
+cljfmt() {
+    clojure -Sdeps '{:deps {lein-cljfmt {:mvn/version "0.6.4"}}}' \
+    -m cljfmt.main fix "$@" \
+    --indents .cljfmt-indents.edn
 }

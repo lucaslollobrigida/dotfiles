@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
-setopt correct
+# setopt correct
+unsetopt correct_all
 setopt noflowcontrol
 
 path=(
