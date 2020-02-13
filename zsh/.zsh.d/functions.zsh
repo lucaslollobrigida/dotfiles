@@ -87,7 +87,15 @@ repl() {
 }
 
 cljfmt() {
-    clojure -Sdeps '{:deps {lein-cljfmt {:mvn/version "0.6.4"}}}' \
+    local version="0.6.4"
+    clojure -Sdeps "{:deps {lein-cljfmt {:mvn/version \"$version\"}}}" \
     -m cljfmt.main fix "$@" \
     --indents .cljfmt-indents.edn
+}
+
+nsorg() {
+    local version="0.3.1"
+    clojure -Sdeps "{:deps {nsorg-cli {:mvn/version \"$version\"}}}" \
+    -m nsorg.cli "${@}" \
+    --replace
 }
