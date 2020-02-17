@@ -96,6 +96,6 @@ cljfmt() {
 nsorg() {
     local version="0.3.1"
     clojure -Sdeps "{:deps {nsorg-cli {:mvn/version \"$version\"}}}" \
-    -m nsorg.cli "${@}" \
+    -m nsorg.cli "$@" \
     --replace
 }
