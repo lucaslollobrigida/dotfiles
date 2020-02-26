@@ -1,3 +1,5 @@
+export FPATH=/usr/share/zsh/5.3/functions:$FPATH
+
 ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -69,3 +71,5 @@ done
 
 [ -f /usr/local/opt/asdf/asdf.sh ] && source /usr/local/opt/asdf/asdf.sh
 [ -f /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash ] && source /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
