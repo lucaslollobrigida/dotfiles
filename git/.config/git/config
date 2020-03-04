@@ -59,4 +59,4 @@
     abbrevcommit = true
 
 [commit]
-	gpgsign = true
+    gpgsign = true
