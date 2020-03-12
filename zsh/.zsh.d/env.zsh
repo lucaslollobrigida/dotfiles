@@ -9,6 +9,7 @@ path=(
     $HOME/.local/bin
     $HOME/bin
     $HOME/Library/Python/3.7/bin/
+    /usr/local/lib/python3.7/site-packages
     $HOME/.emacs.d/bin/
     $path
 )
@@ -31,6 +32,11 @@ export EDITOR=nvim
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
-
 export GPG_TTY=$(tty)
 export PINENTRY_USER_DATA="USE_CURSES=1"
+if [ -f ~/.gnupg/.gpg-agent-info ] && [ -n "$(pgrep gpg-agent)" ]; then
+    source ~/.gnupg/.gpg-agent-info
+    export GPG_AGENT_INFO
+else
+    eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
+fi

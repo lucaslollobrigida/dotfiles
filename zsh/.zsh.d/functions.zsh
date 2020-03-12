@@ -11,12 +11,6 @@ pid() {
 	ps aux | grep $1 | grep -v grep | awk '{ print $2 }'
 }
 
-new() {
-    mkdir -p $1 && \
-        cd $1 && \
-        git init
-}
-
 hs() {
     if [[ -n "$1" ]]; then
         history \
@@ -39,9 +33,9 @@ hs() {
     fi
 }
 
-load() {
-    source ~/.zshrc
-}
+# load() {
+#     source ~/.zshrc
+# }
 
 pg_run() {
     has_docker && \
