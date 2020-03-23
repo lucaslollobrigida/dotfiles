@@ -37,7 +37,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-ZSH_TMUX_AUTOSTART="false"
+ZSH_TMUX_AUTOSTART="true"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
@@ -61,11 +61,11 @@ plugins=(
 )
 
 
-[ -f $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh 
-
 for file in ${HOME}/.zsh.d/*.zsh; do
   [[ -f "${file}" ]] && source "${file}"
 done
+
+[ -f $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.nurc ] && source ~/.nurc
 
