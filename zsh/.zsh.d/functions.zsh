@@ -8,7 +8,7 @@ has_docker() {
 }
 
 pid() {
-	ps aux | grep $1 | grep -v grep | awk '{ print $2 }'
+    ps aux | grep $1 | grep -v grep | awk '{ print $2 }'
 }
 
 hs() {
@@ -33,9 +33,9 @@ hs() {
     fi
 }
 
-# load() {
-#     source ~/.zshrc
-# }
+so() {
+    source $HOME/.zshrc
+}
 
 pg_run() {
     has_docker && \
@@ -68,15 +68,15 @@ cassandra_run() {
 }
 
 vim_update() {
-    if [ -f ~/.config/nvim/sync.sh ]; then
-        . ~/.config/nvim/sync.sh
+    if [ -f $XDG_CONFIG_HOME/nvim/sync.sh ]; then
+        . $XDG_CONFIG_HOME/nvim/sync.sh
     else
         echo "Update script not found."
     fi
 }
 
 repl() {
-    local port="$(grep :api ~/.config/conjure/.conjure.edn | awk '{print substr($3, 1, length($3)-1)}')"
+    local port="$(grep :api $XDG_CONFIG_HOME/conjure/.conjure.edn | awk '{print substr($3, 1, length($3)-1)}')"
     clojure -J-Dclojure.server.jvm="{:port ${port} :accept clojure.core.server/io-prepl}"
 }
 

@@ -11,11 +11,19 @@ path=(
     $HOME/Library/Python/3.7/bin/
     /usr/local/lib/python3.7/site-packages
     $HOME/.emacs.d/bin/
+    /Library/Java/JavaVirtualMachines/graalvm-ce-java8-20.0.0/Contents/Home/bin
     $path
 )
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+
+# Default ENV variables
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_DIRS="/usr/local/share/:/usr/share/"
+export XDG_CONFIG_DIRS="/etc/xdg"
 
 # User configuration
 # bindkey -v
@@ -33,10 +41,3 @@ export EDITOR=nvim
 export ARCHFLAGS="-arch x86_64"
 
 export GPG_TTY=$(tty)
-export PINENTRY_USER_DATA="USE_CURSES=1"
-if [ -f ~/.gnupg/.gpg-agent-info ] && [ -n "$(pgrep gpg-agent)" ]; then
-    source ~/.gnupg/.gpg-agent-info
-    export GPG_AGENT_INFO
-else
-    eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
-fi
