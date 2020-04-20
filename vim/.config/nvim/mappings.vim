@@ -45,7 +45,7 @@ nnoremap <leader>rt :call <SID>remove_tabs()<CR>
 
 " Terminal
 nnoremap <leader>sh :FloatermToggle<CR>
-tnoremap <Esc><Esc> :FloatermToggle<CR>
+" tnoremap <Esc><Esc> :FloatermToggle<CR>
 tnoremap jk <c-\><c-n>
 
 " Sessions

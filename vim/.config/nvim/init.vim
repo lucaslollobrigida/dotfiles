@@ -12,6 +12,8 @@ set encoding=UTF-8
 set signcolumn=yes
 set termguicolors
 if !has('gui_running')
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
   set t_Co=256
 endif
 
@@ -116,23 +118,25 @@ augroup NumberToggle
     autocmd BufLeave,FocusLost,InsertEnter   * :set norelativenumber
 augroup end
 
+let g:gruvbox_italic=1
 try
-  colorscheme OceanicNext
+  colorscheme gruvbox
 catch
-  colorscheme afterglow
+  colorscheme OceanicNext
 endtry
 
+highlight Comment cterm=Italic
 let g:signify_sign_delete = '-'
 au! BufNewFile,BufRead *.boot setf clojure
 
-hi! Normal ctermbg=NONE guibg=NONE
-hi! NonText ctermbg=NONE guibg=NONE
+" hi! Normal ctermbg=NONE guibg=NONE
+" hi! NonText ctermbg=NONE guibg=NONE
 hi! LineNr ctermfg=NONE guibg=NONE
 hi! SignColumn ctermfg=NONE guibg=NONE
-hi! StatusLine guifg=#16252b guibg=#6699CC
+" hi! StatusLine guifg=#16252b guibg=#6699CC
 hi! StatusLineNC guifg=#16252b guibg=#16252b
 
-hi! VertSplit gui=NONE guifg=#17252c guibg=#17252c
+" hi! VertSplit gui=NONE guifg=#17252c guibg=#17252c
 
 " Make background color transparent for git changes
 hi! SignifySignAdd guibg=NONE

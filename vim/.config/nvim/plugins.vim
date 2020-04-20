@@ -27,12 +27,13 @@ Plug 'tpope/vim-fugitive'
 " Visual
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
-Plug 'danilo-augusto/vim-afterglow'
-" Plug 'airblade/vim-gitgutter'
+Plug 'morhetz/gruvbox'
 
-" Asynchronous fuzzyfinder for files/git/tags/buffers/greping
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+" Fuzzy finder inside vim
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+
+" Wiki
+Plug 'vimwiki/vimwiki'
 
 " Go
 Plug 'fatih/vim-go'
@@ -40,16 +41,13 @@ Plug 'fatih/vim-go'
 " Python
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
-" Clojure
+" Lisp
 Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'junegunn/rainbow_parentheses.vim'
 
-" Depend on the latest version via tag.
 Plug 'Olical/aniseed', { 'tag': 'v3.2.0' }
-
-" For Fennel highlighting (based on Clojure).
 Plug 'bakpakin/fennel.vim'
 
-Plug 'junegunn/rainbow_parentheses.vim'
 " Plug 'Olical/conjure', { 'tag': 'v2.1.1', 'do': 'bin/compile'  }
 
 " Markdown
