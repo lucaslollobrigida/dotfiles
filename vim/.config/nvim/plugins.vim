@@ -13,12 +13,12 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
-" Vim enhancements
+" Enhancements builtin features
+Plug 'voldikss/vim-floaterm'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
-Plug 'voldikss/vim-floaterm'
+Plug 'tpope/vim-vinegar'
 Plug 'rstacruz/vim-closer'
-Plug 'Shougo/echodoc.vim'
 
 " Git
 Plug 'mhinz/vim-signify'
@@ -26,6 +26,7 @@ Plug 'tpope/vim-fugitive'
 
 " Visual
 Plug 'itchyny/lightline.vim'
+Plug 'Shougo/echodoc.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'morhetz/gruvbox'
 

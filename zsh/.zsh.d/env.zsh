@@ -6,6 +6,7 @@ setopt noflowcontrol
 
 path=(
     /usr/local/bin
+    /usr/local/opt/grep/libexec/gnubin
     $HOME/.local/bin
     $HOME/bin
     $HOME/Library/Python/3.7/bin/
