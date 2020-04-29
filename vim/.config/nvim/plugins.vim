@@ -35,6 +35,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegu
 
 " Wiki
 Plug 'vimwiki/vimwiki'
+Plug 'suan/vim-instant-markdown', {'for': 'markdown', 'do': 'npm -g install instant-markdown-d'}
 
 " Go
 Plug 'fatih/vim-go'
