@@ -49,8 +49,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 
 Plug 'Olical/aniseed', { 'tag': 'v3.2.0' }
 Plug 'bakpakin/fennel.vim'
-
-" Plug 'Olical/conjure', { 'tag': 'v2.1.1', 'do': 'bin/compile'  }
+Plug 'Olical/conjure', {'tag': 'v3.0.0'}
 
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
