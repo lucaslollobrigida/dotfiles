@@ -86,7 +86,7 @@ augroup vimrc
 augroup END
 
 " Move to the directory each buffer
-autocmd vimrc BufEnter * silent! lcd %:p:h
+" autocmd vimrc BufEnter * silent! lcd %:p:h
 
 " Open quickfix window automatically
 autocmd vimrc QuickfixCmdPost [^l]* nested copen | wincmd p
@@ -220,6 +220,28 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown'}
 
 " Plugin: vim-instant-markdown
 let g:instant_markdown_autostart = 0
+
+" Plugin: deoplete
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
+set completeopt-=preview
+
+" Plugin: float-preview
+let g:float_preview#docked = 0
+let g:float_preview#max_width = 80
+let g:float_preview#max_height = 40
+
+" Plugin: ale
+let g:ale_fix_on_save = 1
+let g:ale_linters = {
+\   'clojure': ['clj-kondo', 'joker']
+\}
+
+" Plugin: conjure
+let g:conjure_config = {
+      \ "mappings.eval-root-form": "ed",
+      \ "log.hud.enabled?":        v:false
+      \ }
 
 if filereadable(expand('$XDG_CONFIG_HOME/nvim/mappings.vim'))
   source ~/.config/nvim/mappings.vim

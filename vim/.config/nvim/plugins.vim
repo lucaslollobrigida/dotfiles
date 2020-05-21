@@ -15,6 +15,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Enhancements builtin features
 Plug 'voldikss/vim-floaterm'
+Plug 'ncm2/float-preview.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
@@ -32,6 +33,12 @@ Plug 'morhetz/gruvbox'
 
 " Fuzzy finder inside vim
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+
+" Completion
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+" Linter
+Plug 'dense-analysis/ale'
 
 " Wiki
 Plug 'vimwiki/vimwiki'

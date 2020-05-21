@@ -69,7 +69,7 @@ cassandra_run() {
 
 vim_update() {
     if [ -f $XDG_CONFIG_HOME/nvim/sync.sh ]; then
-        . $XDG_CONFIG_HOME/nvim/sync.sh
+        source $XDG_CONFIG_HOME/nvim/sync.sh
     else
         echo "Update script not found."
     fi
