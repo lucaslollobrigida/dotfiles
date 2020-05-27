@@ -1,16 +1,30 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
+  imports = [ 
+      ./x11.nix
+      ./development.nix
+      ./font.nix
       ./hardware-configuration.nix
     ];
+
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+    }))
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" ];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [];
+  boot.cleanTmpDir = true;
+  boot.tmpOnTmpfs = true;
 
-  # networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixos"; # Define your hostname.
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
@@ -34,65 +48,63 @@
   time.timeZone = "America/Sao_Paulo";
 
   hardware.bluetooth.enable = true;
+  hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
 
   environment.systemPackages = with pkgs; [
-    clojure
-    clojure-lsp
-    cmake
+    bat
     curl
-    dmenu
-    docker
-    docker-compose
+    discord
+    ((emacsPackagesGen emacsUnstable).emacsWithPackages (epkgs: [
+      epkgs.emacs-libvterm
+    ]))
+    exa
     fd
     firefox
     fzf
-    gcc
-    gitFull
-    gnumake
     gnupg
+    haskellPackages.hoogle
     jq
     kitty
-    kubectl
-    leiningen
     llvm
+    libnotify
     lxappearance
-    minikube
+    msgpack
     (neovim.override ({
       vimAlias = true;
      })) 
-    nodejs
-    oh-my-zsh
+    pavucontrol
     pinentry
-    pipenv
-    python3Full
+    pinentry-gtk2
     ripgrep
+    scrot
     slack
-    shellcheck
+    spotify
     stow
     tree
     unzip
     vim
     wget
-    xclip
-    xorg.xmodmap
-    yarn
-    zsh
+
+    (pkgs.lib.overrideDerivation pkgs.st (attrs: {
+      patches = attrs.patches ++ [
+        ../.config/st/patches/st-alpha-0.8.2.diff
+        ../.config/st/patches/st-xresources-20190105-3be4cf1.diff
+        ../.config/st/patches/st-scrollback-0.8.2.diff
+
+        # ../.config/st-patches/st-ligatures-alpha-20200430-0.8.3.diff
+        # ../.config/st-patches/st-ligatures-alpha-scrollback-20200430-0.8.3.diff
+        # ../.config/st-patches/st-ligatures-20200430-0.8.3.diff
+        # ../.config/st-patches/st-font2-20190416-ba72400.diff
+        # ../.config/st-patches/st-scrollback-mouse-0.8.2.diff
+        # ../.config/st-patches/st-scrollback-20200419-72e3f6c.diff
+      ];
+      conf = builtins.readFile ../.config/st/config.h;
+    }))
   ];
 
-  programs.java = {
+  services.actkbd = with pkgs; {
     enable = true;
-    package = pkgs.openjdk11;
-  };
-
-  # Enable Java anti-aliasing.
-  environment.variables._JAVA_OPTIONS = "-Dswing.aatext=TRUE -Dawt.useSystemAAFontSettings=on";
-
-  virtualisation = {
-    # Enable Docker.
-    docker.enable = true;
-
-    # Enable VirtualBox.
-    virtualbox.host.enable = true;
   };
 
   programs.gnupg.agent = {
@@ -109,8 +121,22 @@
   networking.firewall.allowPing = true;
   networking.firewall.enable = false;
 
-  nix.trustedUsers = [ "root" "lollo" ];
   nixpkgs.config.allowUnfree = true;
+
+  nix = {
+    # useSandbox = true;
+    trustedUsers = [ "root" "lollo" ];
+    binaryCaches = [
+      "https://cache.nixos.org/"
+      "https://cachix.cachix.org"
+      "https://all-hies.cachix.org"
+      ];
+    binaryCachePublicKeys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
+      "all-hies.cachix.org-1:JjrzAOEUsD9ZMt8fdFbzo3jNAyEWlPAwdVuHw4RD43k="
+    ];
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -122,45 +148,12 @@
     package = pkgs.pulseaudioFull;
   };
 
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    layout = "us";
-    desktopManager.xterm.enable = false;
-
-    displayManager.defaultSession = "none+xmonad";
-
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
-      extraPackages = with pkgs; haskellPackages: [
-        haskellPackages.xmonad-contrib
-        haskellPackages.xmonad-extras
-        haskellPackages.xmonad-contrib
-        haskellPackages.xmonad
-	dmenu
-      ];
-    };
-    
-    windowManager.i3 = {
-      enable = false;
-      package = pkgs.i3-gaps;
-      extraPackages = with pkgs; [
-        dmenu i3status i3lock
-      ];
-    };
-
-    displayManager.sessionCommands = with pkgs; lib.mkAfter
-      ''
-      xmodmap $HOME/.Xmodmap
-      '';
-
-  };
+  # Kill process consuming too much memory before it crawls the machine.
+  services.earlyoom.enable = true;
 
   programs.zsh = {
     enable = true;
     autosuggestions.enable = true;
-    enableCompletion = true;
     syntaxHighlighting.enable = true;
     ohMyZsh = {
       enable = true;
@@ -175,11 +168,20 @@
   programs.dconf = {
     enable = true;
   };
-  
-  # Enable touchpad support.
-  # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Enable automatic GC.
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
+
+  # Enable NixOS auto-upgrade.
+  system.autoUpgrade = {
+    enable = true;
+    dates = "daily";
+  }; 
+
   users.users.lollo = {
     isNormalUser = true;
     uid = 1000;
@@ -187,11 +189,5 @@
     shell = pkgs.zsh;
   };
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.03"; # Did you read the comment?
+  system.stateVersion = "20.03";
 }
