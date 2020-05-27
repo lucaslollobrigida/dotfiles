@@ -44,10 +44,11 @@ myWorkspaces =
   , "8:*"
   , "9:*"
   ]
-
+  
+-- TODO: this should be a shell script and will bite me later
 myStatusBar :: String
 myStatusBar =
-  "kill -9 $(pid xmobar); while pgrep -x polybar >/dev/null; do sleep 1; done; xmobar -x 0 ~/.config/xmobar/xmobarrc"
+  "kill -9 $(pid xmobar); while pgrep -x xmobar >/dev/null; do sleep 1; done; xmobar -x 0 ~/.config/xmobar/xmobarrc" 
 
 myWallpaper :: String
 myWallpaper = "nitrogen --restore &"

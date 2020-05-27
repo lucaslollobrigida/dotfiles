@@ -2,14 +2,17 @@
 
 My configuraration files for:
 
-+ Zsh
-+ Vim(neovim)
-+ Tmux
-+ Fonts
-+ Git
-+ Ctags
-+ GNU GPG
-+ Bash
++ dev
++ git
++ emacs
++ fzf
++ neovim
++ nixos
++ st
++ tmux
++ X
++ xmonad
++ zsh
 
 ## Dependencies
 
@@ -18,17 +21,11 @@ My configuraration files for:
 ## Usage
 
 ```sh
-git clone gitthub.com:lucaslollobrigida/dotfiles.git --recursive ~/.dotfiles
+git clone gitthub.com:lucaslollobrigida/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 
 # Backup your files, if needed
 
-# packages: vim|bash|git|tmux|ctags|fonts|gpg|zsh
+# packages: dev|git|emacs|fzf|vim|nixos|st|tmux|X|xmonad|zsh
 stow <package_name>
-```
-
-## Updating
-
-```sh
-~/.dotfiles/update.sh
 ```
