@@ -34,8 +34,11 @@ Plug 'morhetz/gruvbox'
 " Fuzzy finder inside vim
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 
-" Completion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Completion engine
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+" LSP and Completion engine
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Linter
 Plug 'dense-analysis/ale'
@@ -44,19 +47,14 @@ Plug 'dense-analysis/ale'
 Plug 'vimwiki/vimwiki'
 Plug 'suan/vim-instant-markdown', {'for': 'markdown', 'do': 'npm -g install instant-markdown-d'}
 
-" Go
-Plug 'fatih/vim-go'
-
-" Python
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-
 " Lisp
 Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'junegunn/rainbow_parentheses.vim'
 
-Plug 'Olical/aniseed', { 'tag': 'v3.2.0' }
+" REPL development
+Plug 'Olical/aniseed', { 'tag': 'v3.5.0' }
 Plug 'bakpakin/fennel.vim'
-Plug 'Olical/conjure', {'tag': 'v3.0.0'}
+Plug 'Olical/conjure', {'tag': 'v3.3.0'}
 
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }

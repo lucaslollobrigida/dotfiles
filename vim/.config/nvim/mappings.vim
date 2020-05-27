@@ -52,20 +52,30 @@ tnoremap jk <c-\><c-n>
 nnoremap <leader>sw :mksession! .quicksave.vim<CR>:echo "Session saved."<CR>
 nnoremap <leader>sr :source .quicksave.vim<CR>:echo "Session loaded."<CR>
 
-" Plugin: Conjure
-let g:conjure_map_prefix = "<localleader>"
-let g:conjure_nmap_up = g:conjure_map_prefix . "ec"
-let g:conjure_nmap_eval_root_form = g:conjure_map_prefix . "ee"
-let g:conjure_vmap_eval_selection = g:conjure_map_prefix . "ee"
-let g:conjure_nmap_eval_current_form = g:conjure_map_prefix . "er"
-let g:conjure_nmap_eval_file = g:conjure_map_prefix . "rf"
-let g:conjure_nmap_eval_buffer = g:conjure_map_prefix . "ef"
-let g:conjure_nmap_doc = "K"
-let g:conjure_nmap_definition = "gd"
-let g:conjure_nmap_close_log = g:conjure_map_prefix . "lc"
-let g:conjure_nmap_open_log = g:conjure_map_prefix . "lo"
-let g:conjure_nmap_run_tests = g:conjure_map_prefix . "tt"
-let g:conjure_nmap_refresh_all = g:conjure_map_prefix . "rr"
+" COC
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -86,4 +96,17 @@ endfunction
 
 function! s:remove_tabs()
   %s/\t/  /ge
+endfunction
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+function! Expand(exp) abort
+    let l:result = expand(a:exp)
+    return l:result ==# '' ? '' : "file://" . l:result
 endfunction

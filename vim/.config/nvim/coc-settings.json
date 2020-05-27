@@ -1,0 +1,64 @@
+{
+  "suggest.snippetIndicator": "🍦",
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Path": "/run/current-system/sw/bin/flake8",
+  "python.linting.mypyEnabled": true,
+  "python.linting.mypyPath": "/run/current-system/sw/bin/mypy",
+  "python.formatting.provider": "black",
+  "python.autoComplete.addBrackets": true,
+  "python.jediPath": "/home/lollo/.nix-profile/lib/python3.7/site-packages/jedi/",
+  "go.enable": true,
+  "languageserver": {
+    // HASKELL - Installation is broken on nixOS
+    // "haskell": {
+    //   "command": "hie-wrapper",
+    //   "args": ["--lsp"],
+    //   "rootPatterns": [
+    //     "*.cabal",
+    //     "stack.yaml",
+    //     "cabal.project",
+    //     "package.yaml"
+    //   ],
+    //   "filetypes": [
+    //     "hs",
+    //     "lhs",
+    //     "haskell"
+    //   ],
+    //   "initializationOptions": {
+    //     "languageServerHaskell": {
+    //       "languageServerHaskell": {
+    //         "hlintOn": true
+    //       }
+    //     }
+    //   }
+    // },
+
+    // Clojure
+    "clojure-lsp": {
+      "command": "bash",
+      "args": ["-c", "clojure-lsp"],
+      "filetypes": ["clojure"],
+      "rootPatterns": [
+        "project.clj",
+        "deps.edn",
+        "build.boot"
+      ],
+      "additionalSchemes": ["jar", "zipfile"],
+      "trace.server": "verbose",
+      "initializationOptions": {
+      }
+    }
+
+    // GO
+    // "golang": {
+    //   "command": "gopls",
+    //   "rootPatterns": ["go.mod"],
+    //   "disableWorkspaceFolders": true,
+    //   "filetypes": ["go"],
+    //   "initializationOptions": {
+    //     "usePlaceholders": true,
+    //     "completeUnimported": true
+    //   }
+    // }
+   }
+ }

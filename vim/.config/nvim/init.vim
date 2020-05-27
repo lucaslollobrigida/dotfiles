@@ -23,12 +23,12 @@ silent! set clipboard+=unnamedplus
 
 " Appearance
 silent! set relativenumber number background=dark display=lastline,uhex wrap wrapmargin=0 key= t_Co=256
-silent! set noshowmatch matchtime=1 noshowmode shortmess+=I cmdheight=1 cmdwinheight=10 showbreak=
+silent! set noshowmatch matchtime=1 noshowmode shortmess+=I,c cmdheight=1 cmdwinheight=10 showbreak=
 silent! set noshowcmd noruler rulerformat= laststatus=2 statusline=%t\ %=\ %m%r%y%w\ %3l:%-2c
 silent! set title titlelen=100 titleold= titlestring=%f noicon norightleft showtabline=1
 silent! set cursorline nocursorcolumn colorcolumn= concealcursor=nvc conceallevel=0 norelativenumber
 silent! set list listchars=tab:>\ ,nbsp:_ synmaxcol=3000 ambiwidth=double breakindent breakindentopt=
-silent! set nosplitbelow nosplitright nostartofline linespace=0 whichwrap=b,s scrolloff=0 sidescroll=0
+silent! set nosplitbelow nosplitright nostartofline linespace=0 whichwrap=b,s scrolloff=0 sidescroll=0 scroll=0
 silent! set equalalways nowinfixwidth nowinfixheight winminwidth=3 winminheight=3 nowarn noconfirm
 silent! set fillchars=vert:\|,fold:\  eventignore= helplang=en viewoptions=options,cursor virtualedit=
 silent! let [&t_SI,&t_EI] = exists('$TMUX') ? ["\ePtmux;\e\e[5 q\e\\","\ePtmux;\e\e[2 q\e\\"] : ["\e]50;CursorShape=1\x7","\e]50;CursorShape=0\x7"]
@@ -44,6 +44,8 @@ silent! set noautochdir write nowriteany writedelay=0 verbose=0 verbosefile= not
 silent! set tags=tags,./tags,../tags,../../tags,../../../tags,../../../../tags,../../../../../tags
 silent! set tags+=../../../../../../tags,../../../../../../../tags
 silent! set tags+=$VIM_CACHE/tags
+set isk+=/
+set isk+=.
 
 " Cache
 let g:netrw_home = '$VIM_DATA'
@@ -71,7 +73,7 @@ silent! set noerrorbells visualbell t_vb=
 
 " Split defaults
 set splitbelow splitright
-" set hidden
+set hidden
 " set ruler
 
 " set winbl=10
@@ -128,6 +130,7 @@ endtry
 highlight Comment cterm=Italic
 let g:signify_sign_delete = '-'
 au! BufNewFile,BufRead *.boot setf clojure
+au! FileType json syntax match Comment +\/\/.\+$+
 
 " hi! Normal ctermbg=NONE guibg=NONE
 " hi! NonText ctermbg=NONE guibg=NONE
@@ -155,6 +158,8 @@ if exists('g:loaded_webdevicons')
   call webdevicons#refresh()
 endif
 
+let g:loaded_node_provider = 1
+
 " Plugin: lightline.vim
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -171,27 +176,6 @@ let g:lightline = {
 function! LightlineReadonly()
   return &readonly && &filetype !=# 'help' ? 'RO' : ''
 endfunction
-
-" Plugin: vim-go
-let g:go_fmt_command = "goimports"
-let g:go_info_mode = "gopls"
-let g:go_auto_type_info = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-let g:go_auto_sameids = 0
-
-" Plugin: python-mode
-let g:pymode_python = 'python3'
-let g:pymode_indent = 1
-let g:pymode_doc = 1
-let g:pymode_lint_on_write = 1
 
 " Plugin: echodoc
 " Or, you could use neovim's floating text feature.
@@ -221,27 +205,32 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown'}
 " Plugin: vim-instant-markdown
 let g:instant_markdown_autostart = 0
 
-" Plugin: deoplete
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
-set completeopt-=preview
-
 " Plugin: float-preview
 let g:float_preview#docked = 0
 let g:float_preview#max_width = 80
 let g:float_preview#max_height = 40
 
 " Plugin: ale
-let g:ale_fix_on_save = 1
+" let g:ale_go_bingo_executable = 'gopls'
+let g:ale_fix_on_save = 0
 let g:ale_linters = {
-\   'clojure': ['clj-kondo', 'joker']
-\}
+      \ 'clojure': ['clj-kondo', 'joker'],
+      \ 'go': ['gopls']
+      \}
 
 " Plugin: conjure
 let g:conjure_config = {
       \ "mappings.eval-root-form": "ed",
       \ "log.hud.enabled?":        v:false
       \ }
+
+" Plugin: coc
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+let g:markdown_fenced_languages = [
+      \ 'vim',
+      \ 'help'
+      \]
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 if filereadable(expand('$XDG_CONFIG_HOME/nvim/mappings.vim'))
   source ~/.config/nvim/mappings.vim
