@@ -66,6 +66,7 @@ for file in ${HOME}/.zsh.d/*.zsh; do
 done
 
 [ -f $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
+[ -f $HOME/.zsh.d/aliases.zsh ] && source $HOME/.zsh.d/aliases.zsh
 
 [ -f ~/.nurc ] && source ~/.nurc
 

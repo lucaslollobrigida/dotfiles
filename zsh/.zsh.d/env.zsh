@@ -17,8 +17,10 @@ path=(
 )
 
 # Path to your oh-my-zsh installation.
-ZPATH=`nix eval nixpkgs.oh-my-zsh.outPath`
-export ZSH="${ZPATH//\"}/share/oh-my-zsh/"
+if [[ ! -v ZSH ]]; then
+# export ZSH=`nix eval nixpkgs.oh-my-zsh.outPath --raw`/share/oh-my-zsh/
+  export ZSH="$HOME/.oh-my-zsh"
+fi
 
 # Default ENV variables
 export XDG_DATA_HOME="$HOME/.local/share"
