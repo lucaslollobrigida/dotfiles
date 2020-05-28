@@ -44,11 +44,11 @@ myWorkspaces =
   , "8:*"
   , "9:*"
   ]
-  
+
 -- TODO: this should be a shell script and will bite me later
 myStatusBar :: String
 myStatusBar =
-  "kill -9 $(pid xmobar); while pgrep -x xmobar >/dev/null; do sleep 1; done; xmobar -x 0 ~/.config/xmobar/xmobarrc" 
+  "kill -9 $(pid xmobar); while pgrep -x xmobar >/dev/null; do sleep 1; done; xmobar -x 0 ~/.config/xmobar/xmobarrc"
 
 myWallpaper :: String
 myWallpaper = "nitrogen --restore &"
@@ -71,7 +71,7 @@ myManageHook = composeAll
   , className =? "Emacs" --> doShift "2:code"
   , className =? "Slack" --> doShift "4:comms"
   , className =? "Spotify" --> doShift "5:music"
-  , className =? "*" --> doShift "9:*"
+  , className =? "Gimp-2.0" --> doShift "7:misc"
   , isFullscreen --> doFullFloat
   ]
 

@@ -62,6 +62,7 @@
     fd
     firefox
     fzf
+    gimp
     gnupg
     haskellPackages.hoogle
     jq
@@ -76,6 +77,7 @@
     pavucontrol
     pinentry
     pinentry-gtk2
+    ranger
     ripgrep
     scrot
     slack

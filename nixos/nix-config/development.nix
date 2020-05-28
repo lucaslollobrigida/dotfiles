@@ -42,6 +42,7 @@ in
     python37Packages.python-language-server
     python37Packages.setuptools
     rustup
+    shellcheck
     stack
     universal-ctags
     yarn
