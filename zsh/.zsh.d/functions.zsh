@@ -1,14 +1,10 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 has_docker() {
     if hash docker 2>/dev/null; then
         echo 'Docker is not installed or missing from PATH.'
         exit 1
     fi
-}
-
-pid() {
-    ps aux | grep $1 | grep -v grep | awk '{ print $2 }'
 }
 
 hs() {
@@ -34,7 +30,7 @@ hs() {
 }
 
 so() {
-    source $HOME/.zshrc
+    source "$HOME/.zshrc"
 }
 
 pg_run() {
@@ -68,15 +64,16 @@ cassandra_run() {
 }
 
 vim_update() {
-    if [ -f $XDG_CONFIG_HOME/nvim/sync.sh ]; then
-        source $XDG_CONFIG_HOME/nvim/sync.sh
+    if [ -f "$XDG_CONFIG_HOME/nvim/sync.sh" ]; then
+        source "$XDG_CONFIG_HOME/nvim/sync.sh"
     else
         echo "Update script not found."
     fi
 }
 
 repl() {
-    local port="$(grep :api $XDG_CONFIG_HOME/conjure/.conjure.edn | awk '{print substr($3, 1, length($3)-1)}')"
+    local port
+    port=$(grep :api "$XDG_CONFIG_HOME/conjure/.conjure.edn" | awk '{print substr($3, 1, length($3)-1)}')
     clojure -J-Dclojure.server.jvm="{:port ${port} :accept clojure.core.server/io-prepl}"
 }
 

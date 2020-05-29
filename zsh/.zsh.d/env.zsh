@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 # setopt correct
 unsetopt correct_all
@@ -6,13 +6,10 @@ setopt noflowcontrol
 
 path=(
     /usr/local/bin
-    /usr/local/opt/grep/libexec/gnubin
+    /usr/local/lib/python3.7/site-packages
     $HOME/.local/bin
     $HOME/bin
-    $HOME/Library/Python/3.7/bin/
-    /usr/local/lib/python3.7/site-packages
     $HOME/.emacs.d/bin/
-    /Library/Java/JavaVirtualMachines/graalvm-ce-java8-20.0.0/Contents/Home/bin
     $path
 )
 

@@ -4,16 +4,12 @@
 -- Author: Lucas Lollobrigida
 -- https://github.com/lucaslollobrigida/dotfiles
 
-import           Data.Maybe
 import           XMonad
 import qualified XMonad.StackSet               as W
-import           XMonad.Actions.WindowGo
 import           XMonad.Config.Desktop
 import           XMonad.Hooks.DynamicProperty
 import           XMonad.Hooks.DynamicLog        ( dynamicLogWithPP
-                                                , defaultPP
                                                 , wrap
-                                                , pad
                                                 , xmobarPP
                                                 , xmobarColor
                                                 , shorten
@@ -30,7 +26,7 @@ import           XMonad.Util.EZConfig
 import           XMonad.Util.Run
 import           XMonad.Util.SpawnOnce
 
-myModMask = mod4Mask
+myModMask = mod1Mask
 
 myWorkspaces :: [WorkspaceId]
 myWorkspaces =
@@ -60,8 +56,8 @@ myDialogRunner =
 myCompositor :: String
 myCompositor = "picom &"
 
-myShell :: String
-myShell = "zsh"
+-- myShell :: String
+-- myShell = "zsh"
 
 myTerm :: String
 myTerm = "st"
@@ -95,6 +91,7 @@ myLayoutHook = avoidStruts $ smartBorders $ (tile ||| gtile ||| full)
 myStartupHook = do
   spawnOnce myWallpaper
   spawnOnce myCompositor
+  spawnOnce "redshift &"
 
 myKeys =
   [ ("M-p", spawn myDialogRunner)
@@ -112,6 +109,7 @@ main = do
     $                 docks desktopConfig
                         { normalBorderColor  = "#111111"
                         , focusedBorderColor = "#9c71C7"
+                        , modMask            = myModMask
                         , borderWidth        = 6
                         , terminal           = myTerm
                         , workspaces         = myWorkspaces

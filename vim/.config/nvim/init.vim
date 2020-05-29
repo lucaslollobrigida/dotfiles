@@ -212,10 +212,13 @@ let g:float_preview#max_height = 40
 
 " Plugin: ale
 " let g:ale_go_bingo_executable = 'gopls'
-let g:ale_fix_on_save = 0
+let g:ale_fix_on_save = 1
 let g:ale_linters = {
       \ 'clojure': ['clj-kondo', 'joker'],
-      \ 'go': ['gopls']
+      \ 'go': ['gopls'],
+      \ 'sh': ['shellcheck'],
+      \ 'bash': ['shellcheck'],
+      \ 'zsh': ['shellcheck']
       \}
 
 " Plugin: conjure

@@ -78,6 +78,7 @@
     pinentry
     pinentry-gtk2
     ranger
+    redshift
     ripgrep
     scrot
     slack
