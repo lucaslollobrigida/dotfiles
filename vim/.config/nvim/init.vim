@@ -1,10 +1,12 @@
-if filereadable(expand('$XDG_CONFIG_HOME/nvim/plugins.vim'))
-  source ~/.config/nvim/plugins.vim
+if !exists("$XDG_CONFIG_HOME") && filereadable(expand('$HOME/.config/nvim/plugins.vim'))
+    source $HOME/.config/nvim/plugins.vim
+elseif filereadable(expand('$XDG_CONFIG_HOME/nvim/plugins.vim'))
+    source $XDG_CONFIG_HOME/nvim/plugins.vim
 endif
 
 " Set default paths
-let $VIM_DATA = $XDG_DATA_HOME . '/vim'
-let $VIM_CACHE = $XDG_CACHE_HOME . '/vim'
+let $VIM_DATA = expand('$XDG_DATA_HOME/vim')
+let $VIM_CACHE = expand('$XDG_CACHE_HOME/vim')
 
 " Encoding
 set encoding=UTF-8
@@ -235,8 +237,10 @@ let g:markdown_fenced_languages = [
       \]
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
-if filereadable(expand('$XDG_CONFIG_HOME/nvim/mappings.vim'))
-  source ~/.config/nvim/mappings.vim
+if !exists("$XDG_CONFIG_HOME") && filereadable(expand('$HOME/.config/nvim/mappings.vim'))
+    source $HOME/.config/nvim/mappings.vim
+elseif filereadable(expand('$XDG_CONFIG_HOME/nvim/mappings.vim'))
+    source $XDG_CONFIG_HOME/nvim/mappings.vim
 endif
 
 " lua require('aniseed.dotfiles')

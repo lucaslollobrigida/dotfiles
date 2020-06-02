@@ -11,7 +11,11 @@ if empty(glob(plugtarget))
   endtry
 endif
 
-call plug#begin('~/.config/nvim/plugged')
+if !exists("$XDG_CONFIG_HOME")
+  call plug#begin("$HOME/.config/nvim/plugged")
+else
+  call plug#begin("$XDG_CONFIG_HOME/nvim/plugged")
+endif
 
 " Enhancements builtin features
 Plug 'voldikss/vim-floaterm'
