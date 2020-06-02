@@ -47,10 +47,6 @@
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
 
-  hardware.bluetooth.enable = true;
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
-
   environment.systemPackages = with pkgs; [
     bat
     curl
@@ -88,7 +84,6 @@
     unzip
     vim
     wget
-
     (pkgs.lib.overrideDerivation pkgs.st (attrs: {
       patches = attrs.patches ++ [
         ../.config/st/patches/st-alpha-0.8.2.diff
@@ -146,9 +141,22 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    package = pkgs.pulseaudioFull;
+
+  hardware = {
+    bluetooth.enable = true;
+
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+      s3tcSupport = true;
+    };
+
+    pulseaudio = {
+      enable = true;
+      support32Bit = true;
+      package = pkgs.pulseaudioFull;
+    };
   };
 
   # Kill process consuming too much memory before it crawls the machine.

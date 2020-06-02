@@ -35,9 +35,9 @@ myWorkspaces =
   , "3:sh"
   , "4:comms"
   , "5:music"
-  , "6:vm"
-  , "7:misc"
-  , "8:*"
+  , "6:media"
+  , "7:virt"
+  , "8:misc"
   , "9:*"
   ]
 
@@ -62,12 +62,23 @@ myCompositor = "picom &"
 myTerm :: String
 myTerm = "st"
 
+raiseVolume = "amixer set Master 5%+"
+lowerVolume = "amixer set Master 5%-"
+toggleVolumeMute ="amixer set Master 1+ toggle"
+increaseBrightness = "xbacklight -inc 20"
+decreaseBrightness = "xbacklight -dec 20"
+
+-- XF86AudioPlay exec playerctl play
+-- XF86AudioPause exec playerctl pause
+-- XF86AudioNext exec playerctl next
+-- XF86AudioPrev exec playerctl previous
+
 myManageHook = composeAll
-  [ className =? "Firefox" --> doShift "1:www"
-  , className =? "Emacs" --> doShift "2:code"
-  , className =? "Slack" --> doShift "4:comms"
-  , className =? "Spotify" --> doShift "5:music"
-  , className =? "Gimp-2.0" --> doShift "7:misc"
+  [ className =? "Firefox"  --> doShift "1:www"
+  , className =? "Emacs"    --> doShift "2:code"
+  , className =? "Slack"    --> doShift "4:comms"
+  , className =? "Spotify"  --> doShift "5:music"
+  , className =? "Gimp-2.0" --> doShift "8:misc"
   , isFullscreen --> doFullFloat
   ]
 
@@ -99,6 +110,13 @@ myKeys =
     , spawn myTerm
     )
   -- , ("M-S-<Return>", raiseMaybe (spawn "st -c nvim -e nvim") (className =? "nvim"))
+  , ("M-,", spawn toggleVolumeMute)
+  , ("M-.", spawn lowerVolume)
+  , ("M-/", spawn raiseVolume)
+
+  , ("M-'", spawn decreaseBrightness)
+  , ("M-;", spawn increaseBrightness)
+
   , ("M-m", spawn "spotify")
   ]
 
