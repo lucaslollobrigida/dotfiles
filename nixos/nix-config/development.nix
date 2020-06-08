@@ -2,10 +2,11 @@
 
 let
   all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
+  # ghcide   = (import (fetchTarball "https://github.com/cachix/ghcide-nix/tarball/master") {}).ghcide-ghc865;
 in
 {
   environment.systemPackages = with pkgs; [
-    (all-hies.unstable.selection { selector = p: { inherit (p) ghc865 ghc864 ghc844 ghc843 ; }; })
+    (all-hies.selection { selector = p: { inherit (p) ghc865 ; }; })
     binutils
     cmake
     clojure
@@ -14,6 +15,8 @@ in
     docker-compose
     gcc
     ghc
+    glibc
+    # ghcide
     gitFull
     gnumake
     gomodifytags
@@ -41,6 +44,7 @@ in
     python37Packages.pyls-mypy
     python37Packages.python-language-server
     python37Packages.setuptools
+    rnix-lsp
     rustup
     shellcheck
     stack
