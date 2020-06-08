@@ -41,6 +41,7 @@
    :n "v" (lambda () (interactive) (evil-window-vsplit) (evil-window-right 1)))
  ; misc
  :n "-" #'dired-jump
+ :nv ";" #'evil-ex
  :nv "C-a" #'evil-numbers/inc-at-pt
  :nv "C-S-a" #'evil-numbers/dec-at-pt
  :nv "C-SPC" #'+fold/toggle
