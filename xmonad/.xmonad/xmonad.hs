@@ -37,7 +37,7 @@ myWorkspaces =
   , "5:music"
   , "6:media"
   , "7:virt"
-  , "8:misc"
+  , "8:wiki"
   , "9:*"
   ]
 
@@ -46,15 +46,9 @@ myStatusBar :: String
 myStatusBar =
   "kill -9 $(pid xmobar); while pgrep -x xmobar >/dev/null; do sleep 1; done; xmobar -x 0 ~/.config/xmobar/xmobarrc"
 
-myWallpaper :: String
-myWallpaper = "nitrogen --restore &"
-
 myDialogRunner :: String
 myDialogRunner =
   "rofi -modi drun -matching fuzzy -sorting-method fzf drun -show"
-
-myCompositor :: String
-myCompositor = "picom &"
 
 -- myShell :: String
 -- myShell = "zsh"
@@ -99,9 +93,10 @@ myLayoutHook = avoidStruts $ smartBorders $ (tile ||| gtile ||| full)
   tile  = Tall 1 (3 / 100) (1 / 2)
   gtile = Tall 1 (2 / 100) (2 / (1 + (toRational (sqrt (5) :: Double))))
 
+myStartupHook :: X ()
 myStartupHook = do
-  spawnOnce myWallpaper
-  spawnOnce myCompositor
+  spawnOnce "picom &"
+  spawnOnce "nitrogen --restore &"
   spawnOnce "redshift &"
 
 myKeys =
