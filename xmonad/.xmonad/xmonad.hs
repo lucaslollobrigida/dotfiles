@@ -22,11 +22,12 @@ import           XMonad.Hooks.ManageDocks       ( docks
 import           XMonad.Hooks.ManageHelpers
 import           XMonad.ManageHook              ( className )
 import           XMonad.Layout.NoBorders
+import           XMonad.Layout.Spacing
 import           XMonad.Util.EZConfig
 import           XMonad.Util.Run
 import           XMonad.Util.SpawnOnce
 
-myModMask = mod1Mask
+myModMask = mod4Mask
 
 myWorkspaces :: [WorkspaceId]
 myWorkspaces =
@@ -42,18 +43,12 @@ myWorkspaces =
   ]
 
 -- TODO: this should be a shell script and will bite me later
-myStatusBar :: String
 myStatusBar =
   "kill -9 $(pid xmobar); while pgrep -x xmobar >/dev/null; do sleep 1; done; xmobar -x 0 ~/.config/xmobar/xmobarrc"
 
-myDialogRunner :: String
 myDialogRunner =
   "rofi -modi drun -matching fuzzy -sorting-method fzf drun -show"
 
--- myShell :: String
--- myShell = "zsh"
-
-myTerm :: String
 myTerm = "st"
 
 raiseVolume = "amixer set Master 5%+"
@@ -70,9 +65,10 @@ decreaseBrightness = "xbacklight -dec 20"
 myManageHook = composeAll
   [ className =? "Firefox"  --> doShift "1:www"
   , className =? "Emacs"    --> doShift "2:code"
+  , className =? "Code"    --> doShift "2:code"
   , className =? "Slack"    --> doShift "4:comms"
   , className =? "Spotify"  --> doShift "5:music"
-  , className =? "Gimp-2.0" --> doShift "8:misc"
+  , className =? "Gimp-2.0" --> doShift "9:*"
   , isFullscreen --> doFullFloat
   ]
 
@@ -90,8 +86,8 @@ windowCount =
 myLayoutHook = avoidStruts $ smartBorders $ (tile ||| gtile ||| full)
  where
   full  = noBorders Full
-  tile  = Tall 1 (3 / 100) (1 / 2)
-  gtile = Tall 1 (2 / 100) (2 / (1 + (toRational (sqrt (5) :: Double))))
+  tile  = spacing 3 $ Tall 1 (3 / 100) (1 / 2)
+  gtile = spacing 3 $ Tall 1 (2 / 100) (2 / (1 + (toRational (sqrt (5) :: Double))))
 
 myStartupHook :: X ()
 myStartupHook = do
@@ -101,17 +97,17 @@ myStartupHook = do
 
 myKeys =
   [ ("M-p", spawn myDialogRunner)
-  , ( "M-<Return>"
-    , spawn myTerm
-    )
-  -- , ("M-S-<Return>", raiseMaybe (spawn "st -c nvim -e nvim") (className =? "nvim"))
-  , ("M-,", spawn toggleVolumeMute)
-  , ("M-.", spawn lowerVolume)
-  , ("M-/", spawn raiseVolume)
+  , ("M-<Return>", spawn myTerm)
 
   , ("M-'", spawn decreaseBrightness)
   , ("M-;", spawn increaseBrightness)
 
+  , ("M-,", spawn toggleVolumeMute)
+  , ("M-.", spawn lowerVolume)
+  , ("M-/", spawn raiseVolume)
+
+  , ("M-b", spawn "firefox")
+  , ("M-n", spawn "st -c Code -e tmux new-session -c ~/dev -s development nvim")
   , ("M-m", spawn "spotify")
   ]
 
@@ -123,7 +119,7 @@ main = do
                         { normalBorderColor  = "#111111"
                         , focusedBorderColor = "#9c71C7"
                         , modMask            = myModMask
-                        , borderWidth        = 6
+                        , borderWidth        = 2
                         , terminal           = myTerm
                         , workspaces         = myWorkspaces
                         , layoutHook         = myLayoutHook
@@ -132,15 +128,15 @@ main = do
                                               <+> handleEventHook desktopConfig
                         , startupHook        = myStartupHook
                         , logHook            = dynamicLogWithPP xmobarPP
-                                                 { ppOutput = \x -> hPutStrLn xmproc x                 -- >> hPutStrLn xmproc1 x  >> hPutStrLn xmproc2 x
-                                                 , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]" -- Current workspace in xmobar
-                                                 , ppVisible = xmobarColor "#c3e88d" ""                -- Visible but not current workspace
-                                                 , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""   -- Hidden workspaces in xmobar
-                                                 , ppHiddenNoWindows = xmobarColor "#F07178" ""        -- Hidden workspaces (no windows)
-                                                 , ppTitle = xmobarColor "#d0d0d0" "" . shorten 60     -- Title of active window in xmobar
-                                                 , ppSep = "<fc=#666666> | </fc>"                     -- Separators in xmobar
-                                                 , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"  -- Urgent workspace
-                                                 , ppExtras = [windowCount]                           -- # of windows current workspace
+                                                 { ppOutput = \x -> hPutStrLn xmproc x
+                                                 , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]"
+                                                 , ppVisible = xmobarColor "#c3e88d" ""
+                                                 , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""
+                                                 , ppHiddenNoWindows = xmobarColor "#F07178" ""
+                                                 , ppTitle = xmobarColor "#d0d0d0" "" . shorten 60
+                                                 , ppSep = "<fc=#666666> | </fc>"
+                                                 , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
+                                                 , ppExtras = [windowCount]
                                                  , ppOrder = \(ws : l : t : ex) -> [ws, l] ++ ex ++ [t]
                                                  }
                         }
