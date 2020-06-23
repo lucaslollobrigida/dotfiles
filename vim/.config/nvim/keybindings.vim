@@ -33,6 +33,7 @@ nnoremap - :Explore<cr>
 " Search
 nnoremap <leader>s :Rg<CR>
 nnoremap <leader>* :Rg <C-R>=expand("<cword>")<CR><CR>
+" nnoremap <leader>* :Rg <C-R><C-A><CR>
 nnoremap <silent> <leader>n :nohlsearch<CR>
 
 " Files
@@ -55,7 +56,7 @@ tnoremap jk <c-\><c-n>
 nnoremap <leader>sh :FloatermToggle<CR>
 
 " Build and Run projects
-nnoremap <leader>b :make<CR>
+nnoremap <leader>b :Make<CR>
 " nnoremap <leader>x :execute<CR>
 
 " Format

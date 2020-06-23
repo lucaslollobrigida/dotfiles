@@ -1,0 +1,17 @@
+{
+  "suggest.snippetIndicator": "🍦",
+  "go.enable": true,
+  "languageserver": {
+    // GO
+    // "golang": {
+    //   "command": "gopls",
+    //   "rootPatterns": ["go.mod"],
+    //   "disableWorkspaceFolders": true,
+    //   "filetypes": ["go"],
+    //   "initializationOptions": {
+    //     "usePlaceholders": true,
+    //     "completeUnimported": true
+    //   }
+    // }
+   }
+ }

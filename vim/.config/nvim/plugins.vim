@@ -38,10 +38,15 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 
+" Project
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-dispatch' | Plug 'radenling/vim-dispatch-neovim'
+
 " Fuzzy finder inside vim
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 
 " Git wrapper
+Plug 'tpope/vim-fugitive'
 " Plug 'jreybert/vimagit'
 
 " Wiki
@@ -53,19 +58,19 @@ Plug 'voldikss/vim-floaterm'
 " Snippets
 Plug 'SirVer/ultisnips'
 
+" LSP
+" Note: this feature isn't in the stable neovim realease yet, so it expected to have bugs
+" Plug 'neovim/nvim-lsp'
+" Plug 'haorenW1025/completion-nvim' | Plug 'haorenW1025/diagnostic-nvim'
+
+" LSP Engine
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Needs node provider :(
+
 " Lisp
 Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
-" LSP
-" Note: this feature isn't in the stable neovim realease yet, so it expected to have bugs
-Plug 'neovim/nvim-lsp'
-Plug 'haorenW1025/completion-nvim'
-Plug 'haorenW1025/diagnostic-nvim'
-
 " Clojure
-Plug 'tpope/vim-fireplace'
-
-" REASON: Missing ANSI colors, bug? running single tests(always passes)
-" Plug 'Olical/conjure', {'tag': 'v3.4.0'} 
+" Plug 'tpope/vim-fireplace'
+Plug 'Olical/conjure', {'tag': 'v3.5.0'} | Plug 'Olical/AnsiEsc'
 
 call plug#end()

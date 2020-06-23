@@ -33,7 +33,7 @@ silent! set autoread autowrite " TODO: move this to ft to prevent watching unnec
 let $VIM_CACHE = expand('$XDG_CACHE_HOME/vim')
 
 " Editing
-silent! set undofile undolevels=1000 undodir=$VIM_CACHE/undo,/var/tmp/vim,/var/tmp
+silent! set hidden undofile undolevels=1000 undodir=$VIM_CACHE/undo,/var/tmp/vim,/var/tmp
 
 " Visuals
 " silent! set textwidth=0 backspace=indent,eol,start nrformats=hex formatoptions=cmMj nojoinspaces

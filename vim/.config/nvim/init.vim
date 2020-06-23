@@ -8,9 +8,3 @@ source ~/.config/nvim/plugins.vim
 source ~/.config/nvim/functions.vim
 source ~/.config/nvim/keybindings.vim
 source ~/.config/nvim/config.vim
-
-if LSPEnable()
-  try
-    luafile $HOME/.config/nvim/lua/init.lua
-  endtry
-end

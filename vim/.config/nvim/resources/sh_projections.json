@@ -1,0 +1,7 @@
+{
+  "*.zsh": {
+    "template": [
+      "#/usr/bin/env bash"
+    ]
+  }
+}

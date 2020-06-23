@@ -49,6 +49,10 @@ function! LightlineReadonly()
   return &readonly && &filetype !=# 'help' ? 'RO' : ''
 endfunction
 
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
 " Plugin: float-preview.nvim
 let g:float_preview#docked = 0
 set completeopt-=preview

@@ -6,28 +6,47 @@ let b:did_ftplugin = 1
 setlocal comments=s1:/*,mb:*,ex:*/,://
 setlocal commentstring=//\ %s
 
-source $HOME/.config/nvim/common/eightspaceindent.vim
+source $HOME/.config/nvim/common/fourspaceindent.vim
 
 " use omni completion provided by lsp
 " setlocal omnifunc=v:lua.vim.lsp.omnifunc
 " autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()
 
-compiler go
+compiler javac
 
 let g:projectionist_heuristics = {
-      \  "go.mod": {
-      \    "*.go": {
+      \  "build.gradle*&settings.gradle*|pom.xml": {
+      \    "*.java": {"dispatch": "javac {file}"},
+      \    "*": {"make": "mvn compile"},
+      \    "src/main/java/*.java": {
       \      "type": "source",
-      \      "alternate": "{}_test.go",
+      \      "alternate": "src/test/java/{}Test.java",
       \      "template": [
-      \        "package {dirname}"
+      \        "package {dirname|dot};",
+      \        "",
+      \        "public class {basename} {",
+      \        "    public {basename}() {",
+      \        "        return;",
+      \        "    }",
+      \        "}",
       \      ]
       \    },
-      \    "*_test.go": {
+      \    "src/test/java/*Test.java": {
       \      "type": "test",
-      \      "alternate": "{}.go",
+      \      "alternate": "src/main/java/{}.java",
       \      "template": [
-      \        "package {dirname}",
+      \        "package {dirname|dot};",
+      \        "",
+      \        "import org.junit.Test;",
+      \        "import static org.junit.Assert.*;",
+      \        "",
+      \        "public class {basename}Test {",
+      \        "    @Test",
+      \        "    public void testSomeLibraryMethod() {",
+      \        "        {basename} classUnderTest = new {}();",
+      \        "        assertTrue(\"someLibraryMethod should return 'true'\", classUnderTest.someLibraryMethod());",
+      \        "    }",
+      \        "}",
       \      ],
       \    }
       \  }
@@ -35,7 +54,7 @@ let g:projectionist_heuristics = {
 
 " LSP
 " nnoremap <silent> <buffer> gd        <cmd>lua vim.lsp.buf.definition()<CR>
-" nnoremap <silent> <buffer> [d        :echom "[LSP] gols doesn't support declarations()."<CR>
+" nnoremap <silent> <buffer> [d        <cmd>lua vim.lsp.buf.definition()<CR>
 " nnoremap <silent> <buffer> K         <cmd>lua vim.lsp.buf.hover()<CR>
 " nnoremap <silent> <buffer> gD        <cmd>lua vim.lsp.buf.references()<CR>
 " nnoremap <silent> <buffer> gi	       <cmd>lua vim.lsp.buf.implementation()<CR>

@@ -31,3 +31,22 @@ function! Expand(exp) abort
     let l:result = expand(a:exp)
     return l:result ==# '' ? '' : "file://" . l:result
 endfunction
+
+function! SetProjections(ft)
+  let l:base_file = a:ft . '_projections.json'
+  let l:global_jsn = expand('$XDG_CONFIG_HOME/nvim/resources/') . l:base_file
+  if filereadable(l:global_jsn)
+    let l:json = readfile(l:global_jsn)
+    let l:dict = projectionist#json_parse(l:json)
+    call projectionist#append(getcwd(), l:dict)
+  endif
+endfunction
+
+function! ShowDocumentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
