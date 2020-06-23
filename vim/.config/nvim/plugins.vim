@@ -1,7 +1,14 @@
+" Plugin management with vim-plug
+" Author: Lucas Lollobrigida
+" Repository: https://github.com/lucaslollobrigida/dotfiles
+"
+" I'm trying to avoid external depenpencies besides lua that's embedded 
+" in neovim, so any plugins that depends on python or node.js provider
+
 " Check if vim-pug is installed
 let plugtarget = '~/.local/share/nvim/site/autoload/plug.vim'
 if empty(glob(plugtarget))
-  echo "Installing vim-plug..."
+  echom "Installing vim-plug..."
   try
     let plugurl = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     call system('curl -fLo ' . plugtarget . ' --create-dirs ' . plugurl)
@@ -17,50 +24,53 @@ else
   call plug#begin("$XDG_CONFIG_HOME/nvim/plugged")
 endif
 
-" Enhancements builtin features
-Plug 'voldikss/vim-floaterm'
-Plug 'ncm2/float-preview.nvim'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-vinegar'
-Plug 'rstacruz/vim-closer'
-
-" Git
-Plug 'mhinz/vim-signify'
-Plug 'tpope/vim-fugitive'
-
 " Visual
 Plug 'itchyny/lightline.vim'
-Plug 'Shougo/echodoc.vim'
+Plug 'sainnhe/sonokai'
+Plug 'mhinz/vim-signify'
 Plug 'ryanoasis/vim-devicons'
-Plug 'morhetz/gruvbox'
+Plug 'ncm2/float-preview.nvim'
+Plug 'norcalli/nvim-terminal.lua'
+
+" Editing
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
+
+" Project
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-dispatch' | Plug 'radenling/vim-dispatch-neovim'
 
 " Fuzzy finder inside vim
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 
-" Completion engine
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-" LSP and Completion engine
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Linter
-Plug 'dense-analysis/ale'
+" Git wrapper
+Plug 'tpope/vim-fugitive'
+" Plug 'jreybert/vimagit'
 
 " Wiki
 Plug 'vimwiki/vimwiki'
-Plug 'suan/vim-instant-markdown', {'for': 'markdown', 'do': 'npm -g install instant-markdown-d'}
+
+" Floating Terminal
+Plug 'voldikss/vim-floaterm'
+
+" Snippets
+Plug 'SirVer/ultisnips'
+
+" LSP
+" Note: this feature isn't in the stable neovim realease yet, so it expected to have bugs
+" Plug 'neovim/nvim-lsp'
+" Plug 'haorenW1025/completion-nvim' | Plug 'haorenW1025/diagnostic-nvim'
+
+" LSP Engine
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Needs node provider :(
 
 " Lisp
 Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'junegunn/rainbow_parentheses.vim'
 
-" REPL development
-Plug 'Olical/aniseed', { 'tag': 'v3.5.0' }
-Plug 'bakpakin/fennel.vim'
-Plug 'Olical/conjure', {'tag': 'v3.3.0'}
-
-" Markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+" Clojure
+" Plug 'tpope/vim-fireplace'
+Plug 'Olical/conjure', {'tag': 'v3.5.0'} | Plug 'Olical/AnsiEsc'
 
 call plug#end()

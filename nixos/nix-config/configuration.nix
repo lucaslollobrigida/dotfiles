@@ -81,6 +81,7 @@
     slack
     spotify
     stow
+    tldr
     tree
     unzip
     vim

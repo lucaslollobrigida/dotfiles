@@ -13,6 +13,7 @@ in
     clojure-lsp
     docker
     docker-compose
+    elixir
     gcc
     ghc
     glibc
@@ -29,6 +30,7 @@ in
     kubectl
     leiningen
     libtool
+    maven
     minikube
     nodejs
     pipenv
