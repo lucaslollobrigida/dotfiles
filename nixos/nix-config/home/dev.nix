@@ -11,6 +11,7 @@
     elixir
 
     # c
+    clang-tools
     cmake
     gcc
     glibc

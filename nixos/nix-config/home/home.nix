@@ -15,8 +15,8 @@
     # (import (builtins.fetchTarball {
     #   url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
     # }))
-    # (import ./pkgs/emacs.nix)
     # (import ./pkgs/neovim.nix)
+    (import ../overlays/st.nix)
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -35,14 +35,7 @@
     redshift
     ripgrep
     spotify
-    (st.override {
-       patches = [
-        ~/.config/st/patches/st-alpha-0.8.2.diff
-        ~/.config/st/patches/st-xresources-20190105-3be4cf1.diff
-        # ~/.config/st/patches/st-scrollback-0.8.2.diff
-       ];
-      # conf = builtins.readFile ~/.config/st/config.h;
-     })
+    st
     stow
     unzip
     tldr

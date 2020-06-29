@@ -72,8 +72,6 @@ myManageHook = composeAll
   , className =? "Spotify"  --> doShift "5:music"
   , className =? "Gimp-2.0" --> doShift "9:*"
 
-  , className =? "Steam"    --> doShift "6:media"
-  , className =? "csgo_linux64" --> doFullFloat
   , isFullscreen --> doFullFloat
   ]
 

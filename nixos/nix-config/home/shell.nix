@@ -5,7 +5,7 @@
     enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;
-    dotDir = ".config/shell";
+    # dotDir = ".config/shell";
     localVariables = {
       CASE_SENSITIVE = "true";
       DISABLE_AUTO_TITLE = "true";
