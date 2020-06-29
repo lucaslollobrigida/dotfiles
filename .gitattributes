@@ -1,2 +1,2 @@
 *.[ch] linguist-language=C
-xmonad/.config/xmobar/* linguist-language=Haskell
+vim/.config/nvim/UltiSnips/* linguist-vendored

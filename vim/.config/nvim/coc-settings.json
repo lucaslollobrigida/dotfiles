@@ -2,16 +2,23 @@
   "suggest.snippetIndicator": "🍦",
   "go.enable": true,
   "languageserver": {
-    // GO
-    // "golang": {
-    //   "command": "gopls",
-    //   "rootPatterns": ["go.mod"],
-    //   "disableWorkspaceFolders": true,
-    //   "filetypes": ["go"],
-    //   "initializationOptions": {
-    //     "usePlaceholders": true,
-    //     "completeUnimported": true
-    //   }
-    // }
-   }
- }
+    "clojure-lsp": {
+      "command": "bash",
+      "args": ["-c", "clojure-lsp"],
+      "filetypes": ["clojure"],
+      "rootPatterns": ["deps.edn", "project.clj"],
+      "additionalSchemes": ["jar", "zipfile"],
+      "trace.server": "verbose",
+      "initializationOptions": {
+      }
+    },
+    "nix": {
+      "command": "rnix-lsp",
+      "filetypes": ["nix"]
+    },
+    "lua": {
+      "command": "lua-lsp",
+      "filetypes": ["lua"]
+    }
+  }
+}

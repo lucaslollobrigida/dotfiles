@@ -1,4 +1,0 @@
-clear Lock
-keysym Caps_Lock = Escape
-keysym Escape = grave asciitilde
-add Lock = Caps_Lock

@@ -19,6 +19,7 @@ import           XMonad.Hooks.ManageDocks       ( docks
                                                 , avoidStruts
                                                 , manageDocks
                                                 )
+import           XMonad.Hooks.EwmhDesktops      ( ewmh )
 import           XMonad.Hooks.ManageHelpers
 import           XMonad.ManageHook              ( className )
 import           XMonad.Layout.NoBorders
@@ -65,10 +66,14 @@ decreaseBrightness = "xbacklight -dec 20"
 myManageHook = composeAll
   [ className =? "Firefox"  --> doShift "1:www"
   , className =? "Emacs"    --> doShift "2:code"
-  , className =? "Code"    --> doShift "2:code"
+  , className =? "Code"     --> doShift "2:code"
   , className =? "Slack"    --> doShift "4:comms"
+  , className =? "Hexchat"  --> doShift "4:comms"
   , className =? "Spotify"  --> doShift "5:music"
   , className =? "Gimp-2.0" --> doShift "9:*"
+
+  , className =? "Steam"    --> doShift "6:media"
+  , className =? "csgo_linux64" --> doFullFloat
   , isFullscreen --> doFullFloat
   ]
 
@@ -92,8 +97,9 @@ myLayoutHook = avoidStruts $ smartBorders $ (tile ||| gtile ||| full)
 myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "picom &"
-  spawnOnce "nitrogen --restore &"
-  spawnOnce "redshift &"
+  spawnOnce "xrdb -merge ~/.Xresources &"
+  spawnOnce "feh --bg-max ~/wallpapers/person-wearing-red-hoodie-1097456.jpg"
+  spawnOnce "xmodmap ~/.Xmodmap"
 
 myKeys =
   [ ("M-p", spawn myDialogRunner)
@@ -115,29 +121,32 @@ main :: IO ()
 main = do
   xmproc <- spawnPipe myStatusBar
   xmonad
-    $                 docks desktopConfig
-                        { normalBorderColor  = "#111111"
-                        , focusedBorderColor = "#9c71C7"
-                        , modMask            = myModMask
-                        , borderWidth        = 2
-                        , terminal           = myTerm
-                        , workspaces         = myWorkspaces
-                        , layoutHook         = myLayoutHook
-                        , manageHook         = manageDocks <+> myManageHook
-                        , handleEventHook = dynamicPropertyChange "WM_CLASS" myManageHook
-                                              <+> handleEventHook desktopConfig
-                        , startupHook        = myStartupHook
-                        , logHook            = dynamicLogWithPP xmobarPP
-                                                 { ppOutput = \x -> hPutStrLn xmproc x
-                                                 , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]"
-                                                 , ppVisible = xmobarColor "#c3e88d" ""
-                                                 , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""
-                                                 , ppHiddenNoWindows = xmobarColor "#F07178" ""
-                                                 , ppTitle = xmobarColor "#d0d0d0" "" . shorten 60
-                                                 , ppSep = "<fc=#666666> | </fc>"
-                                                 , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
-                                                 , ppExtras = [windowCount]
-                                                 , ppOrder = \(ws : l : t : ex) -> [ws, l] ++ ex ++ [t]
-                                                 }
-                        }
+    $ docks
+    $ ewmh
+    -- $ pagerHints
+    desktopConfig
+        { normalBorderColor  = "#111111"
+        , focusedBorderColor = "#9c71C7"
+        , modMask            = myModMask
+        , borderWidth        = 2
+        , terminal           = myTerm
+        , workspaces         = myWorkspaces
+        , layoutHook         = myLayoutHook
+        , manageHook         = manageDocks <+> myManageHook
+        , handleEventHook = dynamicPropertyChange "WM_CLASS" myManageHook
+                              <+> handleEventHook desktopConfig
+        , startupHook        = myStartupHook
+        , logHook            = dynamicLogWithPP xmobarPP
+                                 { ppOutput = \x -> hPutStrLn xmproc x
+                                 , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]"
+                                 , ppVisible = xmobarColor "#c3e88d" ""
+                                 , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""
+                                 , ppHiddenNoWindows = xmobarColor "#F07178" ""
+                                 , ppTitle = xmobarColor "#d0d0d0" "" . shorten 60
+                                 , ppSep = "<fc=#666666> | </fc>"
+                                 , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
+                                 , ppExtras = [windowCount]
+                                 , ppOrder = \(ws : l : t : ex) -> [ws, l] ++ ex ++ [t]
+                                 }
+        }
     `additionalKeysP` myKeys

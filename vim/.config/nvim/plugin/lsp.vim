@@ -96,10 +96,11 @@ let g:markdown_fenced_languages = [
       \]
 
 let g:coc_global_extensions = [
-      \ 'coc-conjure',
-      \ 'coc-go',
-      \ 'coc-snippets',
-      \ 'coc-rust-analyzer',
-      \ 'coc-elixir',
       \ 'coc-clangd',
+      \ 'coc-conjure',
+      \ 'coc-elixir',
+      \ 'coc-go',
+      \ 'coc-json',
+      \ 'coc-rust-analyzer',
+      \ 'coc-snippets',
       \ ]
