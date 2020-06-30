@@ -3,16 +3,10 @@
 My configuraration files for:
 
 + dev
-+ git
 + emacs
-+ fzf
 + neovim
 + nixos
-+ st
-+ tmux
-+ X
 + xmonad
-+ zsh
 
 ## Dependencies
 
@@ -26,6 +20,6 @@ cd ~/.dotfiles
 
 # Backup your files, if needed
 
-# packages: dev|git|emacs|fzf|vim|nixos|st|tmux|X|xmonad|zsh
+# packages: dev|emacs|vim|nixos|xmonad
 stow <package_name>
 ```
