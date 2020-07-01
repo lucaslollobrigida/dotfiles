@@ -31,7 +31,7 @@
 
   home.file.".Xresources" = {
     text = ''
-      xterm*faceName: "${config.settings.fontName}:pixelsize=${toString config.settings.fontSize}:antialias=true:hinting=true
+      xterm*faceName: ${config.settings.fontName}:pixelsize=${toString config.settings.fontSize}:antialias=true:hinting=true
       xterm*renderFont: true
       xterm*background: black
       xterm*foreground: lightgrey
