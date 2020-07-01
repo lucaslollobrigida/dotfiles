@@ -26,10 +26,11 @@
     stack
 
     # golang
+    go
     goimports
     gomodifytags
+    gopls
     gotests
-    go
     go-tools
     impl
 

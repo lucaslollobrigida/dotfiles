@@ -43,9 +43,9 @@ myWorkspaces =
   , "9:*"
   ]
 
--- TODO: this should be a shell script and will bite me later
+
 myStatusBar =
-  "kill -9 $(pid xmobar); while pgrep -x xmobar >/dev/null; do sleep 1; done; xmobar -x 0 ~/.config/xmobar/xmobarrc"
+  "~/.xmonad/bin/start-xmobar"
 
 myDialogRunner =
   "rofi -modi drun -matching fuzzy -sorting-method fzf drun -show"

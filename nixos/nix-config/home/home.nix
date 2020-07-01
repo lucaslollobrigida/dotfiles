@@ -34,6 +34,7 @@
     ranger
     redshift
     ripgrep
+    slack
     spotify
     st
     stow
