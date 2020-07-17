@@ -63,6 +63,10 @@ Plug 'SirVer/ultisnips'
 " Plug 'neovim/nvim-lsp'
 " Plug 'haorenW1025/completion-nvim' | Plug 'haorenW1025/diagnostic-nvim'
 
+" Syntax
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+
 " LSP Engine
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Needs node provider :(
 
