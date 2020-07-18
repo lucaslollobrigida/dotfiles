@@ -1,5 +1,6 @@
 plugged
 cache
+.cpcache/
 tags
 *.errors
 

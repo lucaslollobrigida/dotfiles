@@ -99,6 +99,7 @@ let g:coc_global_extensions = [
       \ 'coc-clangd',
       \ 'coc-conjure',
       \ 'coc-elixir',
+      \ 'coc-flutter',
       \ 'coc-go',
       \ 'coc-json',
       \ 'coc-rust-analyzer',

@@ -20,5 +20,8 @@
       "command": "lua-lsp",
       "filetypes": ["lua"]
     }
-  }
+  },
+  "coc.preferences.formatOnSaveFiletypes": [
+    "dart"
+  ]
 }

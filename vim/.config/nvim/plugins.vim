@@ -64,6 +64,7 @@ Plug 'SirVer/ultisnips'
 " Plug 'haorenW1025/completion-nvim' | Plug 'haorenW1025/diagnostic-nvim'
 
 " Syntax
+Plug 'dart-lang/dart-vim-plugin'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 
@@ -75,6 +76,6 @@ Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 " Clojure
 " Plug 'tpope/vim-fireplace'
-Plug 'Olical/conjure', {'tag': 'v3.5.0'} | Plug 'Olical/AnsiEsc'
+Plug 'Olical/conjure', {'tag': 'v4.1.0'} | Plug 'Olical/AnsiEsc'
 
 call plug#end()

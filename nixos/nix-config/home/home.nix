@@ -35,6 +35,7 @@
     redshift
     ripgrep
     slack
+    spaceship-prompt
     spotify
     st
     stow

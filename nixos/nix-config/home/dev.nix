@@ -8,6 +8,7 @@
     joker
     leiningen
 
+    # elixir
     elixir
 
     # c
@@ -17,6 +18,10 @@
     glibc
     gnumake
     universal-ctags
+
+    # flutter
+    dart_dev
+    flutter
 
     # haskell
     ghc

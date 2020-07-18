@@ -13,6 +13,8 @@ highlight Comment cterm=Italic
 "   colorscheme gruvbox
 " endtry
 
+highlight NormalFloat ctermbg=black guibg=black
+
 "Plugin: sonokai
 let g:sonokai_style = 'andromeda'
 let g:sonokai_enable_italic = 1
