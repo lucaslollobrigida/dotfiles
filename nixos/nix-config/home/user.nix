@@ -8,7 +8,7 @@
     github.username = "lucaslollobrigida";
     gpgkey = "4915B7BB723C366C";
     shell = pkgs.zsh;
-    fontName = "SauceCodePro Nerd Font";
+    fontName = "SauceCodePro Nerd Font"; # "Fira Code"; 
     fontSize = 16;
   };
 

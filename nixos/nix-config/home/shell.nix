@@ -28,7 +28,7 @@
       home-switch = "home-manager -f $HOME/nix-config/home/home.nix switch";
       system-switch = "sudo nixos-rebuild switch -I $HOME/nix-config/host/desktop.nix -I $HOME/.nix-channels";
     };
-    history.path = "/${config.xdg.dataHome}/zsh/zsh_history";
+    # history.path = "${config.xdg.dataHome}/zsh";
     plugins = [
       {
         name = "zsh-autosuggestions";

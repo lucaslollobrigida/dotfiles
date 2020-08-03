@@ -2,6 +2,10 @@
 
 {
   home.packages = with pkgs; [
+    # general
+    awscli
+    ninja
+
     # clojure
     clojure
     clojure-lsp
@@ -46,9 +50,11 @@
 
     # lua
     libtool
-    luajitPackages.lua-lsp
+    # lua
+    luajit
 
     # java
+    gradle
     maven
 
     # node

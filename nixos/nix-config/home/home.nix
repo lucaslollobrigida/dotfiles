@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, config,  ... }:
 
 {
   imports = [
@@ -15,14 +15,15 @@
     # (import (builtins.fetchTarball {
     #   url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
     # }))
-    # (import ./pkgs/neovim.nix)
     (import ../overlays/st.nix)
+    (import ../overlays/neovim.nix)
   ];
 
   nixpkgs.config.allowUnfree = true;
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
+    cachix
     curl
     exa
     fd
@@ -37,6 +38,7 @@
     slack
     spaceship-prompt
     spotify
+    shutter
     st
     stow
     unzip

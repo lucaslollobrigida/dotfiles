@@ -20,6 +20,7 @@
       (nerdfonts.override {
         fonts = [
           "AnonymousPro"
+          "FiraCode"
           "Inconsolata"
           "Hack"
           "Mononoki"
