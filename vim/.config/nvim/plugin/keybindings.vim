@@ -46,6 +46,10 @@ nnoremap <leader>t :tabnew<CR>
 nnoremap <Tab> :tabnext<CR>
 nnoremap <S-Tab> :tabprevious<CR>
 
+" Project
+nnoremap <silent> <Leader>p :call contabs#project#select()<CR>
+nnoremap <silent> <Leader>b :call contabs#buffer#select()<CR>
+
 " Sessions
 nnoremap <leader>sw :mksession! .quicksave.vim<CR>:echo "Session saved."<CR>
 nnoremap <leader>sr :source .quicksave.vim<CR>:echo "Session loaded."<CR>
@@ -56,7 +60,7 @@ tnoremap jk <c-\><c-n>
 nnoremap <leader>sh :FloatermToggle<CR>
 
 " Build and Run projects
-nnoremap <leader>b :Make<CR>
+" nnoremap <leader>b :Make<CR>
 " nnoremap <leader>x :execute<CR>
 
 " Format

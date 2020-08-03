@@ -3,8 +3,10 @@ if (exists("b:did_ftplugin"))
 endif
 let b:did_ftplugin = 1
 
-source $HOME/.config/nvim/common/twospaceindent.vim
-
+setlocal expandtab
+setlocal smartindent
+setlocal shiftwidth=2
+setlocal tabstop=2
 setlocal commentstring=\"\ %s
 
 nnoremap <buffer> <leader>so :so %<cr>
