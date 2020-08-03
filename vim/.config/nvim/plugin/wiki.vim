@@ -8,10 +8,10 @@ let g:vimwiki_list = [{
             \ 'ext':'.md',
             \ 'custom_wiki2html': 'vimwiki_markdown',
             \}]
+
 let g:taskwiki_syntax = 'markdown'
 let g:taskwiki_markdown_syntax='markdown'
 let g:taskwiki_markup_syntax='markdown'
 let g:vimwiki_folding='expr'
 let g:vimwiki_hl_headers = 1
 let g:vimwiki_ext2syntax = {'.md': 'markdown'}
-
