@@ -34,6 +34,7 @@
     diffFilter = delta --color-only
 
 [delta]
+    side-by-side = true
     features = side-by-side line-numbers decorations
     whitespace-error-style = 22 reverse
 

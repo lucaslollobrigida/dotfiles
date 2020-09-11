@@ -7,5 +7,6 @@ setlocal expandtab
 setlocal smartindent
 setlocal shiftwidth=2
 setlocal tabstop=2
+setlocal softtabstop=2
 setlocal comments=s1:/*,mb:*,ex:*/,://
 setlocal commentstring=//\ %s

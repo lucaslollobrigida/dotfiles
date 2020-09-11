@@ -61,6 +61,7 @@
       interactive.diffFilter = "delta --color-only";
 
       delta.features = "side-by-side line-numbers decorations";
+      delta.side-by-side = true;
       delta.whitespace-error-style = "22 reverse";
 
       "delta \"decorations\"".commit-decoration-style = "bold yellow box ul";
