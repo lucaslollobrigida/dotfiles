@@ -16,13 +16,15 @@
     #   url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
     # }))
     (import ../overlays/st.nix)
-    (import ../overlays/neovim.nix)
+    # (import ../overlays/neovim.nix)
   ];
 
   nixpkgs.config.allowUnfree = true;
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
+    (let neuronSrc = builtins.fetchTarball "https://github.com/srid/neuron/archive/master.tar.gz";
+      in import neuronSrc {})
     cachix
     curl
     exa

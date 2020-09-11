@@ -55,8 +55,17 @@
       "color \"branch\"".remote = "yellow";
 
       core.filemode = false;
-      core.pager = "less -r";
+      core.pager = "delta";
       core.excludesfile = "~/.config/git/ignore";
+
+      interactive.diffFilter = "delta --color-only";
+
+      delta.features = "side-by-side line-numbers decorations";
+      delta.whitespace-error-style = "22 reverse";
+
+      "delta \"decorations\"".commit-decoration-style = "bold yellow box ul";
+      "delta \"decorations\"".file-style = "bold yellow ul";
+      "delta \"decorations\"".file-decoration-style = "none";
 
       diff.renames = "copies";
       diff.algorithm = "patience";

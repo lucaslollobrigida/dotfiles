@@ -24,43 +24,33 @@ Plug 'mhinz/vim-signify'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ncm2/float-preview.nvim'
 Plug 'norcalli/nvim-terminal.lua'
+
+" Focus mode
 Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 
 " Editing
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'jiangmiao/auto-pairs'
 
 " Project
+Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-dispatch' | Plug 'radenling/vim-dispatch-neovim'
 Plug 'junegunn/fzf' | Plug 'junegunn/fzf.vim'
-
-" tab management
 Plug 'm00qek/nvim-contabs'
+Plug 'tpope/vim-fugitive'
+Plug 'voldikss/vim-floaterm'
 
 " REPL integration
 Plug 'clojure-vim/vim-jack-in'
-Plug 'Olical/conjure', { 'tag': 'v4.1.0' } | Plug 'Olical/AnsiEsc'
+Plug 'Olical/conjure' | Plug 'Olical/AnsiEsc'
 
 " LSP Engine
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-"rainbow parentheses
-Plug 'luochen1990/rainbow'
-
-" structural edition
-Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
-
-" Git
-Plug 'tpope/vim-fugitive'
-
-" Floating Terminal
-Plug 'voldikss/vim-floaterm'
-
-" Wiki
-Plug 'vimwiki/vimwiki'
 
 " Syntax
 Plug 'guns/vim-clojure-static'

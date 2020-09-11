@@ -19,6 +19,10 @@ cmap w!! w !sudo tee > /dev/null %
 " Window
 nnoremap <C-+> <C-w>+
 nnoremap <C-_> <C-w>-
+nnoremap <C-h> <C-w><C-h>
+nnoremap <C-j> <C-w><C-j>
+nnoremap <C-k> <C-w><C-k>
+nnoremap <C-l> <C-w><C-l>
 
 " Buffers
 nnoremap <leader>q :bprevious<CR>
@@ -26,9 +30,6 @@ nnoremap <leader>w :bnext<CR>
 nnoremap <leader>c :bdelete!<CR>
 nnoremap <leader>, :Buffers<cr>
 nnoremap <leader>. :lcd %:p:h<CR>
-
-" Netrw
-nnoremap - :Explore<cr>
 
 " Search
 nnoremap <leader>s :Rg<CR>

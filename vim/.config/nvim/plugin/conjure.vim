@@ -1,10 +1,9 @@
-
 " Plugin: conjure
 " autocmd BufEnter conjure-log-* AnsiEsc
 
 let g:conjure#log#strip_ansi_escape_sequences_line_limit = 0
 
-let g:conjure#mapping#eval_root_form = "ed"
+" let g:conjure#mapping#eval_root_form = "ed"
 " let g:conjure#client#clojure#nrepl#mapping#eval_root_form = "ed"
 
 let g:conjure#client#clojure#nrepl#mapping#connect_port_file = "'"
@@ -23,12 +22,3 @@ let g:conjure#mapping#def_word = "gd"
 
 " Plugin: auto-pairs
 let b:AutoPairs = {'(':')', '[':']', '{':'}','"':'"'}
-
-" Plugin: nvim-contabs
-let g:contabs#project#locations = [
-  \ { 'path': '~/dev/', 'depth': 2, 'git_only': v:true },
-  \ { 'path': '~/.dotfiles/', 'depth': 0, 'git_only': v:true, 'entrypoint': [ 'vim/.config/nvim/init.vim' ], 'formatter': { _ -> 'dotfiles (~/.dotfiles)' }},
-  \]
-
-" Plugin: rainbow
-let g:rainbow_active = 1

@@ -4,7 +4,12 @@
   home.packages = with pkgs; [
     # general
     awscli
+    heroku
     ninja
+    silver-searcher
+    bat
+    gitAndTools.delta
+    openssl
 
     # clojure
     clojure
@@ -50,16 +55,16 @@
 
     # lua
     libtool
-    # lua
     luajit
 
     # java
     gradle
     maven
 
-    # node
+    # js
     nodejs
     yarn
+    nodePackages.typescript-language-server
 
     # python
     pipenv
