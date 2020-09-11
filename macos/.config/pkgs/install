@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+brew update
+brew install $(cat ~/.config/pkgs/deps)
+brew upgrade $(cat ~/.config/pkgs/deps)

@@ -1,0 +1,76 @@
+[user]
+    name = Lucas Lollobrigida
+    email = lucaslollobrigida@gmail.com
+    # signingkey = 7370366172F100970D9ABA68BBA6F99379ACADA9
+    # email = lucas.lollobrigida@nubank.com.br
+    # signingkey = 056F9B8CBB81C691D5915FB9286880A835E4C06B
+
+[github]
+    user = lucaslollobrigida
+
+[alias]
+    s = status -s
+    c = clone --recursive
+    last = log -1 HEAD
+    utg = reset HEAD --
+    aliases = config --get-regexp alias
+    glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+
+[pull]
+    rebase  = yes
+    octopus = octopus
+
+[push]
+    default = matching
+
+[color]
+    ui = true
+[core]
+    pager = delta
+    filemode     = false
+    excludesfile = ~/.config/git/ignore
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = side-by-side line-numbers decorations
+    whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+
+[diff]
+    renames = copies
+    algorithm = patience
+
+[merge]
+    tool = vimdiff
+
+[mergetool]
+    keepBackup = false
+
+[format]
+    pretty = format:"%C(yellow)%h%Creset %ad | %Cgreen%s%Creset %Cred%d%Creset %Cblue[%an]"
+
+[color]
+    ui = true
+
+[color "branch"]
+    current = green
+    local   = blue
+    remote  = yellow
+
+[color "status"]
+    added     = green
+    changed   = blue
+    untracked = red
+
+[log]
+    abbrevcommit = true
+    date=short
+
+[commit]
+    gpgsign = false

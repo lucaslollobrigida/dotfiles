@@ -1,0 +1,37 @@
+# Logs and databases
+log/
+*.log
+*.db
+*.sqlite
+
+# OSX
+.DS_Store
+
+# vi and emacs
+*~
+*#
+
+# Temp files
+.*.swp
+
+# Objects
+*.so
+*.o
+*.pyo
+*.pyc
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# IntelliJ
+.idea/
+
+# LSP protocol
+.lsp
