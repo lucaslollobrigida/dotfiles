@@ -49,7 +49,7 @@ nnoremap <S-Tab> :tabprevious<CR>
 
 " Project
 nnoremap <silent> <Leader>p :call contabs#project#select()<CR>
-nnoremap <silent> <Leader>b :call contabs#buffer#select()<CR>
+nnoremap <silent> <Leader>, :call contabs#buffer#select()<CR>
 
 " Sessions
 nnoremap <leader>sw :mksession! .quicksave.vim<CR>:echo "Session saved."<CR>
@@ -67,3 +67,6 @@ nnoremap <leader>sh :FloatermToggle<CR>
 " Format
 nnoremap <leader>tw :call TrimWS()<CR>
 nnoremap <leader>rt :call RemoveTabs()<CR>
+
+xnoremap  <   <gv
+xnoremap  >   >gv

@@ -10,6 +10,9 @@
       "additionalSchemes": ["jar", "zipfile"],
       "trace.server": "verbose",
       "initializationOptions": {
+	"extendedClientCapabilities": {
+	  "classFileContentsSupport": true
+	}
       }
     },
     "nix": {

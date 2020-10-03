@@ -24,6 +24,7 @@ Plug 'mhinz/vim-signify'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ncm2/float-preview.nvim'
 Plug 'norcalli/nvim-terminal.lua'
+Plug 'tjdevries/cyclist.vim'
 
 " Focus mode
 Plug 'junegunn/goyo.vim'
@@ -52,6 +53,8 @@ Plug 'Olical/conjure' | Plug 'Olical/AnsiEsc'
 " LSP Engine
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
 " Syntax
 Plug 'guns/vim-clojure-static'
 Plug 'dart-lang/dart-vim-plugin'
@@ -61,6 +64,9 @@ Plug 'LnL7/vim-nix'
 
 " Snippets
 Plug 'SirVer/ultisnips'
+
+" Notetaking
+Plug 'ihsanturk/neuron.vim'
 
 call plug#end()
 
