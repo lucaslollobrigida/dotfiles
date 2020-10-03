@@ -101,6 +101,67 @@ function! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
 endfunction
 
+" Plugin: Lightline
+" let g:lightline = {
+"       \ 'active': {
+"       \   'left': [ [ 'mode', 'paste' ],
+"       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+"       \ },
+"       \ 'component_function': {
+"       \   'gitbranch': 'FugitiveHead'
+"       \ },
+"       \ }
+   let g:lightline = {
+    \ 'colorscheme': 'wombat',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
+    \ 'right': [ [ 'lineinfo' ],
+    \            [ 'percent' ],
+    \            [ 'ff_icon', 'fileencoding', 'ft_icon' ] ] },
+    \ 'inactive': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
+    \ 'right': [ [ 'lineinfo' ],
+    \            [ 'percent' ],
+    \            [ 'ff_icon', 'fileencoding', 'ft_icon' ] ] },
+    \ 'component': {
+    \   'lineinfo': ' %3l:%-2v',
+    \ },
+    \ 'component_function': {
+    \   'readonly': 'LightlineReadonly',
+    \   'fugitive': 'LightlineFugitive',
+    \   'ft_icon': 'FileTypeWithIcon',
+    \   'ff_icon': 'FileFormatWithIcon',
+    \ },
+    \ 'separator': { 'left': '', 'right': '' },
+    \ 'subseparator': { 'left': '', 'right': '' }
+    \ }
+
+   function! LightlineReadonly()
+     return &readonly ? '' : ''
+   endfunction
+
+   function! LightlineFugitive()
+     if exists('*FugitiveHead')
+       let branch = FugitiveHead()
+       return branch !=# '' ? ''.branch : ''
+     endif
+     return ''
+   endfunction
+
+function! FileTypeWithIcon() abort
+  let filetype_with_icon = &filetype !=# '' ? &filetype : 'no ft'
+  let modified = &modified ? '  ' : ''
+  return winwidth(0) > 70 ? WebDevIconsGetFileTypeSymbol() . ' ' . modified . &filetype : ' '
+endfunction
+
+function! FileFormatWithIcon() abort
+  let fileformat_with_icon = &fileformat !=# '' ? &fileformat : 'no ff'
+  let modified = &modified ? '  ' : ''
+  return winwidth(0) > 70 ? WebDevIconsGetFileFormatSymbol() . ' ' . modified . &fileformat : ' '
+endfunction
+
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
