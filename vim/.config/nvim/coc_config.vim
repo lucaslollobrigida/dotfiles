@@ -33,9 +33,11 @@ Plug 'junegunn/limelight.vim'
 " Editing
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-surround'
 Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'jiangmiao/auto-pairs'
+Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release', 'for': 'clojure'}
+" Plug 'bhurlow/vim-parinfer'
+" Plug 'jiangmiao/auto-pairs'
 
 " Project
 Plug 'justinmk/vim-dirvish'
@@ -47,7 +49,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'voldikss/vim-floaterm'
 
 " REPL integration
-Plug 'clojure-vim/vim-jack-in'
+Plug 'clojure-vim/vim-jack-in', {'for': 'clojure'}
 Plug 'Olical/conjure' | Plug 'Olical/AnsiEsc'
 
 " LSP Engine
@@ -56,6 +58,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " Syntax
+Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-clojure-static'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'leafgarland/typescript-vim'
@@ -71,25 +74,26 @@ Plug 'ihsanturk/neuron.vim'
 call plug#end()
 
 " Plugin: coc.nvim
-nnoremap <silent> gd          <Plug>(coc-definition)
-nnoremap <silent> [d          <Plug>(coc-declarations)
-nnoremap <silent> K           :call ShowDocumentation()<CR>
-nnoremap <silent> gD          <Plug>(coc-type-definition)
-nnoremap <silent> gr          <Plug>(coc-references)
-nnoremap <silent> gi          <Plug>(coc-implementation)
-nnoremap <silent> gW  :<C-u>CocList -I symbols<cr>
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> [d <Plug>(coc-declarations)
+nmap <silent> gW :<C-u>CocList -I symbols<cr>
 
 nnoremap <leader>rn <Plug>(coc-rename)
-xnoremap <leader>f  <Plug>(coc-format-selected)
-nnoremap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+nnoremap <silent> K :call ShowDocumentation()<CR>
 
 " code action
-vnoremap <leader>a  <Plug>(coc-codeaction-selected)
-nnoremap <leader>a  <Plug>(coc-codeaction-selected)
-nnoremap <leader>aa  <Plug>(coc-codeaction)
-nnoremap <leader>aq  <Plug>(coc-fix-current)
+vmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>aa  <Plug>(coc-codeaction)
+nmap <leader>aq  <Plug>(coc-fix-current)
 
-nnoremap <silent> <leader>d  :<C-u>CocList diagnostics<cr>
+nmap <silent> <leader>d  :<C-u>CocList diagnostics<cr>
 
 let g:coc_snippet_next = '<c-j>'
 let g:coc_snippet_prev = '<c-k>'
@@ -102,77 +106,107 @@ function! s:cocActionsOpenFromSelected(type) abort
 endfunction
 
 " Plugin: Lightline
-" let g:lightline = {
-"       \ 'active': {
-"       \   'left': [ [ 'mode', 'paste' ],
-"       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-"       \ },
-"       \ 'component_function': {
-"       \   'gitbranch': 'FugitiveHead'
-"       \ },
-"       \ }
-   let g:lightline = {
-    \ 'colorscheme': 'wombat',
-    \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
-    \ 'right': [ [ 'lineinfo' ],
-    \            [ 'percent' ],
-    \            [ 'ff_icon', 'fileencoding', 'ft_icon' ] ] },
-    \ 'inactive': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
-    \ 'right': [ [ 'lineinfo' ],
-    \            [ 'percent' ],
-    \            [ 'ff_icon', 'fileencoding', 'ft_icon' ] ] },
-    \ 'component': {
-    \   'lineinfo': ' %3l:%-2v',
-    \ },
-    \ 'component_function': {
-    \   'readonly': 'LightlineReadonly',
-    \   'fugitive': 'LightlineFugitive',
-    \   'ft_icon': 'FileTypeWithIcon',
-    \   'ff_icon': 'FileFormatWithIcon',
-    \ },
-    \ 'separator': { 'left': '', 'right': '' },
-    \ 'subseparator': { 'left': '', 'right': '' }
-    \ }
+let g:lightline = {
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'fugitive', 'cocerror', 'cocwarn', 'readonly', 'filename', 'modified' ] ],
+  \   'right': [ [ 'lineinfo' ],
+  \            [ 'percent' ],
+  \            [ 'ff_icon', 'ft_icon' ] ] },
+  \ 'inactive': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
+  \   'right': [ [ 'lineinfo' ],
+  \            [ 'percent' ],
+  \            [ 'ff_icon', 'ft_icon' ] ] },
+  \ 'component': {
+  \   'lineinfo': ' %3l:%-2v',
+  \ },
+  \ 'component_function': {
+  \   'readonly': 'LightlineReadonly',
+  \   'fugitive': 'LightlineFugitive',
+  \   'ft_icon': 'FileTypeWithIcon',
+  \   'ff_icon': 'FileFormatWithIcon',
+  \ },
+  \ 'component_expand': {
+  \   'cocerror': 'LightLineCocError',
+  \   'cocwarn' : 'LightLineCocWarn',
+  \ },
+  \ 'component_type': {
+  \   'cocerror': 'error',
+  \   'cocwarn' : 'warning',
+  \ },
+  \ 'separator': { 'left': '', 'right': '' },
+  \ 'subseparator': { 'left': '', 'right': '' }
+  \ }
 
-   function! LightlineReadonly()
-     return &readonly ? '' : ''
-   endfunction
+function! LightlineReadonly()
+  return &readonly ? '' : ''
+endfunction
 
-   function! LightlineFugitive()
-     if exists('*FugitiveHead')
-       let branch = FugitiveHead()
-       return branch !=# '' ? ''.branch : ''
-     endif
-     return ''
-   endfunction
+function! LightlineFugitive()
+  if exists('*FugitiveHead')
+    let branch = FugitiveHead()
+    return branch !=# '' ? ''.branch : ''
+  endif
+  return ''
+endfunction
 
 function! FileTypeWithIcon() abort
   let filetype_with_icon = &filetype !=# '' ? &filetype : 'no ft'
-  let modified = &modified ? '  ' : ''
-  return winwidth(0) > 70 ? WebDevIconsGetFileTypeSymbol() . ' ' . modified . &filetype : ' '
+  return winwidth(0) > 70 ? WebDevIconsGetFileTypeSymbol() . ' ' . &filetype : ' '
 endfunction
 
 function! FileFormatWithIcon() abort
   let fileformat_with_icon = &fileformat !=# '' ? &fileformat : 'no ff'
-  let modified = &modified ? '  ' : ''
-  return winwidth(0) > 70 ? WebDevIconsGetFileFormatSymbol() . ' ' . modified . &fileformat : ' '
+  return winwidth(0) > 70 ? WebDevIconsGetFileFormatSymbol() . ' ' . &fileformat : ' '
 endfunction
+
+function! LightLineCocError()
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info)
+    return ''
+  endif
+
+  let errmsgs = []
+
+  if get(info, 'error', 0)
+    let s:error_sign = get(g:, 'coc_status_error_sign', '✘ ')
+    call add(errmsgs, s:error_sign . info['error'])
+  endif
+
+  return trim(join(errmsgs, ' ') . ' ' . get(g:, 'coc_status', ''))
+endfunction
+
+function! LightLineCocWarn() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info)
+    return ''
+  endif
+
+  let warnmsgs = []
+
+  if get(info, 'warning', 0)
+    let s:warning_sign = get(g:, 'coc_status_warning_sign', ' ')
+    call add(warnmsgs, s:warning_sign . info['warning'])
+  endif
+
+  return trim(join(warnmsgs, ' ') . ' ' . get(g:, 'coc_status', ''))
+endfunction
+
+autocmd User CocDiagnosticChange call lightline#update()
 
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd FileType clojure,typescript,json setl formatexpr=CocAction('formatSelected')
   " Autoorganize imports on save
   autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
   " highlight symbol under cursor
-  " autocmd CursorHold  * silent call CocActionAsync('highlight')
-  " autocmd CursorHoldI * silent call CocActionAsync('highlight')
+  autocmd CursorHold  * silent call CocActionAsync('highlight')
+  autocmd CursorHoldI * silent call CocActionAsync('highlight')
 augroup end
 
 let g:markdown_fenced_languages = [
@@ -194,18 +228,39 @@ let g:coc_global_extensions = [
       \ 'coc-vimlsp',
       \ ]
 
-nmap <silent> crcc :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-coll', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nmap <silent> crth :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nmap <silent> crtt :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nmap <silent> crtf :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nmap <silent> crtl :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nmap <silent> cruw :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'unwind-thread', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nmap <silent> crua :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'unwind-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nmap <silent> crml :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'move-to-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')]})<CR>
-nmap <silent> cril :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'introduce-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')]})<CR>
-nmap <silent> crel :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'expand-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nmap <silent> cram :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'add-missing-libspec', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nmap <silent> crcn :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'clean-ns', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nmap <silent> crcp :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-privacy', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nmap <silent> cris :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'inline-symbol', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nmap <silent> cref :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'extract-function', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Function name: ')]})<CR>
+autocmd BufReadCmd,FileReadCmd,SourceCmd jar:file://* call s:LoadClojureContent(expand("<amatch>"))
+
+ function! s:LoadClojureContent(uri)
+  setfiletype clojure
+  let content = CocRequest('clojure-lsp', 'clojure/dependencyContents', {'uri': a:uri})
+  call setline(1, split(content, "\n"))
+  setl nomodified
+  setl readonly
+endfunction
+
+let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'match', '^context', '^GET', '^PUT', '^POST', '^PATCH', '^DELETE', '^ANY', 'this-as', '^are', '^dofor']
+
+let g:clojure_syntax_keywords = {
+    \ 'clojureDefine': ["defproject", "defcustom", "s/defn", "s/defmethod", "s/def", "s/defrecord", "s/defschema", "deftest", "defresolver", "defmutation"],
+    \ 'clojureMacro': ["s/with-fn-validation", "with-system"],
+    \ 'clojureFunc': ["are", "is", "testing", "match?",  "match"]
+    \ }
+
+command! -nargs=0 Format :call CocAction('format')
+
+" Test
+nnoremap <silent> crcc :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-coll', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> crth :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> crtt :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> crtf :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> crtl :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> cruw :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'unwind-thread', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> crua :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'unwind-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> crml :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'move-to-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')]})<CR>
+nnoremap <silent> cril :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'introduce-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')]})<CR>
+nnoremap <silent> crel :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'expand-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> cram :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'add-missing-libspec', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> crcn :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'clean-ns', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> crcp :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-privacy', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> cris :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'inline-symbol', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> cref :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'extract-function', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Function name: ')]})<CR>

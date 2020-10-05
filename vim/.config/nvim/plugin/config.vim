@@ -20,9 +20,9 @@ let g:loaded_netrwSettings     = 1
 let g:loaded_netrwFileHandlers = 1
 let g:loaded_netrwPlugin       = 1
 let g:loaded_2html_plugin      = 1
-let g:loaded_gzip              = 1
-let g:loaded_tarPlugin         = 1
-let g:loaded_zipPlugin         = 1
+" let g:loaded_gzip              = 1
+" let g:loaded_tarPlugin         = 1
+" let g:loaded_zipPlugin         = 1
 
 " Some default ignores
 silent! set wildignore=*.~,*.?~,*.o,*.sw?,*.bak,*.hi,*.pyc,*.out,*.lock,*.jar suffixes=*.pdf
@@ -37,7 +37,7 @@ let $VIM_CACHE = expand('$XDG_CACHE_HOME/vim')
 
 " Editing
 silent! set hidden nowrap undofile undolevels=1000 undodir=$VIM_CACHE/undo,/var/tmp/vim,/var/tmp
-silent! set backspace=indent,eol,start
+silent! set backspace=indent,eol,start scrolloff=10 smarttab
 
 " Visuals
 " silent! set textwidth=0  nrformats=hex formatoptions=cmMj nojoinspaces

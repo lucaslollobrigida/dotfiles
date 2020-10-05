@@ -1,5 +1,5 @@
 " Plugin: conjure
-" autocmd BufEnter conjure-log-* AnsiEsc
+autocmd BufEnter conjure-log-* set ft=terminal
 
 let g:conjure#log#strip_ansi_escape_sequences_line_limit = 0
 
@@ -22,3 +22,6 @@ let g:conjure#mapping#def_word = "gd"
 
 " Plugin: auto-pairs
 let b:AutoPairs = {'(':')', '[':']', '{':'}','"':'"'}
+
+" Plugin: vim-sexp-mappings-for-regular-people
+let g:sexp_no_word_maps = 1

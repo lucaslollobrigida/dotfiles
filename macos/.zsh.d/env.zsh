@@ -7,12 +7,13 @@ setopt noflowcontrol
 path=(
     /usr/local/bin
     /usr/local/lib/python3.7/site-packages
-    /usr/local/opt/openjdk/bin
     /usr/local/opt/grep/libexec/gnubin
     $HOME/.local/bin
     $HOME/bin
     $HOME/.emacs.d/bin
     $HOME/Library/Python/3.7/bin
+    /usr/local/Cellar/neovim/0.4.4/bin/
+    /usr/local/opt/openjdk/bin
     $path
 )
 
