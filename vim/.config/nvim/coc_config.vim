@@ -112,13 +112,13 @@ let g:lightline = {
   \             [ 'fugitive', 'cocerror', 'cocwarn', 'readonly', 'filename', 'modified' ] ],
   \   'right': [ [ 'lineinfo' ],
   \            [ 'percent' ],
-  \            [ 'ff_icon', 'ft_icon' ] ] },
+  \            [ 'ft_icon' ] ] },
   \ 'inactive': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
   \   'right': [ [ 'lineinfo' ],
   \            [ 'percent' ],
-  \            [ 'ff_icon', 'ft_icon' ] ] },
+  \            [ 'ft_icon' ] ] },
   \ 'component': {
   \   'lineinfo': ' %3l:%-2v',
   \ },

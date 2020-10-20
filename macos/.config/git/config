@@ -74,4 +74,4 @@
     date=short
 
 [commit]
-    gpgsign = false
+    gpgsign = true

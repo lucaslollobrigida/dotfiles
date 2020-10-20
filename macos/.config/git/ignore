@@ -35,3 +35,4 @@ log/
 
 # LSP protocol
 .lsp
+.clj-kondo/

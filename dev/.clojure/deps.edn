@@ -61,17 +61,24 @@
          :main-opts ["-m" "cljfmt-runner.fix"]}
 
   :nsorg {:extra-paths ["test"]
-          :extra-deps  {nsorg-cli {:mvn/version "0.3.1"}}
+          :extra-deps  {nsorg-cli/nsorg-cli {:mvn/version "0.3.1"}}
           :main-opts   ["-m" "nsorg.cli"
                         "--replace"]}
 
   :kondo {:extra-paths ["test"]
           :main-opts   ["-m clj-kondo.main"
                         "--lint src test"]
-          :extra-deps {clj-kondo {:mvn/version "2020.05.02"}}}
+          :extra-deps {clj-kondo/clj-kondo {:mvn/version "2020.05.02"}}}
 
-  :new {:extra-deps {seancorfield/clj-new {:mvn/version "RELEASE"}}
-        :main-opts ["-m" "clj-new.create"]}
+  :new-app {:extra-deps {seancorfield/clj-new
+                         {:mvn/version "1.1.228"}}
+            :exec-fn clj-new/create
+            :exec-args {:template "app"}}
+
+  :new-lib {:extra-deps {seancorfield/clj-new
+                         {:mvn/version "1.1.228"}}
+            :exec-fn clj-new/create
+            :exec-args {:template "lib"}}
 
   :uberjar {:extra-deps {seancorfield/depstar {:mvn/version "RELEASE"}}
             :main-opts ["-m" "hf.depstar.uberjar"]}
@@ -79,8 +86,8 @@
   :jar {:extra-deps {seancorfield/depstar {:mvn/version "RELEASE"}}
         :main-opts ["-m" "hf.depstar.jar"]}
 
-  :install {:extra-deps {deps-deploy {:mvn/version "RELEASE"}}
+  :install {:extra-deps {deps-deploy/deps-deploy {:mvn/version "RELEASE"}}
             :main-opts ["-m" "deps-deploy.deps-deploy" "install"]}
 
-  :deploy {:extra-deps {deps-deploy {:mvn/version "RELEASE"}}
+  :deploy {:extra-deps {deps-deploy/deps-deploy {:mvn/version "RELEASE"}}
            :main-opts ["-m" "deps-deploy.deps-deploy" "deploy"]}}}
