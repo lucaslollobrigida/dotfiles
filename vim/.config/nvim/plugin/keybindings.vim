@@ -38,7 +38,7 @@ nnoremap <leader>* :Rg <C-R>=expand("<cword>")<CR><CR>
 nnoremap <silent> <leader>n :nohlsearch<CR>
 
 " Files
-nnoremap <leader>f :Files<cr>
+nnoremap <leader>f :Files<CR>
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <leader><leader> :GFiles<cr>
 
@@ -70,3 +70,24 @@ nnoremap <leader>rt :call RemoveTabs()<CR>
 
 xnoremap  <   <gv
 xnoremap  >   >gv
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD <Plug>(coc-references)
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> [d <Plug>(coc-declarations)
+nmap <silent> gW :<C-u>CocList -I symbols<cr>
+
+nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>rf <Plug>(coc-refactor)
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
+
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+" code action
+vmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>aa <Plug>(coc-codeaction)
+nmap <leader>aq <Plug>(coc-fix-current)
+nmap <silent> <leader>d :<C-u>CocList diagnostics<cr>

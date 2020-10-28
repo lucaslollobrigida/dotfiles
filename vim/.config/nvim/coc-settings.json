@@ -1,5 +1,11 @@
 {
   "suggest.snippetIndicator": "🍦",
+  "diagnostic.virtualText": true,
+  "codeLens.enable": true,
+  "suggest.echodocSupport": true,
+  "suggest.removeDuplicateItems": true,
+  "suggest.languageSourcePriority": 98,
+  "coc.source.conjure.priority": 99,
   "go.enable": true,
   "languageserver": {
     "clojure-lsp": {

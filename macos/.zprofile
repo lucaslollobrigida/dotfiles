@@ -6,13 +6,18 @@ export XDG_CONFIG_DIRS="/etc/xdg"
 
 export ZSH="$HOME/.oh-my-zsh"
 export JAVA_HOME="/usr/local/opt/openjdk"
+export ANDROID_HOME="$HOME/.local/share/android"
+export FLUTTER_HOME="$HOME/.local/share/flutter"
 
-export PATH="$HOME/.emacs.d/bin/:$PATH"
-export PATH="$HOME/.local/bin/:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$JAVA_HOME/bin:$PATH"
-
-# export FLUTTER_HOME="$HOME/src/flutter"
+export PATH="$PATH:$HOME/.emacs.d/bin"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$JAVA_HOME/bin"
+export PATH="$PATH:$FLUTTER_HOME/bin"
+export PATH="$PATH:$ANDROID_HOME/emulator"
+export PATH="$PATH:$ANDROID_HOME/cmdline-tools/tools"
+export PATH="$PATH:$ANDROID_HOME/cmdline-tools/tools/bin"
+export PATH="$PATH:$ANDROID_HOME/platform-tools"
 
 [ -f $HOME/.zshrc ] && source ~/.zshrc
 [ -f $HOME/.nurc ] && source ~/.nurc

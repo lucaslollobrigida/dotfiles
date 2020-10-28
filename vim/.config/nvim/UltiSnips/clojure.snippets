@@ -1,0 +1,142 @@
+priority 50
+snippet defn "Expand into a defn form" b
+(defn ${1:fn-name}
+	[${2:arg-list}]
+	${0:code})
+endsnippet
+
+snippet sdef "Expand into a s/defn form" b
+(s/defn ${1:fn-name} :- ${2:type}
+	[${3:arg-list} :- ${4:type}]
+	${0:code})
+endsnippet
+
+snippet def "Expand into a def form" b
+(def ${1:var-name})
+endsnippet
+
+snippet defma "Expand into a defmacro form" b
+(defmacro ${1:macro-name}
+	[${2:arg-list}]
+	${0:code})
+endsnippet
+
+snippet defp "Expand into a defprotocol form" b
+(defprotocol ${1:name}
+	(${2:method} [${0:args}]))
+endsnippet
+
+snippet defr "Expand into a defrecord form" b
+(defrecord ${1:name}
+	${2:protocol}
+
+	${0:code})
+endsnippet
+
+snippet defmm "Expand into defmulti form" b
+(defmulti ${1:name}
+	${0:dispatch-fn})
+endsnippet
+
+snippet defm "Expand into defmethod form" b
+(defmethod ${1:multifn} ${2:dispatch-val}
+	[${4:args}]
+	${0:code})
+endsnippet
+
+snippet defty "Expand into a deftype form" b
+(deftype ${1:Name}
+	[${2:fields}]
+	${3:Protocol}
+	${0:code})
+endsnippet
+
+snippet require "Expand into a (:require) import"
+(:require [${1:namespace} :as ${2:alias}])
+endsnippet
+
+snippet com "Expand into a (comment ...) form" b
+(comment
+	${0})
+endsnippet
+
+snippet if "Expand into an if statement"
+(if ${1:test-expr}
+	${2:then-expr}
+	${0:else-expr})
+endsnippet
+
+snippet condp "Expand into a cond form" b
+(condp ${1:pred} ${2:expr}
+	${0})
+endsnippet
+
+snippet let
+(let [${1:name} ${2:expr}]
+	${0:code})
+endsnippet
+
+snippet deft "Expand into a deftest form" b
+(deftest ${1:name}-test
+	(is (${2:match?} ${3:expected} ${4:actual})))
+${0}
+endsnippet
+
+snippet is "Expand into a (is ...) statement"
+(is (${1:match?} ${1} ${0}))
+endsnippet
+
+snippet test "Expand into a (testing ...) form"
+(testing "${1:description}"
+	(${0}))
+endsnippet
+
+snippet doseq
+(doseq [${1:elem} ${2:coll}]
+	${0:code})
+endsnippet
+
+snippet fn
+(fn [${1:arg-list}] ${0:code})
+endsnippet
+
+snippet if-let
+(if-let [${1:result} ${2:test-expr}]
+	(${3:then-expr} $1)
+	(${0:else-expr}))
+endsnippet
+
+# snippet letfn
+# 	(letfn [(${1:name}) [${2:args}]
+# 		${0:code})])
+# snippet map
+# 	(map ${1:func} ${0:coll})
+# snippet mapl
+# 	(map #(${1:lambda}) ${0:coll})
+# snippet met
+# 	(${1:name} [${2:this} ${3:args}]
+# 		${0:code})
+# snippet ns
+# 	(ns ${0:name})
+# snippet dotimes
+# 	(dotimes [_ 10]
+# 		(time
+# 			(dotimes [_ ${1:times}]
+# 				${0:code})))
+# snippet pmethod
+# 	(${1:name} [${2:this} ${0:args}])
+# snippet refer
+# 	(:refer-clojure :exclude [${0}])
+# snippet require
+# 	(:require [${1:namespace} :as [${0}]])
+# snippet use
+# 	(:use [${1:namespace} :only [${0}]])
+# snippet print
+# 	(println ${0})
+# snippet reduce
+# 	(reduce ${1:(fn [p n] ${3})} ${2})
+# snippet when
+# 	(when ${1:test} ${0:body})
+# snippet when-let
+# 	(when-let [${1:result} ${2:test}]
+# 		${0:body})

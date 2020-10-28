@@ -15,10 +15,10 @@ set completeopt+=noinsert,noselect,menuone
 set shortmess+=c
 
 " Disable defautl stuff
-let g:loaded_netrw             = 1
-let g:loaded_netrwSettings     = 1
-let g:loaded_netrwFileHandlers = 1
-let g:loaded_netrwPlugin       = 1
+" let g:loaded_netrw             = 1
+" let g:loaded_netrwSettings     = 1
+" let g:loaded_netrwFileHandlers = 1
+" let g:loaded_netrwPlugin       = 1
 let g:loaded_2html_plugin      = 1
 " let g:loaded_gzip              = 1
 " let g:loaded_tarPlugin         = 1

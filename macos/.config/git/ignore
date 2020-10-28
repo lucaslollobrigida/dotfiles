@@ -36,3 +36,4 @@ log/
 # LSP protocol
 .lsp
 .clj-kondo/
+.nrepl-history

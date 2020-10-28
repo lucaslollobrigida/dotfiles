@@ -25,6 +25,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'ncm2/float-preview.nvim'
 Plug 'norcalli/nvim-terminal.lua'
 Plug 'tjdevries/cyclist.vim'
+Plug 'Shougo/echodoc.vim'
 
 " Focus mode
 Plug 'junegunn/goyo.vim'
@@ -36,11 +37,10 @@ Plug 'tpope/vim-repeat'
 " Plug 'tpope/vim-surround'
 Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release', 'for': 'clojure'}
-" Plug 'bhurlow/vim-parinfer'
 " Plug 'jiangmiao/auto-pairs'
 
 " Project
-Plug 'justinmk/vim-dirvish'
+Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-dispatch' | Plug 'radenling/vim-dispatch-neovim'
 Plug 'junegunn/fzf' | Plug 'junegunn/fzf.vim'
@@ -53,9 +53,12 @@ Plug 'clojure-vim/vim-jack-in', {'for': 'clojure'}
 Plug 'Olical/conjure' | Plug 'Olical/AnsiEsc'
 
 " LSP Engine
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'tag': 'v0.0.78'}
 
+" Diagram and Documentation
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'tyru/open-browser.vim'
+Plug 'weirongxu/plantuml-previewer.vim'
 
 " Syntax
 Plug 'guns/vim-clojure-highlight'
@@ -64,46 +67,28 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'LnL7/vim-nix'
+Plug 'aklt/plantuml-syntax'
 
 " Snippets
 Plug 'SirVer/ultisnips'
+Plug 'natebosch/dartlang-snippets'
+Plug 'honza/vim-snippets'
 
 " Notetaking
 Plug 'ihsanturk/neuron.vim'
 
 call plug#end()
 
+" Plugin: others
+let dart_style_guide = 2
+
+" Plugin: echodoc
+set noshowmode
+let g:echodoc_enable_at_startup = 1
+
 " Plugin: coc.nvim
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gD <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> [d <Plug>(coc-declarations)
-nmap <silent> gW :<C-u>CocList -I symbols<cr>
-
-nnoremap <leader>rn <Plug>(coc-rename)
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-nnoremap <silent> K :call ShowDocumentation()<CR>
-
-" code action
-vmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>aa  <Plug>(coc-codeaction)
-nmap <leader>aq  <Plug>(coc-fix-current)
-
-nmap <silent> <leader>d  :<C-u>CocList diagnostics<cr>
-
 let g:coc_snippet_next = '<c-j>'
 let g:coc_snippet_prev = '<c-k>'
-
-xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
-
-function! s:cocActionsOpenFromSelected(type) abort
-  execute 'CocCommand actions.open ' . a:type
-endfunction
 
 " Plugin: Lightline
 let g:lightline = {
