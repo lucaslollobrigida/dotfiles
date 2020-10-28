@@ -72,7 +72,6 @@ Plug 'aklt/plantuml-syntax'
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'natebosch/dartlang-snippets'
-Plug 'honza/vim-snippets'
 
 " Notetaking
 Plug 'ihsanturk/neuron.vim'

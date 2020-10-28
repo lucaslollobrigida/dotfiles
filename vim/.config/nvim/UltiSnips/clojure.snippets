@@ -60,10 +60,21 @@ snippet com "Expand into a (comment ...) form" b
 	${0})
 endsnippet
 
+snippet let
+(let [${1:name} ${2:expr}]
+	${0:code})
+endsnippet
+
 snippet if "Expand into an if statement"
 (if ${1:test-expr}
 	${2:then-expr}
 	${0:else-expr})
+endsnippet
+
+snippet if-let
+(if-let [${1:result} ${2:test-expr}]
+	(${3:then-expr} $1)
+	(${0:else-expr}))
 endsnippet
 
 snippet condp "Expand into a cond form" b
@@ -71,9 +82,13 @@ snippet condp "Expand into a cond form" b
 	${0})
 endsnippet
 
-snippet let
-(let [${1:name} ${2:expr}]
-	${0:code})
+snippet when
+(when ${1:test} ${0:body})
+endsnippet
+
+snippet when-let
+(when-let [${1:result} ${2:test}]
+	${0:body})
 endsnippet
 
 snippet deft "Expand into a deftest form" b
@@ -100,43 +115,39 @@ snippet fn
 (fn [${1:arg-list}] ${0:code})
 endsnippet
 
-snippet if-let
-(if-let [${1:result} ${2:test-expr}]
-	(${3:then-expr} $1)
-	(${0:else-expr}))
+snippet map
+(map ${1:func} ${0:coll})
 endsnippet
 
-# snippet letfn
-# 	(letfn [(${1:name}) [${2:args}]
-# 		${0:code})])
-# snippet map
-# 	(map ${1:func} ${0:coll})
-# snippet mapl
-# 	(map #(${1:lambda}) ${0:coll})
-# snippet met
-# 	(${1:name} [${2:this} ${3:args}]
-# 		${0:code})
-# snippet ns
-# 	(ns ${0:name})
-# snippet dotimes
-# 	(dotimes [_ 10]
-# 		(time
-# 			(dotimes [_ ${1:times}]
-# 				${0:code})))
-# snippet pmethod
-# 	(${1:name} [${2:this} ${0:args}])
-# snippet refer
-# 	(:refer-clojure :exclude [${0}])
-# snippet require
-# 	(:require [${1:namespace} :as [${0}]])
-# snippet use
-# 	(:use [${1:namespace} :only [${0}]])
-# snippet print
-# 	(println ${0})
-# snippet reduce
-# 	(reduce ${1:(fn [p n] ${3})} ${2})
-# snippet when
-# 	(when ${1:test} ${0:body})
-# snippet when-let
-# 	(when-let [${1:result} ${2:test}]
-# 		${0:body})
+snippet filter
+(filter ${1:func} ${0:coll})
+endsnippet
+
+snippet reduce
+(reduce ${1:func} ${2} ${0:coll})
+endsnippet
+
+snippet reducel
+(reduce ${1:(fn [p n] ${3})} ${2})
+endsnippet
+
+snippet filterl
+(filter #(${1:lambda}) ${0:coll})
+endsnippet
+
+snippet mapl
+(map #(${1:lambda}) ${0:coll})
+endsnippet
+
+snippet met
+(${1:name} [${2:this} ${3:args}]
+	${0:code})
+endsnippet
+
+snippet pmethod
+(${1:name} [${2:this} ${0:args}])
+endsnippet
+
+snippet print
+(println ${0})
+endsnippet
