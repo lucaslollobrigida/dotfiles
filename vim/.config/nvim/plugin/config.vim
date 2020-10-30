@@ -56,3 +56,9 @@ augroup vimrc
   autocmd!
   autocmd vimrc SwapExists * let v:wapchoice = 'o'
 augroup END
+
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END

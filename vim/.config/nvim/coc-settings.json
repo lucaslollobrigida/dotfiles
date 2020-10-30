@@ -4,8 +4,9 @@
   "codeLens.enable": true,
   "suggest.echodocSupport": true,
   "suggest.removeDuplicateItems": true,
-  "suggest.languageSourcePriority": 98,
   "coc.source.conjure.priority": 99,
+  "suggest.languageSourcePriority": 98,
+  "coc.source.around.priority": 95,
   "go.enable": true,
   "languageserver": {
     "clojure-lsp": {

@@ -59,6 +59,8 @@ plugins=(
 	# zsh-syntax-highlighting
 )
 
+autoload -U compinit && compinit
+
 [ -f $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
 
 for file in ${HOME}/.zsh.d/*.zsh; do

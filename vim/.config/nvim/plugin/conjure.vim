@@ -1,5 +1,8 @@
 " Plugin: conjure
-autocmd BufEnter conjure-log-* set ft=terminal
+" augroup ConjureLog
+"   autocmd!
+"   autocmd BufEnter conjure-log-* AnsiEsc!
+" augroup END
 
 let g:conjure#log#strip_ansi_escape_sequences_line_limit = 0
 

@@ -20,12 +20,14 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Visual
 Plug 'itchyny/lightline.vim'
 Plug 'sainnhe/sonokai'
+Plug 'drewtempelmeyer/palenight.vim'
 Plug 'mhinz/vim-signify'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ncm2/float-preview.nvim'
 Plug 'norcalli/nvim-terminal.lua'
 Plug 'tjdevries/cyclist.vim'
 Plug 'Shougo/echodoc.vim'
+Plug 'machakann/vim-highlightedyank'
 
 " Focus mode
 Plug 'junegunn/goyo.vim'
@@ -91,6 +93,7 @@ let g:coc_snippet_prev = '<c-k>'
 
 " Plugin: Lightline
 let g:lightline = {
+  \ 'colorscheme': 'palenight',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'fugitive', 'cocerror', 'cocwarn', 'readonly', 'filename', 'modified' ] ],
@@ -178,7 +181,6 @@ function! LightLineCocWarn() abort
   return trim(join(warnmsgs, ' ') . ' ' . get(g:, 'coc_status', ''))
 endfunction
 
-autocmd User CocDiagnosticChange call lightline#update()
 
 augroup mygroup
   autocmd!
@@ -188,6 +190,7 @@ augroup mygroup
   autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  autocmd User CocDiagnosticChange call lightline#update()
   " highlight symbol under cursor
   autocmd CursorHold  * silent call CocActionAsync('highlight')
   autocmd CursorHoldI * silent call CocActionAsync('highlight')
@@ -212,7 +215,10 @@ let g:coc_global_extensions = [
       \ 'coc-vimlsp',
       \ ]
 
-autocmd BufReadCmd,FileReadCmd,SourceCmd jar:file://* call s:LoadClojureContent(expand("<amatch>"))
+augroup ClojureContent
+  autocmd!
+  autocmd BufReadCmd,FileReadCmd,SourceCmd jar:file://* call s:LoadClojureContent(expand("<amatch>"))
+augroup END
 
  function! s:LoadClojureContent(uri)
   setfiletype clojure
@@ -225,26 +231,97 @@ endfunction
 let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'match', '^context', '^GET', '^PUT', '^POST', '^PATCH', '^DELETE', '^ANY', 'this-as', '^are', '^dofor']
 
 let g:clojure_syntax_keywords = {
-    \ 'clojureDefine': ["defproject", "defcustom", "s/defn", "s/defmethod", "s/def", "s/defrecord", "s/defschema", "deftest", "defresolver", "defmutation"],
+    \ 'clojureDefine': ["defproject", "defcustom", "s/defn", "s/defmethod", "s/def", "s/defrecord", "s/defschema", "deftest", "defspec", "defresolver", "defmutation"],
     \ 'clojureMacro': ["s/with-fn-validation", "with-system"],
     \ 'clojureFunc': ["are", "is", "testing", "match?",  "match"]
     \ }
 
 command! -nargs=0 Format :call CocAction('format')
 
-" Test
-nnoremap <silent> crcc :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-coll', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> crth :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> crtt :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> crtf :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> crtl :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> cruw :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'unwind-thread', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> crua :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'unwind-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> crml :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'move-to-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')]})<CR>
-nnoremap <silent> cril :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'introduce-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')]})<CR>
-nnoremap <silent> crel :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'expand-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> cram :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'add-missing-libspec', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> crcn :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'clean-ns', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> crcp :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-privacy', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> cris :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'inline-symbol', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-nnoremap <silent> cref :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'extract-function', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Function name: ')]})<CR>
+" Plugin: vim-highlightedyank
+let g:highlightedyank_highlight_duration = 300
+
+" Plugin: float-preview.nvim
+let g:float_preview#docked = 0
+set completeopt-=preview
+
+fu s:snr() abort
+    return matchstr(expand('<sfile>'), '.*\zs<SNR>\d\+_')
+endfu
+let s:snr = get(s:, 'snr', s:snr())
+let g:fzf_layout = {'window': 'call '..s:snr..'fzf_window(0.9, 0.6, "Comment")'}
+
+fu s:fzf_window(width, height, border_highlight) abort
+    let width = float2nr(&columns * a:width)
+    let height = float2nr(&lines * a:height)
+    let row = float2nr((&lines - height) / 2)
+    let col = float2nr((&columns - width) / 2)
+    let top = '┌' . repeat('─', width - 2) . '┐'
+    let mid = '│' . repeat(' ', width - 2) . '│'
+    let bot = '└' . repeat('─', width - 2) . '┘'
+    let border = [top] + repeat([mid], height - 2) + [bot]
+    if has('nvim')
+        let frame = s:create_float(a:border_highlight, {
+            \ 'row': row,
+            \ 'col': col,
+            \ 'width': width,
+            \ 'height': height,
+            \ })
+        call nvim_buf_set_lines(frame, 0, -1, v:true, border)
+        call s:create_float('Normal', {
+            \ 'row': row + 1,
+            \ 'col': col + 2,
+            \ 'width': width - 4,
+            \ 'height': height - 2,
+            \ })
+        exe 'au BufWipeout <buffer> bw '..frame
+    else
+        let frame = s:create_popup_window(a:border_highlight, {
+            \ 'line': row,
+            \ 'col': col,
+            \ 'width': width,
+            \ 'height': height,
+            \ 'is_frame': 1,
+            \ })
+        call setbufline(frame, 1, border)
+        call s:create_popup_window('Normal', {
+            \ 'line': row + 1,
+            \ 'col': col + 2,
+            \ 'width': width - 4,
+            \ 'height': height - 2,
+            \ })
+    endif
+endfu
+
+fu s:create_float(hl, opts) abort
+    let buf = nvim_create_buf(v:false, v:true)
+    let opts = extend({'relative': 'editor', 'style': 'minimal'}, a:opts)
+    let win = nvim_open_win(buf, v:true, opts)
+    call setwinvar(win, '&winhighlight', 'NormalFloat:'..a:hl)
+    return buf
+endfu
+
+fu s:create_popup_window(hl, opts) abort
+    if has_key(a:opts, 'is_frame')
+        let id = popup_create('', #{
+            \ line: a:opts.line,
+            \ col: a:opts.col,
+            \ minwidth: a:opts.width,
+            \ minheight: a:opts.height,
+            \ zindex: 50,
+            \ })
+        call setwinvar(id, '&wincolor', a:hl)
+        exe 'au BufWipeout * ++once call popup_close('..id..')'
+        return winbufnr(id)
+    else
+        let buf = term_start(&shell, #{hidden: 1})
+        call popup_create(buf, #{
+            \ line: a:opts.line,
+            \ col: a:opts.col,
+            \ minwidth: a:opts.width,
+            \ minheight: a:opts.height,
+            \ zindex: 51,
+            \ })
+        exe 'au BufWipeout * ++once bw! '..buf
+    endif
+endfu
