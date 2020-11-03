@@ -49,6 +49,7 @@ Plug 'tpope/vim-dispatch' | Plug 'radenling/vim-dispatch-neovim'
 Plug 'junegunn/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'm00qek/nvim-contabs'
 Plug 'tpope/vim-fugitive'
+Plug 'stsewd/fzf-checkout.vim'
 Plug 'tpope/vim-rhubarb'
 Plug 'voldikss/vim-floaterm'
 
