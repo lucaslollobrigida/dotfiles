@@ -39,6 +39,7 @@ Plug 'tpope/vim-repeat'
 " Plug 'tpope/vim-surround'
 Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release', 'for': 'clojure'}
+Plug 'junegunn/vim-easy-align'
 " Plug 'jiangmiao/auto-pairs'
 
 " Project
@@ -48,6 +49,7 @@ Plug 'tpope/vim-dispatch' | Plug 'radenling/vim-dispatch-neovim'
 Plug 'junegunn/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'm00qek/nvim-contabs'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'voldikss/vim-floaterm'
 
 " REPL integration
@@ -55,7 +57,7 @@ Plug 'clojure-vim/vim-jack-in', {'for': 'clojure'}
 Plug 'Olical/conjure' | Plug 'Olical/AnsiEsc'
 
 " LSP Engine
-Plug 'neoclide/coc.nvim', {'tag': 'v0.0.78'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Diagram and Documentation
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -90,6 +92,10 @@ let g:echodoc_enable_at_startup = 1
 " Plugin: coc.nvim
 let g:coc_snippet_next = '<c-j>'
 let g:coc_snippet_prev = '<c-k>'
+
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
 
 " Plugin: Lightline
 let g:lightline = {
@@ -227,14 +233,6 @@ augroup END
   setl nomodified
   setl readonly
 endfunction
-
-let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'match', '^context', '^GET', '^PUT', '^POST', '^PATCH', '^DELETE', '^ANY', 'this-as', '^are', '^dofor']
-
-let g:clojure_syntax_keywords = {
-    \ 'clojureDefine': ["defproject", "defcustom", "s/defn", "s/defmethod", "s/def", "s/defrecord", "s/defschema", "deftest", "defspec", "defresolver", "defmutation"],
-    \ 'clojureMacro': ["s/with-fn-validation", "with-system"],
-    \ 'clojureFunc': ["are", "is", "testing", "match?",  "match"]
-    \ }
 
 command! -nargs=0 Format :call CocAction('format')
 

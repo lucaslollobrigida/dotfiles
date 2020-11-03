@@ -26,10 +26,10 @@
   ;; - (mm/measure (your-expression))
 
   :measure {:extra-deps {com.clojure-goes-fast/clj-memory-meter {:mvn/version "RELEASE"}}}
-  ;; - see https://github.com/Olical/depot
 
-  :outdated {:extra-deps {olical/depot {:mvn/version "1.8.4"}}
-             :main-opts  ["-m" "depot.outdated.main" "-a" "outdated"]}
+  ;; - see https://github.com/Olical/depot
+  :outdated {:extra-deps {olical/depot {:mvn/version "2.0.1"}}
+             :main-opts  ["-m" "depot.outdated.main"]}
 
   :repl {:extra-paths ["test"]
          :main-opts   ["-m nrepl.cmdline"

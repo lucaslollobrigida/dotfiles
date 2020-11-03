@@ -8,3 +8,5 @@ tags
 
 snapshot.vim
 packer_compiled.vim
+macos/.terminfo/
+!macos/.terminfo/tmux-256color.terminfo

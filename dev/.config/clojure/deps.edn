@@ -34,8 +34,9 @@
   :repl {:extra-paths ["test"]
          :main-opts   ["-m nrepl.cmdline"
                        "--middleware" "[cider.nrepl/cider-middleware]"]
-         :extra-deps {nrepl/nrepl                {:mvn/version "0.7.0"}
-                      cider/cider-nrepl          {:mvn/version "0.23.0"}}}
+         :extra-deps {nrepl/nrepl                     {:mvn/version "0.8.0"}
+                      cider/cider-nrepl               {:mvn/version "0.23.0"}
+                      com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}}}
 
   :socket {:jvm-opts ["-Dclojure.server.repl={:port,50505,:accept,clojure.core.server/repl}"]}
 

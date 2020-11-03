@@ -6,6 +6,8 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_DIRS="/usr/local/share/:/usr/share/"
 export XDG_CONFIG_DIRS="/etc/xdg"
 
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
+
 export ZSH="$HOME/.oh-my-zsh"
 export JAVA_HOME="/usr/local/opt/openjdk"
 export ANDROID_HOME="$HOME/.local/share/android"

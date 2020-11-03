@@ -35,5 +35,9 @@ log/
 
 # LSP protocol
 .lsp
+!.lsp/config.edn
+
 .clj-kondo/
 .nrepl-history
+
+.cpcache/

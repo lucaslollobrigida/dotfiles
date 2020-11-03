@@ -1,4 +1,4 @@
-" Leader keys
+" leader keys
 nnoremap <space> <nop>
 let mapleader = "\<space>"
 let maplocalleader = ","
@@ -48,8 +48,8 @@ nnoremap <Tab> :tabnext<CR>
 nnoremap <S-Tab> :tabprevious<CR>
 
 " Project
-nnoremap <silent> <Leader>p :call contabs#project#select()<CR>
-nnoremap <silent> <Leader>, :call contabs#buffer#select()<CR>
+nnoremap <silent> <leader>p :call contabs#project#select()<CR>
+nnoremap <silent> <leader>, :call contabs#buffer#select()<CR>
 
 " Sessions
 nnoremap <leader>sw :mksession! .quicksave.vim<CR>:echo "Session saved."<CR>
@@ -80,6 +80,7 @@ nmap <silent> gW :<C-u>CocList -I symbols<cr>
 
 nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>rf <Plug>(coc-refactor)
+nnoremap <leader>rp :CocSearch <C-R>=expand("<cword>")<CR><CR>
 " xmap <leader>f  <Plug>(coc-format-selected)
 " nmap <leader>f  <Plug>(coc-format-selected)
 
@@ -93,6 +94,11 @@ nmap <leader>aq <Plug>(coc-fix-current)
 nmap <silent> <leader>d :<C-u>CocList diagnostics<cr>
 
 " Test
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+nmap <C-m> vi{ga-<Space>
+" nmap <C-M> vi[ga-<Space><CR>
+
 nnoremap <silent> crcc :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-coll', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
 nnoremap <silent> crth :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
 nnoremap <silent> crtt :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
