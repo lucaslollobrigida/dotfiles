@@ -2,10 +2,11 @@
 # shellcheck disable=SC1090
 
 has_docker() {
-    if hash docker 2>/dev/null; then
+    if !hash docker 2>/dev/null; then
         echo 'Docker is not installed or missing from PATH.'
-        exit 1
+        return 1
     fi
+    return 0
 }
 
 hs() {
@@ -32,7 +33,7 @@ hs() {
 
 pg_run() {
     has_docker && \
-        docker run --name pg-container -e POSTGRES_PASSWORD=root -p 5432:5432 -d postgres
+        docker run --name pg-container -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB="$1" -p 5432:5432 -d postgres
 }
 
 redis_run() {
@@ -42,7 +43,10 @@ redis_run() {
 
 rabbit_run() {
     has_docker && \
-        docker run --name rabbit-container -d rabbitmq
+        docker run -d --name rabbitmq --hostname rabbitmq \
+        -p 5672:5672 \
+        -p 8080:15672 \
+        rabbitmq:3-management
 }
 
 mongo_run() {
@@ -86,82 +90,4 @@ nsorg() {
     clojure -Sdeps "{:deps {nsorg-cli {:mvn/version \"$version\"}}}" \
     -m nsorg.cli "$@" \
     --replace
-}
-
-function mkjava() {
-  if [[ -z "$1" || -z "$2" ]]; then
-    echo "Specify the groupId and artifactId"
-    echo "Example:"
-    echo "$ mkjava com.lorem my-project"
-    return 1
-  fi
-
-  ARCH=${3:-maven-archetype-quickstart}
-
-  mvn archetype:generate \
-    -DgroupId="$1" \
-    -DartifactId="$2" \
-    -DarchetypeArtifactId="$ARCH" \
-    -DarchetypeVersion=1.4 \
-    -DinteractiveMode=false
-
-  cd "$2" || exit
-
-  cat <<-EOF > .gitignore
-  target/
-  *.class
-  *.jar
-  *.war
-EOF
-
-  mkdir -p src/main/resources
-
-  cat <<-EOF > src/main/resources/logback.xml
-  <?xml version="1.0" encoding="UTF-8"?>
-  <configuration>
-      <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-          <file>application.log</file>
-          <append>true</append>
-          <encoder>
-              <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level  %logger{36} - %msg%n</pattern>
-          </encoder>
-      </appender>
-
-      <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-      </appender>
-
-      <logger name="$1" level="INFO">
-          <appender-ref ref="STDOUT" />
-          <appender-ref ref="FILE" />
-      </logger>
-
-      <logger name="$1.tests" level="WARN">
-          <appender-ref ref="STDOUT" />
-          <appender-ref ref="FILE" />
-      </logger>
-
-      <root level="DEBUG">
-          <appender-ref ref="STDOUT" />
-      </root>
-  </configuration>
-EOF
-
-  git init
-  git add .
-
-  BOILERPLATE=$(cat <<-EOF
-    <properties>
-        <maven.compiler.release>11</maven.compiler.release>
-    </properties>
-EOF
-  )
-
-  echo
-  echo "Add the following lines to pom.xml:"
-  echo
-  echo "$BOILERPLATE"
-  echo
 }
