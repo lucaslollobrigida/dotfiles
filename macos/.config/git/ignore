@@ -34,10 +34,12 @@ log/
 .idea/
 
 # LSP protocol
-.lsp
-!.lsp/config.edn
+.lsp/cache
+.lsp/.cache
+.clj-kondo/cache
+.clj-kondo/.cache
 
-.clj-kondo/
+.cache/
 .nrepl-history
 
 .cpcache/
