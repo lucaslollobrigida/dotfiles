@@ -1,5 +1,10 @@
 priority -50
 
+snippet note
+// @lollo Note
+// $0
+endsnippet
+
 # when to abbriviate and when not?
 # b doesn't work here, because it ignores whitespace
 # optional local name?
@@ -113,5 +118,31 @@ endsnippet
 snippet err "Basic error handling" b
 if err != nil {
 	log.${1:Fatal}(err)
+}
+endsnippet
+
+snippet tt "Table testing"
+func Test${1:FunctionName}(t *testing.T) {
+	type Param struct {}
+
+	tests := []struct{
+		name string
+		param Param
+		want ${2:type}
+	}{
+		{
+			name: "${3:test name}",
+			param: Param{},
+			want: ${4:result},
+		},
+	}
+
+	for _, test := range(tests) {
+		t.Run(test.name, func(t *testing.T) {
+			if got := $1(${0}); !reflect.DeepEqual(got, test.want) {
+				t.Errorf("$1 = %v, want %v", got, test.want)
+			}
+		})
+	}
 }
 endsnippet

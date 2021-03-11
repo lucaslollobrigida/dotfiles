@@ -14,4 +14,4 @@ setlocal softtabstop=4
 setlocal comments=:#
 setlocal commentstring=#\ %s
 
-setlocal colorcolumn=80
+" compiler shellcheck

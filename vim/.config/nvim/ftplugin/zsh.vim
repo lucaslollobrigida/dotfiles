@@ -3,7 +3,7 @@ if (exists("b:did_ftplugin"))
 endif
 let b:did_ftplugin = 1
 
-compiler shellcheck
+" compiler shellcheck
 
 setlocal expandtab
 setlocal smartindent

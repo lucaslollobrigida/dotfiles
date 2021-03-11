@@ -25,6 +25,7 @@
 
 [color]
     ui = true
+
 [core]
     pager = delta
     filemode     = false

@@ -10,4 +10,4 @@ setlocal tabstop=4
 setlocal comments=s1:/*,mb:*,ex:*/,://
 setlocal commentstring=//\ %s
 
-compiler rust
+compiler rustc

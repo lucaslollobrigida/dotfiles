@@ -1,0 +1,30 @@
+{:skip-comments true
+ :config-paths ["nubank/state-flow"]
+ :linters {:refer-all         {:exclude [clojure.test midje.sweet]}
+           :unresolved-symbol {:level   :error
+                               :exclude [fact
+                                         facts
+                                         =>
+                                         provided
+                                         tabular
+                                         against-background
+                                         (midje.sweet/fact)
+                                         (midje.sweet/facts)
+                                         (midje.parsing.arrow-symbols/=>)]}}
+ :hooks   {:analyze-call {postman.aux.init/defflow     nubank.state-flow/defflow
+                          integration.aux.init/defflow nubank.state-flow/defflow}}
+ :lint-as {common-graphql.lacinia.sweet/defresolver       clojure.core/def
+           common-graphql.lacinia.sweet/defmutation       clojure.core/def
+           common-graphql.lacinia.sweet/definterface      clojure.core/def
+           common-graphql.lacinia.sweet/defobject         clojure.core/def
+           common-graphql.lacinia.sweet/defscalar         clojure.core/def
+           common-graphql.lacinia.sweet/defunion          clojure.core/def
+           common-graphql.lacinia.sweet/definput          clojure.core/def
+           common-graphql.lacinia.sweet/defenum           clojure.core/def
+           bonafont.logic.flow-edge/def                   clojure.core/def
+           schema.experimental.abstract-map/extend-schema clojure.core/def
+           ;; plumbing.core/fnk                              clojure.core/let
+           ;; postman.aux.init/defflow                       clojure.core/def
+           ;; integration.aux.init/defflow                   clojure.core/def
+           rewrite-clj.zip/edit->                         clojure.core/->
+           rewrite-clj.zip.subedit/edit->                 clojure.core/->}}
