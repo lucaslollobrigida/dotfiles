@@ -117,7 +117,9 @@ packer.startup({
           'hrsh7th/nvim-compe', 'nvim-lua/lsp-status.nvim', 'nvim-lua/lsp_extensions.nvim', 'RishabhRD/popfix', 'RishabhRD/nvim-lsputils'
         }
       }
-      use "akinsho/flutter-tools.nvim"
+      use 'akinsho/flutter-tools.nvim'
+      use 'crispgm/nvim-go'
+      use 'tjdevries/nlua.nvim'
     else
       -- use 'neoclide/coc.nvim'
     end

@@ -49,7 +49,7 @@ vim.o.wrap = false
 vim.o.undofile = true
 vim.o.undolevels = 10000
 
-vim.o.scrolloff = 10 
+vim.o.scrolloff = 10
 
 ----- completion tweak
 vim.o.completeopt = "menu,menuone,noselect"

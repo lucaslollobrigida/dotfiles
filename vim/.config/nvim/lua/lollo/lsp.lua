@@ -11,6 +11,8 @@ vim.cmd [[packadd lsp_extensions.nvim]]
 vim.cmd [[packadd nvim-compe]]
 vim.cmd [[packadd compe-conjure]]
 vim.cmd [[packadd flutter-tools.nvim]]
+vim.cmd [[packadd nvim-go]]
+vim.cmd [[packadd nlua.nvim]]
 
 local lspconfig = require('lspconfig')
 local completion  = require('compe')
@@ -57,6 +59,8 @@ local function on_attach(client, bufnr)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   buf_set_keymap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts) -- check if server supports
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', ']e', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
   buf_set_keymap('n', '[e', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
   buf_set_keymap('n', '<leader>d', '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>', opts)
@@ -68,10 +72,6 @@ local function on_attach(client, bufnr)
     buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
   elseif client.resolved_capabilities.document_range_formatting then
     buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
-  end
-
-  if client.config.flags then
-    client.config.flags.allow_incremental_sync = true
   end
 
   vim.cmd [[autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()]]
@@ -124,24 +124,6 @@ vim.fn.sign_define("LspDiagnosticsSignInformation",
 vim.fn.sign_define("LspDiagnosticsSignHint",
     {text = "!", texthl = "LspDiagnosticsSignHint"})
 
-local sumneko_command = function()
-  local cache_location = vim.fn.stdpath('cache')
-  local bin_folder = jit.os == 'Linux' and 'Linux' or 'macOS'
-
-  return {
-    string.format(
-      "%s/lspconfig/lua-language-server/bin/%s/lua-language-server",
-      cache_location,
-      bin_folder
-    ),
-    "-E",
-    string.format(
-      "%s/lspconfig/lua-language-server/main.lua",
-      cache_location
-    ),
-  }
-end
-
 local vimls_command = function()
   local cache_location = vim.fn.stdpath('cache')
 
@@ -155,9 +137,6 @@ local vimls_command = function()
 end
 
 local servers = {
-  {'sumneko_lua',
-    cmd = sumneko_command,
-    settings = {Lua = {diagnostics = { enable = true, globals = {"jit", "vim", "awesome", "window", "root", "client", "it", "describe", "before_each", "after_each"}}}}},
   {'vimls', cmd = vimls_command},
   {'gopls'},
   {'rust_analyzer'},
@@ -193,3 +172,18 @@ require("flutter-tools").setup{
     on_attach = on_attach,
   }
 }
+
+require('go').setup{
+  linter = 'golint',
+  lint_prompt_style = 'vt',
+}
+
+require('nlua.lsp.nvim').setup(
+  require('lspconfig'),
+  {
+    on_attach = on_attach,
+    globals = {
+      "jit", "vim", "awesome", "window", "root", "client",
+      "it", "describe", "before_each", "after_each"
+  }
+})
