@@ -3,8 +3,8 @@ if not has_lsp then
   print('[LSP] nvim-lspconfig is required for this package.')
   return
 end
-local api = vim.api
 
+-- TODO: lazy load this packages
 vim.cmd [[packadd popfix]]
 vim.cmd [[packadd nvim-lsputils]]
 vim.cmd [[packadd lsp_extensions.nvim]]
@@ -44,7 +44,7 @@ completion.setup {
     spell = false;
     tags = false;
     vsnip = false;
-    snippets_nvim = false;
+    snippets_nvim = true;
   };
 }
 
@@ -66,15 +66,20 @@ local function on_attach(client, bufnr)
   buf_set_keymap('n', '<leader>d', '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>', opts)
   buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('v', '<leader>a', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
+  buf_set_keymap('v', '<leader>a', [[<cmd>'<,'>lua vim.lsp.buf.range_code_action()<CR>]], opts)
+  buf_set_keymap('n', '<leader>lc', [[<cmd>lua require('lollo.lsp.helpers').clojure_clean_ns()<CR>]], opts)
 
   if client.resolved_capabilities.document_formatting then
     buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
   elseif client.resolved_capabilities.document_range_formatting then
-    buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
+    buf_set_keymap('v', '<leader>lf', [[<cmd>'<,'>lua vim.lsp.buf.formatting()<cr>]], opts)
   end
 
   vim.cmd [[autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()]]
+
+  -- if client.name == 'clojure_lsp' then
+  -- vim.cmd [[autocmd BufWritePre <buffer> lua require('lollo.lsp.helpers').clojure_clean_ns()]]
+  -- end
 
   buf_set_keymap('i', '<C-Space>', 'compe#complete()', { noremap = true, silent = true, expr = true })
   buf_set_keymap('i', '<C-y>'    , 'compe#confirm()' , { noremap = true, silent = true, expr = true })
@@ -114,7 +119,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     update_in_insert = false,
   }
 )
-
 vim.fn.sign_define("LspDiagnosticsSignError",
     {text = "", texthl = "LspDiagnosticsSignError"})
 vim.fn.sign_define("LspDiagnosticsSignWarning",
@@ -144,9 +148,12 @@ local servers = {
   {'clojure_lsp', init_options = {extendedClientCapabilities = {classFileContentsSupport = true}}}
 }
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 for _, lsp in ipairs(servers) do
   local name = lsp[1]
-  local setup = { on_attach = on_attach }
+  local setup = { on_attach = on_attach, capabilities = capabilities }
 
   if lsp.cmd then
     setup.cmd = lsp.cmd()
@@ -170,6 +177,7 @@ end
 require("flutter-tools").setup{
   lsp = {
     on_attach = on_attach,
+    capabilities = capabilities
   }
 }
 
@@ -182,8 +190,11 @@ require('nlua.lsp.nvim').setup(
   require('lspconfig'),
   {
     on_attach = on_attach,
+    capabilities = capabilities,
     globals = {
       "jit", "vim", "awesome", "window", "root", "client",
       "it", "describe", "before_each", "after_each"
   }
 })
+
+vim.cmd [[highlight link CompeDocumentation NormalFloat]]

@@ -11,6 +11,4 @@ local M = {
   statusline = statusline,
 }
 
--- print(vim.inspect(M))
-
 return M

@@ -1,5 +1,3 @@
-local cmd = vim.cmd
-
 ----- syntax
 vim.bo.syntax = 'ON'
 vim.o.termguicolors = true
@@ -19,8 +17,14 @@ vim.wo.cursorline = true
 vim.o.splitbelow = true
 vim.o.splitright = true
 
+---- disable folding
+vim.wo.foldenable = false
+
 ----- fill and use clipboard register on text edits
 vim.cmd [[set clipboard+=unnamed,unnamedplus]]
+
+--
+vim.cmd [[set shortmess+=c]]
 
 ----- disable unused default plugins
 vim.g.loaded_2html_plugin = true

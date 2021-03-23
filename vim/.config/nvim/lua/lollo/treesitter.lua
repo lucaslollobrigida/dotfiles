@@ -1,10 +1,10 @@
-local has_treesitter = pcall(vim.cmd, [[packadd nvim-treesitter]])
+local has_treesitter = pcall(Packadd, 'nvim-treesitter')
 if not has_treesitter then
   print('[Treesitter] nvim-treesitter is required for this package.')
   return
 end
 
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
   ensure_installed = "maintained",
   highlight = {
     enable = true,

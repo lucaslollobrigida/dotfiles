@@ -1,16 +1,16 @@
-local has_telescope = pcall(vim.cmd, [[packadd telescope.nvim]])
+local has_telescope = pcall(Packadd, [[telescope.nvim]])
 
 if not has_telescope then
   print('[finder/telescope] telescope.nvim is required for this package.')
 end
 
-vim.cmd [[packadd plenary.nvim]]
-vim.cmd [[packadd popup.nvim]]
-vim.cmd [[packadd telescope-fzy-native.nvim]]
-vim.cmd [[packadd telescope-fzf-writer.nvim]]
-vim.cmd [[packadd sql.nvim]]
-vim.cmd [[packadd telescope-frecency.nvim]]
--- vim.cmd [[packadd telescope-project.nvim]]
+Packadd [[plenary.nvim]]
+Packadd [[popup.nvim]]
+Packadd [[telescope-fzy-native.nvim]]
+Packadd [[telescope-fzf-writer.nvim]]
+Packadd [[sql.nvim]]
+Packadd [[telescope-frecency.nvim]]
+-- Packadd [[telescope-project.nvim]]
 
 local telescope = require('telescope')
 local actions = require('telescope.actions')
@@ -58,13 +58,10 @@ telescope.setup {
 telescope.load_extension("frecency")
 telescope.load_extension('fzy_native')
 -- telescope.load_extension('project') -- TODO: make my own
--- lua require'telescope'.extensions.project.project()
 
-local function nnoremap(mapping, action)
-  vim.api.nvim_set_keymap('n', mapping, action, { noremap = true })
-end
+local M = {}
 
-function git_branches()
+local function git_branches()
     require("telescope.builtin").git_branches({
         attach_mappings = function(prompt_bufnr, map) 
             map('i', '<c-d>', actions.git_delete_branch)
@@ -74,23 +71,23 @@ function git_branches()
     })
 end
 
-local M = {}
 M.git_branches = git_branches
 
 -- search
-nnoremap('<leader>s', [[<cmd>lua require('telescope').extensions.fzf_writer.staged_grep()<cr>]])
-nnoremap('<leader>*', [[<cmd>lua require('telescope.builtin').grep_string({search = vim.fn.expand("<cword>")})<cr>]])
+Nnoremap {'<leader>s', [[<cmd>lua require('telescope').extensions.fzf_writer.staged_grep()<cr>]]}
+Nnoremap {'<leader>*', [[<cmd>lua require('telescope.builtin').grep_string({search = vim.fn.expand("<cword>")})<cr>]]}
 
 -- files
-nnoremap('<leader>f', [[<cmd>lua require('telescope').extensions.fzf_writer.files()<cr>]])
-nnoremap('<leader><leader>', [[<cmd>lua require('telescope.builtin').git_files()<cr>]])
+Nnoremap {'<leader>f', [[<cmd>lua require('telescope').extensions.fzf_writer.files()<cr>]]}
+Nnoremap {'<leader><leader>', [[<cmd>lua require('telescope.builtin').git_files()<cr>]]}
 
 -- experimental
-nnoremap('<leader>asdf', [[<cmd>lua require('telescope').extensions.frecency.frecency()<cr>]])
+Nnoremap {'<leader>asdf', [[<cmd>lua require('telescope').extensions.frecency.frecency()<cr>]]}
 
 -- buffers
-nnoremap('<leader>,', [[<cmd>lua require('telescope.builtin').buffers()<cr>]])
+Nnoremap {'<leader>,', [[<cmd>lua require('telescope.builtin').buffers()<cr>]]}
 
-nnoremap('<leader>gc', [[<cmd>lua require('lollo.finder.telescope').git_branches()<CR>]])
+-- git
+Nnoremap {'<leader>b', [[<cmd>lua require('lollo.finder.telescope').git_branches()<CR>]]}
 
 return M

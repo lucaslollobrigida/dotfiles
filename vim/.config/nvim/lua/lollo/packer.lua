@@ -1,9 +1,5 @@
-local function packadd(package)
-  vim.cmd('packadd ' .. package)
-end
-
 local function check_installation()
-  local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
+  local packer_exists = pcall(Packadd, 'packer.nvim')
 
   if not packer_exists then
     if vim.fn.input("Download Packer? (y/n)") ~= "y" then
@@ -25,13 +21,13 @@ local function check_installation()
 
     print(out)
     print("Downloading packer.nvim...")
-    packadd('packer.nvim')
+    Packadd('packer.nvim')
   end
 end
 
 check_installation()
 
-local globals = require('lollo.globals')
+local globals = require('lollo.config')
 local packer = require('packer')
 local use = packer.use
 
@@ -104,7 +100,8 @@ packer.startup({
     use {'clojure-vim/vim-jack-in', ft = {'clojure'}}
 
     -- Snippets
-    use {'SirVer/ultisnips', 'natebosch/dartlang-snippets'}
+    -- use {'SirVer/ultisnips', 'natebosch/dartlang-snippets'}
+    use {'norcalli/snippets.nvim', opt = false}
 
     -- Treesitter
     use 'nvim-treesitter/nvim-treesitter'

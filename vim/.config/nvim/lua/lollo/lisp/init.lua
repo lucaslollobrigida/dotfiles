@@ -1,4 +1,4 @@
-local has_sexp = pcall(vim.cmd, [[packadd vim-sexp]])
+local has_sexp = pcall(Packadd, [[vim-sexp]])
 if not has_sexp then
   print('[Lisp] vim-sexp is required for this package.')
   return
