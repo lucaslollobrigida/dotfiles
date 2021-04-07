@@ -169,6 +169,10 @@ packer.startup({
     use {'glepnir/zephyr-nvim'}
     use {'bluz71/vim-nightfly-guicolors'}
     use {'ayu-theme/ayu-vim'}
+    use {'embark-theme/vim',
+    opt = false,
+    as = 'embark',
+  }
 
     use {'wlangstroth/vim-racket', opt = false}
     use {'ds26gte/neoscmindent', opt = false}
