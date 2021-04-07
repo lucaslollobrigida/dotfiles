@@ -32,6 +32,12 @@ export PATH="$PATH:$ANDROID_HOME/platform-tools"
 
 unsetopt correct_all
 setopt noflowcontrol
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+
+export HISTSIZE=999999999
+export SAVEHIST=$HISTSIZE
+export HISTFILE="$HOME/.config/history"
 
 # User configuration
 # bindkey -v
@@ -49,8 +55,6 @@ export EDITOR=nvim
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
-
-export GPG_TTY=$(tty)
 
 export FZF_DEFAULT_OPTS='
 --color=dark

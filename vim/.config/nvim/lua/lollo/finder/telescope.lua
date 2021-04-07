@@ -71,7 +71,17 @@ local function git_branches()
     })
 end
 
+local function lsp_definitions()
+  require("telescope.builtin").lsp_definitions()
+end
+
+local function lsp_references()
+  require("telescope.builtin").lsp_references()
+end
+
 M.git_branches = git_branches
+M.lsp_definitions = lsp_definitions
+M.lsp_references = lsp_references
 
 -- search
 Nnoremap {'<leader>s', [[<cmd>lua require('telescope').extensions.fzf_writer.staged_grep()<cr>]]}

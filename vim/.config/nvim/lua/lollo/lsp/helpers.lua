@@ -1,5 +1,16 @@
 local M = {}
 
+M.borders = {
+  {"┌", "NormalFloat"},
+  {"─", "NormalFloat"},
+  {"┐", "NormalFloat"},
+  {"│", "NormalFloat"},
+  {"┘", "NormalFloat"},
+  {"─", "NormalFloat"},
+  {"└", "NormalFloat"},
+  {"│", "NormalFloat"}
+}
+
 M.current_file_url = function()
   local file = vim.api.nvim_eval([[expand('%:p')]])
   return string.format('file://%s', file)
@@ -18,6 +29,24 @@ M.clojure_clean_ns_sync = function(timeout_ms)
   result = formatting_result.result
   if not result then return end
   vim.lsp.util.apply_text_edits(result)
+end
+
+M.show_line_diagnostics = function()
+  vim.lsp.diagnostic.show_line_diagnostics {
+    border = M.borders,
+  }
+end
+
+M.next_diagnostic = function()
+  vim.lsp.diagnostic.goto_next {
+    popup_opts = { border = M.borders },
+  }
+end
+
+M.prev_diagnostic = function()
+  vim.lsp.diagnostic.goto_prev {
+    popup_opts = { border = M.borders },
+  }
 end
 
 return M

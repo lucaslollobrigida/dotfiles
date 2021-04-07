@@ -23,6 +23,7 @@ local completion  = require('compe')
 completion.setup {
   enabled = true;
   autocomplete = true;
+  documentation = true;
   debug = false;
   min_length = 1;
   preselect = 'enable';
@@ -34,19 +35,20 @@ completion.setup {
   max_menu_width = 100;
 
   source = {
-    path = true;
-    buffer = true;
-    calc = true;
-    conjure = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    treesitter = true;
     spell = false;
     tags = false;
-    vsnip = false;
-    snippets_nvim = true;
+    path = { priority = 1 };
+    buffer = { priority = 1 };
+    calc = { priority = 1 };
+    nvim_lua = { priority = 1 };
+    treesitter = { priority = 1 };
+    nvim_lsp = { priority = 2 };
+    conjure = { priority = 3 };
+    vsnip = { priority = 4 };
   };
 }
+
+vim.cmd [[highlight link CompeDocumentation NormalFloat]]
 
 local function on_attach(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -57,7 +59,7 @@ local function on_attach(client, bufnr)
   local opts = { noremap = true, silent = true }
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', 'gD', '<cmd>lua require("lollo.finder.telescope").lsp_references()<CR>', opts)
   buf_set_keymap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts) -- check if server supports
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
@@ -75,7 +77,7 @@ local function on_attach(client, bufnr)
     buf_set_keymap('v', '<leader>lf', [[<cmd>'<,'>lua vim.lsp.buf.formatting()<cr>]], opts)
   end
 
-  vim.cmd [[autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()]]
+  vim.cmd [[autocmd CursorHold <buffer> lua require('lollo.lsp.helpers').show_line_diagnostics()]]
 
   -- if client.name == 'clojure_lsp' then
   -- vim.cmd [[autocmd BufWritePre <buffer> lua require('lollo.lsp.helpers').clojure_clean_ns()]]
@@ -112,6 +114,18 @@ vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.imp
 vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
 vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
 
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, {
+    border = require('lollo.lsp.helpers').borders,
+  }
+)
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+  vim.lsp.handlers.signature_help, {
+    border = require('lollo.lsp.helpers').borders,
+  }
+)
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = false,
@@ -143,6 +157,7 @@ end
 local servers = {
   {'vimls', cmd = vimls_command},
   {'gopls'},
+  {'tsserver'},
   {'rust_analyzer'},
   {'elixirls'},
   {'clojure_lsp', init_options = {extendedClientCapabilities = {classFileContentsSupport = true}}}

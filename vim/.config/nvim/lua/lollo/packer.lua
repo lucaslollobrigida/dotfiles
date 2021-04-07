@@ -59,7 +59,6 @@ packer.startup({
     end
 
     -- Focus Mode
-    use {'npxbr/glow.nvim'}
     use {'junegunn/goyo.vim',
       requires = {'junegunn/limelight.vim'}
     }
@@ -67,16 +66,13 @@ packer.startup({
     use {'tpope/vim-commentary', opt = false}
     use {'tpope/vim-surround', opt = false}
     use {'tpope/vim-repeat', opt = false}
-    -- use {'justinmk/vim-sneak', opt = false} -- can't live without switching ; -> : :/
     use {'jiangmiao/auto-pairs', opt = false}
 
     -- Project
     use {'tpope/vim-fugitive', requires = {'tpope/vim-rhubarb'}}
     use {'TimUntersberger/neogit', opt = false}
     use {'tpope/vim-vinegar', opt = false}
-    use 'voldikss/vim-floaterm'
     use 'tpope/vim-projectionist'
-    use {'stsewd/fzf-checkout.vim', requires = require_fzf}
     use {'m00qek/nvim-contabs', requires = require_fzf}
 
     use {'tpope/vim-dispatch',
@@ -93,15 +89,15 @@ packer.startup({
       ft = lisps,
       requires = {'Olical/AnsiEsc', 'tami5/compe-conjure'}
     }
-    -- use {'eraserhd/parinfer-rust',
-    --   ft = lisps,
-    --   run = 'cargo build --release'}
+    use {'tami5/lispdocs.nvim',
+      ft = lisps,
+      requires = {'tami5/sql.nvim'}
+    }
 
     use {'clojure-vim/vim-jack-in', ft = {'clojure'}}
 
     -- Snippets
-    -- use {'SirVer/ultisnips', 'natebosch/dartlang-snippets'}
-    use {'norcalli/snippets.nvim', opt = false}
+    use {'hrsh7th/vim-vsnip', opt = false, requires = {'hrsh7th/vim-vsnip-integ', opt = false}}
 
     -- Treesitter
     use 'nvim-treesitter/nvim-treesitter'
@@ -125,51 +121,58 @@ packer.startup({
     -- use 'reinh/vim-makegreen'
 
     -- Visual
-    use {'datwaft/bubbly.nvim',
-    opt = false,
-    config = function()
-      -- Here you can add the configuration for the plugin
-      vim.g.bubbly_palette = {
-         background = "#34343c",
-         foreground = "#c5cdd9",
-         black = "#3e4249",
-         red = "#ec7279",
-         green = "#a0c980",
-         yellow = "#deb974",
-         blue = "#6cb6eb",
-         purple = "#d38aea",
-         cyan = "#5dbbc1",
-         white = "#c5cdd9",
-         lightgrey = "#57595e",
-         darkgrey = "#404247",
-      }
-      vim.g.bubbly_statusline = {
-        'mode',
+    use {
+      'hoob3rt/lualine.nvim',
+      requires = {'kyazdani42/nvim-web-devicons', opt = true},
+      opt = false,
+      config = function()
+        require('lualine').setup{
+          options = {
+            theme = 'nightfly',
+            icons_enabled = true,
+            section_separators = '',
+            component_separators = '',
+          },
+          sections = {
+            lualine_a = { {'mode', upper = true} },
+            lualine_b = { 'b:gitsigns_status', {'b:gitsigns_head', icon = ''} },
+            lualine_c = { {'diagnostics', sources = {'nvim_lsp'}}, {'filename', file_status = true, full_path = true} },
+            lualine_x = { 'fileformat', 'filetype' },
+            lualine_y = { 'progress' },
+            lualine_z = { 'location'  },
+          },
+          inactive_sections = {
+            lualine_a = { {'mode', upper = true} },
+            lualine_b = {  },
+            lualine_c = { 'filename' },
+            lualine_x = { 'location' },
+            lualine_y = {  },
+            lualine_z = {   }
+          },
+          extensions = { 'fugitive' }
+        }
+      end
+    }
 
-         'truncate',
-
-         'path',
-         'branch',
-         'signify',
-         'builtinlsp.diagnostic_count',
-
-         'divisor',
-
-         'builtinlsp.current_function',
-         'filetype',
-         'progress',
-      }
-   end}
-    use 'mhinz/vim-signify'
-    use 'Shougo/echodoc.vim'
-    -- use 'ncm2/float-preview.nvim'
+    use {
+      'lewis6991/gitsigns.nvim',
+      opt = false,
+      requires = {
+        'nvim-lua/plenary.nvim'
+      },
+      config = function()
+        require('gitsigns').setup()
+      end
+    }
     use 'ryanoasis/vim-devicons'
     -- colorscheme (TODO: create a conditional based on globals.colorscheme)
     use {'glepnir/zephyr-nvim'}
     use {'bluz71/vim-nightfly-guicolors'}
     use {'ayu-theme/ayu-vim'}
 
-    use 'elixir-editors/vim-elixir'
-    use 'dart-lang/dart-vim-plugin'
+    use {'wlangstroth/vim-racket', opt = false}
+    use {'ds26gte/neoscmindent', opt = false}
+    use {'elixir-editors/vim-elixir', opt = false}
+    use {'dart-lang/dart-vim-plugin', opt = false}
   end,
   config = { opt_default = true }})

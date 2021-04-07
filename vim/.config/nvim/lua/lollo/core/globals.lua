@@ -20,7 +20,18 @@ end
 local function make_mapping(mode, opts)
   local mapping = opts.lhs or opts[1]
   local action = opts.rhs or opts[2]
-  vim.api.nvim_set_keymap(mode, mapping, action, { noremap = true })
+  local buffer = opts.buffer
+
+  local args = {
+    noremap = opts.noremap,
+    silent = opts.silent,
+  }
+
+  if buffer then
+    vim.api.nvim_buf_set_keymap(buffer, mode, mapping, action, args)
+    else
+    vim.api.nvim_set_keymap(mode, mapping, action, args)
+  end
 end
 
 function Nnoremap(opts)
