@@ -33,19 +33,19 @@ end
 
 M.show_line_diagnostics = function()
   vim.lsp.diagnostic.show_line_diagnostics {
-    border = M.borders,
+    border = "single",
   }
 end
 
 M.next_diagnostic = function()
   vim.lsp.diagnostic.goto_next {
-    popup_opts = { border = M.borders },
+    popup_opts = { border = "single" },
   }
 end
 
 M.prev_diagnostic = function()
   vim.lsp.diagnostic.goto_prev {
-    popup_opts = { border = M.borders },
+    popup_opts = { border = "single" },
   }
 end
 

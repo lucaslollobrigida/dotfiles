@@ -53,6 +53,8 @@ export TERMINFO=~/.terminfo
 
 export EDITOR=nvim
 
+export GO111MODULE=on
+
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 

@@ -50,6 +50,7 @@ packer.startup({
         requires = {
           'nvim-lua/popup.nvim',
           'nvim-lua/plenary.nvim',
+          'kyazdani42/nvim-web-devicons',
           'nvim-telescope/telescope-fzy-native.nvim',
           'nvim-telescope/telescope-fzf-writer.nvim',
           -- 'nvim-telescope/telescope-project.nvim',

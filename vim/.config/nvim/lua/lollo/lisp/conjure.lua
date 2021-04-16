@@ -1,11 +1,12 @@
 Packadd [[conjure]]
 Packadd [[lispdocs.nvim]]
 
--- Plugin: conjure
--- augroup ConjureLog
---   autocmd!
---   autocmd BufEnter conjure-log-* AnsiEsc!
--- augroup END
+Nvim_multiline_command [[
+augroup ConjureLog
+  autocmd!
+  setlocal scrolloff=0
+augroup END
+]]
 
 vim.g['conjure#log#strip_ansi_escape_sequences_line_limit'] = 0
 

@@ -10,6 +10,7 @@ Packadd [[telescope-fzy-native.nvim]]
 Packadd [[telescope-fzf-writer.nvim]]
 Packadd [[sql.nvim]]
 Packadd [[telescope-frecency.nvim]]
+Packadd [[nvim-web-devicons]]
 -- Packadd [[telescope-project.nvim]]
 
 local telescope = require('telescope')
