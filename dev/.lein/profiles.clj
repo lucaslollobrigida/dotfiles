@@ -7,6 +7,7 @@
                         [com.jakemccrary/lein-test-refresh "0.24.1"]
                         [cider/cider-nrepl "0.25.9"]
                         [nrepl/lein-nrepl "0.3.2"]
+                        [lein-ancient "0.7.0"]
                         [refactor-nrepl "2.5.1"]]
   :injections          [(require 'nu)]
   :dependencies        [[cljdev "0.9.0"]

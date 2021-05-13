@@ -23,8 +23,5 @@
            common-graphql.lacinia.sweet/defenum           clojure.core/def
            bonafont.logic.flow-edge/def                   clojure.core/def
            schema.experimental.abstract-map/extend-schema clojure.core/def
-           ;; plumbing.core/fnk                              clojure.core/let
-           ;; postman.aux.init/defflow                       clojure.core/def
-           ;; integration.aux.init/defflow                   clojure.core/def
            rewrite-clj.zip/edit->                         clojure.core/->
            rewrite-clj.zip.subedit/edit->                 clojure.core/->}}

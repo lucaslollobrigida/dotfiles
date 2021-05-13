@@ -50,9 +50,9 @@
            with-fn-validation      [[:block 0]]
            with-responses          [[:block 0]]
            with-scopes             [[:block 1]]}}
- :macro-defs {plumbing.core/fnk [:params :bound-elements]}
- :linters {:unused-public-var {:exclude-when-defined-by #{state-flow.cljtest/defflow}}}
+ :linters {:unused-public-var {:exclude-when-defined-by #{state-flow.cljtest/defflow integration.aux.init/defflow}}}
  :source-paths ["src" "test" "postman"]
+ :text-document-sync-kind :full
  :use-metadata-for-privacy? true
  :keep-require-at-start? true
  :semantic-tokens? true
