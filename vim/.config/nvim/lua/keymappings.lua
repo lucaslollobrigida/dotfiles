@@ -103,7 +103,7 @@ nnoremap('<leader>rt', [[<cmd>%s/\t/  /ge<cr>]])
 -- better netrw
 nnoremap('-', [[<cmd>Telescope file_browser<CR>]])
 
-nnoremap('<leader>s', [[<cmd>lua require('telescope').extensions.fzf_writer.staged_grep()<cr>]])
+nnoremap('<leader>s', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]])
 nnoremap('<leader>*', [[<cmd>lua require('telescope.builtin').grep_string()<cr>]])
 
 nnoremap('<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]])
@@ -111,4 +111,4 @@ nnoremap('<leader><leader>', [[<cmd>lua require('telescope.builtin').git_files()
 
 nnoremap('<leader>,', [[<cmd>lua require('telescope.builtin').buffers()<cr>]])
 
-nnoremap('<leader>b', [[<cmd>lua require('plugin.telescope').git_branches()<CR>]])
+nnoremap('<leader>b', [[<cmd>lua require('plugins.telescope').git_branches()<CR>]])

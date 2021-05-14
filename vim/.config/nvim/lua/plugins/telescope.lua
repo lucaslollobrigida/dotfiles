@@ -13,7 +13,9 @@ telescope.setup {
         qflist_previewer = previewers.vim_buffer_qflist.new,
         buffer_previewer_maker = previewers.buffer_previewer_maker,
 
-        find_command = {'rg', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case', '--hidden', '--glob=!.git/*'},
+        find_command = {
+			'rg', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case', '--hidden', '--glob=!.git/*'
+		},
 
         prompt_position = "bottom",
         prompt_prefix = " ",
@@ -70,20 +72,12 @@ local M = {}
 
 M.git_branches = function()
     require("telescope.builtin").git_branches({
-        attach_mappings = function(prompt_bufnr, map) 
+        attach_mappings = function(_, map)
             map('i', '<c-d>', actions.git_delete_branch)
             map('n', '<c-d>', actions.git_delete_branch)
             return true
         end
     })
-end
-
-M.lsp_definitions = function()
-  require("telescope.builtin").lsp_definitions()
-end
-
-M.lsp_references = function()
-  require("telescope.builtin").lsp_references()
 end
 
 return M
