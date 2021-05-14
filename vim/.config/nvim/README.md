@@ -20,3 +20,6 @@
     + [ ] Open each one in the current or new tab
 + [ ] Customize bar to show file name and change indicator
 + [ ] RFC database
++ [x] Why gitsign is colorless?
++ [ ] Configure NeoGit
++ [ ] Ident structures, like clojure maps

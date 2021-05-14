@@ -60,7 +60,15 @@ return require("packer").startup(
         use {"windwp/nvim-ts-autotag", opt = true}
 
         -- use {'lukas-reineke/indent-blankline.nvim', opt=true, branch = 'lua'}
-        use {"lewis6991/gitsigns.nvim", opt = true, requires = 'nvim-lua/plenary.nvim'}
+        use {
+            'lewis6991/gitsigns.nvim',
+            requires = {
+                'nvim-lua/plenary.nvim'
+            },
+            config = function()
+                require('gitsigns').setup()
+            end
+        }
         use {"ChristianChiarulli/dashboard-nvim", opt = true}
         use {"windwp/nvim-autopairs", opt = true}
         use {"terrortylor/nvim-comment", opt = true}
@@ -90,7 +98,7 @@ return require("packer").startup(
         require_plugin("vim-vsnip")
         require_plugin("nvim-treesitter")
         require_plugin("nvim-ts-autotag")
-        require_plugin("gitsigns.nvim")
+        -- require_plugin("gitsigns.nvim")
         require_plugin("dashboard-nvim")
         require_plugin("nvim-autopairs")
         require_plugin("nvim-comment")
