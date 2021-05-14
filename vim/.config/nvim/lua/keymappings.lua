@@ -1,4 +1,3 @@
-
 -- -- better window movement
 -- vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', {silent = true})
 -- vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', {silent = true})
@@ -70,10 +69,6 @@ silent_nnoremap('<leader>n', ':nohlsearch<CR>')
 -- managing files
 nnoremap("<leader>e", ':e <C-R>=expand("%:p:h") . "/" <CR>')
 
-
--- better netrw
-nnoremap('-', [[<cmd>Telescope file_browser<CR>]])
-
 -- buffers
 nnoremap('<leader>q', ':bprevious<CR>')
 nnoremap('<leader>w', ':bnext<CR>')
@@ -103,3 +98,17 @@ nnoremap('<leader>sh', [[<cmd>lua require('experiments.terminal').open_term()<cr
 nnoremap('<leader>tw', [[<cmd>%s/\s\+$//e<cr>]])
 nnoremap('<leader>rt', [[<cmd>%s/\t/  /ge<cr>]])
 
+-- telescope
+--
+-- better netrw
+nnoremap('-', [[<cmd>Telescope file_browser<CR>]])
+
+nnoremap('<leader>s', [[<cmd>lua require('telescope').extensions.fzf_writer.staged_grep()<cr>]])
+nnoremap('<leader>*', [[<cmd>lua require('telescope.builtin').grep_string()<cr>]])
+
+nnoremap('<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]])
+nnoremap('<leader><leader>', [[<cmd>lua require('telescope.builtin').git_files()<cr>]])
+
+nnoremap('<leader>,', [[<cmd>lua require('telescope.builtin').buffers()<cr>]])
+
+nnoremap('<leader>b', [[<cmd>lua require('plugin.telescope').git_branches()<CR>]])

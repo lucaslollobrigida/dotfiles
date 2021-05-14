@@ -42,7 +42,7 @@ vim.o.autowrite  = true
 ----- tweak update and redraw timers
 vim.o.updatetime = 200
 vim.o.timeout = true
-vim.o.timeoutlen = 100
+vim.o.timeoutlen = 300
 vim.o.ttimeout = true
 vim.o.ttyfast = true
 vim.o.lazyredraw = true
@@ -64,7 +64,14 @@ vim.o.scrolloff = 10
 ----- completion tweak
 vim.o.completeopt = "menu,menuone,noselect"
 
-
+if vim.fn.has('nvim-0.5') then
+  vim.cmd [[
+    augroup highlight_yank
+    au!
+    au TextYankPost * silent! lua vim.highlight.on_yank()
+    augroup END
+  ]]
+end
 
 
 

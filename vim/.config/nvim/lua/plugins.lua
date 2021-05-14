@@ -64,7 +64,7 @@ return require("packer").startup(
         -- use {"kyazdani42/nvim-tree.lua", opt = true}
 
         -- use {'lukas-reineke/indent-blankline.nvim', opt=true, branch = 'lua'}
-        use {"lewis6991/gitsigns.nvim", opt = true}
+        use {"lewis6991/gitsigns.nvim", opt = true, requires = 'nvim-lua/plenary.nvim'}
         -- use {"folke/which-key.nvim", opt = true}
         use {"ChristianChiarulli/dashboard-nvim", opt = true}
         use {"windwp/nvim-autopairs", opt = true}
@@ -72,7 +72,10 @@ return require("packer").startup(
         use {"kevinhwang91/nvim-bqf", opt = true}
 
         -- Color
-        use {"christianchiarulli/nvcode-color-schemes.vim", opt = true}
+        use {'embark-theme/vim',
+            as = 'embark',
+        }
+        -- use {"christianchiarulli/nvcode-color-schemes.vim", opt = true}
 
         -- Icons
         use {"kyazdani42/nvim-web-devicons", opt = true}
@@ -88,6 +91,7 @@ return require("packer").startup(
         require_plugin("popup.nvim")
         require_plugin("plenary.nvim")
         require_plugin("telescope.nvim")
+        require_plugin("telescope-fzy-native.nvim")
         require_plugin("nvim-dap")
         require_plugin("nvim-compe")
         require_plugin("vim-vsnip")

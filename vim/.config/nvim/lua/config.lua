@@ -1,7 +1,7 @@
 local M = {
     auto_close_tree = 0,
     auto_complete = true,
-    colorscheme = 'lunar',
+    colorscheme = 'embark',
     hidden_files = true,
     wrap_lines = false,
     shell = 'bash',
