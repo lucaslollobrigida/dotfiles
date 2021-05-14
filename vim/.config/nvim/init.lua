@@ -11,7 +11,6 @@ require('plugins.telescope')
 require('plugins.compe')
 require('plugins.galaxyline')
 require('plugins.dashboard')
-require('plugins.comment')
 require('plugins.autopairs')
 
 -- LSP

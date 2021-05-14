@@ -10,6 +10,7 @@
     + [ ] Delete file/folder
     + [ ] Create file/folder
     + [ ] Rename file/folder
++ [ ] Why rg find files are ignoring hidden folders?
 + [ ] Lisp editing + conjure repl ux
     + [ ] Autoclose parens, etc ...
 + [ ] Configure Efm LSP

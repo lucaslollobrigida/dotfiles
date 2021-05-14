@@ -92,23 +92,26 @@ nnoremap('<leader>rt', ':call RemoveTabs()<CR>')
 xnoremap('<', '<gv')
 xnoremap('>', '>gv')
 
-nnoremap('<leader>sh', [[<cmd>lua require('experiments.terminal').open_term()<cr>]])
+nnoremap('<leader>sh', [[<cmd>lua require('terminal').open_term()<cr>]])
 
 -- format
 nnoremap('<leader>tw', [[<cmd>%s/\s\+$//e<cr>]])
 nnoremap('<leader>rt', [[<cmd>%s/\t/  /ge<cr>]])
 
--- telescope
---
--- better netrw
-nnoremap('-', [[<cmd>Telescope file_browser<CR>]])
-
+-- search
 nnoremap('<leader>s', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]])
 nnoremap('<leader>*', [[<cmd>lua require('telescope.builtin').grep_string()<cr>]])
+--
+-- buffer
+nnoremap('<leader>,', [[<cmd>lua require('telescope.builtin').buffers()<cr>]])
 
+-- files
 nnoremap('<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]])
 nnoremap('<leader><leader>', [[<cmd>lua require('telescope.builtin').git_files()<cr>]])
 
-nnoremap('<leader>,', [[<cmd>lua require('telescope.builtin').buffers()<cr>]])
+-- file browser
+nnoremap('-', [[<cmd>Telescope file_browser<CR>]])
 
+-- git
 nnoremap('<leader>b', [[<cmd>lua require('plugins.telescope').git_branches()<CR>]])
+-- nnoremap('<leader>g', '<cmd>lua require("neogit").status.create("split")<cr>')

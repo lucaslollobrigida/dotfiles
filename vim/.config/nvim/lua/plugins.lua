@@ -71,7 +71,7 @@ return require("packer").startup(
         }
         use {"ChristianChiarulli/dashboard-nvim", opt = true}
         use {"windwp/nvim-autopairs", opt = true}
-        use {"terrortylor/nvim-comment", opt = true}
+        use {"terrortylor/nvim-comment", config = function() require('nvim_comment').setup() end}
         use {"kevinhwang91/nvim-bqf", opt = true}
 
         -- Color
