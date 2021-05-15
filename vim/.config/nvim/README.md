@@ -10,11 +10,11 @@
     + [ ] Delete file/folder
     + [ ] Create file/folder
     + [ ] Rename file/folder
-+ [ ] Why rg find files are ignoring hidden folders?
++ [x] Why rg find files are ignoring hidden folders?
 + [ ] Lisp editing + conjure repl ux
-    + [ ] Autoclose parens, etc ...
+    + [x] Autoclose parens, etc ...
 + [x] Configure Efm LSP
-+ [ ] Configure Go LSP
++ [x] Configure Go LSP
 + [x] Configure Scala LSP (metals)
 + [x] Project browser with tabs
     + [x] Browse projects with telescope
@@ -22,5 +22,8 @@
 + [ ] Customize bar to show file name and change indicator
 + [ ] RFC database
 + [x] Why gitsign is colorless?
-+ [ ] Configure NeoGit
++ [x] Configure NeoGit
 + [ ] Ident structures, like clojure maps
++ [ ] Configure Projectionist or alike
++ [ ] Github browse files, like rhubarb
++ [ ] Fix snippets path and version files with dotfiles

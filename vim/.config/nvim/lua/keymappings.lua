@@ -8,21 +8,6 @@
 -- vim.api.nvim_set_keymap('x', 'K', ':move \'<-2<CR>gv-gv', {noremap = true, silent = true})
 -- vim.api.nvim_set_keymap('x', 'J', ':move \'>+1<CR>gv-gv', {noremap = true, silent = true})
 
--- Better nav for omnicomplete
--- vim.cmd('inoremap <expr> <c-j> (\"\\<C-n>\")')
--- vim.cmd('inoremap <expr> <c-k> (\"\\<C-p>\")')
--- vim.cmd('inoremap <expr> <TAB> (\"\\<C-n>\")')
--- vim.cmd('inoremap <expr> <S-TAB> (\"\\<C-p>\")')
-
--- vim.api.nvim_set_keymap('i', '<C-TAB>', 'compe#complete()', {noremap = true, silent = true, expr = true})
-
--- vim.cmd([[
--- map p <Plug>(miniyank-autoput)
--- map P <Plug>(miniyank-autoPut)
--- map <leader>n <Plug>(miniyank-cycle)
--- map <leader>N <Plug>(miniyank-cycleback)
--- ]])
-
 local function nnoremap(mapping, action)
   vim.api.nvim_set_keymap('n', mapping, action, { noremap = true })
 end
@@ -106,15 +91,14 @@ nnoremap('<leader>*', [[<cmd>lua require('telescope.builtin').grep_string()<cr>]
 nnoremap('<leader>,', [[<cmd>lua require('telescope.builtin').buffers()<cr>]])
 
 -- files
-nnoremap('<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]])
-nnoremap('<leader><leader>', [[<cmd>lua require('telescope.builtin').git_files()<cr>]])
+nnoremap('<leader>f', [[<cmd>lua require('plugins.telescope').project_files()<cr>]])
 
 -- file browser
 nnoremap('-', [[<cmd>Telescope file_browser<CR>]])
 
 -- git
 nnoremap('<leader>b', [[<cmd>lua require('plugins.telescope').git_branches()<CR>]])
--- nnoremap('<leader>g', '<cmd>lua require("neogit").status.create("split")<cr>')
+nnoremap('<leader>g', '<cmd>lua require("neogit").status.create("split")<cr>')
 
 -- Flutter commands
 vim.api.nvim_exec(
@@ -128,4 +112,4 @@ vim.api.nvim_exec(
 )
 
 -- project
-nnoremap('<leader>p', [[<cmd>lua require('telescope').extensions.project.browse()<CR>]])
+nnoremap('<leader>p', [[<cmd>lua require('plugins.telescope').browse_projects()<CR>]])

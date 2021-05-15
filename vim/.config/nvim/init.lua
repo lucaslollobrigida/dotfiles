@@ -3,6 +3,7 @@ require('plugins')
 
 require('keymappings')
 require('colorscheme')
+require('lisp')
 
 require('treesitter')
 require('lsp')

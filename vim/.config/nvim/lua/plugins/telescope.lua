@@ -65,9 +65,8 @@ telescope.setup {
         },
         project = {
             locations = {
-                {'/Users/lucas.lollobrigida/dev/personal', depth = 2},
-                {'/Users/lucas.lollobrigida/dev/nu', depth = 1},
-                {'/Users/lucas.lollobrigida/.dotfiles', depth = 1}
+                {'/Users/lucaslollobrigida/dev', depth = 2},
+                {'/Users/lucaslollobrigida/.dotfiles', depth = 1}
             }
         },
     }
@@ -77,6 +76,12 @@ telescope.load_extension('fzy_native')
 telescope.load_extension("flutter")
 
 local M = {}
+
+M.project_files = function()
+  local opts = { hidden = true }
+  local ok = pcall(require('telescope.builtin').git_files)
+  if not ok then require('telescope.builtin').find_files(opts) end
+end
 
 M.git_branches = function()
     require("telescope.builtin").git_branches({
@@ -90,6 +95,10 @@ end
 
 M.flutter_commands = function()
     require('telescope').extensions.flutter.commands()
+end
+
+M.browse_projects = function()
+    require('telescope').extensions.project.browse()
 end
 
 return M

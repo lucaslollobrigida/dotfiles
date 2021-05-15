@@ -1,16 +1,25 @@
-local C = require('config')
+local C = require("config")
 
-require'nvim-treesitter.configs'.setup {
-    ensure_installed = C.treesitter.ensure_installed,
-    ignore_install = C.treesitter.ignore_install,
-    indent = {enable = {"javascriptreact"}},
-    autotag = {enable = true},
-    highlight = {
-        enable = C.treesitter.highlight.enabled,
-        use_languagetree = false,
-    },
-    incremental_selection = {
-        enable = true,
-    }
+require "nvim-treesitter.configs".setup {
+  ensure_installed = C.treesitter.ensure_installed,
+  ignore_install = C.treesitter.ignore_install,
+  highlight = {
+    enable = true,
+    use_languagetree = false
+  },
+  playground = {
+    enabled = true
+  },
+  rainbow = {
+    enabled = true
+  },
+  indent = {
+    enable = true
+  },
+  autotag = {
+    enable = true
+  },
+  incremental_selection = {
+    enable = true
+  }
 }
-

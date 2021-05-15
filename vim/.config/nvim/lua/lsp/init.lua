@@ -56,10 +56,10 @@ M.on_attach = function(client, bufnr)
   M.buf_set_keymap(bufnr, 'i', '<C-Space>', 'compe#complete()', { noremap = true, silent = true, expr = true })
   M.buf_set_keymap(bufnr, 'i', '<C-y>'    , 'compe#confirm()' , { noremap = true, silent = true, expr = true })
 
-  if client.resolved_capabilities.document_formatting then
-    M.buf_set_keymap(bufnr, 'n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
-  elseif client.resolved_capabilities.document_range_formatting then
+  if client.resolved_capabilities.document_range_formatting then
     M.buf_set_keymap(bufnr, 'v', '<leader>lf', [[<cmd>'<,'>lua vim.lsp.buf.formatting()<cr>]], opts)
+    else
+    M.buf_set_keymap(bufnr, 'n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
   end
 
   vim.cmd [[autocmd CursorHold <buffer> lua require('lsp').show_line_diagnostics()]]

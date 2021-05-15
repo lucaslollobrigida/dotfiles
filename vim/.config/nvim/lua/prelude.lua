@@ -40,7 +40,7 @@ vim.o.autoread = true
 vim.o.autowrite  = true
 
 ----- tweak update and redraw timers
-vim.o.updatetime = 200
+vim.o.updatetime = 600
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 vim.o.ttimeout = true
