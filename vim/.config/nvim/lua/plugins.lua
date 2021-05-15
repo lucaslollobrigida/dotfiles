@@ -85,6 +85,13 @@ return require("packer").startup(
         -- Status Line and Bufferline
         use {"glepnir/galaxyline.nvim", opt = true}
 
+        -- LSP plugins
+        use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim', opt = true}
+        use {'scalameta/nvim-metals', opt = true}
+
+        -- Local
+        use {'lucaslollobrigida/project.nvim', branch = 'main'}
+
         require_plugin("nvim-lspconfig")
         require_plugin("lspsaga.nvim")
         require_plugin("nvim-lspinstall")
@@ -98,7 +105,8 @@ return require("packer").startup(
         require_plugin("vim-vsnip")
         require_plugin("nvim-treesitter")
         require_plugin("nvim-ts-autotag")
-        -- require_plugin("gitsigns.nvim")
+        require_plugin("nvim-metals")
+        require_plugin("flutter-tools.nvim")
         require_plugin("dashboard-nvim")
         require_plugin("nvim-autopairs")
         require_plugin("nvim-comment")

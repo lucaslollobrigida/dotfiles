@@ -62,11 +62,19 @@ telescope.setup {
         fzy_native = {
             override_generic_sorter = false,
             override_file_sorter = true,
-        }
+        },
+        project = {
+            locations = {
+                {'/Users/lucas.lollobrigida/dev/personal', depth = 2},
+                {'/Users/lucas.lollobrigida/dev/nu', depth = 1},
+                {'/Users/lucas.lollobrigida/.dotfiles', depth = 1}
+            }
+        },
     }
 }
 
 telescope.load_extension('fzy_native')
+telescope.load_extension("flutter")
 
 local M = {}
 
@@ -78,6 +86,10 @@ M.git_branches = function()
             return true
         end
     })
+end
+
+M.flutter_commands = function()
+    require('telescope').extensions.flutter.commands()
 end
 
 return M

@@ -101,7 +101,7 @@ nnoremap('<leader>rt', [[<cmd>%s/\t/  /ge<cr>]])
 -- search
 nnoremap('<leader>s', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]])
 nnoremap('<leader>*', [[<cmd>lua require('telescope.builtin').grep_string()<cr>]])
---
+
 -- buffer
 nnoremap('<leader>,', [[<cmd>lua require('telescope.builtin').buffers()<cr>]])
 
@@ -115,3 +115,17 @@ nnoremap('-', [[<cmd>Telescope file_browser<CR>]])
 -- git
 nnoremap('<leader>b', [[<cmd>lua require('plugins.telescope').git_branches()<CR>]])
 -- nnoremap('<leader>g', '<cmd>lua require("neogit").status.create("split")<cr>')
+
+-- Flutter commands
+vim.api.nvim_exec(
+    [[
+    augroup fluttertools_cmd
+    autocmd!
+    autocmd FileType dart nnoremap <leader>lc <cmd>lua require('plugins.telescope').flutter_commands()<CR>
+    augroup END
+    ]],
+    false
+)
+
+-- project
+nnoremap('<leader>p', [[<cmd>lua require('telescope').extensions.project.browse()<CR>]])
