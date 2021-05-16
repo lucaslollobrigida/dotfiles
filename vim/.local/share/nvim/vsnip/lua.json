@@ -1,0 +1,22 @@
+{
+  "vim.g": {
+    "prefix": "vim.g",
+    "body": ["vim.g.${1:option} = $2"],
+    "description": "vim global option"
+  },
+  "use": {
+    "prefix": "use",
+    "body": ["use \"$1\""],
+    "description": "for adding plugins in packer"
+  },
+  "loc": {
+    "prefix": "loc",
+    "body": ["local ${1} = ${2}"],
+    "description": "create a variable"
+  },
+  "req": {
+    "prefix": "req",
+    "body": ["local ${2} = require(\"${1}\")"],
+    "description": "Require module as a variable"
+  }
+}

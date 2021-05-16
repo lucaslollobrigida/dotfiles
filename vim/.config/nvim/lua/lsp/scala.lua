@@ -9,9 +9,9 @@ M.settings = {
   on_attach = lsp.on_attach,
   settings = {
     showImplicitArguments = true,
-    excludedPackages = {"akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl"}
+    excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
   },
-  capabilities = capabilities
+  capabilities = capabilities,
 }
 
 vim.api.nvim_exec(

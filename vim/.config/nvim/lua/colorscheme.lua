@@ -1,6 +1,6 @@
-local C = require('config')
+local C = require("config")
 
-vim.cmd('colorscheme ' .. C.colorscheme)
+vim.cmd("colorscheme " .. C.colorscheme)
 
 vim.g.embark_terminal_italics = true
 

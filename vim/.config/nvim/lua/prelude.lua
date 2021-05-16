@@ -1,5 +1,5 @@
 ----- syntax
-vim.bo.syntax = 'ON'
+vim.bo.syntax = "ON"
 vim.o.termguicolors = true
 vim.o.showmode = false
 
@@ -7,9 +7,8 @@ vim.o.mouse = "a"
 
 vim.bo.smartindent = true
 vim.o.expandtab = true
-vim.cmd('set ts=4') -- Insert 2 spaces for a tab
-vim.cmd('set sw=4') -- Change the number of space characters inserted for indentation
-
+vim.cmd("set ts=4") -- Insert 2 spaces for a tab
+vim.cmd("set sw=4") -- Change the number of space characters inserted for indentation
 
 ---- ruler and cursor line
 vim.wo.relativenumber = true
@@ -27,17 +26,17 @@ vim.wo.foldenable = false
 vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
 
 --
-vim.cmd [[set shortmess+=c]]
+vim.cmd([[set shortmess+=c]])
 
 -- treat dash separated words as a word text object"
-vim.cmd [[set iskeyword+=-]]
+vim.cmd([[set iskeyword+=-]])
 
 ----- disable unused default plugins
 vim.g.loaded_2html_plugin = true
 
 ----- automatically write on focus change and load changes from outside vim's to the buffer
 vim.o.autoread = true
-vim.o.autowrite  = true
+vim.o.autowrite = true
 
 ----- tweak update and redraw timers
 vim.o.updatetime = 600
@@ -51,7 +50,7 @@ vim.o.lazyredraw = true
 vim.bo.swapfile = false
 
 ----- make inccommand opens a split with live preview of the search (neovim only)
-vim.o.inccommand = 'split'
+vim.o.inccommand = "split"
 
 vim.o.hidden = true
 vim.o.wrap = false
@@ -64,29 +63,27 @@ vim.o.scrolloff = 10
 ----- completion tweak
 vim.o.completeopt = "menu,menuone,noselect"
 
-if vim.fn.has('nvim-0.5') then
-  vim.cmd [[
+if vim.fn.has("nvim-0.5") then
+  vim.cmd([[
     augroup highlight_yank
     au!
     au TextYankPost * silent! lua vim.highlight.on_yank()
     augroup END
-  ]]
+  ]])
 end
-
-
 
 ---- NEW
 vim.o.title = true
 
-TERMINAL = vim.fn.expand('$TERMINAL')
-vim.cmd('let &titleold="'..TERMINAL..'"')
-vim.o.titlestring="%<%F%=%l/%L - nvim"
+TERMINAL = vim.fn.expand("$TERMINAL")
+vim.cmd('let &titleold="' .. TERMINAL .. '"')
+vim.o.titlestring = "%<%F%=%l/%L - nvim"
 
-vim.cmd('set whichwrap+=<,>,[,],h,l') -- move to next line with theses keys
+vim.cmd("set whichwrap+=<,>,[,],h,l") -- move to next line with theses keys
 vim.o.pumheight = 10 -- Makes popup menu smaller
 vim.o.fileencoding = "utf-8" -- The encoding written to file
 vim.o.cmdheight = 2 -- More space for displaying messages
-vim.cmd('set colorcolumn=99999') -- fix indentline for now
+vim.cmd("set colorcolumn=99999") -- fix indentline for now
 
 vim.o.t_Co = "256" -- Support 256 colors
 vim.o.conceallevel = 0 -- So that I can see `` in markdown files

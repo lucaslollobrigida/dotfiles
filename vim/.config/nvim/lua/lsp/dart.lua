@@ -1,6 +1,6 @@
-local lsp = require('lsp')
+local lsp = require("lsp")
 
-require("flutter-tools").setup {
+require("flutter-tools").setup({
   experimental = {
     lsp_derive_paths = true,
   },
@@ -21,7 +21,18 @@ require("flutter-tools").setup {
     -- capabilities = my_custom_capabilities,
     settings = {
       showTodos = true,
-      completeFunctionCalls = true
-    }
-  }
-}
+      completeFunctionCalls = true,
+    },
+  },
+})
+
+-- Flutter commands
+vim.api.nvim_exec(
+  [[
+    augroup fluttertools_cmd
+    autocmd!
+    autocmd FileType dart nnoremap <leader>lc <cmd>lua require('plugins.telescope').flutter_commands()<CR>
+    augroup END
+    ]],
+  false
+)

@@ -1,5 +1,4 @@
 local M = {
-  auto_close_tree = 0,
   auto_complete = true,
   colorscheme = "embark",
   hidden_files = true,
@@ -12,7 +11,7 @@ local M = {
   },
   paths = {
     data = vim.fn.stdpath("data"),
-    cache = vim.fn.stdpath("cache")
+    cache = vim.fn.stdpath("cache"),
   },
   lua = {
     formatter = "luafmt",
@@ -37,10 +36,10 @@ local M = {
       '             #"  #  #"  #  #" "#  "m m"    #    # # #',
       '             #   #  #""""  #   #   #m#     #    # # #',
       '             #   #  "#mm"  "#m#"    #    mm#mm  # # #',
-      ""
+      "",
     },
-    footer = {"https://github.com/lucaslollobrigida/dotfiles"}
-  }
+    footer = { "https://github.com/lucaslollobrigida/dotfiles" },
+  },
 }
 
 return M
