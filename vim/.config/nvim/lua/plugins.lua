@@ -116,6 +116,9 @@ return require("packer").startup(function(use)
   -- File browser
   use("tamago324/lir.nvim")
 
+  -- Project
+  use("tpope/vim-projectionist")
+
   -- Lisp
   use({
     "Olical/conjure",

@@ -16,6 +16,10 @@ local function xnoremap(mapping, action)
   vim.api.nvim_set_keymap("x", mapping, action, { noremap = true })
 end
 
+local function vnoremap(mapping, action)
+  vim.api.nvim_set_keymap("x", mapping, action, { noremap = true })
+end
+
 local function silent_nnoremap(mapping, action)
   vim.api.nvim_set_keymap("n", mapping, action, { noremap = true, silent = true })
 end
@@ -100,4 +104,7 @@ nnoremap("<leader>g", '<cmd>lua require("neogit").status.create("split")<cr>')
 nnoremap("<leader>p", [[<cmd>lua require('plugins.telescope').browse_projects()<CR>]])
 
 -- Align
-nnoremap("<leader><leader>", [[<cmd>lua R('common').align()<CR>]])
+nnoremap("ga", "<Plug>(EasyAlign)")
+xnoremap("ga", "<Plug>(EasyAlign)")
+nnoremap("<leader><leader>", [[<cmd>exe "normal vif"<CR>|<cmd>'<,'>EasyAlign 1\<CR>]])
+vnoremap("<leader><leader>", [[<cmd>'<,'>EasyAlign 1\<CR>]])

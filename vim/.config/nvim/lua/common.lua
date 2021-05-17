@@ -1,4 +1,3 @@
-local selection = require("nvim-treesitter.incremental_selection")
 P = function(v)
   print(vim.inspect(v))
   return v
@@ -19,12 +18,6 @@ local M = {}
   local match_string = "[^/]+[/][^/]+$"
 
   return string.match(path, match_string)
-end
-
-function M.align()
-  selection.init_selection()
-  selection.node_incremental()
-  -- vim.cmd([[EasyAlign 1\]])
 end
 
 return M

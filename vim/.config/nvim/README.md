@@ -23,8 +23,7 @@
 + [x] Why gitsign is colorless?
 + [x] Configure NeoGit
 + [x] Fix snippets path and version files with dotfiles
-+ [ ] Ident structures, like clojure maps
-    + 'godlygeek/tabular', 'AndrewRadev/splitjoin.vim'
++ [x] Ident structures, like clojure maps
 + [ ] Fix snippet `-` issue, may be a keyword problem?
 + [ ] Configure Projectionist or alike
 + [ ] Github browse files, like rhubarb
