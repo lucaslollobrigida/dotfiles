@@ -1,4 +1,3 @@
-local C = require("config")
 local lsp = require("lsp")
 
 -- local sumneko_root_path = C.paths.data .. "/lspinstall/lua"
@@ -6,6 +5,7 @@ local lsp = require("lsp")
 
 require("nlua.lsp.nvim").setup(require("lspconfig"), {
   on_attach = lsp.on_attach,
+  filetypes = { "lua" },
   globals = {
     "jit",
     "vim",

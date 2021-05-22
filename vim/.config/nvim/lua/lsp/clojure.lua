@@ -9,6 +9,7 @@ M.clojure_clean_ns = function()
 end
 
 require("lspconfig").clojure_lsp.setup({
+  filetypes = { "clojure" },
   on_attach = function(client, bufnr)
     lsp.buf_set_keymap(bufnr, "n", "<leader>lc", [[<cmd>lua require('lsp.clojure').clojure_clean_ns()<CR>]], opts)
     lsp.on_attach(client, bufnr)

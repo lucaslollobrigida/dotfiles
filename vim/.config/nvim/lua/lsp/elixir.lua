@@ -1,15 +1,10 @@
 local C = require("config")
 local lspconfig = require("lspconfig")
 
--- TODO: fix this
--- require("go").setup({
---   max_len = 120,
--- })
-
-lspconfig.gopls.setup({
-  filetypes = { "go" },
-  cmd = { C.paths.data .. "/lspinstall/go/gopls" },
-  root_dir = lspconfig.util.root_pattern(".git", "go.mod"),
+lspconfig.elixirls.setup({
+  cmd = { C.paths.data .. "/lspinstall/elixir/elixir-ls/language_server.sh" },
+  filetypes = { "elixir", "eelixir" },
+  root_dir = lspconfig.util.root_pattern("mix.exs", ".git") or vim.loop.os_homedir(),
   on_attach = require("lsp").on_attach,
   settings = {
     gopls = {
