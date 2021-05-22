@@ -67,7 +67,9 @@ M.on_attach = function(client, bufnr)
 
   if client.resolved_capabilities.document_range_formatting then
     M.buf_set_keymap(bufnr, "v", "<leader>lf", [[<cmd>'<,'>lua vim.lsp.buf.formatting()<cr>]], opts)
-  else
+  end
+
+  if client.resolved_capabilities.document_formatting then
     M.buf_set_keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)
   end
 

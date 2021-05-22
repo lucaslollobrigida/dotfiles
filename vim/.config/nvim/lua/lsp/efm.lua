@@ -39,10 +39,10 @@ local eslint = {
 }
 
 require("lspconfig").efm.setup({
-  -- init_options = {initializationOptions},
   cmd = { C.paths.data .. "/lspinstall/efm/efm-langserver" },
   init_options = { documentFormatting = true, codeAction = false },
   filetypes = { "lua", "typescript", "typescriptreact", "javascript", "javascriptreact", "sh", "zsh", "json" },
+  on_attach = require("lsp").on_attach,
   settings = {
     rootMarkers = { ".git/" },
     languages = {
