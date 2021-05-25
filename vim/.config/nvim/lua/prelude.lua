@@ -7,8 +7,6 @@ vim.o.mouse = "a"
 
 vim.bo.smartindent = true
 vim.o.expandtab = true
-vim.cmd("set ts=4") -- Insert 2 spaces for a tab
-vim.cmd("set sw=4") -- Change the number of space characters inserted for indentation
 
 ---- ruler and cursor line
 vim.wo.relativenumber = true
@@ -76,10 +74,7 @@ end
 vim.o.title = true
 
 TERMINAL = vim.fn.expand("$TERMINAL")
-vim.cmd('let &titleold="' .. TERMINAL .. '"')
-vim.o.titlestring = "%<%F%=%l/%L - nvim"
 
-vim.cmd("set whichwrap+=<,>,[,],h,l") -- move to next line with theses keys
 vim.o.pumheight = 10 -- Makes popup menu smaller
 vim.o.fileencoding = "utf-8" -- The encoding written to file
 vim.o.cmdheight = 2 -- More space for displaying messages
@@ -92,6 +87,12 @@ vim.wo.cursorline = true -- Enable highlighting of the current line
 vim.o.showtabline = 2 -- Always show tabs
 vim.wo.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 
+vim.o.listchars = 'tab:>·,trail:·,extends:>,precedes:<,eol:↲'
+vim.wo.list = true
+
 -- vim.o.guifont = "JetBrainsMono\\ Nerd\\ Font\\ Mono:h18"
 -- vim.o.guifont = "FiraCode Nerd Font:h17"
 -- vim.o.guifont = "JetBrains\\ Mono\\ Regular\\ Nerd\\ Font\\ Complete"
+
+vim.cmd("set ts=2") -- Insert 2 spaces for a tab
+vim.cmd("set sw=2") -- Change the number of space characters inserted for indentation

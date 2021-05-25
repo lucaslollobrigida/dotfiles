@@ -26,7 +26,7 @@
 + [x] Ident structures, like clojure maps
 + [ ] Fix snippet `-` issue, may be a keyword problem?
 + [ ] Configure Projectionist or alike
-+ [ ] Github browse files, like rhubarb
++ [x] Github browse files, like rhubarb
 + [ ] Async jobs
 + [ ] Test runner
-+ [ ] RFC database
++ [x] RFC database
