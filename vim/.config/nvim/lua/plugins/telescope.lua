@@ -135,11 +135,13 @@ local gen_from_quickfix = function(opts)
 end
 
 M.project_files = function()
-  local opts = { hidden = true }
-  local ok = pcall(require("telescope.builtin").git_files)
-  if not ok then
-    require("telescope.builtin").find_files(opts)
-  end
+  -- local opts = { hidden = true }
+  require("telescope.builtin").find_files({
+    find_command = {"rg", "--files", "--hidden"}
+  })
+  -- local ok = pcall(require("telescope.builtin").git_files)
+  -- if not ok then
+  -- end
 end
 
 M.git_branches = function()

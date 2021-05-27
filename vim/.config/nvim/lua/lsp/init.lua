@@ -38,6 +38,16 @@ saga.init_lsp_saga({
   server_filetype_map = { metals = { "sbt", "scala" } },
 })
 
+require("lsp-colors").setup({
+  Error = "#db4b4b",
+  Warning = "#e0af68",
+  Information = "#0db9d7",
+  Hint = "#10B981"
+})
+
+require("trouble").setup()
+require("todo-comments").setup()
+
 M.buf_set_keymap = function(bufnr, ...)
   vim.api.nvim_buf_set_keymap(bufnr, ...)
 end

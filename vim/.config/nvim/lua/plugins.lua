@@ -60,6 +60,12 @@ return require("packer").startup(function(use)
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   use({ "windwp/nvim-ts-autotag", opt = true })
 
+  use({
+    "folke/todo-comments.nvim",
+    opt = true,
+    requires = "nvim-lua/plenary.nvim",
+  })
+
   -- Git
   use({ "TimUntersberger/neogit", opt = true })
   use({
@@ -121,8 +127,13 @@ return require("packer").startup(function(use)
   -- LSP plugins
   use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim", opt = true })
   use({ "scalameta/nvim-metals", opt = true })
-  -- use({ "ray-x/go.nvim", opt = false })
   use({ "tjdevries/nlua.nvim", opt = true })
+  use({ "folke/lsp-colors.nvim", opt = true })
+  use({
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    opt = true,
+  })
 
   -- Local
   use({ "lucaslollobrigida/project.nvim", branch = "main" })
@@ -141,10 +152,10 @@ return require("packer").startup(function(use)
   use("tamago324/lir.nvim")
 
   -- RFC database
-  use("mhinz/vim-rfc")
+  use({ "mhinz/vim-rfc", opt = true })
 
   -- Project
-  use("tpope/vim-projectionist")
+  use({ "tpope/vim-projectionist", opt = true })
 
   -- Lisp
   use({
@@ -159,8 +170,6 @@ return require("packer").startup(function(use)
     opt = true,
     requires = { "tami5/sql.nvim" },
   })
-  -- use 'crispgm/nvim-go'
-  -- require_plugin("go")
 
   require_plugin("Olical/conjure")
   require_plugin("tamago324/lir.nvim")
@@ -189,4 +198,9 @@ return require("packer").startup(function(use)
   require_plugin("nvim-bqf")
   require_plugin("nvim-web-devicons")
   require_plugin("galaxyline.nvim")
+  require_plugin("lsp-colors.nvim")
+  require_plugin("vim-projectionist")
+  require_plugin("vim-rfc")
+  require_plugin("trouble.nvim")
+  require_plugin("todo-comments.nvim")
 end)
