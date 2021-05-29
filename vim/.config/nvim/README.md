@@ -10,6 +10,7 @@
     + [x] Delete file/folder
     + [x] Create file/folder
     + [x] Rename file/folder
+    + [x] Move to diferent file/folder
 + [x] Why rg find files are ignoring hidden folders?
 + [x] Lisp editing + conjure repl ux
     + [x] Autoclose parens, etc ...
@@ -24,8 +25,11 @@
 + [x] Configure NeoGit
 + [x] Fix snippets path and version files with dotfiles
 + [x] Ident structures, like clojure maps
-+ [ ] Fix snippet `-` issue, may be a keyword problem?
-+ [ ] Configure Projectionist or alike
++ [ ] Fix snippet `-` issue, ~~may be a keyword problem?~~
++ [x] Configure Projectionist or alike
+  + [x] Clojure
+  + [x] Scala
+  + [x] Golang
 + [x] Github browse files, like rhubarb
 + [ ] Async jobs
 + [ ] Test runner

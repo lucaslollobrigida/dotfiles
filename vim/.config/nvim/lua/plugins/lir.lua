@@ -77,7 +77,7 @@ vim.api.nvim_exec(
 )
 
 function M.file_browser()
-  local folder_path = vim.fn.expand('%:p:h')
+  local folder_path = vim.fn.expand("%:p:h")
   require("lir.float").toggle(folder_path)
 end
 

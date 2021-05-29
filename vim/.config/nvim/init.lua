@@ -4,18 +4,11 @@ require("common")
 
 require("keymappings")
 require("colorscheme")
-require("lisp")
 
 require("treesitter")
 require("lsp")
 
-require("plugins.telescope")
-require("plugins.compe")
-require("plugins.galaxyline")
-require("plugins.autopairs")
-require("plugins.lir")
-
--- LSP
+---- LSP
 require("lsp.clojure")
 require("lsp.dart")
 require("lsp.elixir")

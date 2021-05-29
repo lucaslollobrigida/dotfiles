@@ -2,7 +2,6 @@ local telescope = require("telescope")
 local common = require("common")
 
 local actions = require("telescope.actions")
-local action_state = require("telescope.actions.state")
 local sorters = require("telescope.sorters")
 local previewers = require("telescope.previewers")
 
@@ -135,13 +134,9 @@ local gen_from_quickfix = function(opts)
 end
 
 M.project_files = function()
-  -- local opts = { hidden = true }
   require("telescope.builtin").find_files({
-    find_command = {"rg", "--files", "--hidden"}
+    find_command = { "rg", "--files", "--hidden" },
   })
-  -- local ok = pcall(require("telescope.builtin").git_files)
-  -- if not ok then
-  -- end
 end
 
 M.git_branches = function()

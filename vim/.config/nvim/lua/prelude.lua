@@ -1,98 +1,98 @@
 ----- syntax
-vim.bo.syntax = "ON"
-vim.o.termguicolors = true
-vim.o.showmode = false
+vim.opt.syntax = "ON"
+vim.opt.termguicolors = true
+vim.opt.showmode = false
 
-vim.o.mouse = "a"
+vim.opt.mouse = "a"
 
-vim.bo.smartindent = true
-vim.o.expandtab = true
+vim.opt.smartindent = true
+vim.opt.expandtab = true
 
 ---- ruler and cursor line
-vim.wo.relativenumber = true
-vim.wo.number = true
-vim.wo.cursorline = true
+vim.opt.relativenumber = true
+vim.opt.number = true
+vim.opt.cursorline = true
 
 ----- sane splits
-vim.o.splitbelow = true
-vim.o.splitright = true
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 ---- disable folding
-vim.wo.foldenable = false
+vim.opt.foldenable = false
 
 ----- fill and use clipboard register on text edits
-vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
+vim.opt.clipboard = "unnamedplus"
 
---
-vim.cmd([[set shortmess+=c]])
-
--- treat dash separated words as a word text object"
-vim.cmd([[set iskeyword+=-]])
+----- .
+vim.opt.shortmess:append("c")
+-- vim.cmd([[set iskeyword+=-]])
 
 ----- disable unused default plugins
 vim.g.loaded_2html_plugin = true
+vim.g.loaded_netrw = true
+vim.g.loaded_netrwPlugin = true
 
 ----- automatically write on focus change and load changes from outside vim's to the buffer
-vim.o.autoread = true
-vim.o.autowrite = true
+vim.opt.autoread = true
+vim.opt.autowrite = true
 
 ----- tweak update and redraw timers
-vim.o.updatetime = 600
-vim.o.timeout = true
-vim.o.timeoutlen = 300
-vim.o.ttimeout = true
-vim.o.ttyfast = true
-vim.o.lazyredraw = true
+vim.opt.updatetime = 600
+vim.opt.timeout = true
+vim.opt.timeoutlen = 300
+vim.opt.ttimeout = true
+vim.opt.ttyfast = true
+vim.opt.lazyredraw = true
 
 ----- disable swapfiles
-vim.bo.swapfile = false
+vim.opt.swapfile = false
 
 ----- make inccommand opens a split with live preview of the search (neovim only)
-vim.o.inccommand = "split"
+vim.opt.inccommand = "split"
 
-vim.o.hidden = true
-vim.o.wrap = false
+vim.opt.hidden = true
+vim.opt.wrap = false
 
-vim.o.undofile = true
-vim.o.undolevels = 10000
+vim.opt.undofile = true
+vim.opt.undolevels = 10000
 
-vim.o.scrolloff = 10
+vim.opt.scrolloff = 10
+
+----- Default identatition
+vim.opt.ts = 2
+vim.opt.sw = 2
 
 ----- completion tweak
-vim.o.completeopt = "menu,menuone,noselect"
+vim.opt.completeopt:append({ "menu", "menuone", "noselect" })
 
 if vim.fn.has("nvim-0.5") then
   vim.cmd([[
-    augroup highlight_yank
-    au!
-    au TextYankPost * silent! lua vim.highlight.on_yank()
-    augroup END
-  ]])
+     augroup highlight_yank
+     au!
+     au TextYankPost * silent! lua vim.highlight.on_yank()
+     augroup END
+   ]])
 end
-
----- NEW
-vim.o.title = true
 
 TERMINAL = vim.fn.expand("$TERMINAL")
 
-vim.o.pumheight = 10 -- Makes popup menu smaller
-vim.o.fileencoding = "utf-8" -- The encoding written to file
-vim.o.cmdheight = 2 -- More space for displaying messages
-vim.cmd("set colorcolumn=99999") -- fix indentline for now
+vim.opt.pumheight = 10 -- Makes popup menu smaller
+vim.opt.fileencoding = "utf-8" -- The encoding written to file
+vim.opt.cmdheight = 2 -- More space for displaying messages
+vim.opt.colorcolumn = "99999"
 
-vim.o.t_Co = "256" -- Support 256 colors
-vim.o.conceallevel = 0 -- So that I can see `` in markdown files
+vim.go.t_Co = "256" -- Support 256 colors
+vim.opt.conceallevel = 0 -- So that I can see `` in markdown files
 
-vim.wo.cursorline = true -- Enable highlighting of the current line
-vim.o.showtabline = 2 -- Always show tabs
-vim.wo.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
+vim.opt.cursorline = true -- Enable highlighting of the current line
+vim.opt.showtabline = 2 -- Always show tabs
+vim.opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 
-vim.o.listchars = 'tab:>·,trail:·,extends:>,precedes:<,eol:↲'
-vim.wo.list = true
-
--- vim.o.guifont = "JetBrainsMono\\ Nerd\\ Font\\ Mono:h18"
--- vim.o.guifont = "FiraCode Nerd Font:h17"
--- vim.o.guifont = "JetBrains\\ Mono\\ Regular\\ Nerd\\ Font\\ Complete"
-
-vim.cmd("set ts=2") -- Insert 2 spaces for a tab
-vim.cmd("set sw=2") -- Change the number of space characters inserted for indentation
+vim.opt.list = true
+vim.opt.listchars = {
+  tab = ">·",
+  trail = "·",
+  extends = ">",
+  precedes = "<",
+  eol = "↲",
+}

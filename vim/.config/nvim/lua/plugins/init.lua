@@ -34,7 +34,7 @@ vim.cmd("autocmd BufWritePost plugins.lua PackerCompile") -- Auto compile when t
 
 local lisps = { "clojure", "scheme", "racket", "lisp", "fennel" }
 
-return require("packer").startup(function(use)
+require("packer").startup(function(use)
   use("wbthomason/packer.nvim")
 
   -- LSP
@@ -156,6 +156,7 @@ return require("packer").startup(function(use)
 
   -- Project
   use({ "tpope/vim-projectionist", opt = true })
+  use({ "tpope/vim-dispatch", opt = true })
 
   -- Lisp
   use({
@@ -200,7 +201,15 @@ return require("packer").startup(function(use)
   require_plugin("galaxyline.nvim")
   require_plugin("lsp-colors.nvim")
   require_plugin("vim-projectionist")
+  require_plugin("vim-dispatch")
   require_plugin("vim-rfc")
   require_plugin("trouble.nvim")
   require_plugin("todo-comments.nvim")
 end)
+
+require("plugins.telescope")
+require("plugins.compe")
+require("plugins.galaxyline")
+require("plugins.autopairs")
+require("plugins.lir")
+require("plugins.projections")
