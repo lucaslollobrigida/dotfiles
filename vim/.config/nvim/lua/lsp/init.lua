@@ -51,6 +51,7 @@ require("todo-comments").setup()
 M.buf_set_keymap = function(bufnr, ...)
   vim.api.nvim_buf_set_keymap(bufnr, ...)
 end
+
 M.buf_set_option = function(bufnr, ...)
   vim.api.nvim_buf_set_option(bufnr, ...)
 end

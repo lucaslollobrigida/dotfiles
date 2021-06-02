@@ -77,7 +77,7 @@ nnoremap("<leader>sr", ':source .quicksave.vim<CR>:echo "Session loaded."<CR>')
 xnoremap("<", "<gv")
 xnoremap(">", ">gv")
 
-nnoremap("<leader>sh", [[<cmd>lua R('terminal').open_term()<cr>]])
+nnoremap("<leader>sh", [[<cmd>lua R('plugins.terminal').open_term()<cr>]])
 
 -- format
 nnoremap("<leader>tw", [[<cmd>%s/\s\+$//e<cr>]])

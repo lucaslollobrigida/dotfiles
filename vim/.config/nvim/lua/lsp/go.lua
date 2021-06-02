@@ -8,7 +8,6 @@ local lspconfig = require("lspconfig")
 
 lspconfig.gopls.setup({
   filetypes = { "go" },
-  cmd = { C.paths.data .. "/lspinstall/go/gopls" },
   root_dir = lspconfig.util.root_pattern(".git", "go.mod"),
   on_attach = require("lsp").on_attach,
   settings = {
