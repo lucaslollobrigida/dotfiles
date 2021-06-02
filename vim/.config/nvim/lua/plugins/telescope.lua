@@ -76,8 +76,8 @@ telescope.setup({
     },
     project = {
       locations = {
-        { "/Users/lucaslollobrigida/dev", depth = 2 },
-        { "/Users/lucaslollobrigida/.dotfiles", depth = 1 },
+        { "/Users/lucas.lollobrigida/dev", depth = 2 },
+        { "/Users/lucas.lollobrigida/.dotfiles", depth = 1 },
       },
     },
   },

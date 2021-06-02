@@ -15,6 +15,7 @@ export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
 export ANDROID_HOME="$HOME/.local/share/android"
 export FLUTTER_HOME="$HOME/.local/share/flutter"
 
+export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.fzf/bin"
