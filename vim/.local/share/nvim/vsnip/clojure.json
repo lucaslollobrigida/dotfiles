@@ -1,0 +1,86 @@
+{
+  "defn": {
+    "prefix": "defn",
+    "body": [
+      "(defn ${1:func}",
+      "\t[${2:arg}]",
+      "\t${3:body})"
+    ],
+    "description": "Expand into a defn form"
+  },
+  "def": {
+    "prefix": "def",
+    "body": "(def ${1:symbol} $2)",
+    "description": "Expand into a def form"
+  },
+  "defm": {
+    "prefix": "defm",
+    "body": [
+      "(defmethod ${1:func} ${2:key}",
+      "\t[${3:arg}]",
+      "\t${4:body})"
+    ],
+    "description": "Expand into a s/defn form"
+  },
+  "s/defn": {
+    "prefix": "sdef",
+    "body": [
+      "(s/defn ${1:func} :- $2",
+      "\t[${3:arg}]",
+      "\t${4:body})"
+    ],
+    "description": "Expand into a s/defn form"
+  },
+  "require": {
+    "prefix": "req",
+    "body": "(:require [${1:namespace} :as ${2:alias}])",
+    "description": "Expand into a require form"
+  },
+  "let": {
+    "prefix": "let",
+    "body": [
+      "(let [${1:name} ${2:expr}]",
+	    "\t${0:code})"
+    ],
+    "description": "Expand into a let form"
+  },
+  "if": {
+    "prefix": "if",
+    "body": [
+      "(if ${1:test-expr}",
+	    "\t${2:then-expr})",
+	    "\t${3:else-expr})"
+    ],
+    "description": "Expand into a if form"
+  },
+  "when": {
+    "prefix": "when",
+    "body": [
+      "(when ${1:test-expr}",
+	    "\t${0:body})"
+    ],
+    "description": "Expand into a when form"
+  },
+  "compo": {
+    "prefix": "compo",
+    "body": [
+      "(defrecord $1 [$2]",
+      "",
+      "\tcomponent/Lifecycle",
+      "\t(start [component]",
+      "\t\t${3:component})",
+      "",
+      "\t(stop [component]",
+      "\t\t${4:component}))"
+    ]
+  },
+  "test": {
+    "prefix": "deft",
+    "body": [
+      "(deftest ${1:test-case}-test",
+      "\t(testing \"Given ${2:context}, we should have ${3:our expected outcome}\"",
+      "\t\t(is (match? ${5:expected}",
+      "\t\t\t\t\t\t\t\t(ns/${1} ${4:argument})))))"
+    ]
+  }
+}

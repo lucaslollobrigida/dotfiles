@@ -15,6 +15,7 @@ export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
 export ANDROID_HOME="$HOME/.local/share/android"
 export FLUTTER_HOME="$HOME/.local/share/flutter"
 
+export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.fzf/bin"
@@ -32,6 +33,12 @@ export PATH="$PATH:$ANDROID_HOME/platform-tools"
 
 unsetopt correct_all
 setopt noflowcontrol
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+
+export HISTSIZE=999999999
+export SAVEHIST=$HISTSIZE
+export HISTFILE="$HOME/.config/history"
 
 # User configuration
 # bindkey -v
@@ -47,10 +54,10 @@ export TERMINFO=~/.terminfo
 
 export EDITOR=nvim
 
+export GO111MODULE=on
+
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
-
-export GPG_TTY=$(tty)
 
 export FZF_DEFAULT_OPTS='
 --color=dark

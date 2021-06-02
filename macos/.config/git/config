@@ -1,9 +1,7 @@
 [user]
     name = Lucas Lollobrigida
-    email = lucaslollobrigida@gmail.com
-    # signingkey = 7370366172F100970D9ABA68BBA6F99379ACADA9
-    # email = lucas.lollobrigida@nubank.com.br
-    # signingkey = 056F9B8CBB81C691D5915FB9286880A835E4C06B
+    email = lucas.lollobrigida@nubank.com.br
+    signingkey = A9D1FF3A
 
 [github]
     user = lucaslollobrigida
@@ -77,11 +75,14 @@
 [commit]
     gpgsign = true
 
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+[gpg]
+    program = gpg2
 
 [filter "lfs"]
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+
+[init]
+	defaultBranch = main

@@ -1,13 +1,25 @@
-require 'lollo.globals'
-require 'lollo.core'
-require 'lollo.packer'
-require 'lollo.visual'
-require 'lollo.finder'
-require 'lollo.lisp'
-require 'lollo.lsp'
-require 'lollo.treesitter'
-require 'lollo.project'
-require 'lollo.editing'
-require 'lollo.snippets'
+require("prelude")
+require("plugins")
+require("common")
 
--- autocmd FileType go lua require'lollo.clojure'.on_ft()
+require("keymappings")
+require("colorscheme")
+
+require("treesitter")
+require("lsp")
+
+---- LSP
+require("lsp.clojure")
+require("lsp.dart")
+require("lsp.elixir")
+require("lsp.scala")
+require("lsp.latex")
+require("lsp.lua")
+require("lsp.go")
+require("lsp.bash")
+require("lsp.docker")
+require("lsp.efm")
+require("lsp.graphql")
+require("lsp.typescript")
+require("lsp.terraform")
+require("lsp.install")

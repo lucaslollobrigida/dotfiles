@@ -45,3 +45,7 @@ cassandra_run() {
 repl() {
   clj -A:rebel
 }
+
+restart_pgp() {
+    killall gpg-agent && gpg-agent --daemon --use-standard-socket --pinentry-program /usr/local/bin/pinentry
+}
