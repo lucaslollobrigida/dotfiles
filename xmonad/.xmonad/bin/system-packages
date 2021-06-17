@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-nix-store -q --references /run/current-system/sw | wc -l

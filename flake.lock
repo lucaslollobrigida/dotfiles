@@ -1,0 +1,247 @@
+{
+  "nodes": {
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1606424373,
+        "narHash": "sha256-oq8d4//CJOrVj+EcOaSXvMebvuTkmBJuT5tzlfewUnQ=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "99f1c2157fba4bfe6211a321fd0ee43199025dbf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1610051610,
+        "narHash": "sha256-U9rPz/usA1/Aohhk7Cmc2gBrEEKRzcW4nwPWMPwja4Y=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3982c9903e93927c2164caa727cd3f6a0e6d14cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "hardware": {
+      "locked": {
+        "lastModified": 1623441850,
+        "narHash": "sha256-yaVNtMsKPuYceEuEFE5eTA4GBVlQOj5nmZjQ64RK2V4=",
+        "owner": "thiagokokada",
+        "repo": "nixos-hardware",
+        "rev": "b0f31689acd3c7da53ad003ff392205c3131efa3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "thiagokokada",
+        "ref": "remove-intel-drivers-from-nvidia-disable",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
+    "home": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1622917919,
+        "narHash": "sha256-9gAIwbQyLhK78bEV648k4tfLK6JkYiPk9QdTECpLuOE=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "148d85ee8303444fb0116943787aa0b1b25f94df",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "release-21.05",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "home-unstable": {
+      "inputs": {
+        "nixpkgs": [
+          "unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1623103231,
+        "narHash": "sha256-ns6p4FYqdMHmcaZZjNC1HhxApfxKlpAPbvbOzhiLbas=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "aa36e2d6b481a54b95fbddbecb76076e0f38eb89",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "master",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "neovim-flake": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "contrib",
+        "lastModified": 1623312355,
+        "narHash": "sha256-BMt2WAAPB78TrLvcmANXMgeEyhN4YbYsAzMMIv1sR4Y=",
+        "owner": "neovim",
+        "repo": "neovim",
+        "rev": "21645e603cbc7003898315d753a0f3f7c867f68a",
+        "type": "github"
+      },
+      "original": {
+        "dir": "contrib",
+        "owner": "neovim",
+        "repo": "neovim",
+        "type": "github"
+      }
+    },
+    "neovim-nightly-overlay": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "neovim-flake": "neovim-flake",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1623313008,
+        "narHash": "sha256-x6VgPWdwEjbAn6xUgtM+21CAjwCAg2MaaGJtxFLbn+c=",
+        "owner": "nix-community",
+        "repo": "neovim-nightly-overlay",
+        "rev": "b40ca8a8b0535fd2d42c01cd08e0730516d4ae1c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "neovim-nightly-overlay",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1622966049,
+        "narHash": "sha256-6g+28v94ISkVk9TBSsITVOnB2slK8plieWPIF2jo/l0=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "fbfb79400a08bf754e32b4d4fc3f7d8f8055cf94",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1622922048,
+        "narHash": "sha256-nTyKxe0n7l/4HSmYaIN+63WQrvHrTJY6drSwP7bMqhU=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5de44c15758465f8ddf84d541ba300b48e56eda4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-21.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nubank": {
+      "locked": {
+        "lastModified": 1623352053,
+        "narHash": "sha256-U10nttX6eliXVRNdwnQsHP9udnPCSw5MXaHbd7Xv2r0=",
+        "owner": "nubank",
+        "repo": "nixpkgs",
+        "rev": "6e2304b37a0e6e02dda719c847e4544fa943c1d2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nubank",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "picom-jonaburg": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1606582992,
+        "narHash": "sha256-R+YUGBrLst6CpUgG9VCwaZ+LiBSDWTp0TLt1Ou4xmpQ=",
+        "owner": "jonaburg",
+        "repo": "picom",
+        "rev": "a8445684fe18946604848efb73ace9457b29bf80",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jonaburg",
+        "repo": "picom",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "hardware": "hardware",
+        "home": "home",
+        "home-unstable": "home-unstable",
+        "neovim-nightly-overlay": "neovim-nightly-overlay",
+        "nixpkgs": "nixpkgs_2",
+        "nubank": "nubank",
+        "picom-jonaburg": "picom-jonaburg",
+        "tint2-axarva": "tint2-axarva",
+        "unstable": "unstable"
+      }
+    },
+    "tint2-axarva": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1614012908,
+        "narHash": "sha256-7AzoizDFKbX+T+lN9yDybqLY89ZHwX5uXx6RL/9kfSc=",
+        "owner": "Axarva",
+        "repo": "tint2-1",
+        "rev": "25a5015f0a6765d3cca1de2d697a7726f8295a5b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Axarva",
+        "repo": "tint2-1",
+        "type": "github"
+      }
+    },
+    "unstable": {
+      "locked": {
+        "lastModified": 1623084146,
+        "narHash": "sha256-oWsOzM4PVW2fsMAKFzR/o0LQ4FqHNMeELjpU/ALda3Y=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "12e7af1cfb3ab5bbbbd1d213a0b17c11ce9d3f2f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
