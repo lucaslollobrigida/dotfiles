@@ -1,5 +1,11 @@
 { pkgs, ... }:
+let
+  say = pkgs.writeScriptBin "say" ''
+  #!usr/bin/env sh
 
+  espeak -v us-mbrola-1 "$@"
+  '';
+in
 {
   home.packages = with pkgs; [
     aws
@@ -8,6 +14,7 @@
     circleci-cli
     coreutils
     curl
+    espeak
     exa
     fd
     fzf
@@ -23,9 +30,9 @@
     ripgrep
     rlwrap
     sassc
+    say
     tektoncd-cli
     telnet
-    tmux
     wget
     unrar
     unzip

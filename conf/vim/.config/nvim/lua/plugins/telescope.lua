@@ -17,16 +17,16 @@ telescope.setup({
     qflist_previewer = previewers.vim_buffer_qflist.new,
     buffer_previewer_maker = previewers.buffer_previewer_maker,
 
-    find_command = {
-      "rg",
-      "--no-heading",
-      "--with-filename",
-      "--line-number",
-      "--column",
-      "--smart-case",
-      "--hidden",
-      "--glob=!.git/*",
-    },
+    -- find_command = {
+    --   "rg",
+    --   "--no-heading",
+    --   "--with-filename",
+    --   "--line-number",
+    --   "--column",
+    --   "--smart-case",
+    --   "--hidden",
+    --   "--glob=!.git/*",
+    -- },
 
     prompt_position = "bottom",
     prompt_prefix = " ",
@@ -76,7 +76,8 @@ telescope.setup({
     },
     project = {
       locations = {
-        { "/home/lollo/dev", depth = 2 },
+        { "/home/lollo/dev/nu", depth = 1 },
+        { "/home/lollo/dev/personal", depth = 2 },
         { "/home/lollo/.dotfiles", depth = 1 },
         { "/etc/nixos", depth = 1 },
       },
@@ -136,7 +137,7 @@ end
 
 M.project_files = function()
   require("telescope.builtin").find_files({
-    find_command = { "rg", "--files", "--hidden" },
+    find_command = { "rg", "--files", "--hidden", "--color", "never", [[--glob=!.git/*]] },
   })
 end
 

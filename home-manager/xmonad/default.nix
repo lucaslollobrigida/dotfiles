@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
+  home.packages = with pkgs; [ multilockscreen xmonad-log ];
+
   xsession = {
     enable = true;
 
@@ -8,9 +10,11 @@
       enable = true;
       enableContribAndExtras = true;
       extraPackages = hp: [
-        hp.xmonad-extras
-        hp.xmonad-contrib
+        hp.dbus
         hp.xmonad
+        hp.xmonad-contrib
+        hp.xmonad-extras
+        hp.monad-logger
       ];
       config = pkgs.writeText "xmonad.hs" (builtins.readFile ./config.hs);
     };
@@ -64,35 +68,20 @@
         ];
 
         modules = {
-          left = "workspaces";
-          center = "title";
-          right = "memory cpu audio wired-network wireless-network battery date";
+          left = "xmonad";
+          center = "";
+          right = "memory cpu audio battery date";
         };
 
         wm.name = "xmonad";
 
         tray = {
-          position = "right";
+          position = "center";
           detached = false;
           maxsize = 16;
         };
       };
 
-      "module/ewmh" = {
-        type = "internal/xworkspaces";
-        pin.workspaces = false;
-        icon = [
-          "1"
-          "2"
-          "3"
-          "4"
-          "5"
-          "6"
-          "7"
-          "8"
-          "9"
-        ];
-      };
       "module/workspaces" = {};
       "module/title" = {};
 
@@ -185,6 +174,12 @@
         format-padding = 1;
 
         label = "%date% %time%";
+      };
+
+      "module/xmonad" = {
+        type = "custom/script";
+        exec = "${pkgs.xmonad-log}/bin/xmonad-log";
+        tail = true;
       };
     };
   };

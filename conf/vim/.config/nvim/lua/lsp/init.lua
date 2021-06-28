@@ -84,7 +84,9 @@ M.on_attach = function(client, bufnr)
     M.buf_set_keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)
   end
 
-  vim.cmd([[autocmd CursorHold <buffer> lua require('lsp').show_line_diagnostics()]])
+  -- vim.cmd([[autocmd CursorHold <buffer> lua require('lsp').show_line_diagnostics()]])
+  vim.cmd([[autocmd CursorHold <buffer> lua require('lspsaga.diagnostic').show_cursor_diagnostics()]])
+  -- vim.cmd([[autocmd CursorHold <buffer> lua require('lspsaga.signaturehelp').signature_help()]])
 
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_exec(

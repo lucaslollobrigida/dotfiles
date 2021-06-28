@@ -12,7 +12,6 @@
     ./ssh.nix
     ./theme.nix
     ./tmux.nix
-    ./widgets.nix
     ./zsh.nix
     ./xmonad
     ../overlays

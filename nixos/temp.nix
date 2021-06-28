@@ -15,6 +15,10 @@
       notifications.x11.enable = true;
     };
     gnome.gnome-keyring.enable = true;
+    dbus = {
+      enable = true;
+      # packages = [ pkgs.gnome3.dconf ];
+    };
   };
 
   services = {

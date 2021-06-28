@@ -11,14 +11,17 @@
     newSession = true;
     sensibleOnTop = true;
     shortcut = "a";
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
     secureSocket = false;
     extraConfig = ''
-      # enable auto renaming
-      setw -g automatic-rename on
+      set -as terminal-overrides ',alacritty*:Tc:sitm=\E[3m'
+      set -as terminal-overrided ',alacritty:RGB'
+      set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
+      set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0
 
-      # enable wm window titles
+      setw -g automatic-rename on
       set -g set-titles on
+      set -g renumber-windows on
 
       # hostname, window number, program name
       set -g set-titles-string '#H: #S.#I.#P #W'
@@ -30,15 +33,34 @@
       setw -g monitor-activity on
       set -g visual-activity on
 
-      # show current mode
-      set -g status-left '#{prefix_highlight} '
-      set -g status-right ' "#{=21:pane_title}" | %H:%M %d-%b-%y'
+      # No delay for escape key press
+      set -sg escape-time 0
+
+      # split rebinds
+      bind-key v split-window -h
+      bind-key s split-window -v
+
+      # reload config file (change file location to your the tmux.conf you want to use)
+      bind r source-file ~/.tmux.conf \; display '~/.tmux.conf sourced'
+
+      # loud or quiet?
+      set-option -g visual-activity off
+      set-option -g visual-bell off
+      set-option -g visual-silence off
+      set-window-option -g monitor-activity off
+      set-option -g bell-action none
     '';
     plugins = with pkgs; [
       {
-        plugin = tmuxPlugins.tmux-colors-solarized;
+        plugin = tmuxPlugins.dracula;
         extraConfig = ''
-          set -g @colors-solarized '256'
+          set -g @dracula-show-network true
+          set -g @dracula-show-weather false
+          set -g @dracula-show-fahrenheit false
+          set -g @dracula-cpu-usage true
+          set -g @dracula-ram-usage false
+          set -g @dracula-show-battery false
+          set -g @dracula-show-powerline true
         '';
       }
       {
@@ -54,6 +76,7 @@
       tmuxPlugins.copycat
       tmuxPlugins.pain-control
       tmuxPlugins.yank
+      tmuxPlugins.sensible
     ];
   };
 }

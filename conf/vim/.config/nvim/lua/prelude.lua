@@ -76,9 +76,9 @@ end
 
 TERMINAL = vim.fn.expand("$TERMINAL")
 
-vim.opt.pumheight = 10 -- Makes popup menu smaller
-vim.opt.fileencoding = "utf-8" -- The encoding written to file
-vim.opt.cmdheight = 2 -- More space for displaying messages
+vim.opt.pumheight = 10
+vim.opt.fileencoding = "utf-8"
+vim.opt.cmdheight = 1
 vim.opt.colorcolumn = "99999"
 
 vim.go.t_Co = "256" -- Support 256 colors

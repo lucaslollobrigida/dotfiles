@@ -23,7 +23,7 @@
   home.packages = with pkgs;
     with config.theme.fonts; [
       dejavu_fonts
-      font-awesome_5
+      font-awesome-ttf
       gnome3.gnome-themes-standard
       gui.package
       hack-font

@@ -2,7 +2,6 @@ local lsp = require("lsp")
 
 require("lspconfig").sumneko_lua.setup {
   cmd = {"lua-language-server"};
-  autostart = false;
   on_attach = lsp.on_attach,
   settings = {
       Lua = {

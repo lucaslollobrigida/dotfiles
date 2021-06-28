@@ -51,7 +51,6 @@
     registry.nixpkgs.flake = inputs.nixpkgs;
   };
 
-  # Enable unfree packages
   nixpkgs.config.allowUnfree = true;
 
   networking.useDHCP = false;
