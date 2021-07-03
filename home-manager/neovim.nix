@@ -3,7 +3,7 @@
 {
   programs.neovim = {
     enable = true;
-    package = pkgs.neovim-nightly;
+    package = pkgs.neovim;
 
     viAlias = false;
     vimAlias = true;

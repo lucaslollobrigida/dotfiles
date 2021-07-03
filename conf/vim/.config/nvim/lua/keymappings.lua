@@ -38,7 +38,6 @@ vim.api.nvim_set_var("mapleader", " ")
 vim.api.nvim_set_var("maplocalleader", ",")
 
 -- disable ex-mode
-
 nnoremap("Q", "")
 nnoremap("gQ", "")
 

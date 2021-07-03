@@ -29,8 +29,8 @@
     wireless.userControlled.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 ];
-      allowedUDPPorts = [ 22 ];
+      allowedTCPPorts = [];
+      allowedUDPPorts = [];
     };
   };
 }

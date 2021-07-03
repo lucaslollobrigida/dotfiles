@@ -3,7 +3,6 @@ local C = require("config")
 require("compe").setup({
   enabled = true,
   autocomplete = true,
-  documentation = true,
   debug = false,
   min_length = 1,
   preselect = "enable",
@@ -14,31 +13,32 @@ require("compe").setup({
   max_kind_width = 100,
   max_menu_width = 100,
 
+  documentation = {
+    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
+    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+    max_width = 120,
+    min_width = 60,
+    max_height = math.floor(vim.o.lines * 0.3),
+    min_height = 1,
+  };
+
   source = {
     path = { kind = "   (Path)" },
-    buffer = { kind = "   (Buffer)" },
-    calc = { kind = "   (Calc)" },
+    -- buffer = { kind = "   (Buffer)" },
+    -- calc = { kind = "   (Calc)" },
     vsnip = { kind = "   (Snippet)" },
     nvim_lsp = { kind = "   (LSP)" },
     -- nvim_lua = {kind = "  "},
-    nvim_lua = false,
-    spell = { kind = "   (Spell)" },
-    tags = false,
-    vim_dadbod_completion = true,
+    -- nvim_lua = false,
+    -- spell = { kind = "   (Spell)" },
+    -- tags = false,
+    -- vim_dadbod_completion = false,
     -- ultisnips = {kind = "  "},
-    treesitter = { kind = "  " },
-    emoji = { kind = " ﲃ  (Emoji)", filetypes = { "markdown", "text" } },
+    treesitter = false, -- { kind = "  " },
+    -- emoji = { kind = " ﲃ  (Emoji)", filetypes = { "markdown", "text" } },
   },
 })
 
 vim.g.vsnip_snippet_dir = string.format("%s/vsnip", C.paths.data)
 
-vim.cmd([[highlight link CompeDocumentation NormalFloat]])
-
-vim.cmd([[imap <expr> <C-y>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-y>']])
-vim.cmd([[smap <expr> <C-y>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-y>']])
-
-vim.cmd([[imap <expr> <C-j>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-j>']])
-vim.cmd([[smap <expr> <C-j>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-j>']])
-vim.cmd([[imap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-k>']])
-vim.cmd([[smap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-k>']])
+-- vim.cmd([[highlight link CompeDocumentation NormalFloat]])

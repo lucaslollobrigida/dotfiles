@@ -180,7 +180,7 @@ myPolybarLogHook dbus = myLogHook <+> dynamicLogWithPP (polybarHook dbus)
 -- Key bindings. Add, modify or remove key bindings here.
 --
 
-myTerminal      = "alacritty"
+myTerminal      = "kitty"
 appLauncher     = "rofi -modi drun,ssh,window -show drun -show-icons"
 screenLocker    = "multilockscreen -l dim"
 playerctl c     = "playerctl --player=spotify,%any " <> c

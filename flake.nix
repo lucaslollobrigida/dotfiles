@@ -25,7 +25,7 @@
       flake = false;
     };
 
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     nubank.url = "github:nubank/nixpkgs/master";
   };

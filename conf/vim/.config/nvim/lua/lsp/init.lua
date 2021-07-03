@@ -59,22 +59,47 @@ end
 M.on_attach = function(client, bufnr)
   M.buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
-  local opts = { noremap = true, silent = true }
-  M.buf_set_keymap(bufnr, "n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
-  M.buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  M.buf_set_keymap(bufnr, "n", "gD", [[<cmd>lua R('plugins.telescope').lsp_references()<CR>]], opts)
-  M.buf_set_keymap(bufnr, "n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts) -- check if server supports
-  M.buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  M.buf_set_keymap(bufnr, "n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-  M.buf_set_keymap(bufnr, "n", "]e", "<cmd>Lspsaga diagnostic_jump_prev()<cr>", opts)
-  M.buf_set_keymap(bufnr, "n", "[e", "<cmd>Lspsaga diagnostic_jump_next()<cr>", opts)
-  M.buf_set_keymap(bufnr, "n", "<leader>d", "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", opts)
-  M.buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
-  M.buf_set_keymap(bufnr, "n", "<leader>a", "<cmd>Lspsaga code_action<CR>", opts)
-  M.buf_set_keymap(bufnr, "v", "<leader>a", [[<cmd>'<,'>Lspsaga range_code_action<CR>]], opts)
+  require("lsp_signature").on_attach()
 
-  M.buf_set_keymap(bufnr, "i", "<C-Space>", "compe#complete()", { noremap = true, silent = true, expr = true })
-  M.buf_set_keymap(bufnr, "i", "<C-y>", "compe#confirm()", { noremap = true, silent = true, expr = true })
+  local opts = { noremap = true, silent = true }
+  local expr_opts = { noremap = true, silent = true, expr = true }
+
+  local keys = {
+    { "n", "K"         , "<cmd>Lspsaga hover_doc<CR>"                             , opts },
+    { "n", "gd"        , "<cmd>lua vim.lsp.buf.definition()<CR>"                  , opts },
+    { "n", "gD"        , [[<cmd>lua R('plugins.telescope').lsp_references()<CR>]] , opts },
+    { "n", "gs"        , "<cmd>lua vim.lsp.buf.signature_help()<CR>"              , opts },
+    { "n", "gi"        , "<cmd>lua vim.lsp.buf.implementation()<CR>"              , opts },
+    { "n", "gt"        , "<cmd>lua vim.lsp.buf.type_definition()<CR>"             , opts },
+    { "n", "]e"        , "<cmd>Lspsaga diagnostic_jump_prev()<cr>"                , opts },
+    { "n", "[e"        , "<cmd>Lspsaga diagnostic_jump_next()<cr>"                , opts },
+    { "n", "<leader>d" , "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>"          , opts },
+    { "n", "<leader>rn", "<cmd>Lspsaga rename<CR>"                                , opts },
+    { "n", "<leader>a" , "<cmd>Lspsaga code_action<CR>"                           , opts },
+    { "v", "<leader>a" , [[<cmd>'<,'>Lspsaga range_code_action<CR>]]              , opts },
+
+    { "i", "<C-Space>" , "compe#complete()"                                       , expr_opts },
+    { "i", "<C-y>"     , "compe#confirm()"                                        , expr_opts },
+    { "i", "<CR>"      , "compe#confirm()"                                        , expr_opts },
+    { "i", "<C-e>"     , "compe#close('C-e>')"                                    , expr_opts },
+    { "i", "<C-f>"     , "compe#scroll({ 'delta': +4 })"                          , expr_opts },
+    { "i", "<C-d>"     , "compe#scroll({ 'delta': -4 })"                          , expr_opts },
+
+    { "i", "<C-y>"     , "vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-y>'", expr_opts },
+    { "s", "<C-y>"     , "vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-y>'", expr_opts },
+    { "i", "<CR>"      , "vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<CR>'" , expr_opts },
+    { "s", "<CR>"      , "vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<CR>'" , expr_opts },
+
+    { "i", "<C-j>"     , "vsnip#available(1) ? '<Plug>(vsnip-jump-next)' : '<C-j>'" , expr_opts },
+    { "s", "<C-j>"     , "vsnip#available(1) ? '<Plug>(vsnip-jump-next)' : '<C-j>'" , expr_opts },
+    { "i", "<C-k>"     , "vsnip#available(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'" , expr_opts },
+    { "s", "<C-k>"     , "vsnip#available(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'" , expr_opts },
+  }
+
+  for _, key in ipairs(keys) do
+    M.buf_set_keymap(bufnr, key[1], key[2], keys[3], keys[4]) -- is there an apply-like in lua? (apply bufnr key)
+  end
+
 
   if client.resolved_capabilities.document_range_formatting then
     M.buf_set_keymap(bufnr, "v", "<leader>lf", [[<cmd>'<,'>lua vim.lsp.buf.formatting()<cr>]], opts)
@@ -84,9 +109,12 @@ M.on_attach = function(client, bufnr)
     M.buf_set_keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)
   end
 
-  -- vim.cmd([[autocmd CursorHold <buffer> lua require('lsp').show_line_diagnostics()]])
   vim.cmd([[autocmd CursorHold <buffer> lua require('lspsaga.diagnostic').show_cursor_diagnostics()]])
-  -- vim.cmd([[autocmd CursorHold <buffer> lua require('lspsaga.signaturehelp').signature_help()]])
+
+  if client.resolved_capabilities.code_lens then
+    M.buf_set_keymap(bufnr, "n", "<leader>l", "<cmd>lua vim.lsp.codelens.run()<CR>", opts)
+    vim.cmd([[autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()]])
+  end
 
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_exec(
@@ -153,6 +181,10 @@ autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100) ]]
 -- Java
 -- autocmd FileType java nnoremap ca <Cmd>lua require('jdtls').code_action()<CR>
 --
+vim.api.nvim_command("highlight default link LspCodeLens Comment")
+vim.api.nvim_command("highlight default link LspCodeLensSign LspCodeLens")
+vim.api.nvim_command(
+	"highlight default link LspCodeLensSeparator LspCodeLens")
 
 M.current_file_url = function()
   local file = vim.api.nvim_eval([[expand('%:p')]])

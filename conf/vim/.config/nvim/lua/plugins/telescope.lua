@@ -17,18 +17,6 @@ telescope.setup({
     qflist_previewer = previewers.vim_buffer_qflist.new,
     buffer_previewer_maker = previewers.buffer_previewer_maker,
 
-    -- find_command = {
-    --   "rg",
-    --   "--no-heading",
-    --   "--with-filename",
-    --   "--line-number",
-    --   "--column",
-    --   "--smart-case",
-    --   "--hidden",
-    --   "--glob=!.git/*",
-    -- },
-
-    prompt_position = "bottom",
     prompt_prefix = " ",
     selection_caret = " ",
     entry_prefix = "  ",
@@ -37,14 +25,16 @@ telescope.setup({
     selection_strategy = "reset",
     sorting_strategy = "descending",
     layout_strategy = "horizontal",
-    layout_defaults = { horizontal = { mirror = false }, vertical = { mirror = false } },
-    file_ignore_patterns = {},
+    fjle_ignore_patterns = {},
     shorten_path = true,
     winblend = 0,
-    width = 0.75,
-    preview_cutoff = 120,
-    results_height = 1,
-    results_width = 0.8,
+    layout_config = {
+      horizontal = { mirror = false },
+      vertical = { mirror = false },
+      prompt_position = "bottom",
+      width = 0.75,
+      preview_cutoff = 120,
+    },
     border = {},
     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 
@@ -137,7 +127,7 @@ end
 
 M.project_files = function()
   require("telescope.builtin").find_files({
-    find_command = { "rg", "--files", "--hidden", "--color", "never", [[--glob=!.git/*]] },
+    find_command = { "rg", "--files", "--hidden", "--color", "never", "--glob=!.git/*" },
   })
 end
 

@@ -81,12 +81,12 @@ vim.opt.fileencoding = "utf-8"
 vim.opt.cmdheight = 1
 vim.opt.colorcolumn = "99999"
 
-vim.go.t_Co = "256" -- Support 256 colors
+vim.go.t_Co = "256"
 vim.opt.conceallevel = 0 -- So that I can see `` in markdown files
 
-vim.opt.cursorline = true -- Enable highlighting of the current line
-vim.opt.showtabline = 2 -- Always show tabs
-vim.opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
+vim.opt.cursorline = true
+vim.opt.showtabline = 2
+vim.opt.signcolumn = "number"
 
 vim.opt.list = true
 vim.opt.listchars = {

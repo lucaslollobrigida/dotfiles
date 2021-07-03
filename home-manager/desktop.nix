@@ -10,6 +10,7 @@ in
     feh
     pcmanfm
     spotify
+    v4l-utils
     xautolock
     xorg.xdpyinfo
     xorg.xhost

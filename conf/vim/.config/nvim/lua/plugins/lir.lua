@@ -31,14 +31,21 @@ require("lir").setup({
     ["p"] = clipboard_actions.paste,
   },
   float = {
-    size_percentage = 0.5,
     winblend = 15,
-    border = true,
-    borderchars = { "╔", "═", "╗", "║", "╝", "═", "╚", "║" },
-
-    -- -- If you want to use `shadow`, set `shadow` to `true`.
-    -- -- Also, if you set shadow to true, the value of `borderchars` will be ignored.
-    -- shadow = false,
+    win_opts = function()
+      local width = math.floor(vim.o.columns * 0.6)
+      local height = math.floor(vim.o.lines * 0.7)
+      return {
+        border = require("lir.float.helper").make_border_opts({
+          -- "╔", "═", "╗", "║", "╝", "═", "╚", "║",
+          '╭', '─', '╮', '│', '╯', '─', '╰', '│',
+        }, "Normal"),
+        width = width,
+        height = height,
+        row = 10,
+        col = math.floor((vim.o.columns - width) / 2),
+      }
+    end,
   },
   hide_cursor = true,
 })
