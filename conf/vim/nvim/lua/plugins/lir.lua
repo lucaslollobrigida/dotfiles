@@ -38,7 +38,14 @@ require("lir").setup({
       return {
         border = require("lir.float.helper").make_border_opts({
           -- "╔", "═", "╗", "║", "╝", "═", "╚", "║",
-          '╭', '─', '╮', '│', '╯', '─', '╰', '│',
+          "╭",
+          "─",
+          "╮",
+          "│",
+          "╯",
+          "─",
+          "╰",
+          "│",
         }, "Normal"),
         width = width,
         height = height,

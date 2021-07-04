@@ -1,12 +1,15 @@
 vim.api.nvim_set_var("sexp_filetypes", "clojure,racket,scheme,lisp,fennel")
 vim.api.nvim_set_var("sexp_no_word_maps", true)
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+  [[
 augroup ConjureLog
   autocmd!
   setlocal scrolloff=0
 augroup END
-]], false)
+]],
+  false
+)
 
 vim.g["conjure#log#strip_ansi_escape_sequences_line_limit"] = 0
 

@@ -1,0 +1,21 @@
+{
+  "name": "Lucas Lollobrigida custom snippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "path": "./global.json"
+      },
+      {
+        "language": "clojure",
+        "path": "./clojure.json"
+      },
+      {
+        "language": "lua",
+        "path": "./lua.json"
+      }
+    ]
+  }
+}

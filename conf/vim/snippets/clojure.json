@@ -78,9 +78,10 @@
     "prefix": "deft",
     "body": [
       "(deftest ${1:test-case}-test",
-      "\t(testing \"Given ${2:context}, we should have ${3:our expected outcome}\"",
-      "\t\t(is (match? ${5:expected}",
-      "\t\t\t\t\t\t\t\t(ns/${1} ${4:argument})))))"
+      "\t(let [${6:fixtures true}]",
+      "\t\t(testing \"${2:on context, we should have ...}\"",
+      "\t\t\t(is (match? ${5:expected}",
+      "\t\t\t\t\t\t\t\t\t(${3:ns}/${1} ${4:argument}))))))"
     ]
   }
 }

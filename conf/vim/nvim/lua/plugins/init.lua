@@ -15,7 +15,6 @@ local function require_plugin(plugin)
   local plugin_prefix = C.paths.data .. "/site/pack/packer/opt/"
 
   local plugin_path = plugin_prefix .. plugin .. "/"
-  --	print('test '..plugin_path)
   local ok, err, code = os.rename(plugin_path, plugin_path)
   if not ok then
     if code == 13 then
@@ -40,10 +39,11 @@ require("packer").startup(function(use)
   -- LSP
   use({ "neovim/nvim-lspconfig", opt = true })
   use({ "glepnir/lspsaga.nvim", opt = true })
-  use {
+  use({ "jose-elias-alvarez/null-ls.nvim" })
+  use({
     "ray-x/lsp_signature.nvim",
     opt = true,
-  }
+  })
 
   -- Telescope
   use({ "nvim-lua/popup.nvim", opt = true })
@@ -58,6 +58,7 @@ require("packer").startup(function(use)
   use({ "hrsh7th/nvim-compe", opt = true })
   use({ "hrsh7th/vim-vsnip", opt = true })
   use({ "rafamadriz/friendly-snippets", opt = true })
+  use({ "L3MON4D3/LuaSnip", opt = true })
 
   -- Treesitter
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -104,7 +105,6 @@ require("packer").startup(function(use)
     end,
   })
 
-  -- use {'lukas-reineke/indent-blankline.nvim', opt=true, branch = 'lua'}
   use("Yggdroot/indentLine")
   use({ "windwp/nvim-autopairs", opt = true })
   use({
@@ -130,8 +130,8 @@ require("packer").startup(function(use)
   -- LSP plugins
   use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim", opt = true })
   use({ "scalameta/nvim-metals", opt = true })
-  use({ "tjdevries/nlua.nvim", opt = true })
   use({ "folke/lsp-colors.nvim", opt = true })
+  use({ "jose-elias-alvarez/nvim-lsp-ts-utils", opt = true })
   use({
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
@@ -178,6 +178,7 @@ require("packer").startup(function(use)
   require_plugin("Olical/conjure")
   require_plugin("tamago324/lir.nvim")
   require_plugin("tami5/compe-conjure")
+  require_plugin("LuaSnip")
   require_plugin("tami5/lispdocs.nvim")
   require_plugin("tami5/sql.nvim")
   require_plugin("nvim-lspconfig")
@@ -197,6 +198,7 @@ require("packer").startup(function(use)
   require_plugin("nvim-metals")
   require_plugin("nlua.nvim")
   require_plugin("flutter-tools.nvim")
+  require_plugin("nvim-lsp-ts-utils")
   require_plugin("nvim-autopairs")
   require_plugin("nvim-comment")
   require_plugin("nvim-bqf")

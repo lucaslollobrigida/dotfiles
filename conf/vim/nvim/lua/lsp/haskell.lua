@@ -9,7 +9,7 @@ lspconfig.hls.setup({
   on_attach = lsp.on_attach,
   settings = {
     languageServerHaskell = {
-      formattingProvider = "ormolu"
-    }
-  }
+      formattingProvider = "ormolu",
+    },
+  },
 })

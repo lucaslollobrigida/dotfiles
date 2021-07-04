@@ -52,9 +52,23 @@
       export PATH="$HOME/.local/bin:$PATH"
       export PATH="$HOME/go/bin:$PATH"
 
+      [ -f ~/.zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme ] && source ~/.zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
+      [ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
       [ -f ~/.nurc ] && source ~/.nurc
     '';
 
+    plugins = [
+      {
+        name = "powerlevel10k";
+        file = "init.sh";
+        src = pkgs.fetchFromGitHub {
+          owner = "romkatv";
+          repo = "powerlevel10k";
+          rev = "v1.15.0";
+          sha256 = "1b3j2riainx3zz4irww72z0pb8l8ymnh1903zpsy5wmjgb0wkcwq";
+        };
+      }
+    ];
   };
 
   programs.autojump.enable = true;

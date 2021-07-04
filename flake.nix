@@ -20,13 +20,7 @@
       flake = false;
     };
 
-    tint2-axarva = {
-      url = "github:Axarva/tint2-1";
-      flake = false;
-    };
-
     # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
     nubank.url = "github:nubank/nixpkgs/master";
   };
 

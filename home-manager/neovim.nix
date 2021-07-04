@@ -1,29 +1,41 @@
 { config, lib, pkgs, ... }:
 
+let
+  myneovim = pkgs.unstable.neovim.override (
+    {
+      vimAlias = true;
+      viAlias = false;
+      withNodeJs = false;
+      withRuby = false;
+    }
+  );
+in
 {
-  programs.neovim = {
-    enable = true;
-    package = pkgs.neovim;
+  home.packages = with pkgs; [ myneovim ];
 
-    viAlias = false;
-    vimAlias = true;
-    vimdiffAlias = true;
+  # programs.neovim = {
+  #   enable = true;
+  #   package = pkgs.unstable.neovim;
 
-    withNodeJs = false;
-    withRuby = false;
-  };
+  #   viAlias = false;
+  #   vimAlias = true;
+  #   vimdiffAlias = true;
+
+  #   withNodeJs = false;
+  #   withRuby = false;
+  # };
 
   programs.zsh.sessionVariables = {
     EDITOR = "nvim";
   };
 
   xdg.configFile."nvim" = {
-    source = ../conf/vim/.config/nvim;
+    source = ../conf/vim/nvim;
     recursive = true;
   };
 
-  xdg.dataFile."nvim" = {
-    source = ../conf/vim/.local/share/nvim;
+  xdg.dataFile."nvim/snippets" = {
+    source = ../conf/vim/snippets;
     recursive = true;
   };
 }

@@ -86,7 +86,7 @@ vim.opt.conceallevel = 0 -- So that I can see `` in markdown files
 
 vim.opt.cursorline = true
 vim.opt.showtabline = 2
-vim.opt.signcolumn = "number"
+vim.opt.signcolumn = "auto:2"
 
 vim.opt.list = true
 vim.opt.listchars = {

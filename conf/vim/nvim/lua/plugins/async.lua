@@ -10,9 +10,12 @@ local failure_modes = {
   end,
   notify = function(ctx)
     return function(job_id, data)
-      local messages = table.concat(vim.tbl_filter(function(m)
-        return m ~= ""
-      end, data), "")
+      local messages = table.concat(
+        vim.tbl_filter(function(m)
+          return m ~= ""
+        end, data),
+        ""
+      )
 
       if string.len(messages) > 0 then
         vim.api.nvim_notify(messages, vim.log.levels.ERROR, {})
@@ -29,9 +32,12 @@ local output_modes = {
   end,
   notify = function(ctx)
     return function(job_id, data)
-      local messages = table.concat(vim.tbl_filter(function(m)
-        return m ~= ""
-      end, data), "")
+      local messages = table.concat(
+        vim.tbl_filter(function(m)
+          return m ~= ""
+        end, data),
+        ""
+      )
 
       if string.len(messages) > 0 then
         vim.api.nvim_notify(messages, vim.log.levels.INFO, {})
@@ -66,7 +72,6 @@ function M.make(opts)
   return job_id
 end
 
-function M.console()
-end
+function M.console() end
 
 return M

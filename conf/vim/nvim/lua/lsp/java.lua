@@ -8,7 +8,9 @@ else
 end
 
 local bundles = {
-  vim.fn.glob("~/.config/nvim/.debuggers/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"),
+  vim.fn.glob(
+    "~/.config/nvim/.debuggers/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"
+  ),
 }
 
 local on_attach = function(client, bufr)
