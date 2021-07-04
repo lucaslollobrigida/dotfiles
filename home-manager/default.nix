@@ -2,6 +2,7 @@
 {
   imports = [
     ./alacritty.nix
+    ./awesomewm.nix
     ./desktop.nix
     ./dev
     ./git.nix
@@ -13,7 +14,7 @@
     ./theme.nix
     ./tmux.nix
     ./zsh.nix
-    ./xmonad
+    # ./xmonad
     ../overlays
     ../modules/theme.nix
     ../modules/user.nix

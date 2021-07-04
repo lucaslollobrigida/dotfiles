@@ -27,8 +27,12 @@ in
         enableContribAndExtras = true;
       };
 
+      windowManager.awesome = {
+        enable = true;
+      };
+
       displayManager = {
-        defaultSession = "none+xmonad";
+        defaultSession = "none+awesome";
         sessionCommands = "${pkgs.xorg.xmodmap}/bin/xmodmap ${myCustomLayout}";
       };
 

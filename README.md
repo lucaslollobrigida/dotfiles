@@ -2,10 +2,10 @@
 
 Common configuration across unix environments:
 + Nix(OS) as a distro and package management tool (powered by flake)
-+ Xmonad as window manager
++ AwesomeWM as window manager
 + Neovim as text editor
 + Common dev tooling: tmux, ~~alacritty~~ kitty, docker
-+ Language tooling, mainly for JVM (Clojure and Scala), for other tools configuration (Lua), also Haskell, Go and Typescript.
++ Language tooling, mainly for JVM (Clojure and Scala), for other tools configuration (Lua), also Go and Typescript.
 
 ## Topology
 
@@ -48,8 +48,8 @@ sudo nixos-rebuild switch --flake "/etc/nixos#<some-host>" --recreate-lock-file
 # Todo
 
 + [ ] Update tmux theme (maybe [this?](https://github.com/wfxr/tmux-power)).
-+ [ ] Fix wired connection.
++ [x] Fix wired connection.
 + [ ] Fix user modules not acessible on home config.
-+ [ ] Polybar on every conected monitor.
++ [x] ~~Polybar on every conected monitor.~~ Moved to awesomewm
 + [ ] Rename ./home-manager -> ./home.
-+ [ ] Customize polybar.
++ [x] ~~Customize polybar.~~ Moved to awesomewm

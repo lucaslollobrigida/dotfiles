@@ -53,7 +53,7 @@
       export PATH="$HOME/go/bin:$PATH"
 
       [ -f ~/.zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme ] && source ~/.zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
-      [ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
+      [ -f ~/.config/zsh/p10k.zsh ] && source ~/.config/zsh/p10k.zsh
       [ -f ~/.nurc ] && source ~/.nurc
     '';
 
@@ -73,6 +73,10 @@
 
   programs.autojump.enable = true;
   programs.dircolors.enable = true;
+
+  xdg.configFile."zsh/p10k.zsh" = {
+    source = ../conf/zsh/p10k.zsh;
+  };
 
   programs.fzf = {
     enable = true;

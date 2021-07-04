@@ -21,12 +21,13 @@ require("lspconfig").sumneko_lua.setup({
         path = vim.split(package.path, ";"),
       },
       diagnostics = {
-        globals = { "vim" },
+        globals = { "awesome", "client", "root", "screen", "vim" },
       },
       workspace = {
         library = {
           [vim.fn.expand("$VIMRUNTIME/lua")] = true,
           [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+          [vim.fn.expand("etc/nixos/conf")] = true,
         },
       },
     },

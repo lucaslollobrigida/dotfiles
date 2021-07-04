@@ -49,6 +49,7 @@
 
       rounded-corners-exclude = [
         "name = 'Notification area'",
+        "name = 'Awesome drawin'",
         "class_g = 'Rofi'",
         "class_g = 'Polybar'",
         "class_g = 'Firefox'",
