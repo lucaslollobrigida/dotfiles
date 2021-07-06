@@ -7,6 +7,6 @@
     metals
     sbt
     scalafix
-    scalafmt
+    # scalafmt # temporary hack
   ];
 }

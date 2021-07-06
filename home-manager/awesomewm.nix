@@ -1,5 +1,7 @@
 { lib, pkgs, ... }:
 {
+  home.packages = with pkgs; [ brightnessctl multilockscreen mpc_cli mpd xsel xorg.xbacklight ];
+
   xsession = {
     enable = true;
 

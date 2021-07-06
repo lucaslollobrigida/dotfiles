@@ -24,7 +24,7 @@ vim.opt.foldenable = false
 vim.opt.clipboard = "unnamedplus"
 
 ----- .
-vim.opt.shortmess:append("c")
+vim.opt.shortmess:append("c") -- :remove("F")
 -- vim.cmd([[set iskeyword+=-]])
 
 ----- disable unused default plugins

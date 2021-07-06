@@ -51,6 +51,7 @@
 
       export PATH="$HOME/.local/bin:$PATH"
       export PATH="$HOME/go/bin:$PATH"
+      export PATH="$HOME/.local/share/coursier/bin:$PATH"
 
       [ -f ~/.zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme ] && source ~/.zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
       [ -f ~/.config/zsh/p10k.zsh ] && source ~/.config/zsh/p10k.zsh
