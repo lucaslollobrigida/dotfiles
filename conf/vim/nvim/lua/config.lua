@@ -10,8 +10,8 @@ local M = {
     ensure_installed = "maintained",
   },
   paths = {
-    data = vim.fn.stdpath("data"),
-    cache = vim.fn.stdpath("cache"),
+    data = vim.fn.stdpath "data",
+    cache = vim.fn.stdpath "cache",
   },
   lua = {
     formatter = "luafmt",

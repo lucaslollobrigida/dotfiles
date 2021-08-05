@@ -1,13 +1,13 @@
-local telescope = require("telescope")
-local common = require("common")
+local telescope = require "telescope"
+local common = require "common"
 
-local actions = require("telescope.actions")
-local sorters = require("telescope.sorters")
-local previewers = require("telescope.previewers")
+local actions = require "telescope.actions"
+local sorters = require "telescope.sorters"
+local previewers = require "telescope.previewers"
 
-local entry_display = require("telescope.pickers.entry_display")
+local entry_display = require "telescope.pickers.entry_display"
 
-telescope.setup({
+telescope.setup {
   defaults = {
     file_sorter = sorters.get_fuzzy_file,
     generic_sorter = sorters.get_fzy_sorter,
@@ -73,35 +73,35 @@ telescope.setup({
       },
     },
   },
-})
+}
 
-telescope.load_extension("fzy_native")
-telescope.load_extension("flutter")
+telescope.load_extension "fzy_native"
+telescope.load_extension "flutter"
 
 local M = {}
 
 local gen_from_quickfix = function(opts)
   opts = opts or {}
 
-  local displayer = entry_display.create({
+  local displayer = entry_display.create {
     separator = "▏",
     items = {
       { width = 7 },
       { width = 98 },
       { width = 28 },
     },
-  })
+  }
 
   local make_display = function(entry)
     local filename = common.path_short(entry.filename)
 
     local line_info = { table.concat({ entry.lnum, entry.col }, ":"), "TelescopeResultsLineNr" }
 
-    return displayer({
+    return displayer {
       line_info,
       entry.text:gsub(".* | ", ""),
       filename,
-    })
+    }
   end
 
   return function(entry)
@@ -126,19 +126,19 @@ local gen_from_quickfix = function(opts)
 end
 
 M.project_files = function()
-  require("telescope.builtin").find_files({
+  require("telescope.builtin").find_files {
     find_command = { "rg", "--files", "--hidden", "--color", "never", "--glob=!.git/*" },
-  })
+  }
 end
 
 M.git_branches = function()
-  require("telescope.builtin").git_branches({
+  require("telescope.builtin").git_branches {
     attach_mappings = function(_, map)
       map("i", "<c-d>", actions.git_delete_branch)
       map("n", "<c-d>", actions.git_delete_branch)
       return true
     end,
-  })
+  }
 end
 
 M.flutter_commands = function()
@@ -150,9 +150,9 @@ M.browse_projects = function()
 end
 
 function M.lsp_references()
-  require("telescope.builtin").lsp_references({
+  require("telescope.builtin").lsp_references {
     entry_maker = gen_from_quickfix(),
-  })
+  }
 end
 
 return M

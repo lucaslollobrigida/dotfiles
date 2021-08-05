@@ -1,7 +1,7 @@
 local M = {}
-local saga = require("lspsaga")
+local saga = require "lspsaga"
 
-saga.init_lsp_saga({
+saga.init_lsp_saga {
   use_saga_diagnostic_sign = true,
   error_sign = "",
   warn_sign = "",
@@ -36,14 +36,14 @@ saga.init_lsp_saga({
   border_style = "round",
   rename_prompt_prefix = "➤",
   server_filetype_map = { metals = { "sbt", "scala" } },
-})
+}
 
-require("lsp-colors").setup({
+require("lsp-colors").setup {
   Error = "#db4b4b",
   Warning = "#e0af68",
   Information = "#0db9d7",
   Hint = "#10B981",
-})
+}
 
 require("trouble").setup()
 require("todo-comments").setup()
@@ -59,7 +59,7 @@ end
 M.on_attach = function(client, bufnr)
   M.buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
-  require("lsp_signature").on_attach({
+  require("lsp_signature").on_attach {
     bind = true,
     handler_opts = {
       border = "single",
@@ -67,7 +67,7 @@ M.on_attach = function(client, bufnr)
     extra_trigger_chars = { "(", "," },
     floating_window = true,
     use_lspsaga = false,
-  })
+  }
 
   local opts = { noremap = true, silent = true }
   local expr_opts = { noremap = true, silent = true, expr = true }
@@ -113,14 +113,14 @@ M.on_attach = function(client, bufnr)
 
   if client.resolved_capabilities.document_formatting then
     M.buf_set_keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)
-    vim.cmd([[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()]])
+    vim.cmd [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()]]
   end
 
-  vim.cmd([[autocmd CursorHold <buffer> lua require('lspsaga.diagnostic').show_cursor_diagnostics()]])
+  vim.cmd [[autocmd CursorHold <buffer> lua require('lspsaga.diagnostic').show_cursor_diagnostics()]]
 
   if client.resolved_capabilities.code_lens then
     M.buf_set_keymap(bufnr, "n", "<leader>l", "<cmd>lua vim.lsp.codelens.run()<CR>", opts)
-    vim.cmd([[autocmd BufEnter,InsertLeave <buffer> lua vim.lsp.codelens.refresh()]])
+    vim.cmd [[autocmd BufEnter,InsertLeave <buffer> lua vim.lsp.codelens.refresh()]]
 
     vim.lsp.codelens.refresh()
   end
@@ -190,12 +190,12 @@ autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100) ]]
 -- Java
 -- autocmd FileType java nnoremap ca <Cmd>lua require('jdtls').code_action()<CR>
 --
-vim.api.nvim_command("highlight default link LspCodeLens Comment")
-vim.api.nvim_command("highlight default link LspCodeLensSign LspCodeLens")
-vim.api.nvim_command("highlight default link LspCodeLensSeparator LspCodeLens")
+vim.api.nvim_command "highlight default link LspCodeLens Comment"
+vim.api.nvim_command "highlight default link LspCodeLensSign LspCodeLens"
+vim.api.nvim_command "highlight default link LspCodeLensSeparator LspCodeLens"
 
 M.current_file_url = function()
-  local file = vim.api.nvim_eval([[expand('%:p')]])
+  local file = vim.api.nvim_eval [[expand('%:p')]]
   return string.format("file://%s", file)
 end
 
@@ -205,21 +205,21 @@ M.tsserver_on_attach = function(client, bufnr)
 end
 
 M.show_line_diagnostics = function()
-  vim.lsp.diagnostic.show_line_diagnostics({
+  vim.lsp.diagnostic.show_line_diagnostics {
     border = "single",
-  })
+  }
 end
 
 M.next_diagnostic = function()
-  vim.lsp.diagnostic.goto_next({
+  vim.lsp.diagnostic.goto_next {
     popup_opts = { border = "single" },
-  })
+  }
 end
 
 M.prev_diagnostic = function()
-  vim.lsp.diagnostic.goto_prev({
+  vim.lsp.diagnostic.goto_prev {
     popup_opts = { border = "single" },
-  })
+  }
 end
 
 return M

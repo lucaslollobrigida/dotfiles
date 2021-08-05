@@ -1,6 +1,6 @@
-local C = require("config")
+local C = require "config"
 
-require("compe").setup({
+require("compe").setup {
   enabled = true,
   autocomplete = true,
   debug = false,
@@ -31,7 +31,7 @@ require("compe").setup({
     treesitter = false, -- { kind = "  " },
     emoji = { kind = " ﲃ  (Emoji)", filetypes = { "markdown", "text" } },
   },
-})
+}
 
 -- vim.g.vsnip_snippet_dir = string.format("%s/vsnip", C.paths.data)
 
@@ -49,7 +49,7 @@ local customsnip_path = string.format("%s/snippets/", C.paths.data)
 vim.opt.runtimepath:append(commonsnip_path)
 vim.opt.runtimepath:append(customsnip_path)
 
-local loader = require("luasnip/loaders/from_vscode")
+local loader = require "luasnip/loaders/from_vscode"
 loader.load()
 
 vim.api.nvim_exec(

@@ -1,6 +1,6 @@
-local lsp = require("lsp")
+local lsp = require "lsp"
 
-require("flutter-tools").setup({
+require("flutter-tools").setup {
   experimental = {
     lsp_derive_paths = true,
   },
@@ -24,7 +24,7 @@ require("flutter-tools").setup({
       completeFunctionCalls = true,
     },
   },
-})
+}
 
 -- Flutter commands
 vim.api.nvim_exec(

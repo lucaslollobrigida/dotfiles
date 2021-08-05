@@ -1,8 +1,8 @@
-local actions = require("lir.actions")
-local mark_actions = require("lir.mark.actions")
-local clipboard_actions = require("lir.clipboard.actions")
+local actions = require "lir.actions"
+local mark_actions = require "lir.mark.actions"
+local clipboard_actions = require "lir.clipboard.actions"
 
-require("lir").setup({
+require("lir").setup {
   show_hidden_files = true,
   devicons_enable = true,
   mappings = {
@@ -24,7 +24,7 @@ require("lir").setup({
 
     ["J"] = function()
       mark_actions.toggle_mark()
-      vim.cmd("normal! j")
+      vim.cmd "normal! j"
     end,
     ["c"] = clipboard_actions.copy,
     ["x"] = clipboard_actions.cut,
@@ -55,10 +55,10 @@ require("lir").setup({
     end,
   },
   hide_cursor = true,
-})
+}
 
 -- custom folder icon
-require("nvim-web-devicons").setup({
+require("nvim-web-devicons").setup {
   override = {
     lir_folder_icon = {
       icon = "",
@@ -66,7 +66,7 @@ require("nvim-web-devicons").setup({
       name = "LirFolderNode",
     },
   },
-})
+}
 
 local M = {}
 
@@ -91,16 +91,16 @@ vim.api.nvim_exec(
 )
 
 function M.file_browser()
-  local folder_path = vim.fn.expand("%:p:h")
+  local folder_path = vim.fn.expand "%:p:h"
   require("lir.float").toggle(folder_path)
 end
 
-vim.cmd([[
+vim.cmd [[
   hi LirFloatNormal guibg=#32302f
   hi LirFloatBorder guifg=#7c6f64
   hi LirDir guifg=#7ebae4
   hi LirSymLink guifg=#7c6f64
   hi LirEmptyDirText guifg=#7c6f64
-]])
+]]
 
 return M

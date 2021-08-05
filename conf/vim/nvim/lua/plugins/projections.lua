@@ -37,8 +37,8 @@ local function clojure_project(test_path)
   end
 end
 
-local clojure_standard = clojure_project("test/unit")
-local clojure_legacy = clojure_project("test")
+local clojure_standard = clojure_project "test/unit"
+local clojure_legacy = clojure_project "test"
 
 local clojure_lein_standard = clojure_standard("project.clj", clojure_lein_actions)
 local clojure_lein_legacy = clojure_legacy("project.clj", clojure_lein_actions)

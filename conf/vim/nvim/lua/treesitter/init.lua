@@ -1,6 +1,6 @@
-local C = require("config")
+local C = require "config"
 
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter.configs").setup {
   ensure_installed = C.treesitter.ensure_installed,
   ignore_install = C.treesitter.ignore_install,
   highlight = {
@@ -23,4 +23,4 @@ require("nvim-treesitter.configs").setup({
   incremental_selection = {
     enable = true,
   },
-})
+}

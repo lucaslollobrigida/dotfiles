@@ -1,5 +1,5 @@
-local gl = require("galaxyline")
-local common = require("common")
+local gl = require "galaxyline"
+local common = require "common"
 
 -- get my theme in galaxyline repo
 -- local colors = require('galaxyline.theme').default
@@ -47,7 +47,7 @@ local mode_color = {
   ["!"] = colors.blue,
   t = colors.blue,
 }
-local condition = require("galaxyline.condition")
+local condition = require "galaxyline.condition"
 local gls = gl.section
 gl.short_line_list = { "dbui", "packer" }
 
@@ -122,7 +122,7 @@ gls.left[7] = {
 gls.left[8] = {
   FileName = {
     provider = function()
-      local file = vim.fn.expand("%:p")
+      local file = vim.fn.expand "%:p"
 
       if vim.fn.empty(file) == 1 then
         return ""

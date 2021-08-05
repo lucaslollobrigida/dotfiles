@@ -37,7 +37,7 @@ local eslint = {
   formatStdin = true,
 }
 
-require("lspconfig").efm.setup({
+require("lspconfig").efm.setup {
   init_options = { documentFormatting = true, codeAction = false },
   filetypes = { "lua", "typescript", "typescriptreact", "javascript", "javascriptreact", "sh", "zsh", "json" },
   on_attach = require("lsp").on_attach,
@@ -53,4 +53,4 @@ require("lspconfig").efm.setup({
       json = { prettier },
     },
   },
-})
+}

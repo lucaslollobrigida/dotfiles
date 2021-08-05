@@ -1,4 +1,4 @@
-local lspconfig = require("lspconfig")
+local lspconfig = require "lspconfig"
 
 -- TODO: fix this
 -- require("go").setup({
@@ -15,7 +15,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   },
 }
 
-lspconfig.gopls.setup({
+lspconfig.gopls.setup {
   filetypes = { "go" },
   root_dir = lspconfig.util.root_pattern(".git", "go.mod"),
   on_attach = require("lsp").on_attach,
@@ -40,13 +40,13 @@ lspconfig.gopls.setup({
   flags = {
     allow_incremental_sync = true,
   },
-})
+}
 
 local M = {}
 
 function M.goimports(timeout_ms)
   local context = { source = { organizeImports = true } }
-  vim.validate({ context = { context, "t", true } })
+  vim.validate { context = { context, "t", true } }
 
   local params = vim.lsp.util.make_range_params()
   params.context = context
@@ -78,6 +78,6 @@ function M.goimports(timeout_ms)
   end
 end
 
-vim.cmd([[autocmd BufWritePre *.go lua require("lsp.go").goimports(1000)]])
+vim.cmd [[autocmd BufWritePre *.go lua require("lsp.go").goimports(1000)]]
 
 return M

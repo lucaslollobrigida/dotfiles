@@ -1,12 +1,12 @@
-local lsp = require("lsp")
-local ts_utils = require("nvim-lsp-ts-utils")
+local lsp = require "lsp"
+local ts_utils = require "nvim-lsp-ts-utils"
 
-require("lspconfig").tsserver.setup({
+require("lspconfig").tsserver.setup {
   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
   on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false
 
-    ts_utils.setup({
+    ts_utils.setup {
       enable_import_on_completion = true,
       import_all_timeout = 5000,
 
@@ -30,7 +30,7 @@ require("lspconfig").tsserver.setup({
       update_imports_on_move = true,
       require_confirmation_on_move = false,
       watch_dir = nil,
-    })
+    }
 
     -- required to fix code action ranges
     ts_utils.setup_client(client)
@@ -38,4 +38,4 @@ require("lspconfig").tsserver.setup({
   end,
   root_dir = require("lspconfig/util").root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
   settings = { documentFormatting = false },
-})
+}

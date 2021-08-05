@@ -1,8 +1,8 @@
-local lsp = require("lsp")
-local lspconfig = require("lspconfig")
-local lsputil = require("lspconfig/util")
+local lsp = require "lsp"
+local lspconfig = require "lspconfig"
+local lsputil = require "lspconfig/util"
 
-lspconfig.hls.setup({
+lspconfig.hls.setup {
   cmd = { "haskell-language-server", "--lsp" },
   filetypes = { "haskell", "ihaskell" },
   root_dir = lsputil.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml", ".git"),
@@ -12,4 +12,4 @@ lspconfig.hls.setup({
       formattingProvider = "ormolu",
     },
   },
-})
+}

@@ -1,4 +1,4 @@
-local lsp = require("lsp")
+local lsp = require "lsp"
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -10,7 +10,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   },
 }
 
-require("lspconfig").sumneko_lua.setup({
+require("lspconfig").sumneko_lua.setup {
   cmd = { "lua-language-server" },
   on_attach = lsp.on_attach,
   capabilities = capabilities,
@@ -25,11 +25,11 @@ require("lspconfig").sumneko_lua.setup({
       },
       workspace = {
         library = {
-          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-          [vim.fn.expand("etc/nixos/conf")] = true,
+          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+          [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+          [vim.fn.expand "etc/nixos/conf"] = true,
         },
       },
     },
   },
-})
+}

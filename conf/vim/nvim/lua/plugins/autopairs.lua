@@ -1,7 +1,7 @@
-require("nvim-autopairs").setup({
+require("nvim-autopairs").setup {
   check_ts = true,
-})
+}
 
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter.configs").setup {
   autopairs = { enable = true },
-})
+}

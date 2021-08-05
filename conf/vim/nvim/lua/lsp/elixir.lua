@@ -1,6 +1,6 @@
-local lspconfig = require("lspconfig")
+local lspconfig = require "lspconfig"
 
-lspconfig.elixirls.setup({
+lspconfig.elixirls.setup {
   cmd = { "elixir-ls" },
   filetypes = { "elixir", "eelixir" },
   root_dir = lspconfig.util.root_pattern("mix.exs", ".git") or vim.loop.os_homedir(),
@@ -15,4 +15,4 @@ lspconfig.elixirls.setup({
     usePlaceholders = true,
     completeUnimported = true,
   },
-})
+}

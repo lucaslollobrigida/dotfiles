@@ -24,7 +24,7 @@ vim.opt.foldenable = false
 vim.opt.clipboard = "unnamedplus"
 
 ----- .
-vim.opt.shortmess:append("c") -- :remove("F")
+vim.opt.shortmess:append "c"
 -- vim.cmd([[set iskeyword+=-]])
 
 ----- disable unused default plugins
@@ -63,18 +63,18 @@ vim.opt.ts = 2
 vim.opt.sw = 2
 
 ----- completion tweak
-vim.opt.completeopt:append({ "menu", "menuone", "noselect" })
+vim.opt.completeopt:append { "menu", "menuone", "noselect" }
 
-if vim.fn.has("nvim-0.5") then
-  vim.cmd([[
+if vim.fn.has "nvim-0.5" then
+  vim.cmd [[
      augroup highlight_yank
      au!
      au TextYankPost * silent! lua vim.highlight.on_yank()
      augroup END
-   ]])
+   ]]
 end
 
-TERMINAL = vim.fn.expand("$TERMINAL")
+TERMINAL = vim.fn.expand "$TERMINAL"
 
 vim.opt.pumheight = 10
 vim.opt.fileencoding = "utf-8"

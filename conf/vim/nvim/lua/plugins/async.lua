@@ -5,7 +5,7 @@ local failure_modes = {
     return function(job_id, data)
       local errfmt = vim.api.nvim_buf_get_option(ctx.bufnr, "errorformat")
 
-      vim.api.nvim_command("doautocmd QuickFixCmdPost")
+      vim.api.nvim_command "doautocmd QuickFixCmdPost"
     end
   end,
   notify = function(ctx)
@@ -27,7 +27,7 @@ local failure_modes = {
 local output_modes = {
   qlist = function(ctx)
     return function(job_id, data)
-      vim.api.nvim_command("doautocmd QuickFixCmdPost")
+      vim.api.nvim_command "doautocmd QuickFixCmdPost"
     end
   end,
   notify = function(ctx)
