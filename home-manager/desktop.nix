@@ -1,16 +1,20 @@
 { super, config, lib, pkgs, ... }:
 
-let inherit (super.user) username;
+let
+  inherit (super.user) username;
 in
 {
   home.packages = with pkgs; [
     bitwarden
+    brave
     desktop-file-utils
     discord
+    evince
     feh
+    guvcview
+    gthumb
     pcmanfm
     spotify
-    v4l-utils
     xautolock
     xorg.xdpyinfo
     xorg.xhost
@@ -43,7 +47,7 @@ in
       "image/jpeg" = "org.gnome.gThumb.desktop";
       "image/png" = "org.gnome.gThumb.desktop";
       "inode/directory" = "pcmanfm.desktop";
-      "text/plain" = "emacs.desktop";
+      "text/plain" = "nvim.desktop";
     };
   };
 }

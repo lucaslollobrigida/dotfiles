@@ -5,6 +5,7 @@
     gnupg
     libu2f-host
     yubikey-manager
+    yubioath-desktop
     yubikey-personalization-gui
   ];
 

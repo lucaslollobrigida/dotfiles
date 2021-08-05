@@ -53,9 +53,9 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  networking.useDHCP = false;
-  networking.interfaces.wlp0s20f3.useDHCP = true;
-  networking.interfaces.enp56s0u1u2.useDHCP = true;
+  # networking.useDHCP = false;
+  # networking.interfaces.wlp0s20f3.useDHCP = true;
+  # networking.interfaces.enp56s0u1u2.useDHCP = true;
 
   hardware.nvidia.prime = {
     # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA

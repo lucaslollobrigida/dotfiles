@@ -138,7 +138,7 @@ require("packer").startup(function(use)
     opt = true,
   })
 
-  -- Local
+  -- Project Browser
   use({ "lucaslollobrigida/project.nvim", branch = "main" })
 
   -- Editing

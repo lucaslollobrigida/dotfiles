@@ -3,11 +3,10 @@
 {
 
   environment.systemPackages = with pkgs; [
-    pamixer
+    alsaUtils
+    alsaTools
     pavucontrol
     playerctl
-    pulseaudio
-    pulseeffects-pw
   ];
 
   programs.noisetorch = {
@@ -15,7 +14,20 @@
     package = pkgs.noisetorch;
   };
 
+
+  hardware.pulseaudio.extraConfig = "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1";
+
   services = {
+    mpd = {
+      enable = true;
+      extraConfig = ''
+        audio_output {
+          type "alsa"
+          name "alsa"
+          server "127.0.0.1"
+        }
+      '';
+    };
     pipewire = {
       enable = true;
       alsa = {

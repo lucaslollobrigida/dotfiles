@@ -48,8 +48,7 @@ sudo nixos-rebuild switch --flake "/etc/nixos#<some-host>" --recreate-lock-file
 # Todo
 
 + [ ] Update tmux theme (maybe [this?](https://github.com/wfxr/tmux-power)).
-+ [x] Fix wired connection.
 + [ ] Fix user modules not acessible on home config.
-+ [x] ~~Polybar on every conected monitor.~~ Moved to awesomewm
 + [ ] Rename ./home-manager -> ./home.
-+ [x] ~~Customize polybar.~~ Moved to awesomewm
++ [ ] Fix alternate files in Scala. Source -> test is working, but not the other way around
++ [ ] Markdown is flickering (no active LSP)

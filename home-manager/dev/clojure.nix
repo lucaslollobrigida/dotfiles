@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    # adoptopenjdk-jre-openj9-bin-8
     babashka
     clojure
     clj-kondo

@@ -10,7 +10,7 @@ local entry_display = require("telescope.pickers.entry_display")
 telescope.setup({
   defaults = {
     file_sorter = sorters.get_fuzzy_file,
-    generic_sorter = sorters.get_generic_fuzzy_sorter,
+    generic_sorter = sorters.get_fzy_sorter,
 
     file_previewer = previewers.vim_buffer_cat.new,
     grep_previewer = previewers.vim_buffer_vimgrep.new,
@@ -26,7 +26,7 @@ telescope.setup({
     sorting_strategy = "descending",
     layout_strategy = "horizontal",
     fjle_ignore_patterns = {},
-    shorten_path = true,
+    path_display = { 3 },
     winblend = 0,
     layout_config = {
       horizontal = { mirror = false },
