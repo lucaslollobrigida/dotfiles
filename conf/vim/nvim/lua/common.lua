@@ -14,6 +14,10 @@ end
 
 local M = {}
 
+if pcall(require, "notify") then
+  vim.notify = require "notify"
+end
+
 function M.path_short(path)
   local match_string = "[^/]+[/][^/]+$"
 
@@ -78,11 +82,6 @@ function M.notify(msg, opts)
       vim.api.nvim_win_close(win, true)
     end
   end)
-end
-
-vim.notify = function(msg, log_level)
-  local opts = { log_level = log_level, duration = 5000 }
-  require("common").notify(msg, opts)
 end
 
 return M

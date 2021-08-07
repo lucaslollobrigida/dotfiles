@@ -39,7 +39,6 @@ local function brightclt(action)
   os.execute(string.format("brightnessctl s %s", action))
 end
 
--- {{{ Key bindings
 local globalkeys = gears.table.join(
   awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
   awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
@@ -433,8 +432,7 @@ local tasklist_buttons = gears.table.join(
 
 -- Set keys
 root.keys(globalkeys)
--- }}}
---
+
 return {
   clientkeys = clientkeys,
   clientbuttons = clientbuttons,

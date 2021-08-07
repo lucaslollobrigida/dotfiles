@@ -11,7 +11,6 @@
       luaModules = with pkgs.luaPackages; [
         luarocks
         luadbi-mysql
-        # oocairo
       ];
     };
   };

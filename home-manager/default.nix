@@ -14,7 +14,6 @@
     ./theme.nix
     ./tmux.nix
     ./zsh.nix
-    # ./xmonad
     ../overlays
     ../modules/theme.nix
     ../modules/user.nix

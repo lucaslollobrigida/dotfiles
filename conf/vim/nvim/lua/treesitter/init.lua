@@ -5,7 +5,7 @@ require("nvim-treesitter.configs").setup {
   ignore_install = C.treesitter.ignore_install,
   highlight = {
     enable = true,
-    use_languagetree = false,
+    additional_vim_regex_highlighting = false,
   },
   playground = {
     enabled = true,

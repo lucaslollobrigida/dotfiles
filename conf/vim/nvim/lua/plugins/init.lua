@@ -151,6 +151,8 @@ require("packer").startup(function(use)
     requires = { "tpope/vim-sexp-mappings-for-regular-people" },
   }
 
+  use "rcarriga/nvim-notify"
+
   -- File browser
   use "tamago324/lir.nvim"
 
