@@ -33,7 +33,9 @@ in
 
       displayManager = {
         defaultSession = "none+awesome";
-        sessionCommands = "${pkgs.xorg.xmodmap}/bin/xmodmap ${myCustomLayout}";
+        sessionCommands = ''
+          ${pkgs.xorg.xmodmap}/bin/xmodmap ${myCustomLayout}
+        '';
       };
 
       # Enable libinput

@@ -20,6 +20,37 @@
     recursive = true;
   };
 
+  xresources.properties = {
+    "*background" = "#1D1D1D";
+    "*foreground" = "#7b745b";
+    "*cursorColor" = "ebdbb2";
+
+    "*color0" = "#3B2B2C";
+    "*color1" = "#A7623A";
+    "*color2" = "#626C39";
+    "*color3" = "#8C6B48";
+    "*color4" = "#424949";
+    "*color5" = "#5F4547";
+    "*color6" = "#575A4B";
+    "*color7" = "#9A8E6F";
+    "*color8" = "#6f5541";
+    "*color9" = "#A7623A";
+    "*color10" = "#626C39";
+    "*color11" = "#8C6B48";
+    "*color12" = "#424949";
+    "*color13" = "#5F4547";
+    "*color14" = "#575A4B";
+    "*color15" = "#9A8E6F";
+
+    "Xft.dpi" = 108;
+    "Xft.antialias" = true;
+    "Xft.hinting" = true;
+    "Xft.rgba" = "rgb";
+    "Xft.autohint" = false;
+    "Xft.hintstyle" = "hintslight";
+    "Xft.lcdfilter" = "lcddefault";
+  };
+
   home.packages = with pkgs;
     with config.theme.fonts; [
       dejavu_fonts
@@ -29,6 +60,7 @@
       hack-font
       hicolor-icon-theme
       liberation_ttf
+      material-design-icons
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
@@ -48,18 +80,18 @@
             "Gtk/CursorThemeName" = "${pointerCursor.name}";
           };
       in
-      {
-        Unit = {
-          Description =
-            "Provides settings to X11 applications via the XSETTINGS specification";
-          After = [ "graphical-session-pre.target" ];
-          PartOf = [ "graphical-session.target" ];
+        {
+          Unit = {
+            Description =
+              "Provides settings to X11 applications via the XSETTINGS specification";
+            After = [ "graphical-session-pre.target" ];
+            PartOf = [ "graphical-session.target" ];
+          };
+          Install = { WantedBy = [ "graphical-session.target" ]; };
+          Service = {
+            ExecStart = "${pkgs.kbdd}/bin/xsettingsd --config=${configFile}";
+          };
         };
-        Install = { WantedBy = [ "graphical-session.target" ]; };
-        Service = {
-          ExecStart = "${pkgs.kbdd}/bin/xsettingsd --config=${configFile}";
-        };
-      };
   };
 
   xsession.pointerCursor = {
