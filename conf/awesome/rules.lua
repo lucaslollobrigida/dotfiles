@@ -5,6 +5,32 @@ local wibox = require "wibox"
 
 local keys = require "keys"
 
+local dpi = beautiful.xresources.apply_dpi
+
+local function colorize_text(text, color)
+  return "<span foreground='" .. color .. "'>" .. text .. "</span>"
+end
+
+local function titlebarbtn(char, color, func)
+  return wibox.widget {
+    {
+      {
+        font = beautiful.titlebar_font,
+        markup = colorize_text(char, color),
+        widget = wibox.widget.textbox,
+      },
+      top = dpi(20),
+      bottom = 4,
+      widget = wibox.container.margin,
+    },
+    font = beautiful.titlebar_font,
+    bg = color,
+    widget = wibox.container.background,
+    buttons = gears.table.join(awful.button({}, 1, func)),
+    shape = gears.shape.circle,
+  }
+end
+
 awful.rules.rules = {
   -- All clients will match this rule.
   {
@@ -65,14 +91,24 @@ awful.rules.rules = {
 }
 
 client.connect_signal("manage", function(c)
-  -- Set the windows at the slave,
-  -- i.e. put it at the end of others instead of setting it master.
-  -- if not awesome.startup then awful.client.setslave(c) end
+  if not awesome.startup then
+    awful.client.setslave(c)
+  end
 
   if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
     -- Prevent clients from being unreachable after screen count changes.
     awful.placement.no_offscreen(c)
   end
+
+  -- if c.fullscreen then
+  -- 	c.shape = function(cr, width, height)
+  -- 		gears.shape.rectangle(cr, width, height)
+  -- 	end
+  -- else
+  -- 	c.shape = function(cr, width, height)
+  -- 		gears.shape.rounded_rect(cr, width, height, beautiful.border_radius)
+  -- 	end
+  -- end
 end)
 
 client.connect_signal("request::titlebars", function(c)
@@ -88,29 +124,60 @@ client.connect_signal("request::titlebars", function(c)
     end)
   )
 
-  awful.titlebar(c):setup {
-    { -- Left
-      awful.titlebar.widget.iconwidget(c),
-      buttons = buttons,
-      layout = wibox.layout.fixed.horizontal,
-    },
-    { -- Middle
-      { -- Title
-        align = "center",
-        widget = awful.titlebar.widget.titlewidget(c),
-      },
-      buttons = buttons,
-      layout = wibox.layout.flex.horizontal,
-    },
-    { -- Right
-      awful.titlebar.widget.floatingbutton(c),
-      awful.titlebar.widget.maximizedbutton(c),
-      awful.titlebar.widget.stickybutton(c),
-      awful.titlebar.widget.ontopbutton(c),
-      awful.titlebar.widget.closebutton(c),
-      layout = wibox.layout.fixed.horizontal(),
-    },
+  local minimize = titlebarbtn("", beautiful.xcolor3, function()
+    awful.client.next(1)
+    c.minimized = true
+  end)
+
+  local maximize = titlebarbtn("", beautiful.xcolor2, function()
+    c.maximized = not c.maximized
+    c:raise()
+  end)
+
+  local floating = titlebarbtn("", beautiful.xcolor4, function()
+    c.floating = not c.floating
+  end)
+
+  local close = titlebarbtn("", beautiful.xcolor1, function()
+    c:kill()
+  end)
+
+  awful.titlebar(c, { size = beautiful.titlebar_size }):setup {
     layout = wibox.layout.align.horizontal,
+    expand = "none",
+    {
+      buttons = buttons,
+      {
+        layout = wibox.layout.fixed.horizontal,
+        spacing = dpi(10),
+        floating,
+      },
+      left = dpi(10),
+      right = dpi(10),
+      widget = wibox.container.margin,
+    },
+    {
+      buttons = buttons,
+      {
+        layout = wibox.layout.fixed.horizontal,
+        spacing = dpi(10),
+      },
+      left = dpi(10),
+      right = dpi(10),
+      widget = wibox.container.margin,
+    },
+    {
+      {
+        layout = wibox.layout.fixed.horizontal,
+        spacing = dpi(10),
+        minimize,
+        maximize,
+        close,
+      },
+      left = dpi(10),
+      right = dpi(10),
+      widget = wibox.container.margin,
+    },
   }
 end)
 

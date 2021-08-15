@@ -403,6 +403,9 @@ local taglist_buttons = gears.table.join(
       client.focus:toggle_tag(t)
     end
   end),
+  awful.button({}, 2, function()
+    awful.spawn.with_shell "rofi -show combi"
+  end),
   awful.button({}, 4, function(t)
     awful.tag.viewnext(t.screen)
   end),

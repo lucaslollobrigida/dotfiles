@@ -1,303 +1,263 @@
 local awful = require "awful"
-local beautiful = require "beautiful"
-local hotkeys_popup = require "awful.hotkeys_popup"
-local gears = require "gears"
-local lain = require "lain"
 local wibox = require "wibox"
+local gears = require "gears"
+local beautiful = require "beautiful"
+local dpi = require("beautiful.xresources").apply_dpi
 
-local theme = require "theme"
+local keys = require "keys"
 
-local markup = lain.util.markup
-local separators = lain.util.separators
+local config = require "config"
+--local mymainmenu = require("widgets.startmenu")
 
-local spr = wibox.widget.textbox " "
-local arrl_dl = separators.arrow_left(theme.bg_focus, "alpha")
-local arrl_ld = separators.arrow_left("alpha", theme.bg_focus)
+-- Widgets
+local mytextclock = wibox.widget.textclock " %H:%M"
+-- local mytextclock = wibox.widget.textclock(" %H:%M  %d%A %B ")
+mytextclock.align = "center"
+mytextclock.valign = "center"
+mytextclock.font = "SFNS Display 12"
 
--- icons
-local mpdicon = wibox.widget.imagebox(theme.widget_music)
-local clockicon = wibox.widget.imagebox(theme.widget_clock)
-local mailicon = wibox.widget.imagebox(theme.widget_mail)
-local neticon = wibox.widget.imagebox(theme.widget_net)
-local memicon = wibox.widget.imagebox(theme.widget_mem)
-local cpuicon = wibox.widget.imagebox(theme.widget_cpu)
-local tempicon = wibox.widget.imagebox(theme.widget_temp)
-local fsicon = wibox.widget.imagebox(theme.widget_hdd)
-local volicon = wibox.widget.imagebox(theme.widget_vol)
-local baticon = wibox.widget.imagebox(theme.widget_battery)
+local gstart = wibox.widget.textbox(beautiful.startmenu_icon)
 
-local keyboardlayout = awful.widget.keyboardlayout:new()
+local rounded_shape = function(radius)
+  return function(cr, width, height)
+    gears.shape.rounded_rect(cr, width, height, radius)
+  end
+end
 
-local clock = awful.widget.watch("date +'%a %d %b %R'", 60, function(widget, stdout)
-  widget:set_markup(" " .. markup.font(theme.font, stdout))
-end)
+local real_x = function(s, x)
+  if s.index == 1 then
+    return x
+  else
+    return x + 1920 -- screen[s.index - 1].geometry.x
+  end
+end
 
-local mem = lain.widget.mem {
-  settings = function()
-    local formatted = string.format(" %.2fGB ", mem_now.used / 1024)
-    widget:set_markup(markup.font(theme.font, formatted))
-  end,
-}
-
-local cpu = lain.widget.cpu {
-  settings = function()
-    widget:set_markup(markup.font(theme.font, " " .. cpu_now.usage .. "% "))
-  end,
-}
-
-local temp = lain.widget.temp {
-  settings = function()
-    widget:set_markup(markup.font(theme.font, " " .. coretemp_now .. "°C "))
-  end,
-}
-
-local net = lain.widget.net {
-  settings = function()
-    widget:set_markup(
-      markup.font(
-        theme.font,
-        markup("#7AC82E", " " .. string.format("%06.1f", net_now.received))
-          .. " "
-          .. markup("#46A8C3", " " .. string.format("%06.1f", net_now.sent) .. " ")
-      )
-    )
-  end,
-}
-
-lain.widget.cal {
-  attach_to = { clock },
-  notification_preset = {
-    font = "Iosevka 10",
-    fg = theme.fg_normal,
-    bg = theme.bg_normal,
-  },
-}
-
-local bat = lain.widget.bat {
-  settings = function()
-    if bat_now.status and bat_now.status ~= "N/A" then
-      if bat_now.ac_status == 1 then
-        baticon:set_image(theme.widget_ac)
-      elseif not bat_now.perc and tonumber(bat_now.perc) <= 5 then
-        baticon:set_image(theme.widget_battery_empty)
-      elseif not bat_now.perc and tonumber(bat_now.perc) <= 15 then
-        baticon:set_image(theme.widget_battery_low)
-      else
-        baticon:set_image(theme.widget_battery)
-      end
-      widget:set_markup(markup.font(theme.font, " " .. bat_now.perc .. "% "))
-    else
-      widget:set_markup(markup.font(theme.font, " AC "))
-      baticon:set_image(theme.widget_ac)
-    end
-  end,
-}
-
--- local mpd = lain.widget.mpd({
--- 	settings = function()
--- 		if mpd_now.state == "play" then
--- 			artist = " " .. mpd_now.artist .. " "
--- 			title = mpd_now.title .. " "
--- 			mpdicon:set_image(theme.widget_music_on)
--- 		elseif mpd_now.state == "pause" then
--- 			artist = " mpd "
--- 			title = "paused "
--- 		else
--- 			artist = ""
--- 			title = ""
--- 			mpdicon:set_image(theme.widget_music)
--- 		end
---
--- 		widget:set_markup(markup.font(theme.font, markup("#EA6F81", artist) .. title))
--- 	end,
--- })
-
-local playing = require "playing"()
-
--- mpdicon:buttons(my_table.join(
--- 	awful.button({ "Mod4" }, 1, function()
--- 		awful.spawn("kitty -title Music -e ncmpcpp")
--- 	end),
--- 	awful.button({}, 1, function()
--- 		os.execute("mpc prev")
--- 		theme.mpd.update()
--- 	end),
--- 	awful.button({}, 2, function()
--- 		os.execute("mpc toggle")
--- 		theme.mpd.update()
--- 	end),
--- 	awful.button({}, 3, function()
--- 		os.execute("mpc next")
--- 		theme.mpd.update()
--- 	end)
--- ))
-
-local volume = lain.widget.alsa {
-  settings = function()
-    if volume_now.status == "off" then
-      volicon:set_image(theme.widget_vol_mute)
-    elseif tonumber(volume_now.level) == 0 then
-      volicon:set_image(theme.widget_vol_no)
-    elseif tonumber(volume_now.level) <= 50 then
-      volicon:set_image(theme.widget_vol_low)
-    else
-      volicon:set_image(theme.widget_vol)
-    end
-
-    widget:set_markup(markup.font(theme.font, " " .. volume_now.level .. "% "))
-  end,
-}
-
-volume.widget:buttons(awful.util.table.join(
-  awful.button({}, 1, function() -- left click
-    awful.spawn "pavucontrol"
-  end),
-  awful.button({}, 2, function() -- middle click
-    os.execute(string.format("%s set %s 100%%", volume.cmd, volume.channel))
-    volume.update()
-  end),
-  awful.button({}, 3, function() -- right click
-    os.execute(string.format("%s set %s toggle", volume.cmd, volume.togglechannel or volume.channel))
-    volume.update()
-  end),
-  awful.button({}, 4, function() -- scroll up
-    os.execute(string.format("%s set %s 1%%+", volume.cmd, volume.channel))
-    volume.update()
-  end),
-  awful.button({}, 5, function() -- scroll down
-    os.execute(string.format("%s set %s 1%%-", volume.cmd, volume.channel))
-    volume.update()
-  end)
-))
-
--- volume.widget:buttons(awful.util.table.join(
--- 	awful.button({}, 4, function()
--- 		awful.util.spawn("amixer set Master 1%+")
--- 		theme.volume.update()
--- 	end),
--- 	awful.button({}, 5, function()
--- 		awful.util.spawn("amixer set Master 1%-")
--- 		theme.volume.update()
--- 	end)
--- ))
-
--- Mail IMAP check
---[[ commented because it needs to be set before use
-mailicon:buttons(my_table.join(awful.button({ }, 1, function () awful.spawn(mail) end)))
-local mail = lain.widget.imap({
-    timeout  = 180,
-    server   = "server",
-    mail     = "mail",
-    password = "keyring get mail",
-    settings = function()
-        if mailcount > 0 then
-            widget:set_markup(markup.font(theme.font, " " .. mailcount .. " "))
-            mailicon:set_image(theme.widget_mail_on)
-        else
-            widget:set_text("")
-            mailicon:set_image(theme.widget_mail)
-        end
-    end
-})
---]]
-
-local fs = lain.widget.fs {
-  notification_preset = { fg = theme.fg_normal, bg = theme.bg_normal, font = "Terminus 10" },
-  settings = function()
-    widget:set_markup(markup.font(theme.font, " " .. fs_now["/"].percentage .. "% "))
-  end,
-}
-
-local myawesomemenu = {
-  {
-    "hotkeys",
-    function()
-      hotkeys_popup.show_help(nil, awful.screen.focused())
-    end,
-  },
-  { "manual", "kitty -e man awesome" },
-  { "edit config", "kitty -e" .. " " .. awesome.conffile },
-  { "restart", awesome.restart },
-  {
-    "quit",
-    function()
-      awesome.quit()
-    end,
-  },
-}
-
-local mymainmenu = awful.menu {
-  items = {
-    { "awesome", myawesomemenu, beautiful.awesome_icon },
-    { "open terminal", "kitty" },
-  },
-}
-local mylauncher = awful.widget.launcher { image = beautiful.awesome_icon, menu = mymainmenu }
-
--- {{{ Mouse bindings
-root.buttons(gears.table.join(
-  awful.button({}, 3, function()
-    mymainmenu:toggle()
-  end),
-  awful.button({}, 4, awful.tag.viewnext),
-  awful.button({}, 5, awful.tag.viewprev)
-))
--- }}}
-
-local function lhs_widgets(s)
-  return {
+local function horizontal_pad(width)
+  return wibox.widget {
+    forced_width = width,
     layout = wibox.layout.fixed.horizontal,
-    mylauncher,
-    s.mytaglist,
-    s.mypromptbox,
-    spr,
   }
 end
 
-local function rhs_widgets(s)
-  return {
-    layout = wibox.layout.fixed.horizontal,
+local function set_wallpaper(s)
+  -- Wallpaper
+  if beautiful.wallpaper then
+    local wallpaper = beautiful.wallpaper
+    -- If wallpaper is a function, call it with the screen
+    if type(wallpaper) == "function" then
+      wallpaper = wallpaper(s)
+    end
+    gears.wallpaper.maximized(wallpaper, s, true)
+  end
+end
+
+-- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
+screen.connect_signal("property::geometry", set_wallpaper)
+
+awful.screen.connect_for_each_screen(function(s)
+  -- Wallpaper
+  set_wallpaper(s)
+
+  local workspaces = config.workspaces
+  local screen_size = s.geometry.width
+
+  -- Each screen has its own tag table.
+  awful.tag(workspaces.names, s, workspaces.layouts)
+
+  local bar = wibox {
+    visible = beautiful.main_vis,
+    margins = beautiful.useless_gap * 2,
+    position = beautiful.main_pos,
+    screen = s,
+    -- x = screen.index == 2 and beautiful.main_x + dpi(1000) or beautiful.main_x,
+    y = beautiful.main_y,
+    width = screen_size - (beautiful.useless_gap * 4), -- beautiful.main_width,
+    height = beautiful.main_height,
+    type = "normal",
+    shape = rounded_shape(beautiful.border_radius),
+  }
+
+  s.padding = { top = beautiful.useless_gap * 2 + beautiful.main_height }
+  awful.placement.top(bar, { margins = beautiful.useless_gap * 2 })
+
+  -- Create a promptbox for each screen
+  -- local mypromptbox = awful.widget.prompt()
+
+  -- Taglist
+  local taglist = awful.widget.taglist {
+    screen = s,
+    filter = awful.widget.taglist.filter.all,
+    style = {
+      font = beautiful.taglist_text_font,
+      forced_width = dpi(24),
+      align = "center",
+      valign = "center",
+      shape = rounded_shape(dpi(30)),
+    },
+    layout = {
+      spacing = dpi(6),
+      layout = wibox.layout.flex.horizontal,
+    },
+
+    buttons = keys.taglist_buttons,
+  }
+
+  local leftwibox = wibox {
+    visible = beautiful.l_vis,
+    position = beautiful.l_pos,
+    screen = s,
+    x = real_x(s, beautiful.l_x),
+    y = beautiful.l_y,
+    width = beautiful.l_width,
+    height = beautiful.l_height,
+    type = "normal",
+    shape = rounded_shape(beautiful.l_border_radius),
+  }
+
+  leftwibox:setup {
+    layout = wibox.layout.align.horizontal,
+    wibox.container.background(
+      wibox.container.margin(taglist, 15, 15, 2, 2),
+      beautiful.bg_normal,
+      rounded_shape(beautiful.l_border_radius)
+    ),
+  }
+
+  awful.popup {
+    widget = require "newtask" {
+      screen = s,
+      filter = awful.widget.tasklist.filter.currenttags,
+      buttons = keys.tasklist_buttons,
+      style = {
+        align = "center",
+        valign = "center",
+        shape = rounded_shape(beautiful.l_border_radius),
+      },
+      layout = {
+        spacing = 10,
+        layout = wibox.layout.fixed.horizontal,
+      },
+      widget_template = {
+        {
+          {
+            {
+              {
+                id = "clienticon",
+                widget = awful.widget.clienticon,
+              },
+              id = "mat_fg",
+              widget = wibox.container.background,
+            },
+            layout = wibox.layout.align.horizontal,
+            {
+              id = "text_role",
+              font = beautiful.font,
+              widget = wibox.widget.textbox,
+            },
+          },
+          left = dpi(8),
+          right = dpi(8),
+          margins = 2,
+          widget = wibox.container.margin,
+        },
+        id = "background_role",
+        forced_height = beautiful.c_height,
+        forced_width = dpi(200),
+        shape = rounded_shape(beautiful.l_border_radius),
+        widget = wibox.container.background,
+        create_callback = function(self, c)
+          self:get_children_by_id("text_role")[1].client = c
+          self:get_children_by_id("clienticon")[1].client = c
+        end,
+        update_callback = function(self)
+          gears.timer.start_new(1 / 1000, function()
+            awful.placement.top(self, { margins = beautiful.start_y }) --mylist
+          end)
+        end,
+      },
+    },
+    ontop = false,
+    y = beautiful.c_y,
+    x = real_x(s, beautiful.c_x),
+    shape = rounded_shape(beautiful.l_border_radius),
+  }
+
+  local systray = wibox {
+    ontop = true,
+    visible = beautiful.systray_vis,
+    position = beautiful.systray_pos,
+    screen = s,
+    x = beautiful.useless_gap * 2 + screen_size / 2 - beautiful.systray_width / 2, -- beautiful.systray_x,
+    y = beautiful.systray_y,
+    width = beautiful.systray_width,
+    height = beautiful.systray_height,
+    type = "normal",
+    shape = rounded_shape(beautiful.border_radius),
+  }
+
+  systray:setup {
+    layout = wibox.layout.align.horizontal,
     wibox.widget.systray(),
-    -- keyboardlayout,
-    spr,
-    arrl_ld,
-    wibox.container.background(mpdicon, theme.bg_focus),
-    wibox.container.background(playing.widget, theme.bg_focus),
-    arrl_dl,
-    volicon,
-    volume.widget,
-    -- arrl_ld,
-    -- wibox.container.background(mailicon, theme.bg_focus),
-    --wibox.container.background(mail.widget, theme.bg_focus),
-    arrl_ld,
-    wibox.container.background(memicon, theme.bg_focus),
-    wibox.container.background(mem.widget, theme.bg_focus),
-    arrl_dl,
-    cpuicon,
-    cpu.widget,
-    arrl_ld,
-    wibox.container.background(tempicon, theme.bg_focus),
-    wibox.container.background(temp.widget, theme.bg_focus),
-    -- arrl_ld,
-    -- wibox.container.background(fsicon, theme.bg_focus),
-    -- wibox.container.background(fs.widget, theme.bg_focus),
-    arrl_dl,
-    baticon,
-    bat.widget,
-    -- arrl_ld,
-    -- wibox.container.background(neticon, theme.bg_focus),
-    -- wibox.container.background(net.widget, theme.bg_focus),
-    arrl_ld,
-    wibox.container.background(clockicon, theme.bg_focus),
-    wibox.container.background(clock, theme.bg_focus),
-    wibox.container.background(spr, theme.bg_focus),
-    arrl_dl,
-    s.mylayoutbox,
   }
-end
 
-return {
-  lhs_widgets = lhs_widgets,
-  rhs_widgets = rhs_widgets,
-  volume = volume,
-}
+  local rightwibox = wibox {
+    visible = beautiful.r_vis,
+    position = beautiful.r_pos,
+    screen = s,
+    x = real_x(s, screen_size - beautiful.r_width - beautiful.useless_gap * 2 - beautiful.wibox_spacing),
+    y = beautiful.r_y,
+    width = beautiful.r_width,
+    height = beautiful.r_height,
+    type = "normal",
+    shape = rounded_shape(beautiful.l_border_radius),
+  }
+
+  rightwibox:setup {
+    layout = wibox.layout.align.horizontal,
+    horizontal_pad(dpi(2)),
+    widget = wibox.container.place,
+    {
+      widget = wibox.container.background,
+      bg = beautiful.bg_normal,
+      {
+        widget = wibox.container.margin,
+        left = 10,
+        right = 10,
+        top = 2,
+        bottom = 2,
+        mytextclock,
+      },
+    },
+    horizontal_pad(dpi(2)),
+  }
+
+  local startwibox = wibox {
+    visible = beautiful.start_vis,
+    position = beautiful.start_pos,
+    screen = s,
+    x = real_x(s, beautiful.start_x),
+    y = beautiful.start_y,
+    width = beautiful.start_width,
+    height = beautiful.start_height,
+    type = "normal",
+    shape = rounded_shape(beautiful.l_border_radius),
+  }
+
+  startwibox:setup {
+    layout = wibox.layout.align.horizontal,
+    expand = "none",
+    wibox.container.background(
+      wibox.container.margin(gstart, 15, 15, 2, 2),
+      beautiful.bg_normal,
+      rounded_shape(beautiful.l_border_radius * 30)
+    ),
+  }
+
+  startwibox:connect_signal("mouse::enter", function()
+    startwibox.fg = beautiful.xcolor2
+  end)
+
+  startwibox:connect_signal("mouse::leave", function()
+    startwibox.fg = beautiful.fg_normal
+  end)
+end)

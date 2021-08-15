@@ -19,7 +19,8 @@ awful.layout.layouts = {
   -- awful.layout.suit.corner.se,
 }
 
-local names = { "www", "code", "comms", "call", "media", "system", "others" }
+-- local names = { "www", "code", "comms", "call", "media", "system", "others" }
+local names = { "", "󰈹", "󰘅", "󰓓", "", "󰲍" }
 local l = awful.layout.suit
 local layouts = { l.max, l.tile, l.max, l.floating, l.max, l.tile, l.tile }
 
