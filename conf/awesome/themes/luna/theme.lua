@@ -12,7 +12,7 @@ theme.wallpaper = os.getenv "HOME" .. "/.config/awesome/themes/luna/wallpaper.pn
 
 -- Gaps & Borders
 theme.gap_single_client = true
-theme.useless_gap = dpi(5)
+theme.useless_gap = dpi(3)
 theme.border_width = 0
 theme.border_radius = dpi(7)
 
@@ -140,7 +140,7 @@ end
 -- Titlebars
 theme.titlebar_pos = "top"
 theme.titlebar_font = "SFNS Display 8"
-theme.titlebar_size = dpi(24)
+theme.titlebar_size = dpi(21)
 theme.titlebar_bg_focus = xrdb.color0
 theme.titlebar_bg_normal = theme.bg_normal
 theme.titlebar_fg_focus = theme.fg_normal

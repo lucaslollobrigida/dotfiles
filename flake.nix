@@ -1,5 +1,5 @@
 {
-  description = "My Nix{OS} configuration files";
+  description = "Nix based dotfiles";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.05";
@@ -32,7 +32,7 @@
     };
 
     homeConfigurations.home-linux = home.lib.homeManagerConfiguration rec {
-      configuration = ./home-manager;
+      configuration = ./home;
       system = "x86_64-linux";
       homeDirectory = "/home/lollo";
       username = "lollo";
