@@ -15,10 +15,10 @@
   # Enable fonts in home.packages to be available to applications
   fonts.fontconfig.enable = true;
 
-  xdg.dataFile."wallpapers" = {
-    source = ../conf/theme/wallpapers;
-    recursive = true;
-  };
+  # xdg.dataFile."wallpapers" = {
+  #   source = ../conf/theme/wallpapers;
+  #   recursive = true;
+  # };
 
   xresources.properties = {
     "*background" = "#1D1D1D";
