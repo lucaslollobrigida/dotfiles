@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-kill -9 $(pid xmobar)
-
-while pgrep -x xmobar >/dev/null
-  do sleep 1
-done
-
-xmobar -x 0 ~/.config/xmobar/xmobarrc

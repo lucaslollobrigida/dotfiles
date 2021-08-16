@@ -1,4 +1,3 @@
 * text=auto
 *.[ch] linguist-language=C
 *.edn linguist-language=Clojure
-vim/.config/nvim/UltiSnips/* linguist-vendored
