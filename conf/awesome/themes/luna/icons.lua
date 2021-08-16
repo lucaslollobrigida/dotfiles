@@ -4,6 +4,7 @@ local icons = {}
 icons.app = {
   st = "󰆍",
   web = "󰖟",
+  firefox = "󰈹",
   neomutt = "󰇮",
   ncmpcpp = "",
   vifm = "󱂶",

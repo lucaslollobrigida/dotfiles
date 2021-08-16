@@ -1,4 +1,5 @@
 local awful = require "awful"
+local icons = require "themes.luna.icons"
 
 awful.layout.layouts = {
   awful.layout.suit.tile,
@@ -20,7 +21,16 @@ awful.layout.layouts = {
 }
 
 -- local names = { "www", "code", "comms", "call", "media", "system", "others" }
-local names = { "", "󰈹", "󰘅", "󰓓", "", "󰲍" }
+local names = {
+  icons.app.firefox,
+  icons.app.default,
+  icons.app.weechat,
+  icons.app.zathura,
+  icons.app.mpv,
+  icons.app.spior,
+  icons.widget.change_theme,
+}
+
 local l = awful.layout.suit
 local layouts = { l.max, l.tile, l.max, l.floating, l.max, l.tile, l.tile }
 

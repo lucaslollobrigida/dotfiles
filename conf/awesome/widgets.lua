@@ -10,7 +10,7 @@ local config = require "config"
 --local mymainmenu = require("widgets.startmenu")
 
 -- Widgets
-local mytextclock = wibox.widget.textclock " %H:%M"
+local mytextclock = wibox.widget.textclock " %H:%M     %B, %d "
 -- local mytextclock = wibox.widget.textclock(" %H:%M  %d%A %B ")
 mytextclock.align = "center"
 mytextclock.valign = "center"
@@ -89,13 +89,13 @@ awful.screen.connect_for_each_screen(function(s)
     filter = awful.widget.taglist.filter.all,
     style = {
       font = beautiful.taglist_text_font,
-      forced_width = dpi(24),
+      -- forced_width = dpi(34),
       align = "center",
       valign = "center",
-      shape = rounded_shape(dpi(30)),
+      shape = rounded_shape(dpi(35)),
     },
     layout = {
-      spacing = dpi(6),
+      spacing = dpi(4),
       layout = wibox.layout.flex.horizontal,
     },
 
@@ -117,7 +117,7 @@ awful.screen.connect_for_each_screen(function(s)
   leftwibox:setup {
     layout = wibox.layout.align.horizontal,
     wibox.container.background(
-      wibox.container.margin(taglist, 15, 15, 2, 2),
+      wibox.container.margin(taglist, 14, 14, 2, 2),
       beautiful.bg_normal,
       rounded_shape(beautiful.l_border_radius)
     ),
@@ -182,23 +182,25 @@ awful.screen.connect_for_each_screen(function(s)
     shape = rounded_shape(beautiful.l_border_radius),
   }
 
-  local systray = wibox {
-    ontop = true,
-    visible = beautiful.systray_vis,
-    position = beautiful.systray_pos,
-    screen = s,
-    x = beautiful.useless_gap * 2 + screen_size / 2 - beautiful.systray_width / 2, -- beautiful.systray_x,
-    y = beautiful.systray_y,
-    width = beautiful.systray_width,
-    height = beautiful.systray_height,
-    type = "normal",
-    shape = rounded_shape(beautiful.border_radius),
-  }
+  if s.index == 1 then
+    local systray = wibox {
+      ontop = false,
+      visible = beautiful.systray_vis,
+      position = beautiful.systray_pos,
+      screen = s,
+      x = (beautiful.useless_gap * 2) + (screen_size / 6) * 5 - beautiful.systray_width,
+      y = beautiful.systray_y,
+      width = beautiful.systray_width,
+      height = beautiful.systray_height,
+      type = "normal",
+      shape = rounded_shape(beautiful.border_radius),
+    }
 
-  systray:setup {
-    layout = wibox.layout.align.horizontal,
-    wibox.widget.systray(),
-  }
+    systray:setup {
+      layout = wibox.layout.align.horizontal,
+      wibox.widget.systray(),
+    }
+  end
 
   local rightwibox = wibox {
     visible = beautiful.r_vis,

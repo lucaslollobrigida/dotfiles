@@ -52,7 +52,7 @@ theme.xcolor14 = xrdb.color14
 theme.xcolor15 = xrdb.color15
 
 -- Tags
-theme.taglist_text_font = "JetBrainsMono Nerd Font 10"
+theme.taglist_text_font = "JetBrainsMono Nerd Font 12"
 
 -- Tasklist
 --theme.tasklist_disable_icon = false
@@ -62,11 +62,11 @@ theme.taglist_text_font = "JetBrainsMono Nerd Font 10"
 -- Wibar Configuration
 -- Systray
 theme.systray_pos = "top"
-theme.systray_vis = false
+theme.systray_vis = true
 theme.systray_width = dpi(151)
 theme.systray_height = dpi(30)
 -- theme.systray_x = theme.useless_gap * 2 + screen_size / 2 - theme.systray_width / 2 -- Deprecated
-theme.systray_y = theme.useless_gap * 2 + theme.systray_height
+theme.systray_y = theme.useless_gap * 2 + dpi(10)
 
 -- Wiboxes
 theme.wibox_spacing = dpi(20)
@@ -94,7 +94,7 @@ theme.start_y = theme.useless_gap * 2 + (theme.main_height - theme.start_height)
 theme.l_border_radius = dpi(12)
 theme.l_pos = "top"
 theme.l_vis = true
-theme.l_width = dpi(20 * 6 + 12 * 6) -- tag fixed width * amount of tags + tag spacing * amount of spaces
+theme.l_width = dpi(21 * 7 + 12 * 7) -- tag fixed width * amount of tags + tag spacing * amount of spaces
 theme.l_height = dpi(30)
 theme.l_x = theme.useless_gap * 2 + theme.wibox_spacing * 2 + theme.start_width
 theme.l_y = theme.useless_gap * 2 + (theme.main_height - theme.l_height) / 2
@@ -102,7 +102,7 @@ theme.l_y = theme.useless_gap * 2 + (theme.main_height - theme.l_height) / 2
 -- Right Wibar
 theme.r_pos = "top"
 theme.r_vis = true
-theme.r_width = dpi(175)
+theme.r_width = dpi(210)
 theme.r_height = dpi(30)
 -- theme.r_x = screen_size - theme.r_width - theme.useless_gap * 2 - theme.wibox_spacing -- Deprecated
 theme.r_y = theme.useless_gap * 2 + (theme.main_height - theme.r_height) / 2
