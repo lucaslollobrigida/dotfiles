@@ -20,4 +20,9 @@
       setxkbmap.Service.ExecStart = lib.mkForce "${pkgs.coreutils}/bin/true";
     };
   };
+
+  xdg.configFile."awesome" = {
+    source = ../conf/awesome;
+    recursive = true;
+  };
 }
