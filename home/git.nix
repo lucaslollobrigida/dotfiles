@@ -1,16 +1,14 @@
 { config, lib, pkgs, ... }:
 
-let
-  inherit (config.user) github gpgkey email name;
-in
-{
+let inherit (config.user) github gpgkey email name;
+in {
   home.packages = with pkgs; [ github-cli ];
 
   programs.git = {
     enable = true;
 
     signing = {
-      key = "A9D1FF3A"; #gpgkey;
+      key = "A9D1FF3A"; # gpgkey;
       signByDefault = true;
     };
 
@@ -30,17 +28,17 @@ in
           file-style = "bold yellow ul";
           file-decoration-style = "none";
         };
-        delta = {
-          navigate = true;
-        };
+        delta = { navigate = true; };
       };
     };
 
     aliases = {
       aliases = "config --get-regexp alias";
-      branch-cleanup = ''!git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d #'';
+      branch-cleanup = ''
+        !git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d #'';
       c = "clone --recursive";
-      glog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'";
+      glog =
+        "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'";
       last = "log -1 HEAD";
       logs = "log --show-signature";
       s = "status -s";
@@ -73,11 +71,14 @@ in
       "*#"
       ".idea/"
       ".lsp/"
+      ".clj-kondo/"
+      "!.clj-kondo/config"
     ];
 
-    includes = [ { path = "~/.config/git/local"; } ];
+    includes = [{ path = "~/.config/git/local"; }];
 
     extraConfig = {
+      init.defaultBranch = "main";
       color.ui = true;
       "color \"status\"".added = "green";
       "color \"status\"".changed = "blue";
@@ -92,7 +93,8 @@ in
       diff.renames = "copies";
       diff.algorithm = "patience";
 
-      format.pretty = "format:\"%C(yellow)%h%Creset %ad | %Cgreen%s%Creset %Cred%d%Creset %Cblue[%an]\"";
+      format.pretty = ''
+        format:"%C(yellow)%h%Creset %ad | %Cgreen%s%Creset %Cred%d%Creset %Cblue[%an]"'';
 
       github.user = "lucaslollobrigida"; # github.username;
 

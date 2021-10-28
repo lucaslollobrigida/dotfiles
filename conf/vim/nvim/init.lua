@@ -1,24 +1,21 @@
 require "prelude"
-require "plugins"
+
 require "common"
-
 require "keymappings"
-require "colorscheme"
 
-require "treesitter"
-require "lsp"
+require "plugins"
 
----- LSP
-require "lsp.bash"
-require "lsp.clojure"
-require "lsp.dart"
-require "lsp.elixir"
-require "lsp.go"
-require "lsp.haskell"
-require "lsp.latex"
-require "lsp.lua"
-require "lsp.nix"
-require "lsp.null"
-require "lsp.scala"
-require "lsp.terraform"
-require "lsp.typescript"
+require("modules.telescope").setup()
+require("modules.treesitter").setup()
+require("modules.lsp").setup()
+require("modules.file_browser").setup()
+require("modules.git").setup()
+require("modules.ui").setup()
+require("modules.project").setup()
+
+require("modules.lang.clojure").setup()
+require("modules.lang.dart").setup()
+require("modules.lang.go").setup()
+require("modules.lang.lua").setup()
+require("modules.lang.scala").setup()
+require("modules.lang.typescript").setup()

@@ -58,26 +58,22 @@
       [ -f ~/.nurc ] && source ~/.nurc
     '';
 
-    plugins = [
-      {
-        name = "powerlevel10k";
-        file = "init.sh";
-        src = pkgs.fetchFromGitHub {
-          owner = "romkatv";
-          repo = "powerlevel10k";
-          rev = "v1.15.0";
-          sha256 = "1b3j2riainx3zz4irww72z0pb8l8ymnh1903zpsy5wmjgb0wkcwq";
-        };
-      }
-    ];
+    plugins = [{
+      name = "powerlevel10k";
+      file = "init.sh";
+      src = pkgs.fetchFromGitHub {
+        owner = "romkatv";
+        repo = "powerlevel10k";
+        rev = "v1.15.0";
+        sha256 = "1b3j2riainx3zz4irww72z0pb8l8ymnh1903zpsy5wmjgb0wkcwq";
+      };
+    }];
   };
 
   programs.autojump.enable = true;
   programs.dircolors.enable = true;
 
-  xdg.configFile."zsh/p10k.zsh" = {
-    source = ../conf/zsh/p10k.zsh;
-  };
+  xdg.configFile."zsh/p10k.zsh" = { source = ../conf/zsh/p10k.zsh; };
 
   programs.fzf = {
     enable = true;

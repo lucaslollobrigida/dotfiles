@@ -9,8 +9,7 @@ let
 
     keycode 108 = Multi_key
   '';
-in
-{
+in {
   # Configure the virtual console keymap from the xserver keyboard settings
   console.useXkbConfig = true;
 
@@ -27,9 +26,7 @@ in
         enableContribAndExtras = true;
       };
 
-      windowManager.awesome = {
-        enable = true;
-      };
+      windowManager.awesome = { enable = true; };
 
       displayManager = {
         defaultSession = "none+awesome";
@@ -46,9 +43,7 @@ in
           naturalScrolling = true;
           tapping = true;
         };
-        mouse = {
-          accelProfile = "flat";
-        };
+        mouse = { accelProfile = "flat"; };
       };
     };
   };

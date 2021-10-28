@@ -9,7 +9,7 @@
       };
     };
 
-    /* colors = builtins.fromJSON (builtins.readFile ./colors.json); */
+    # colors = builtins.fromJSON (builtins.readFile ./colors.json);
   };
 
   # Enable fonts in home.packages to be available to applications
@@ -68,30 +68,28 @@
     ];
 
   systemd.user.services = {
-    xsettingsd =
-      let
-        mkKeyValue = (k: v: ''${k} "${v}"'');
-        configFile = with lib.generators;
-          with config.gtk;
-          with config.xsession;
-          toKeyValue { mkKeyValue = mkKeyValue; } {
-            "Net/IconThemeName" = "${iconTheme.name}";
-            "Net/ThemeName" = "${theme.name}";
-            "Gtk/CursorThemeName" = "${pointerCursor.name}";
-          };
-      in
-        {
-          Unit = {
-            Description =
-              "Provides settings to X11 applications via the XSETTINGS specification";
-            After = [ "graphical-session-pre.target" ];
-            PartOf = [ "graphical-session.target" ];
-          };
-          Install = { WantedBy = [ "graphical-session.target" ]; };
-          Service = {
-            ExecStart = "${pkgs.kbdd}/bin/xsettingsd --config=${configFile}";
-          };
+    xsettingsd = let
+      mkKeyValue = (k: v: ''${k} "${v}"'');
+      configFile = with lib.generators;
+        with config.gtk;
+        with config.xsession;
+        toKeyValue { mkKeyValue = mkKeyValue; } {
+          "Net/IconThemeName" = "${iconTheme.name}";
+          "Net/ThemeName" = "${theme.name}";
+          "Gtk/CursorThemeName" = "${pointerCursor.name}";
         };
+    in {
+      Unit = {
+        Description =
+          "Provides settings to X11 applications via the XSETTINGS specification";
+        After = [ "graphical-session-pre.target" ];
+        PartOf = [ "graphical-session.target" ];
+      };
+      Install = { WantedBy = [ "graphical-session.target" ]; };
+      Service = {
+        ExecStart = "${pkgs.kbdd}/bin/xsettingsd --config=${configFile}";
+      };
+    };
   };
 
   xsession.pointerCursor = {

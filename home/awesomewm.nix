@@ -1,6 +1,12 @@
-{ lib, pkgs, ... }:
-{
-  home.packages = with pkgs; [ brightnessctl multilockscreen mpc_cli mpd xsel xorg.xbacklight ];
+{ lib, pkgs, ... }: {
+  home.packages = with pkgs; [
+    brightnessctl
+    multilockscreen
+    mpc_cli
+    mpd
+    xsel
+    xorg.xbacklight
+  ];
 
   xsession = {
     enable = true;
@@ -8,10 +14,7 @@
     windowManager.awesome = {
       enable = true;
       noArgb = true;
-      luaModules = with pkgs.luaPackages; [
-        luarocks
-        luadbi-mysql
-      ];
+      luaModules = with pkgs.luaPackages; [ luarocks luadbi-mysql ];
     };
   };
 

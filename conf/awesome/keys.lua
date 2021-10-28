@@ -23,7 +23,7 @@ local function set_volume(action, device)
   local command = string.format("amixer set %s %s", channel, action)
 
   os.execute(command)
-  require("widgets").volume.update()
+  -- require("widgets").volume.update()
 end
 
 local function lock()

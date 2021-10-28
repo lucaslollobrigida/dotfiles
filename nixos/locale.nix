@@ -14,7 +14,7 @@
   # Set X11 keyboard layout.
   services.xserver = lib.mkDefault {
     layout = "us";
-     xkbVariant = "intl,abnt2";
+    xkbVariant = "intl,abnt2";
   };
 
   # Set your time zone.

@@ -43,13 +43,13 @@
 
     fade = true;
     fadeDelta = 3;
-    fadeExclude = [];
+    fadeExclude = [ ];
     fadeSteps = [ "0.03" "0.03" ];
 
     shadow = true;
     noDNDShadow = true;
     noDockShadow = true;
-    shadowExclude = [];
+    shadowExclude = [ ];
     # shadowOffsets = [ -12 -12 ];
     shadowOpacity = "0.80";
 

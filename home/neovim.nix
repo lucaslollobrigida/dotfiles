@@ -1,16 +1,13 @@
 { config, lib, pkgs, ... }:
 
 let
-  myneovim = pkgs.unstable.neovim.override (
-    {
-      vimAlias = true;
-      viAlias = false;
-      withNodeJs = false;
-      withRuby = false;
-    }
-  );
-in
-{
+  myneovim = pkgs.unstable.neovim.override ({
+    vimAlias = true;
+    viAlias = false;
+    withNodeJs = false;
+    withRuby = false;
+  });
+in {
   home.packages = with pkgs; [ myneovim ];
 
   # programs.neovim = {
@@ -25,9 +22,7 @@ in
   #   withRuby = false;
   # };
 
-  programs.zsh.sessionVariables = {
-    EDITOR = "nvim";
-  };
+  programs.zsh.sessionVariables = { EDITOR = "nvim"; };
 
   xdg.configFile."nvim" = {
     source = ../conf/vim/nvim;

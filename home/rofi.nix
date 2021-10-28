@@ -1,9 +1,7 @@
 { config, pkgs, ... }:
 
-let
-  inherit (config.lib.formats.rasi) mkLiteral;
-in
-{
+let inherit (config.lib.formats.rasi) mkLiteral;
+in {
   programs.rofi = {
     enable = true;
     font = "JetBrainsMono Nerd Font 14";

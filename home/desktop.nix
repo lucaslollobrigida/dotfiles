@@ -1,9 +1,7 @@
 { super, config, lib, pkgs, ... }:
 
-let
-  inherit (super.user) username;
-in
-{
+let inherit (super.user) username;
+in {
   home.packages = with pkgs; [
     bitwarden
     brave
@@ -13,6 +11,7 @@ in
     feh
     guvcview
     gthumb
+    okular
     pcmanfm
     spotify
     xautolock
@@ -22,9 +21,7 @@ in
     xorg.xset
   ];
 
-  programs.feh = {
-    enable = true;
-  };
+  programs.feh = { enable = true; };
 
   programs.firefox = {
     enable = true;

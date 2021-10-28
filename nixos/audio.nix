@@ -14,8 +14,8 @@
     package = pkgs.noisetorch;
   };
 
-
-  hardware.pulseaudio.extraConfig = "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1";
+  hardware.pulseaudio.extraConfig =
+    "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1";
 
   services = {
     mpd = {
@@ -61,7 +61,7 @@
           }
           {
             name = "libpipewire-module-access";
-            args = {};
+            args = { };
           }
           { name = "libpipewire-module-adapter"; }
           { name = "libpipewire-module-link-factory"; }
@@ -72,7 +72,7 @@
       media-session.config.bluez-monitor.rules = [
         {
           # Matches all cards
-          matches = [ { "device.name" = "~bluez_card.*"; } ];
+          matches = [{ "device.name" = "~bluez_card.*"; }];
           actions = {
             "update-props" = {
               "bluez5.reconnect-profiles" = [ "hfp_hf" "hsp_hs" "a2dp_sink" ];
@@ -85,13 +85,13 @@
         {
           matches = [
             # Matches all sources
-            { "node.name" = "~bluez_input.*"; }
+            {
+              "node.name" = "~bluez_input.*";
+            }
             # Matches all outputs
             { "node.name" = "~bluez_output.*"; }
           ];
-          actions = {
-            "node.pause-on-idle" = false;
-          };
+          actions = { "node.pause-on-idle" = false; };
         }
       ];
     };

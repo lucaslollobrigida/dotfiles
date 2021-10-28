@@ -1,7 +1,6 @@
 { pkgs, lib, ... }:
 
-with lib;
-{
+with lib; {
   options.user = {
     name = mkOption {
       type = types.str;

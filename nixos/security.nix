@@ -23,20 +23,18 @@ let
   };
   restrictNetworkFlags = { RestrictAddressFamilies = "AF_UNIX"; };
   unrestrictNetworkFlags = { RestrictAddressFamilies = ""; };
-in
-{
+in {
   nix.trustedUsers = [ "root" "@wheel" ];
 
   # systemd-analyze --user security
   systemd.user.services = {
-    opentabletdriver.serviceConfig = safeHardeningFlags // unrestrictNetworkFlags;
+    opentabletdriver.serviceConfig = safeHardeningFlags
+      // unrestrictNetworkFlags;
   };
 
   # systemd-analyze security
   systemd.services = {
-    flood.serviceConfig = strictHardeningFlags // {
-      ProtectHome = false;
-    };
+    flood.serviceConfig = strictHardeningFlags // { ProtectHome = false; };
     plex.serviceConfig = safeHardeningFlags // unrestrictNetworkFlags // {
       RestrictNamespaces = false;
     };
@@ -50,14 +48,12 @@ in
   security = {
     rtkit.enable = true;
     # Increase file handler limit
-    pam.loginLimits = [
-      {
-        domain = "*";
-        type = "hard";
-        item = "nofile";
-        value = "1048576";
-      }
-    ];
+    pam.loginLimits = [{
+      domain = "*";
+      type = "hard";
+      item = "nofile";
+      value = "1048576";
+    }];
   };
 
   # TODO: Enable usbguard after finding some way to easily manage it

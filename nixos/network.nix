@@ -22,15 +22,13 @@
 
   networking = {
     # Use Network Manager
-    networkmanager = {
-      enable = true;
-    };
+    networkmanager = { enable = true; };
 
     wireless.userControlled.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [];
-      allowedUDPPorts = [];
+      allowedTCPPorts = [ ];
+      allowedUDPPorts = [ ];
     };
   };
 }

@@ -1,13 +1,3 @@
--- -- better window movement
--- vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', {silent = true})
--- vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', {silent = true})
--- vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', {silent = true})
--- vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', {silent = true})
-
--- Move selected line / block of text in visual mode
--- vim.api.nvim_set_keymap('x', 'K', ':move \'<-2<CR>gv-gv', {noremap = true, silent = true})
--- vim.api.nvim_set_keymap('x', 'J', ':move \'>+1<CR>gv-gv', {noremap = true, silent = true})
-
 local function nnoremap(mapping, action)
   vim.api.nvim_set_keymap("n", mapping, action, { noremap = true })
 end
@@ -76,7 +66,7 @@ nnoremap("<leader>sr", ':source .quicksave.vim<CR>:echo "Session loaded."<CR>')
 xnoremap("<", "<gv")
 xnoremap(">", ">gv")
 
-nnoremap("<leader>sh", [[<cmd>lua R('plugins.terminal').open_term()<cr>]])
+nnoremap("<leader>sh", [[<cmd>lua require('modules.terminal').open_term()<cr>]])
 
 -- format
 nnoremap("<leader>tw", [[<cmd>%s/\s\+$//e<cr>]])
@@ -90,17 +80,17 @@ nnoremap("<leader>*", [[<cmd>lua require('telescope.builtin').grep_string()<cr>]
 nnoremap("<leader>,", [[<cmd>lua require('telescope.builtin').buffers()<cr>]])
 
 -- files
-nnoremap("<leader>f", [[<cmd>lua require('plugins.telescope').project_files()<cr>]])
+nnoremap("<leader>f", [[<cmd>lua require('modules.telescope').project_files()<cr>]])
 
 -- file browser
-nnoremap("-", [[<cmd>lua R('plugins.lir').file_browser()<CR>]])
+nnoremap("-", [[<cmd>lua require('modules.file_browser').file_browser()<CR>]])
 
 -- git
-nnoremap("<leader>b", [[<cmd>lua require('plugins.telescope').git_branches()<CR>]])
+nnoremap("<leader>b", [[<cmd>lua require('modules.telescope').git_branches()<CR>]])
 nnoremap("<leader>g", '<cmd>lua require("neogit").status.create("split")<cr>')
 
 -- project
-nnoremap("<leader>p", [[<cmd>lua require('plugins.telescope').browse_projects()<CR>]])
+nnoremap("<leader>p", [[<cmd>lua require('modules.telescope').browse_projects()<CR>]])
 
 -- Align
 nnoremap("ga", "<Plug>(EasyAlign)")

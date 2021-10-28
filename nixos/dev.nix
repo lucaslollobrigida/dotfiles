@@ -1,8 +1,6 @@
 { pkgs, config, ... }:
-let
-  inherit (config.user) username;
-in
-{
+let inherit (config.user) username;
+in {
   environment.systemPackages = with pkgs; [
     docker-compose
     gnome3.gnome-boxes
@@ -18,7 +16,7 @@ in
   };
 
   # Enable anti-aliasing in Java
-  environment.variables._JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=gasp";
+  # environment.variables._JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=gasp";
 
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;

@@ -1,12 +1,11 @@
 { pkgs, ... }:
 let
   say = pkgs.writeScriptBin "say" ''
-  #!usr/bin/env sh
+    #!usr/bin/env sh
 
-  espeak -v us-mbrola-1 "$@"
+    espeak -v us-mbrola-1 "$@"
   '';
-in
-{
+in {
   home.packages = with pkgs; [
     aws
     aws-iam-authenticator

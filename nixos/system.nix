@@ -1,8 +1,7 @@
 { config, lib, pkgs, ... }:
 
 with config.boot;
-with lib;
-{
+with lib; {
   environment = {
     # To get zsh completion for system packages
     pathsToLink = [ "/share/zsh" ];
@@ -13,6 +12,7 @@ with lib;
       nss.tools
       vim
       zsh
+      xorg.setxkbmap
     ];
   };
 

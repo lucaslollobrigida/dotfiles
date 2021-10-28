@@ -1,5 +1,4 @@
-{ super, lib, pkgs, inputs, ... }:
-{
+{ super, lib, pkgs, inputs, ... }: {
   imports = [
     ./alacritty.nix
     ./awesomewm.nix

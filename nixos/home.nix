@@ -1,10 +1,8 @@
 { config, lib, pkgs, inputs, system, ... }:
 
 with lib;
-let
-  inherit (config.user) username;
-in
-{
+let inherit (config.user) username;
+in {
   imports = [ inputs.home.nixosModules.home-manager ];
 
   home-manager = {

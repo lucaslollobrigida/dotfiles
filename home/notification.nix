@@ -1,10 +1,7 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    dunst
-    libnotify
-  ];
+  home.packages = with pkgs; [ dunst libnotify ];
 
   xdg.configFile."dunst" = {
     source = ../conf/dunst;
