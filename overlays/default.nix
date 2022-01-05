@@ -1,7 +1,7 @@
 { inputs, pkgs, system, ... }: {
   nixpkgs.overlays = [
     inputs.nubank.overlay
-    inputs.neovim-nightly-overlay.overlay
+    # inputs.neovim-nightly-overlay.overlay
     (final: prev: {
       unstable = import inputs.unstable {
         inherit system;
@@ -20,7 +20,7 @@
           + "${prev.upower}/lib/girepository-1.0:" + old.GI_TYPELIB_PATH;
       })).override {
         stdenv = prev.clangStdenv;
-        luaPackages = prev.lua52Packages;
+        # luaPackages = prev.lua52Packages;
         gtk3Support = true;
       };
     })

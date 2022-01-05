@@ -5,6 +5,7 @@
     enable = true;
     aggressiveResize = true;
     baseIndex = 1;
+    escapeTime = 0;
     clock24 = true;
     historyLimit = 10000;
     keyMode = "vi";
@@ -35,9 +36,6 @@
       # monitor activity between windows
       setw -g monitor-activity on
       set -g visual-activity on
-
-      # No delay for escape key press
-      set -sg escape-time 0
 
       # split rebinds
       bind-key v split-window -h

@@ -14,7 +14,7 @@
     windowManager.awesome = {
       enable = true;
       noArgb = true;
-      luaModules = with pkgs.luaPackages; [ luarocks luadbi-mysql ];
+      luaModules = with pkgs.luaPackages; [ luarocks ];
     };
   };
 

@@ -6,11 +6,14 @@
     fontDir.enable = true;
 
     fonts = with pkgs; [
+      aileron
       corefonts
+      helvetica-neue-lt-std
       nerdfonts
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
+      liberation_ttf
     ];
 
     fontconfig = {

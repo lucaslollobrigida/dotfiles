@@ -18,9 +18,9 @@ local on_attach = function(client, bufnr)
     { "n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts },
     { "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts },
     { "n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts },
-    { "n", "]e", "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", opts },
-    { "n", "[e", "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>", opts },
-    { "n", "<leader>d", "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", opts },
+    { "n", "]e", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts },
+    { "n", "[e", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts },
+    { "n", "<leader>d", "<cmd>lua vim.diagnostic.set_loclist()<cr>", opts },
     { "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts },
     { "n", "<leader>a", "<cmd>lua require('modules.telescope').lsp_code_action()<CR>", opts },
     { "v", "<leader>a", "<cmd>lua require('modules.telescope').lsp_range_code_action()<CR>", opts },
@@ -36,22 +36,22 @@ local on_attach = function(client, bufnr)
 
   if client.resolved_capabilities.document_formatting then
     buf_set_keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)
-    vim.api.nvim_exec(
-      [[
-      augroup lsp_formatting
-      autocmd! * <buffer>
-      autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)
-      augroup END
-      ]],
-      false
-    )
+    -- vim.api.nvim_exec(
+    --   [[
+    --   augroup lsp_formatting
+    --   autocmd! * <buffer>
+    --   autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)
+    --   augroup END
+    --   ]],
+    --   false
+    -- )
   end
 
   vim.api.nvim_exec(
     [[
     augroup lsp_hover
     autocmd! * <buffer>
-    autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()
+    autocmd CursorHold <buffer> lua vim.diagnostic.open_float()
     autocmd CursorHoldI <buffer> silent! lua vim.lsp.buf.signature_help()
     augroup END
     ]],
@@ -208,26 +208,23 @@ return {
       },
     }
 
+    local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+    cmp.event:on(
+      "confirm_done",
+      cmp_autopairs.on_confirm_done { map_char = {
+        all = "(",
+        tex = "{",
+      } }
+    )
+
     vim.cmd [[
     imap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<C-j>'
     smap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<C-j>'
     imap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
-    smap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
     ]]
 
-    require("nvim-autopairs.completion.cmp").setup {
-      map_cr = true, --  map <CR> on insert mode
-      map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
-      auto_select = true, -- automatically select the first item
-      insert = false, -- use insert confirm behavior instead of replace
-      map_char = { -- modifies the function or method delimiter by filetypes
-        all = "(",
-        clojure = "",
-        tex = "{",
-      },
-    }
-
     local null_ls = require "null-ls"
+    local lspconfig = require "lspconfig"
 
     local sources = {
       null_ls.builtins.formatting.stylua,

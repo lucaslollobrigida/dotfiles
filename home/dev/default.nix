@@ -6,7 +6,7 @@
     ./clojure.nix
     ./elixir.nix
     ./go.nix
-    # ./haskell.nix
+    ./haskell.nix
     ./nix.nix
     ./nubank.nix
     ./scala.nix

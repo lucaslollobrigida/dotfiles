@@ -18,8 +18,6 @@ return {
       return
     end
 
-    vim.g.metals_use_global_executable = true
-
     vim.api.nvim_exec(
       [[
       augroup metals_lsp
@@ -42,6 +40,7 @@ return {
       },
       -- tvp = {},
       settings = {
+        useGlobalExecutable = true,
         showImplicitArguments = true,
         showInferredType = true,
         superMethodLensesEnabled = true,
