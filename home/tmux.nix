@@ -7,10 +7,10 @@
     baseIndex = 1;
     escapeTime = 0;
     clock24 = true;
-    historyLimit = 10000;
+    historyLimit = 20000;
     keyMode = "vi";
-    newSession = true;
-    sensibleOnTop = true;
+    newSession = false;
+    sensibleOnTop = false;
     shortcut = "a";
     terminal = "screen-256color";
     secureSocket = false;
@@ -38,8 +38,9 @@
       set -g visual-activity on
 
       # split rebinds
-      bind-key v split-window -h
-      bind-key s split-window -v
+      bind c new-window -c "#{pane_current_path}"
+      bind-key v split-window -h -c "#{pane_current_path}"
+      bind-key s split-window -v -c "#{pane_current_path}"
 
       # reload config file (change file location to your the tmux.conf you want to use)
       bind r source-file ~/.tmux.conf \; display '~/.tmux.conf sourced'

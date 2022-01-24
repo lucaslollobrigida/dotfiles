@@ -4,6 +4,7 @@ in {
   environment.systemPackages = with pkgs; [
     docker-compose
     gnome3.gnome-boxes
+    graalvm11-ce
     python3
   ];
 

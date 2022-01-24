@@ -47,6 +47,11 @@ require("packer").startup(function(use)
   require("modules.lang.dart").plugins(use)
   require("modules.lang.typescript").plugins(use)
 
+  -- temp
+  use("aklt/plantuml-syntax")
+  use("tyru/open-browser.vim")
+  use("weirongxu/plantuml-previewer.vim")
+
   if packer_bootstrap then
     require("packer").sync()
   end
