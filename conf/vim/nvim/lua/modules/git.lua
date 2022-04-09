@@ -19,22 +19,21 @@ return {
       "ruifm/gitlinker.nvim",
       requires = "nvim-lua/plenary.nvim",
       opt = true,
-      config = function()
-        require("gitlinker").setup {
-          opts = {
-            remote = nil,
-            add_current_line_on_normal_mode = true,
-            action_callback = require("gitlinker.actions").open_in_browser,
-            print_url = false,
-            mappings = "<leader>gy",
-          },
-          callbacks = {
-            ["github.com"] = require("gitlinker.hosts").get_github_type_url,
-            ["gitlab.com"] = require("gitlinker.hosts").get_gitlab_type_url,
-          },
-        }
-      end,
     }
   end,
-  setup = function() end,
+  setup = function()
+    require("gitlinker").setup {
+      opts = {
+        remote = nil,
+        add_current_line_on_normal_mode = true,
+        action_callback = require("gitlinker.actions").open_in_browser,
+        print_url = false,
+        mappings = "<leader>gy",
+      },
+      callbacks = {
+        ["github.com"] = require("gitlinker.hosts").get_github_type_url,
+        ["gitlab.com"] = require("gitlinker.hosts").get_gitlab_type_url,
+      },
+    }
+  end,
 }

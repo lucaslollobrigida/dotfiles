@@ -9,12 +9,12 @@ return {
     end
 
     local lsp = require "modules.lsp"
-    local cmp = require "cmp_nvim_lsp"
+    -- local cmp = require "cmp_nvim_lsp"
 
     lspconfig.sumneko_lua.setup {
       cmd = { "lua-language-server" },
       on_attach = lsp.on_attach,
-      capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+      -- capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities()),
       settings = {
         Lua = {
           runtime = {

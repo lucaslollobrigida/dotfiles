@@ -101,10 +101,11 @@ return {
     load "nvim-web-devicons"
     load "null-ls.nvim"
 
-    load "nvim-cmp"
-    load "cmp-nvim-lsp"
-    load "cmp-vsnip"
-    load "vim-vsnip"
+    load "coq_nvim"
+    -- load "nvim-cmp"
+    -- load "cmp-nvim-lsp"
+    -- load "cmp-vsnip"
+    -- load "vim-vsnip"
   end,
   plugins = function(use)
     use {
@@ -125,6 +126,12 @@ return {
       requires = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-vsnip", "hrsh7th/vim-vsnip" },
     }
 
+    use {
+      "ms-jpq/coq_nvim",
+      branch = "coq",
+      opt = true
+    }
+
     use { "jose-elias-alvarez/null-ls.nvim", opt = true }
   end,
 
@@ -139,16 +146,23 @@ return {
     require("trouble").setup()
     require("todo-comments").setup()
 
-    vim.fn.sign_define("LspDiagnosticsSignError", { text = "", texthl = "LspDiagnosticsSignError" })
-    vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "", texthl = "LspDiagnosticsSignWarning" })
-    vim.fn.sign_define("LspDiagnosticsSignInformation", { text = "", texthl = "LspDiagnosticsSignInformation" })
-    vim.fn.sign_define("LspDiagnosticsSignHint", { text = "", texthl = "LspDiagnosticsSignHint" })
+    vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticError" })
+    vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticWarn" })
+    vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticInfo" })
+    vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticHint" })
 
-    vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    -- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    --   virtual_text = false,
+    --   signs = true,
+    --   underline = true,
+    --   -- update_in_insert = false,
+    -- })
+    vim.diagnostic.config({
       virtual_text = false,
       signs = true,
       underline = true,
-      -- update_in_insert = false,
+      -- update_in_insert = true,
+      -- severity_sort = false,
     })
 
     -- symbols for autocomplete
@@ -184,47 +198,46 @@ return {
     vim.cmd "highlight default link LspCodeLensSign LspCodeLens"
     vim.cmd "highlight default link LspCodeLensSeparator LspCodeLens"
 
-    local cmp = require "cmp"
-
-    cmp.setup {
-      snippet = {
-        expand = function(args)
-          vim.fn["vsnip#anonymous"](args.body)
-        end,
-      },
-      mapping = {
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.close(),
-        ["<C-y>"] = cmp.mapping.confirm { select = true },
-      },
-      sources = {
-        { name = "nvim_lsp" },
-        { name = "vsnip" },
-      },
-      formatting = {
-        format = require("lspkind").cmp_format { with_text = false, maxwidth = 50 },
-      },
-    }
-
-    local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-    cmp.event:on(
-      "confirm_done",
-      cmp_autopairs.on_confirm_done { map_char = {
-        all = "(",
-        tex = "{",
-      } }
-    )
-
-    vim.cmd [[
-    imap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<C-j>'
-    smap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<C-j>'
-    imap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
-    ]]
+    -- local cmp = require "cmp"
+    --
+    -- cmp.setup {
+    --   snippet = {
+    --     expand = function(args)
+    --       vim.fn["vsnip#anonymous"](args.body)
+    --     end,
+    --   },
+    --   mapping = {
+    --     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    --     ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    --     ["<C-Space>"] = cmp.mapping.complete(),
+    --     ["<C-e>"] = cmp.mapping.close(),
+    --     ["<C-y>"] = cmp.mapping.confirm { select = true },
+    --   },
+    --   sources = {
+    --     { name = "nvim_lsp" },
+    --     { name = "vsnip" },
+    --   },
+    --   formatting = {
+    --     format = require("lspkind").cmp_format { with_text = false, maxwidth = 50 },
+    --   },
+    -- }
+    --
+    -- local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+    -- cmp.event:on(
+    --   "confirm_done",
+    --   cmp_autopairs.on_confirm_done { map_char = {
+    --     all = "(",
+    --     tex = "{",
+    --   } }
+    -- )
+    --
+    -- vim.cmd [[
+    -- imap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<C-j>'
+    -- smap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<C-j>'
+    -- imap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
+    -- ]]
 
     local null_ls = require "null-ls"
-    local lspconfig = require "lspconfig"
 
     local sources = {
       null_ls.builtins.formatting.stylua,
