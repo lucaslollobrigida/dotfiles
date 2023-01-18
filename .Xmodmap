@@ -1,0 +1,6 @@
+clear Lock
+keysym Caps_Lock = Caps_Lock Control_L
+keysym Caps_Lock = Escape
+keysym Escape = grave asciitilde
+add Lock = Caps_Lock
+keycode 108 = Multi_key

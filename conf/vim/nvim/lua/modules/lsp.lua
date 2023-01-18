@@ -22,20 +22,20 @@ local on_attach = function(client, bufnr)
     { "n", "[e", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts },
     { "n", "<leader>d", "<cmd>lua vim.diagnostic.set_loclist()<cr>", opts },
     { "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts },
-    { "n", "<leader>a", "<cmd>lua require('modules.telescope').lsp_code_action()<CR>", opts },
-    { "v", "<leader>a", "<cmd>lua require('modules.telescope').lsp_range_code_action()<CR>", opts },
+    { "n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts },
+    { "v", "<leader>a", "<cmd>lua vim.lsp.buf.range_code_action()<CR>", opts },
   }
 
   for _, key in ipairs(keys) do
     buf_set_keymap(bufnr, key[1], key[2], key[3], key[4]) -- is there an apply-like in lua? (apply bufnr key)
   end
 
-  if client.resolved_capabilities.document_range_formatting then
-    buf_set_keymap(bufnr, "v", "<leader>lf", [[<cmd>'<,'>lua vim.lsp.buf.formatting()<cr>]], opts)
+  if client.server_capabilities.documentRangeFormattingProvider then
+    buf_set_keymap(bufnr, "v", "<leader>lf", [[<cmd>'<,'>lua vim.lsp.buf.format {async = true} <cr>]], opts)
   end
 
-  if client.resolved_capabilities.document_formatting then
-    buf_set_keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)
+  if client.server_capabilities.documentFormattingProvider then
+    buf_set_keymap(bufnr, "n", "<leader>lf", [[<cmd>lua vim.lsp.buf.format {async = true} <cr>]], opts)
     -- vim.api.nvim_exec(
     --   [[
     --   augroup lsp_formatting
@@ -52,13 +52,15 @@ local on_attach = function(client, bufnr)
     augroup lsp_hover
     autocmd! * <buffer>
     autocmd CursorHold <buffer> lua vim.diagnostic.open_float()
-    autocmd CursorHoldI <buffer> silent! lua vim.lsp.buf.signature_help()
     augroup END
     ]],
     false
   )
 
-  if client.resolved_capabilities.code_lens then
+  -- INFO: removed from above ^
+  -- autocmd CursorHoldI <buffer> silent! lua vim.lsp.buf.signature_help()
+
+  if client.server_capabilities.codeLensProvider then
     buf_set_keymap(bufnr, "n", "<leader>l", "<cmd>lua vim.lsp.codelens.run()<CR>", opts)
 
     vim.api.nvim_exec(
@@ -74,7 +76,7 @@ local on_attach = function(client, bufnr)
     vim.lsp.codelens.refresh()
   end
 
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_exec(
       [[
       hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
@@ -100,12 +102,6 @@ return {
     load "trouble.nvim"
     load "nvim-web-devicons"
     load "null-ls.nvim"
-
-    load "coq_nvim"
-    -- load "nvim-cmp"
-    -- load "cmp-nvim-lsp"
-    -- load "cmp-vsnip"
-    -- load "vim-vsnip"
   end,
   plugins = function(use)
     use {
@@ -118,18 +114,6 @@ return {
         "folke/trouble.nvim",
         "kyazdani42/nvim-web-devicons",
       },
-    }
-
-    use {
-      "hrsh7th/nvim-cmp",
-      opt = true,
-      requires = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-vsnip", "hrsh7th/vim-vsnip" },
-    }
-
-    use {
-      "ms-jpq/coq_nvim",
-      branch = "coq",
-      opt = true
     }
 
     use { "jose-elias-alvarez/null-ls.nvim", opt = true }
@@ -151,91 +135,15 @@ return {
     vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticInfo" })
     vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticHint" })
 
-    -- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    --   virtual_text = false,
-    --   signs = true,
-    --   underline = true,
-    --   -- update_in_insert = false,
-    -- })
-    vim.diagnostic.config({
+    vim.diagnostic.config {
       virtual_text = false,
       signs = true,
       underline = true,
-      -- update_in_insert = true,
-      -- severity_sort = false,
-    })
-
-    -- symbols for autocomplete
-    vim.lsp.protocol.CompletionItemKind = {
-      "   (Text) ",
-      "   (Method)",
-      "   (Function)",
-      "   (Constructor)",
-      " ﴲ  (Field)",
-      "[] (Variable)",
-      "   (Class)",
-      " ﰮ  (Interface)",
-      "   (Module)",
-      " 襁 (Property)",
-      "   (Unit)",
-      "   (Value)",
-      " 練 (Enum)",
-      "   (Keyword)",
-      "   (Snippet)",
-      "   (Color)",
-      "   (File)",
-      "   (Reference)",
-      "   (Folder)",
-      "   (EnumMember)",
-      " ﲀ  (Constant)",
-      " ﳤ  (Struct)",
-      "   (Event)",
-      "   (Operator)",
-      "   (TypeParameter)",
     }
 
     vim.cmd "highlight default link LspCodeLens Comment"
     vim.cmd "highlight default link LspCodeLensSign LspCodeLens"
     vim.cmd "highlight default link LspCodeLensSeparator LspCodeLens"
-
-    -- local cmp = require "cmp"
-    --
-    -- cmp.setup {
-    --   snippet = {
-    --     expand = function(args)
-    --       vim.fn["vsnip#anonymous"](args.body)
-    --     end,
-    --   },
-    --   mapping = {
-    --     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-    --     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    --     ["<C-Space>"] = cmp.mapping.complete(),
-    --     ["<C-e>"] = cmp.mapping.close(),
-    --     ["<C-y>"] = cmp.mapping.confirm { select = true },
-    --   },
-    --   sources = {
-    --     { name = "nvim_lsp" },
-    --     { name = "vsnip" },
-    --   },
-    --   formatting = {
-    --     format = require("lspkind").cmp_format { with_text = false, maxwidth = 50 },
-    --   },
-    -- }
-    --
-    -- local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-    -- cmp.event:on(
-    --   "confirm_done",
-    --   cmp_autopairs.on_confirm_done { map_char = {
-    --     all = "(",
-    --     tex = "{",
-    --   } }
-    -- )
-    --
-    -- vim.cmd [[
-    -- imap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<C-j>'
-    -- smap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<C-j>'
-    -- imap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
-    -- ]]
 
     local null_ls = require "null-ls"
 

@@ -22,16 +22,17 @@ return {
       [[
       augroup metals_lsp
       autocmd!
-      autocmd FileType scala,sbt lua require('metals').initialize_or_attach(require('modules.lang.scala').setup())
+      autocmd FileType scala,sbt lua require('metals').initialize_or_attach(require('modules.lang.scala').lsp_config())
       autocmd FileType scala,sbt nnoremap <buffer> <localleader>a <cmd>lua require("telescope").extensions.metals.commands()<CR>
       augroup END
       ]],
       false
     )
-
+  end,
+  lsp_config = function()
     return {
       on_attach = require("modules.lsp").on_attach,
-      -- capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+      capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
       init_options = {
         statusBarProvider = "on",
         compilerOptions = {
@@ -40,7 +41,7 @@ return {
       },
       -- tvp = {},
       settings = {
-        useGlobalExecutable = true,
+        useGlobalExecutable = false,
         showImplicitArguments = true,
         showInferredType = true,
         superMethodLensesEnabled = true,

@@ -25,6 +25,7 @@ vim.opt.clipboard = "unnamedplus"
 
 ----- .
 vim.opt.shortmess:append "c"
+vim.opt.shortmess:append "W"
 -- vim.cmd([[set iskeyword+=-]])
 
 ----- disable unused default plugins
@@ -42,7 +43,7 @@ vim.opt.timeout = true
 vim.opt.timeoutlen = 300
 vim.opt.ttimeout = true
 vim.opt.ttyfast = true
-vim.opt.lazyredraw = true
+-- vim.opt.lazyredraw = true
 
 ----- disable swapfiles
 vim.opt.swapfile = false

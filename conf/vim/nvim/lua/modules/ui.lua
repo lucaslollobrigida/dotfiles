@@ -261,6 +261,8 @@ return {
     load "nvim-notify"
     load "indent-blankline.nvim"
     load "windline.nvim"
+    load "nui.nvim"
+    load "noice.nvim"
   end,
   plugins = function(use)
     use {
@@ -268,12 +270,20 @@ return {
       as = "embark",
       opt = true,
     }
-    use { "rcarriga/nvim-notify", opt = true }
     use { "lukas-reineke/indent-blankline.nvim", opt = true }
     use { "windwp/windline.nvim", opt = true }
+
+    use {
+      "folke/noice.nvim",
+      requires = {
+        { "MunifTanjim/nui.nvim", opt = true },
+        { "rcarriga/nvim-notify", opt = true },
+      },
+    }
   end,
   setup = function()
     local C = require "config"
+    -- require("noice").setup()
 
     vim.cmd("colorscheme " .. C.colorscheme)
 

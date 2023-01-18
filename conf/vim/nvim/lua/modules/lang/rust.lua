@@ -10,9 +10,9 @@ return {
 
     local lsp = require "modules.lsp"
 
-    local config = {
+    lspconfig.rust_analyzer.setup {
       on_attach = lsp.on_attach,
+      capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
     }
-    lspconfig.rust_analyzer.setup(require("coq").lsp_ensure_capabilities(config))
   end,
 }

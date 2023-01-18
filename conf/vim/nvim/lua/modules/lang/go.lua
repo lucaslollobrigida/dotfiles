@@ -12,12 +12,12 @@ return {
       filetypes = { "go" },
       root_dir = lspconfig.util.root_pattern(".git", "go.mod"),
       on_attach = require("modules.lsp").on_attach,
-      -- capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+      capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
       settings = {
         gopls = {
           analyses = { unusedparams = true },
           staticcheck = true,
-          usePlaceholders = false,
+          usePlaceholders = true,
           completeUnimported = true,
           codelenses = {
             gc_details = true,

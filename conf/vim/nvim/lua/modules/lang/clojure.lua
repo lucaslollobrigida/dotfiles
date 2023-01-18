@@ -20,7 +20,7 @@ return {
       "Olical/conjure",
       ft = lisps,
       opt = true,
-      requires = { "Olical/AnsiEsc", "tami5/compe-conjure" },
+      requires = { "Olical/AnsiEsc", "hrsh7th/compe-conjure" },
     }
     use {
       "tami5/lispdocs.nvim",
@@ -37,13 +37,13 @@ return {
     end
 
     local lsp = require "modules.lsp"
-    -- local cmp = require "cmp_nvim_lsp"
-    local coq = require "coq"
+    local cmp = require "cmp_nvim_lsp"
+    -- local coq = require "coq"
 
     local opts = { noremap = true, silent = true }
     local config = {
       filetypes = { "clojure" },
-      -- capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+      capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities()),
       on_attach = function(client, bufnr)
         lsp.buf_set_keymap(
           bufnr,
@@ -59,7 +59,7 @@ return {
       },
     }
 
-    lspconfig.clojure_lsp.setup(coq.lsp_ensure_capabilities(config))
+    lspconfig.clojure_lsp.setup(config)
 
     vim.api.nvim_set_var("sexp_filetypes", "clojure,racket,scheme,lisp,fennel")
     vim.api.nvim_set_var("sexp_no_word_maps", true)

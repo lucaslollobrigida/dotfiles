@@ -55,6 +55,7 @@ return {
     load "telescope.nvim"
     load "nvim-web-devicons"
     load "project.nvim"
+    load "telescope-ui-select.nvim"
   end,
 
   plugins = function(use)
@@ -68,6 +69,7 @@ return {
         "kyazdani42/nvim-web-devicons",
       },
     }
+    use {'nvim-telescope/telescope-ui-select.nvim' }
 
     use { "lucaslollobrigida/project.nvim", branch = "main", opt = true }
   end,
@@ -138,15 +140,15 @@ return {
         project = {
           locations = {
             { "/home/lollo/dev/nu", depth = 1 },
-            { "/home/lollo/dev/personal", depth = 2 },
-            { "/home/lollo/.dotfiles", depth = 1 },
-            { "/etc/nixos", depth = 1 },
+            { "/home/lollo/dev/personal", depth = 1 }
           },
         },
+        ["ui-select"] = { require("telescope.themes").get_cursor() }
       },
     }
 
     telescope.load_extension "fzy_native"
+    telescope.load_extension("ui-select")
   end,
 
   project_files = function()

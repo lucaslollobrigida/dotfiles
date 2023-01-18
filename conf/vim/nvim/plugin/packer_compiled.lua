@@ -9,23 +9,26 @@ vim.api.nvim_command('packadd packer.nvim')
 
 local no_errors, error_msg = pcall(function()
 
-  local time
-  local profile_info
-  local should_profile = false
-  if should_profile then
-    local hrtime = vim.loop.hrtime
-    profile_info = {}
-    time = function(chunk, start)
-      if start then
-        profile_info[chunk] = hrtime()
-      else
-        profile_info[chunk] = (hrtime() - profile_info[chunk]) / 1e6
-      end
+_G._packer = _G._packer or {}
+_G._packer.inside_compile = true
+
+local time
+local profile_info
+local should_profile = false
+if should_profile then
+  local hrtime = vim.loop.hrtime
+  profile_info = {}
+  time = function(chunk, start)
+    if start then
+      profile_info[chunk] = hrtime()
+    else
+      profile_info[chunk] = (hrtime() - profile_info[chunk]) / 1e6
     end
-  else
-    time = function(chunk, start) end
   end
-  
+else
+  time = function(chunk, start) end
+end
+
 local function save_profiles(threshold)
   local sorted_times = {}
   for chunk_name, time_taken in pairs(profile_info) do
@@ -38,8 +41,10 @@ local function save_profiles(threshold)
       results[i] = elem[1] .. ' took ' .. elem[2] .. 'ms'
     end
   end
+  if threshold then
+    table.insert(results, '(Only showing plugins that took longer than ' .. threshold .. ' ms ' .. 'to load)')
+  end
 
-  _G._packer = _G._packer or {}
   _G._packer.profile_output = results
 end
 
@@ -78,6 +83,26 @@ _G.packer_plugins = {
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/AnsiEsc",
     url = "https://github.com/Olical/AnsiEsc"
   },
+  ["cmp-buffer"] = {
+    after_files = { "/home/lollo/.local/share/nvim/site/pack/packer/opt/cmp-buffer/after/plugin/cmp_buffer.lua" },
+    load_after = {
+      ["nvim-cmp"] = true
+    },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/cmp-buffer",
+    url = "https://github.com/hrsh7th/cmp-buffer"
+  },
+  ["cmp-cmdline"] = {
+    after_files = { "/home/lollo/.local/share/nvim/site/pack/packer/opt/cmp-cmdline/after/plugin/cmp_cmdline.lua" },
+    load_after = {
+      ["nvim-cmp"] = true
+    },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/cmp-cmdline",
+    url = "https://github.com/hrsh7th/cmp-cmdline"
+  },
   ["cmp-nvim-lsp"] = {
     after_files = { "/home/lollo/.local/share/nvim/site/pack/packer/opt/cmp-nvim-lsp/after/plugin/cmp_nvim_lsp.lua" },
     load_after = {
@@ -88,8 +113,28 @@ _G.packer_plugins = {
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
+  ["cmp-nvim-lsp-signature-help"] = {
+    after_files = { "/home/lollo/.local/share/nvim/site/pack/packer/opt/cmp-nvim-lsp-signature-help/after/plugin/cmp_nvim_lsp_signature_help.lua" },
+    load_after = {
+      ["nvim-cmp"] = true
+    },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/cmp-nvim-lsp-signature-help",
+    url = "https://github.com/hrsh7th/cmp-nvim-lsp-signature-help"
+  },
+  ["cmp-path"] = {
+    after_files = { "/home/lollo/.local/share/nvim/site/pack/packer/opt/cmp-path/after/plugin/cmp_path.lua" },
+    load_after = {
+      ["nvim-cmp"] = true
+    },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/cmp-path",
+    url = "https://github.com/hrsh7th/cmp-path"
+  },
   ["cmp-vsnip"] = {
-    after_files = { "/home/lollo/.local/share/nvim/site/pack/packer/opt/cmp-vsnip/after/plugin/cmp_vsnip.vim" },
+    after_files = { "/home/lollo/.local/share/nvim/site/pack/packer/opt/cmp-vsnip/after/plugin/cmp_vsnip.lua" },
     load_after = {
       ["nvim-cmp"] = true
     },
@@ -106,10 +151,10 @@ _G.packer_plugins = {
     loaded = false,
     needs_bufread = false,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/compe-conjure",
-    url = "https://github.com/tami5/compe-conjure"
+    url = "https://github.com/hrsh7th/compe-conjure"
   },
   conjure = {
-    after = { "AnsiEsc", "compe-conjure" },
+    after = { "compe-conjure", "AnsiEsc" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -184,11 +229,29 @@ _G.packer_plugins = {
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/lspkind-nvim",
     url = "https://github.com/onsails/lspkind-nvim"
   },
+  ["markdown-preview.nvim"] = {
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/markdown-preview.nvim",
+    url = "https://github.com/iamcco/markdown-preview.nvim"
+  },
   neogit = {
     loaded = false,
     needs_bufread = true,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/neogit",
     url = "https://github.com/TimUntersberger/neogit"
+  },
+  ["noice.nvim"] = {
+    loaded = true,
+    path = "/home/lollo/.local/share/nvim/site/pack/packer/start/noice.nvim",
+    url = "https://github.com/folke/noice.nvim"
+  },
+  ["nui.nvim"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["null-ls.nvim"] = {
     loaded = false,
@@ -209,7 +272,7 @@ _G.packer_plugins = {
     url = "https://github.com/kevinhwang91/nvim-bqf"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-nvim-lsp", "cmp-vsnip", "vim-vsnip" },
+    after = { "cmp-nvim-lsp", "cmp-path", "cmp-buffer", "cmp-cmdline", "cmp-vsnip", "vim-vsnip", "cmp-nvim-lsp-signature-help" },
     loaded = false,
     needs_bufread = false,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/nvim-cmp",
@@ -230,6 +293,12 @@ _G.packer_plugins = {
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/nvim-dap",
     url = "https://github.com/mfussenegger/nvim-dap"
   },
+  ["nvim-jdtls"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/nvim-jdtls",
+    url = "https://github.com/mfussenegger/nvim-jdtls"
+  },
   ["nvim-lsp-ts-utils"] = {
     loaded = false,
     needs_bufread = false,
@@ -237,7 +306,7 @@ _G.packer_plugins = {
     url = "https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils"
   },
   ["nvim-lspconfig"] = {
-    after = { "lsp-colors.nvim", "nvim-dap", "lspkind-nvim", "trouble.nvim" },
+    after = { "lspkind-nvim", "lsp-colors.nvim", "nvim-dap", "trouble.nvim" },
     loaded = false,
     needs_bufread = false,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/nvim-lspconfig",
@@ -257,7 +326,7 @@ _G.packer_plugins = {
   },
   ["nvim-treesitter"] = {
     loaded = false,
-    needs_bufread = true,
+    needs_bufread = false,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
@@ -338,8 +407,13 @@ _G.packer_plugins = {
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/telescope-fzy-native.nvim",
     url = "https://github.com/nvim-telescope/telescope-fzy-native.nvim"
   },
+  ["telescope-ui-select.nvim"] = {
+    loaded = true,
+    path = "/home/lollo/.local/share/nvim/site/pack/packer/start/telescope-ui-select.nvim",
+    url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
+  },
   ["telescope.nvim"] = {
-    after = { "popup.nvim", "nvim-web-devicons", "plenary.nvim", "telescope-fzy-native.nvim" },
+    after = { "popup.nvim", "telescope-fzy-native.nvim", "nvim-web-devicons", "plenary.nvim" },
     loaded = false,
     needs_bufread = true,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/telescope.nvim",
@@ -416,7 +490,7 @@ _G.packer_plugins = {
       ["nvim-cmp"] = true
     },
     loaded = false,
-    needs_bufread = false,
+    needs_bufread = true,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/vim-vsnip",
     url = "https://github.com/hrsh7th/vim-vsnip"
   },
@@ -429,6 +503,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Setup for: markdown-preview.nvim
+time([[Setup for markdown-preview.nvim]], true)
+try_loadstring("\27LJ\2\n=\0\0\2\0\4\0\0056\0\0\0009\0\1\0005\1\3\0=\1\2\0K\0\1\0\1\2\0\0\rmarkdown\19mkdp_filetypes\6g\bvim\0", "setup", "markdown-preview.nvim")
+time([[Setup for markdown-preview.nvim]], false)
 -- Config for: gitsigns.nvim
 time([[Config for gitsigns.nvim]], true)
 try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
@@ -437,13 +515,21 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType scheme ++once lua require("packer.load")({'conjure', 'vim-sexp', 'lispdocs.nvim'}, { ft = "scheme" }, _G.packer_plugins)]]
 vim.cmd [[au FileType racket ++once lua require("packer.load")({'conjure', 'vim-sexp', 'lispdocs.nvim'}, { ft = "racket" }, _G.packer_plugins)]]
-vim.cmd [[au FileType fennel ++once lua require("packer.load")({'conjure', 'vim-sexp', 'lispdocs.nvim'}, { ft = "fennel" }, _G.packer_plugins)]]
 vim.cmd [[au FileType lisp ++once lua require("packer.load")({'conjure', 'vim-sexp', 'lispdocs.nvim'}, { ft = "lisp" }, _G.packer_plugins)]]
 vim.cmd [[au FileType clojure ++once lua require("packer.load")({'conjure', 'vim-sexp', 'lispdocs.nvim'}, { ft = "clojure" }, _G.packer_plugins)]]
+vim.cmd [[au FileType fennel ++once lua require("packer.load")({'conjure', 'vim-sexp', 'lispdocs.nvim'}, { ft = "fennel" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
+
+_G._packer.inside_compile = false
+if _G._packer.needs_bufread == true then
+  vim.cmd("doautocmd BufRead")
+end
+_G._packer.needs_bufread = false
+
 if should_profile then save_profiles() end
 
 end)
