@@ -154,7 +154,7 @@ _G.packer_plugins = {
     url = "https://github.com/hrsh7th/compe-conjure"
   },
   conjure = {
-    after = { "compe-conjure", "AnsiEsc" },
+    after = { "AnsiEsc", "compe-conjure" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -178,6 +178,13 @@ _G.packer_plugins = {
     needs_bufread = true,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/flutter-tools.nvim",
     url = "https://github.com/akinsho/flutter-tools.nvim"
+  },
+  ["github-nvim-theme"] = {
+    config = { "\27LJ\2\n>\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\17github-theme\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/github-nvim-theme",
+    url = "https://github.com/projekt0n/github-nvim-theme"
   },
   ["gitlinker.nvim"] = {
     loaded = false,
@@ -272,7 +279,7 @@ _G.packer_plugins = {
     url = "https://github.com/kevinhwang91/nvim-bqf"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-nvim-lsp", "cmp-path", "cmp-buffer", "cmp-cmdline", "cmp-vsnip", "vim-vsnip", "cmp-nvim-lsp-signature-help" },
+    after = { "cmp-buffer", "cmp-cmdline", "vim-vsnip", "cmp-vsnip", "cmp-nvim-lsp-signature-help", "cmp-nvim-lsp", "cmp-path" },
     loaded = false,
     needs_bufread = false,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/nvim-cmp",
@@ -306,7 +313,7 @@ _G.packer_plugins = {
     url = "https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils"
   },
   ["nvim-lspconfig"] = {
-    after = { "lspkind-nvim", "lsp-colors.nvim", "nvim-dap", "trouble.nvim" },
+    after = { "nvim-dap", "lspkind-nvim", "lsp-colors.nvim", "trouble.nvim" },
     loaded = false,
     needs_bufread = false,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/nvim-lspconfig",
@@ -413,7 +420,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
   },
   ["telescope.nvim"] = {
-    after = { "popup.nvim", "telescope-fzy-native.nvim", "nvim-web-devicons", "plenary.nvim" },
+    after = { "plenary.nvim", "popup.nvim", "telescope-fzy-native.nvim", "nvim-web-devicons" },
     loaded = false,
     needs_bufread = true,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/telescope.nvim",
@@ -424,6 +431,12 @@ _G.packer_plugins = {
     needs_bufread = false,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/todo-comments.nvim",
     url = "https://github.com/folke/todo-comments.nvim"
+  },
+  ["tokyonight.nvim"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/tokyonight.nvim",
+    url = "https://github.com/folke/tokyonight.nvim"
   },
   ["trouble.nvim"] = {
     load_after = {
@@ -515,12 +528,12 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType scheme ++once lua require("packer.load")({'lispdocs.nvim', 'conjure', 'vim-sexp'}, { ft = "scheme" }, _G.packer_plugins)]]
+vim.cmd [[au FileType racket ++once lua require("packer.load")({'lispdocs.nvim', 'conjure', 'vim-sexp'}, { ft = "racket" }, _G.packer_plugins)]]
+vim.cmd [[au FileType clojure ++once lua require("packer.load")({'lispdocs.nvim', 'conjure', 'vim-sexp'}, { ft = "clojure" }, _G.packer_plugins)]]
+vim.cmd [[au FileType fennel ++once lua require("packer.load")({'lispdocs.nvim', 'conjure', 'vim-sexp'}, { ft = "fennel" }, _G.packer_plugins)]]
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
-vim.cmd [[au FileType scheme ++once lua require("packer.load")({'conjure', 'vim-sexp', 'lispdocs.nvim'}, { ft = "scheme" }, _G.packer_plugins)]]
-vim.cmd [[au FileType racket ++once lua require("packer.load")({'conjure', 'vim-sexp', 'lispdocs.nvim'}, { ft = "racket" }, _G.packer_plugins)]]
-vim.cmd [[au FileType lisp ++once lua require("packer.load")({'conjure', 'vim-sexp', 'lispdocs.nvim'}, { ft = "lisp" }, _G.packer_plugins)]]
-vim.cmd [[au FileType clojure ++once lua require("packer.load")({'conjure', 'vim-sexp', 'lispdocs.nvim'}, { ft = "clojure" }, _G.packer_plugins)]]
-vim.cmd [[au FileType fennel ++once lua require("packer.load")({'conjure', 'vim-sexp', 'lispdocs.nvim'}, { ft = "fennel" }, _G.packer_plugins)]]
+vim.cmd [[au FileType lisp ++once lua require("packer.load")({'lispdocs.nvim', 'conjure', 'vim-sexp'}, { ft = "lisp" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 

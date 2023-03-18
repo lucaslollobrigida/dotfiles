@@ -4,7 +4,7 @@
     corner_radius = 4
     font = SauceCodePro Nerd Font 10
 
-    markup = yes
+    markup = full
 
     # The format of the message.  Possible variables are:
     #   %a  appname
@@ -39,7 +39,7 @@
 
     # Split notifications into multiple lines if they don't fit into
     # geometry.
-    word_wrap = no
+    word_wrap = yes
 
     # Ignore newlines '\n' in notifications.
     ignore_newline = no
@@ -60,7 +60,7 @@
 
     # Shrink window if it's smaller than the width.  Will be ignored if
     # width is 0.
-    shrink = yes
+    shrink = no
 
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing windowmanager is
@@ -97,25 +97,24 @@
     history_length = 20
 
     # Display indicators for URLs (U) and actions (A).
-    show_indicators = yes
-    
+    show_indicators = no
+
     # The height of a single line.  If the height is smaller than the
     # font height, it will get raised to the font height.
     # This adds empty space above and under the text.
     line_height = 0
-    
+
     # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
     separator_height = 1
-    
+
     # Padding between text and separator.
-    # padding = 8
     padding = 8
-    
+
     # Horizontal padding.
     horizontal_padding = 10
-    
+
     # Define a color for the separator.
     # possible values are:
     #  * auto: dunst tries to find a color fitting to the background;
@@ -124,26 +123,30 @@
     #  * anything else will be interpreted as a X color.
     # separator_color = #263238
     separator_color = frame
-    
+
     # Print a notification on startup.
     # This is mainly for error detection, since dbus (re-)starts dunst
     # automatically after a crash.
     startup_notification = false
-    
+
     # dmenu path.
     dmenu = /usr/bin/dmenu -p dunst:
-    
+
     # Browser for opening urls in context menu.
-    browser = firefox
+    browser = /usr/bin/xdg-open
 
     # Align icons left/right/off
     icon_position = left
 
     # Paths to default icons.
-    #icon_path = /usr/share/icons/Adwaita/16x16/status/:/usr/share/icons/Adwaita/16x16/devices/:/usr/share/icons/Adwaita/16x16/emblems/:/usr/share/icons/Adwaita/16x16/actions/:/usr/share/icons/Adwaita/16x16/emotes/
-    icon_path = /usr/share/icons/Papirus-Dark/16x16/status/:/usr/share/icons/Papirus-Dark/16x16/devices/:/usr/share/icons/Papirus-Dark/16x16/emblems/:/usr/share/icons/Papirus-Dark/16x16/actions/
+    icon_path = /usr/share/icons/Adwaita/16x16/status/:/usr/share/icons/Adwaita/16x16/devices/:/usr/share/icons/Adwaita/16x16/emblems/:/usr/share/icons/Adwaita/16x16/actions/:/usr/share/icons/Adwaita/16x16/emotes/
+    #icon_path = /usr/share/icons/Papirus-Dark/16x16/status/:/usr/share/icons/Papirus-Dark/16x16/devices/:/usr/share/icons/Papirus-Dark/16x16/emblems/:/usr/share/icons/Papirus-Dark/16x16/actions/
     # Limit icons size.
     max_icon_size=32
+
+    mouse_left_click = do_action, close_current
+    mouse_middle_click = do_action
+    mouse_right_click = close_all
 
 [shortcuts]
 
@@ -151,10 +154,10 @@
     # Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
     # "mod3" and "mod4" (windows-key).
     # Xev might be helpful to find names for keys.
-    
+
     # Close notification.
     #close = mod1+space
-    
+
     # Close all notifications.
     # close_all = ctrl+shift+space
     #close_all = ctrl+mod1+space
@@ -163,29 +166,26 @@
     # On the US keyboard layout "grave" is normally above TAB and left
     # of "1".
     #history = ctrl+mod4+h 
-    
+
     # Context menu.
     #context = ctrl+mod1+c
 
 [urgency_low]
-    # IMPORTANT: colors have to be defined in quotation marks.
-    # Otherwise the "#" and following would be interpreted as a comment.
     background = "#282a36"
-    foreground = "#6272a4"
-    timeout = 10
+    foreground = "#f8f8f2"
+    timeout = 4
 
 [urgency_normal]
     background = "#282a36"
-    foreground = "#bd93f9"
-    timeout = 10
+    foreground = "#f8f8f2"
+    timeout = 4
     #icon = /usr/share/icons/Adwaita/16x16/status/dialog-information-symbolic.symbolic.png
 
 [urgency_critical]
     background = "#ff5555"
     foreground = "#f8f8f2"
     frame_color = "#ff5555"
-    timeout = 0
-
+    timeout = 4
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.

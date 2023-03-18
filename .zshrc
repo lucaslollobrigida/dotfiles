@@ -5,19 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-export NU_HOME="$HOME/dev/nu"
-export NUCLI_HOME=$NU_HOME/nucli
-
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH="$NUCLI_HOME:$PATH"
-export PATH="$PATH:/home/lollo/.local/share/coursier/bin"
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
-export JAVA_HOME="$HOME/.asdf/installs/java/openjdk-11/"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -49,14 +38,11 @@ CASE_SENSITIVE="true"
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -89,15 +75,13 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(asdf git rust vi-mode)
+plugins=(
+  asdf
+  git
+  rust
+  vi-mode
+  zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
 source /usr/share/doc/fzf/examples/key-bindings.zsh
@@ -105,9 +89,10 @@ source /usr/share/doc/fzf/examples/completion.zsh
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
+export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
@@ -119,29 +104,9 @@ fi
 
 [ -f ~/.nurc ] && source ~/.nurc
 
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
-
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export ANDROID_HOME="/home/lollo/Android/Sdk"
-export ANDROID_SDK="$ANDROID_HOME"
-export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator"
-
-
-export MONOREPO_ROOT="${NU_HOME}/mini-meta-repo"
-export PATH="$PATH:$MONOREPO_ROOT/monocli/bin"
-
-
-export FLUTTER_SDK_HOME="$HOME/sdk-flutter"
-export FLUTTER_ROOT="$FLUTTER_SDK_HOME"
-export PATH="$PATH:$FLUTTER_SDK_HOME/bin:$HOME/.pub-cache/bin:$FLUTTER_ROOT/bin/cache/dart-sdk/bin"
-
-export GPG_TTY=/dev/pts/0
-# GPG_TTY=$(tty)
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
@@ -166,3 +131,10 @@ alias k="kubectl"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export TERM=xterm-256color-italic
+
+export GPG_TTY="$TTY"
+
+. ~/.asdf/plugins/java/set-java-home.zsh
+
+# Add JBang to environment
+alias j!=jbang

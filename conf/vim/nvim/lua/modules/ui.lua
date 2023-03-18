@@ -263,6 +263,8 @@ return {
     load "windline.nvim"
     load "nui.nvim"
     load "noice.nvim"
+    load "github-theme"
+    load "tokyonight.nvim"
   end,
   plugins = function(use)
     use {
@@ -270,6 +272,15 @@ return {
       as = "embark",
       opt = true,
     }
+    use {
+      "projekt0n/github-nvim-theme",
+      tag = "v0.0.7",
+      opt = true,
+      config = function()
+        require("github-theme").setup {}
+      end,
+    }
+    use { 'folke/tokyonight.nvim', opt = true }
     use { "lukas-reineke/indent-blankline.nvim", opt = true }
     use { "windwp/windline.nvim", opt = true }
 

@@ -11,7 +11,7 @@ return {
     local lsp = require "modules.lsp"
     local cmp = require "cmp_nvim_lsp"
 
-    lspconfig.sumneko_lua.setup {
+    lspconfig.lua_ls.setup {
       cmd = { "lua-language-server" },
       on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
