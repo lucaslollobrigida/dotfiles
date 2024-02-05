@@ -7,7 +7,7 @@ local buf_set_keymap = function(bufnr, ...)
 end
 
 local on_attach = function(client, bufnr)
-  buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+  -- buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   local opts = { noremap = true, silent = true }
 
@@ -27,7 +27,7 @@ local on_attach = function(client, bufnr)
   }
 
   for _, key in ipairs(keys) do
-    buf_set_keymap(bufnr, key[1], key[2], key[3], key[4]) -- is there an apply-like in lua? (apply bufnr key)
+    buf_set_keymap(bufnr, unpack(key))
   end
 
   if client.server_capabilities.documentRangeFormattingProvider then

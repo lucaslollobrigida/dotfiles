@@ -5,6 +5,7 @@ return {
     load "vim-sexp-mappings-for-regular-people"
     load "lispdocs.nvim"
     load "sql.nvim"
+    load "baleia.nvim"
   end,
   plugins = function(use)
     local lisps = { "clojure", "scheme", "racket", "lisp", "fennel" }
@@ -28,6 +29,7 @@ return {
       opt = true,
       requires = { "tami5/sql.nvim" },
     }
+    use { 'm00qek/baleia.nvim', tag = 'v1.3.0' }
   end,
   setup = function()
     local ok, lspconfig = pcall(require, "lspconfig")
@@ -44,6 +46,7 @@ return {
     local config = {
       filetypes = { "clojure" },
       capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+      -- capabilities = coq.lsp_ensure_capabilities(vim.lsp.protocol.make_client_capabilities()),
       on_attach = function(client, bufnr)
         lsp.buf_set_keymap(
           bufnr,
@@ -74,6 +77,7 @@ return {
       false
     )
     vim.g["conjure#log#fold#enabled"] = true
+    vim.g["conjure#log#strip_ansi_escape_sequences_line_limit"] = 0
     vim.g["conjure#log#wrap"] = true
     vim.g["conjure#client#clojure#nrepl#test#current_form_names"] = { "deftest", "defflow", "defspec", "defflow-i18n", "defflow-mx", "defflow-co"}
 
@@ -81,6 +85,11 @@ return {
     vim.g["conjure#client#clojure#nrepl#mapping#run_current_test"] = "tt"
 
     vim.g["conjure#extract#tree_sitter#enabled"] = true
+
+    vim.cmd [[
+    let s:baleia = luaeval("require('baleia').setup { line_starts_at = 3 }")
+    autocmd BufWinEnter conjure-log-* call s:baleia.automatically(bufnr('%'))
+    ]]
   end,
   clojure_clean_ns = function()
     local file = require("modules.lsp").current_file_url()

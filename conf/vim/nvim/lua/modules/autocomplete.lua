@@ -1,5 +1,28 @@
 return {
   lazy_load = function(load)
+    -- vim.g.coq_settings = {
+    --   auto_start = 'shut-up',
+    --   clients = {
+    --     ['tmux.enabled'] = false,
+    --     ['paths.enabled'] = false,
+    --     ['buffers.enabled'] = false,
+    --     ['tags.enabled'] = false,
+    --     tree_sitter = {
+    --       enabled = true,
+    --       always_on_top = true,
+    --     },
+    --     lsp = {
+    --       enabled = true,
+    --       resolve_timeout = 0.4,
+    --     }
+    --   },
+    --   keymap = {
+    --     manual_complete_insertion_only = true,
+    --     manual_complete = "<C-x><C-o>",
+    --     recommended = false,
+    --   }
+    -- }
+
     -- load "coq_nvim"
     load "nvim-cmp"
     load "cmp-nvim-lsp"
@@ -25,11 +48,11 @@ return {
       },
     }
 
-    use {
-      "ms-jpq/coq_nvim",
-      branch = "coq",
-      opt = true,
-    }
+    -- use {
+    --   "ms-jpq/coq_nvim",
+    --   branch = "coq",
+    --   opt = true,
+    -- }
   end,
   setup = function()
     vim.lsp.protocol.CompletionItemKind = {
@@ -59,7 +82,6 @@ return {
       "   (Operator)",
       "   (TypeParameter)",
     }
-
     local cmp = require "cmp"
 
     cmp.setup {
@@ -128,5 +150,10 @@ return {
     smap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<C-j>'
     imap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
     ]]
+
+    local npairs = require "nvim-autopairs"
+
+    npairs.setup { check_ts = true, enable_check_bracket_line = false, map_bs = false, map_cr = false }
   end,
+
 }

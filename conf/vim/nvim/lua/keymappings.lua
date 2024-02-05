@@ -87,7 +87,7 @@ nnoremap("-", [[<cmd>lua require('modules.file_browser').file_browser()<CR>]])
 
 -- git
 nnoremap("<leader>b", [[<cmd>lua require('modules.telescope').git_branches()<CR>]])
-nnoremap("<leader>g", '<cmd>lua require("neogit").status.create("split")<cr>')
+nnoremap("<leader>g", '<cmd>lua require("neogit").open{kind="split"}<cr>')
 
 -- project
 nnoremap("<leader>p", [[<cmd>lua require('modules.telescope').browse_projects()<CR>]])

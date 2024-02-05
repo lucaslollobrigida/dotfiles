@@ -291,6 +291,16 @@ return {
         { "rcarriga/nvim-notify", opt = true },
       },
     }
+    use {
+      'j-hui/fidget.nvim',
+      tag = 'legacy',
+      event = "LspAttach",
+      config = function()
+        require("fidget").setup {
+          -- options
+        }
+      end
+    }
   end,
   setup = function()
     local C = require "config"
@@ -307,12 +317,9 @@ return {
     vim.cmd "hi htmlArg cterm=italic"
     vim.cmd "hi Type cterm=italic"
 
-    require("indent_blankline").setup {
-      char = "¦",
-      show_first_indent_level = false,
-      use_treesitter = true,
-      show_end_of_line = true,
-      buftype_exclude = { "terminal", "clojure" },
+    require("ibl").setup {
+      indent = { char = "¦" },
+      scope = { exclude = { language = { "terminal", "clojure" } } },
     }
 
     if pcall(require, "notify") then

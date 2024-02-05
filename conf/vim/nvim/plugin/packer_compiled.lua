@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/lollo/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/lollo/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/lollo/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/lollo/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/lollo/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/home/lollo/.cache/nvim/packer_hererocks/2.1.1692716794/share/lua/5.1/?.lua;/home/lollo/.cache/nvim/packer_hererocks/2.1.1692716794/share/lua/5.1/?/init.lua;/home/lollo/.cache/nvim/packer_hererocks/2.1.1692716794/lib/luarocks/rocks-5.1/?.lua;/home/lollo/.cache/nvim/packer_hererocks/2.1.1692716794/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/lollo/.cache/nvim/packer_hererocks/2.1.1692716794/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -82,6 +82,11 @@ _G.packer_plugins = {
     needs_bufread = false,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/AnsiEsc",
     url = "https://github.com/Olical/AnsiEsc"
+  },
+  ["baleia.nvim"] = {
+    loaded = true,
+    path = "/home/lollo/.local/share/nvim/site/pack/packer/start/baleia.nvim",
+    url = "https://github.com/m00qek/baleia.nvim"
   },
   ["cmp-buffer"] = {
     after_files = { "/home/lollo/.local/share/nvim/site/pack/packer/opt/cmp-buffer/after/plugin/cmp_buffer.lua" },
@@ -161,11 +166,10 @@ _G.packer_plugins = {
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/conjure",
     url = "https://github.com/Olical/conjure"
   },
-  coq_nvim = {
-    loaded = false,
-    needs_bufread = true,
-    path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/coq_nvim",
-    url = "https://github.com/ms-jpq/coq_nvim"
+  ["dressing.nvim"] = {
+    loaded = true,
+    path = "/home/lollo/.local/share/nvim/site/pack/packer/start/dressing.nvim",
+    url = "https://github.com/stevearc/dressing.nvim"
   },
   embark = {
     loaded = false,
@@ -173,10 +177,17 @@ _G.packer_plugins = {
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/embark",
     url = "https://github.com/embark-theme/vim"
   },
-  ["flutter-tools.nvim"] = {
+  ["fidget.nvim"] = {
+    config = { "\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vfidget\frequire\0" },
     loaded = false,
-    needs_bufread = true,
-    path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/flutter-tools.nvim",
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/fidget.nvim",
+    url = "https://github.com/j-hui/fidget.nvim"
+  },
+  ["flutter-tools.nvim"] = {
+    loaded = true,
+    path = "/home/lollo/.local/share/nvim/site/pack/packer/start/flutter-tools.nvim",
     url = "https://github.com/akinsho/flutter-tools.nvim"
   },
   ["github-nvim-theme"] = {
@@ -199,8 +210,9 @@ _G.packer_plugins = {
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
   ["indent-blankline.nvim"] = {
+    after_files = { "/home/lollo/.local/share/nvim/site/pack/packer/opt/indent-blankline.nvim/after/plugin/commands.lua" },
     loaded = false,
-    needs_bufread = false,
+    needs_bufread = true,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
@@ -279,7 +291,7 @@ _G.packer_plugins = {
     url = "https://github.com/kevinhwang91/nvim-bqf"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-buffer", "cmp-cmdline", "vim-vsnip", "cmp-vsnip", "cmp-nvim-lsp-signature-help", "cmp-nvim-lsp", "cmp-path" },
+    after = { "cmp-nvim-lsp", "cmp-buffer", "cmp-cmdline", "cmp-vsnip", "vim-vsnip", "cmp-nvim-lsp-signature-help", "cmp-path" },
     loaded = false,
     needs_bufread = false,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/nvim-cmp",
@@ -313,7 +325,7 @@ _G.packer_plugins = {
     url = "https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils"
   },
   ["nvim-lspconfig"] = {
-    after = { "nvim-dap", "lspkind-nvim", "lsp-colors.nvim", "trouble.nvim" },
+    after = { "lsp-colors.nvim", "lspkind-nvim", "trouble.nvim", "nvim-dap" },
     loaded = false,
     needs_bufread = false,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/nvim-lspconfig",
@@ -420,7 +432,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
   },
   ["telescope.nvim"] = {
-    after = { "plenary.nvim", "popup.nvim", "telescope-fzy-native.nvim", "nvim-web-devicons" },
+    after = { "nvim-web-devicons", "plenary.nvim", "popup.nvim", "telescope-fzy-native.nvim" },
     loaded = false,
     needs_bufread = true,
     path = "/home/lollo/.local/share/nvim/site/pack/packer/opt/telescope.nvim",
@@ -528,13 +540,17 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType scheme ++once lua require("packer.load")({'lispdocs.nvim', 'conjure', 'vim-sexp'}, { ft = "scheme" }, _G.packer_plugins)]]
-vim.cmd [[au FileType racket ++once lua require("packer.load")({'lispdocs.nvim', 'conjure', 'vim-sexp'}, { ft = "racket" }, _G.packer_plugins)]]
-vim.cmd [[au FileType clojure ++once lua require("packer.load")({'lispdocs.nvim', 'conjure', 'vim-sexp'}, { ft = "clojure" }, _G.packer_plugins)]]
-vim.cmd [[au FileType fennel ++once lua require("packer.load")({'lispdocs.nvim', 'conjure', 'vim-sexp'}, { ft = "fennel" }, _G.packer_plugins)]]
+vim.cmd [[au FileType lisp ++once lua require("packer.load")({'conjure', 'vim-sexp', 'lispdocs.nvim'}, { ft = "lisp" }, _G.packer_plugins)]]
+vim.cmd [[au FileType fennel ++once lua require("packer.load")({'conjure', 'vim-sexp', 'lispdocs.nvim'}, { ft = "fennel" }, _G.packer_plugins)]]
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
-vim.cmd [[au FileType lisp ++once lua require("packer.load")({'lispdocs.nvim', 'conjure', 'vim-sexp'}, { ft = "lisp" }, _G.packer_plugins)]]
+vim.cmd [[au FileType clojure ++once lua require("packer.load")({'conjure', 'vim-sexp', 'lispdocs.nvim'}, { ft = "clojure" }, _G.packer_plugins)]]
+vim.cmd [[au FileType scheme ++once lua require("packer.load")({'conjure', 'vim-sexp', 'lispdocs.nvim'}, { ft = "scheme" }, _G.packer_plugins)]]
+vim.cmd [[au FileType racket ++once lua require("packer.load")({'conjure', 'vim-sexp', 'lispdocs.nvim'}, { ft = "racket" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
+  -- Event lazy-loads
+time([[Defining lazy-load event autocommands]], true)
+vim.cmd [[au LspAttach * ++once lua require("packer.load")({'fidget.nvim'}, { event = "LspAttach *" }, _G.packer_plugins)]]
+time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 
 _G._packer.inside_compile = false

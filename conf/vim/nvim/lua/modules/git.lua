@@ -5,7 +5,7 @@ return {
     load "plenary.nvim"
   end,
   plugins = function(use)
-    use { "TimUntersberger/neogit", opt = true }
+    use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim", opt = true }
     use {
       "lewis6991/gitsigns.nvim",
       requires = {
@@ -22,6 +22,7 @@ return {
     }
   end,
   setup = function()
+    require("neogit").setup{}
     require("gitlinker").setup {
       opts = {
         remote = nil,
