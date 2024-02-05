@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+if [ -x "$(command -v picom)" ]; then
+  picom &
+fi
+
+if [ -x "$(command -v sxhkd)" ]; then
+  sxhkd &
+fi
+
+if [ -x "$(command -v numlockx)" ]; then
+  numlockx on &
+fi
+
+if [ -x "$(command -v dunst)" ]; then
+  dunst &
+fi
+
+if [ -x "$(command -v xmodmap)" ]; then
+  xmodmap ~/.Xmodmap
+fi
+
+if [ -x "$(command -v redshift)" ]; then
+  redshift &
+fi
+
+if [ -x "${command -v adjust-monitors}" ]; then
+  adjust-monitors
+fi
+
+if [ -x "$(command -v ~/.fehbg)" ]; then
+  . "$HOME/.fehbg"
+fi
+
