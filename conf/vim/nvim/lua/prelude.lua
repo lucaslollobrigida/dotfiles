@@ -82,7 +82,7 @@ vim.opt.fileencoding = "utf-8"
 vim.opt.cmdheight = 1
 vim.opt.colorcolumn = "99999"
 
-vim.go.t_Co = "256"
+-- vim.go.t_Co = "256"
 vim.opt.conceallevel = 0 -- So that I can see `` in markdown files
 
 vim.opt.cursorline = true
